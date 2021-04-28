@@ -39,6 +39,16 @@ services:
       app_net:
         ipv4_address: '172.20.0.3'
 
+  frontend:
+    container_name: front
+    build: ./frontend/
+    image: frontend
+    command: [yarn, start]
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app
+
 networks:
   app_net:
     driver: bridge
