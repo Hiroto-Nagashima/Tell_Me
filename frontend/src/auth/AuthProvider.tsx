@@ -18,7 +18,7 @@ export const AuthContext =createContext<ContextProps>({});
 
 export const AuthProvider:VFC<Props> = (props) => {
   const { children } = props
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState<any>(null);
 
   // ユーザーをログインさせる関数
   const login = async (email:string, password:string, history:H.History) => {
@@ -27,6 +27,7 @@ export const AuthProvider:VFC<Props> = (props) => {
       history.push("/");
     } catch (error) {
       alert(error);
+      console.log(error)
     }
   };
 
@@ -37,11 +38,14 @@ export const AuthProvider:VFC<Props> = (props) => {
       history.push("/");
     } catch (error) {
       alert(error);
+      console.log(error)
     }
   };
 
   useEffect(() => {
-    app.auth().onAuthStateChanged(setCurrentUser);
+    app.auth().onAuthStateChanged((user)=>{
+      setCurrentUser(user)
+    });
   }, []);
 
   return (
