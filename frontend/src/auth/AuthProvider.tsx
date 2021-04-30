@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from "react";
+import { createContext, useEffect, useState, VFC} from "react";
+import { useHistory } from "react-router-dom"
 import { app } from "../base.js";
+import * as H from 'history'
 
+type Props={
+  children: React.ReactNode
+}
 // contextの作成
-export const AuthContext = React.createContext();
+export const AuthContext =createContext({});
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider:VFC<Props> = (props) => {
+  const { children } = props
   const [currentUser, setCurrentUser] = useState(null);
 
   // ユーザーをログインさせる関数
-  const login = async (email, password, history) => {
+  const login = async (email:string, password:string, history:H.History) => {
     try {
       await app.auth().signInWithEmailAndPassword(email, password);
       history.push("/");
@@ -18,7 +24,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   // 新しいユーザーを作成しログインさせる関数
-  const signup = async (email, password, history) => {
+  const signup = async (email:string, password:string, history:H.History) => {
     try {
       await app.auth().createUserWithEmailAndPassword(email, password);
       history.push("/");
