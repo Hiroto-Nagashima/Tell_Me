@@ -5,8 +5,16 @@ import * as H from 'history'
 type Props={
   children: React.ReactNode
 }
+
+type ContextProps = {
+  login?:(email: string, password: string, history: H.History) => Promise<void>
+  signup?:(email: string, password: string, history: H.History) => Promise<void>
+  // 仮に設定
+  currentUser?: any
+};
+
 // contextの作成
-export const AuthContext =createContext({});
+export const AuthContext =createContext<ContextProps>({});
 
 export const AuthProvider:VFC<Props> = (props) => {
   const { children } = props
