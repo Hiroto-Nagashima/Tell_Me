@@ -5,11 +5,11 @@ info:
   version: "0.0.0"
   title: Tell Me
 paths:
-  /kids/:id:
+  /daycares/:id:
     get:
       tags:
-      - "kids"
-      summary: "子供の名前、年齢取得"
+      - "daycare"
+      summary: "ある保育園に在籍する全ての子供、保育園の電話番号、名前、住所取得"
       description: ""
       parameters:
         -
@@ -34,7 +34,36 @@ paths:
           description: "該当する子供が見つからない"
           schema:
             $ref: '#/definitions/404Error'
-  /kid/:id/communication_notebooks:
+  /daycares/:id/kids/:id:
+    get:
+      tags:
+      - "kids"
+      summary: "ある保育園の子供の名前、年齢取得"
+      description: ""
+      parameters:
+        -
+          name: kid_id
+          in: path
+          description: 特定の子供の名前と年齢を取得
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 成功時のレスポンス
+          schema:
+            title: 子供の年齢と名前を返す
+            type: object
+            properties:
+              name:
+                type: string
+              age:
+                type: integer
+        404:
+          description: "該当する子供が見つからない"
+          schema:
+            $ref: '#/definitions/404Error'
+  /daycares/:id/communication_notebooks:
     get:
       tags:
       - "communication_notebooks"
