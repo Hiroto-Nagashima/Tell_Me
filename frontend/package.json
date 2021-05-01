@@ -28,22 +28,9 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}' functions/**/*.ts; stylelint 'src/**/*.css'",
     "precommit": "lint-staged"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ]
-  },
+  "eslintIgnore": [
+    "/.eslintrc.js"
+  ],
   "browserslist": {
     "production": [
       ">0.2%",
@@ -102,9 +89,9 @@
       "git add"
     ]
   },
-    "husky": {
-      "hooks": {
-        "pre-commit": "lint-staged"
-      }
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
+  }
 }

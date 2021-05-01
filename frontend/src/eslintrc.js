@@ -46,6 +46,7 @@ module.exports = {
     'prefer-arrow',
     'prettier',
     'react',
+    'react-app',
     'react-hooks',
   ],
   root: true,

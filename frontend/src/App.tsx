@@ -1,4 +1,4 @@
-import { BrowserRouter,Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./router/PrivateRoute";
 import { AuthProvider } from "./auth/AuthProvider";
 import { Home } from "./components/pages/Home";
