@@ -41,7 +41,7 @@ export const Login:VFC<Props> =( { history } )=>{
           Password
           <input name="password" type="password" placeholder="Password" onChange={onChangePassword} value={password} />
         </label>
-        <button type="submit" onClick={handleSubmit}>Log in</button>
+        <button onClick={handleSubmit}>Log in</button>
       </form>
     </div>
   )
