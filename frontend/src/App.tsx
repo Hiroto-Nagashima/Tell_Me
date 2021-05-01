@@ -6,7 +6,7 @@ import { Login } from "./components/pages/Login";
 import { SignUp } from "./components/pages/SignUp";
 
 
-function App() {
+const App:React.FC=()=> {
   return (
     <AuthProvider>
       <BrowserRouter>

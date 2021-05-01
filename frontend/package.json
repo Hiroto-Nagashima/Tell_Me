@@ -28,9 +28,6 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}' functions/**/*.ts; stylelint 'src/**/*.css'",
     "precommit": "lint-staged"
   },
-  "eslintIgnore": [
-    "/.eslintrc.js"
-  ],
   "browserslist": {
     "production": [
       ">0.2%",
