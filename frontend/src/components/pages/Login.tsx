@@ -25,7 +25,8 @@ export const Login:VFC<Props> =( { history } )=>{
   },[])
 
   // AuthContextからlogin関数を受け取る
-  const handleSubmit = () => {
+  const handleSubmit = (e:any) => {
+    e.preventDefault();
     login!(email, password, history);
   };
 

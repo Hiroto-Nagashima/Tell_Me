@@ -25,7 +25,8 @@ export const SignUp:VFC<Props> =( { history } )=>{
   },[])
 
   // AuthContextからlogin関数を受け取る
-  const handleSubmit = () => {
+  const handleSubmit = (e:any) => {
+    e.preventDefault();
     signup!(email, password, history);
   };
 
