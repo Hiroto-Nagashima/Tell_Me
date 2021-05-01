@@ -1,46 +1,57 @@
-import { createContext, useEffect, useState, VFC} from "react";
-import { auth } from "../firebase.js";
-import * as H from 'history'
+import React, { createContext, useEffect, useState } from 'react';
+import * as H from 'history';
+import { auth } from '../firebase';
 
-type Props={
-  children: React.ReactNode
-}
+type Props = {
+  children: React.ReactNode;
+};
 
 type ContextProps = {
-  login?:(email: string, password: string, history: H.History) => Promise<void>
-  signup?:(email: string, password: string, history: H.History) => Promise<void>
+  login?: (
+    email: string,
+    password: string,
+    history: H.History,
+  ) => Promise<void>;
+  signup?: (
+    email: string,
+    password: string,
+    history: H.History,
+  ) => Promise<void>;
   // 仮に設定
-  currentUser?: any
+  currentUser?: any;
 };
 
 // contextの作成
-export const AuthContext =createContext<ContextProps>({});
+export const AuthContext = createContext<ContextProps>({});
 
-export const AuthProvider:VFC<Props> = (props) => {
-  const { children } = props
+export const AuthProvider: React.FC<Props> = (props) => {
+  const { children } = props;
   const [currentUser, setCurrentUser] = useState<any>(null);
 
   // ユーザーをログインさせる関数
-  const login = async (email:string, password:string, history:H.History) => {
+  const login = async (email: string, password: string, history: H.History) => {
     try {
-      console.log("hello")
+      console.log('hello');
       await auth.signInWithEmailAndPassword(email, password);
-      auth.onAuthStateChanged(user => setCurrentUser(user));
-      history.push("/");
+      auth.onAuthStateChanged((user) => setCurrentUser(user));
+      history.push('/');
     } catch (error) {
       alert(error);
     }
   };
 
   // 新しいユーザーを作成しログインさせる関数
-  const signup = async (email:string, password:string, history:H.History) => {
+  const signup = async (
+    email: string,
+    password: string,
+    history: H.History,
+  ) => {
     try {
       await auth.createUserWithEmailAndPassword(email, password);
-      auth.onAuthStateChanged(user => setCurrentUser(user));
-      history.push("/");
+      auth.onAuthStateChanged((user) => setCurrentUser(user));
+      history.push('/');
     } catch (error) {
       alert(error);
-      console.log(error)
     }
   };
 
@@ -50,7 +61,7 @@ export const AuthProvider:VFC<Props> = (props) => {
 
   return (
     // Contextを使用して認証に必要な情報をコンポーネントツリーに流し込む。
-    <AuthContext.Provider value={{ signup, login, currentUser}}>
+    <AuthContext.Provider value={{ signup, login, currentUser }}>
       {children}
     </AuthContext.Provider>
   );

@@ -29,6 +29,7 @@
     "typescript",
     "typescriptreact"
   ],
+  "eslint.workingDirectories": [ "./frontend" ],
   "editor.formatOnType": true, // コード整形
   "editor.formatOnPaste": true, // コード整形
   "editor.formatOnSave": true,

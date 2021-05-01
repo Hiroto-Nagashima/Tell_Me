@@ -1,12 +1,11 @@
-import { VFC } from "react"
-import { auth } from "../../firebase";
-export const Home:VFC=()=>{
-  return(
+import React from 'react';
+import { auth } from '../../firebase';
+
+export const Home: React.FC = () => {
+  return (
     <>
-      <div>
-        Homeです
-      </div>
+      <div>Homeです</div>
       <button onClick={() => auth.signOut()}>Sign out</button>
     </>
-  )
-}
+  );
+};

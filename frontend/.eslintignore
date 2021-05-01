@@ -1,7 +1,3 @@
-“build/
-public/
-**/coverage/
-**/node_modules/
-**/*.min.js
+node_modules/
 *.config.js
-.*lintrc.js”
+/.eslintrc.js

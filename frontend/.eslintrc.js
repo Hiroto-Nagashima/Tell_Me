@@ -26,6 +26,14 @@ module.exports = {
     SharedArrayBuffer: 'readonly',
     __DEV__: true,
   },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'], // Your TypeScript files extension
+      parserOptions: {
+        project: ['./tsconfig.json'], // Specify it only for TypeScript files
+      },
+    },
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -52,10 +60,10 @@ module.exports = {
     'newline-before-return': 'error',
     'no-console': 'warn',
     'no-continue': 'off',
-    "prettier/prettier": ['error', { "singleQuote": true }],
+    'prettier/prettier': ['error', { singleQuote: true }],
     'require-yield': 'error',
-    "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"],
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': ['error'],
     // for react-app-env.d.ts (https://github.com/facebook/create-react-app/issues/6560)
     'spaced-comment': [
       'error',
@@ -131,22 +139,6 @@ module.exports = {
         jsx: 'never',
         ts: 'never',
         tsx: 'never',
-      },
-    ],
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: [
-          '.storybook/**',
-          'stories/**',
-          '**/*/*.story.*',
-          '**/*/*.stories.*',
-          '**/__specs__/**',
-          '**/*/*.spec.*',
-          '**/__tests__/**',
-          '**/*/*.test.*',
-          'src/setupTests.*',
-        ],
       },
     ],
     'import/prefer-default-export': 'off',

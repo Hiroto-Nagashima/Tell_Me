@@ -1,4 +1,5 @@
-import { ChangeEvent, useCallback, useContext, useState, VFC } from 'react';
+import React from 'react';
+import { ChangeEvent, useCallback, useContext, useState  } from 'react';
 import { withRouter } from 'react-router';
 import * as H from 'history';
 import { AuthContext } from '../../auth/AuthProvider';
@@ -7,7 +8,7 @@ type Props = {
   history: H.History;
 };
 
-export const Login: VFC<Props> = ({ history }) => {
+export const Login: React.FC<Props> = ({ history }) => {
   const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
