@@ -141,21 +141,21 @@ module.exports = {
         tsx: 'never',
       },
     ],
-    'import/no-extraneous-dependencies': [error, { devDependencies: true }],
-    'import/prefer-default-export': 'off',
-    settings: {
-      'import/parsers': {
-        '@typescript-eslint/parser': ['.ts', '.tsx'],
-      },
-      'import/resolver': {
-        node: {
-          extensions: ['.js', 'jsx', '.ts', '.tsx'],
-          paths: ['src'],
-        },
-      },
-      react: {
-        version: 'detect',
+    'import/no-extraneous-dependencies': 'off',
+    'import/prefer-default-export': 'off'
+  },
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      node: {
+        extensions: ['.js', 'jsx', '.ts', '.tsx'],
+        paths: ['src'],
       },
     },
+    react: {
+      version: 'detect',
+    },
   },
-}
+};
