@@ -1,13 +1,12 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { FC } from 'react'
-import PrivateRoute from "./router/PrivateRoute";
-import { AuthProvider } from "./auth/AuthProvider";
-import { Home } from "./components/pages/Home";
-import { Login } from "./components/pages/Login";
-import { SignUp } from "./components/pages/SignUp";
+import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import PrivateRoute from './router/PrivateRoute';
+import { AuthProvider } from './auth/AuthProvider';
+import { Home } from './components/pages/Home';
+import { Login } from './components/pages/Login';
+import { SignUp } from './components/pages/SignUp';
 
-
- const App:FC=()=> {
+const App: React.FC = () => {
   return (
     <AuthProvider>
       <BrowserRouter>
@@ -19,6 +18,6 @@ import { SignUp } from "./components/pages/SignUp";
       </BrowserRouter>
     </AuthProvider>
   );
-}
+};
 
 export default App;

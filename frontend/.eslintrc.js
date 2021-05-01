@@ -54,6 +54,8 @@ module.exports = {
     'no-continue': 'off',
     "prettier/prettier": ['error', { "singleQuote": true }],
     'require-yield': 'error',
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
     // for react-app-env.d.ts (https://github.com/facebook/create-react-app/issues/6560)
     'spaced-comment': [
       'error',
