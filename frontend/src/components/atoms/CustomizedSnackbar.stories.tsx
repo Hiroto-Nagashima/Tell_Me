@@ -14,29 +14,28 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<Props> = (args) => <CustomizedSnackbar {...args} />;
+export const Empty: Story<Props> = (args) => <CustomizedSnackbar {...args} />;
 
-export const Error = (args: Props) => (
+export const Error: Story<Props> = (args: Props) => (
   <>
     <CustomizedSnackbar {...args} />
   </>
 );
 
-export const Warning = (args: Props) => (
+export const Warning: Story<Props> = (args: Props) => (
   <>
     <CustomizedSnackbar {...args} />
   </>
 );
 
-export const Info = (args: Props) => (
+export const Info: Story<Props> = (args: Props) => (
   <>
     <CustomizedSnackbar {...args} />
   </>
 );
 
-export const Success = (args: Props) => (
+export const Success: Story<Props> = (args: Props) => (
   <>
     <CustomizedSnackbar {...args} />
   </>
 );
-
