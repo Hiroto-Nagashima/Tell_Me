@@ -1,11 +1,8 @@
 import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
-// import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-// const Alert = (props: AlertProps) => (
-//   <MuiAlert elevation={6} variant="filled" {...props} />
-// );
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
