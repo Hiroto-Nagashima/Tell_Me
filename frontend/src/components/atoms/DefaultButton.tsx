@@ -14,18 +14,16 @@ const useStyles = makeStyles((theme: Theme) =>
 export type Props = {
   variant: 'text' | 'outlined' | 'contained';
   color: 'default' | 'inherit' | 'primary' | 'secondary';
-  label: string;
+  onClick: () => void;
 };
 
 export const DefaultButton: React.FC<Props> = (props) => {
-  const { variant, color, label } = props;
+  const { variant, color, onClick } = props;
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Button variant={variant} color={color}>
-        {label}
-      </Button>
+      <Button variant={variant} color={color} onClick={onClick} />
     </div>
   );
 };

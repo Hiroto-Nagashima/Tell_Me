@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import { Alert } from './Alert';
 import { makeStyles, Theme } from '@material-ui/core/styles';
@@ -16,24 +16,11 @@ export type Props = {
   open: boolean;
   onClose: () => void;
   severity: 'error' | 'warning' | 'info' | 'success';
-  children: ReactNode;
+  children: string;
 };
 export const CustomizedSnackbar: React.FC<Props> = (props) => {
   const { open, onClose, severity, children } = props;
   const classes = useStyles();
-  // const [open, setOpen] = React.useState(false);
-
-  // const handleClick = () => {
-  //   setOpen(true);
-  // };
-
-  // const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-  //   if (reason === 'clickaway') {
-  //     return;
-  //   }
-
-  //   setOpen(false);
-  // };
 
   return (
     <div className={classes.root}>
