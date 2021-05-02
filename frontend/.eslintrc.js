@@ -29,7 +29,7 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx'], // Your TypeScript files extension
       parserOptions: {
-        project: ['./tsconfig.json'], // Specify it only for TypeScript files
+        project: ['./tsconfig.json', './functions/tsconfig.json'], // Specify it only for TypeScript files
       },
     },
   ],
@@ -122,7 +122,7 @@ module.exports = {
       },
     ],
     'import/no-extraneous-dependencies': 'off',
-    'import/prefer-default-export': 'off'
+    'import/prefer-default-export': 'off',
   },
   settings: {
     'import/parsers': {

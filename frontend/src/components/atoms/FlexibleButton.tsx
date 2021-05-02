@@ -19,7 +19,7 @@ export const MyButton: React.FC<Props> = (props) => {
 
   return (
     <SButton variant={variant} color={color} href={url} onClick={onClick}>
-      {  label}
+      {label}
     </SButton>
   );
 };
