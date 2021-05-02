@@ -11,7 +11,6 @@ export type Props = {
 // 列の指定ができるTextarea
 export const MultipleLinesTextField: React.FC<Props> = (props) => {
   const { label, row, value, onChange } = props;
-  console.log('hi');
 
   return (
     <TextField
