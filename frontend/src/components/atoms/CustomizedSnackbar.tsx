@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import { Alert } from './Alert';
 import { makeStyles, Theme } from '@material-ui/core/styles';
@@ -16,9 +16,10 @@ type Props = {
   open: boolean;
   onClose: () => void;
   severity: 'error' | 'warning' | 'info' | 'success';
+  children: ReactNode;
 };
 export const CustomizedSnackbar: React.FC<Props> = (props) => {
-  const { open, onClose, severity } = props;
+  const { open, onClose, severity, children } = props;
   const classes = useStyles();
   // const [open, setOpen] = React.useState(false);
 
@@ -38,7 +39,7 @@ export const CustomizedSnackbar: React.FC<Props> = (props) => {
     <div className={classes.root}>
       <Snackbar open={open} autoHideDuration={6000} onClose={onClose}>
         <Alert onClose={onClose} severity={severity}>
-          This is a success message!
+          {children}
         </Alert>
       </Snackbar>
     </div>
