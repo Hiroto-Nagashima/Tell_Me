@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-type Props = {
+export type Props = {
   open: boolean;
   onClose: () => void;
   severity: 'error' | 'warning' | 'info' | 'success';
