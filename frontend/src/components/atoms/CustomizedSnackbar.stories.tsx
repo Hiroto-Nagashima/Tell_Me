@@ -15,9 +15,9 @@ export default {
   ],
 } as Meta;
 
-export const Empty: Story<Props> = (args) => <CustomizedSnackbar {...args} />;
+const Template: Story<Props> = (args) => <CustomizedSnackbar {...args} />;
 
-export const Error: Story = () => {
+export const ActualMovement: Story = () => {
   const [open, setOpen] = useState(false);
   const handleClick = () => {
     setOpen(true);
@@ -33,9 +33,12 @@ export const Error: Story = () => {
 
   return (
     <>
-      <DefaultButton variant="contained" color="primary" onClick={handleClick}>
-        ボタン
-      </DefaultButton>
+      <DefaultButton
+        variant="contained"
+        color="primary"
+        onClick={handleClick}
+        label="ボタン"
+      />
       <CustomizedSnackbar onClose={handleClose} open={open} severity="error">
         エラーです
       </CustomizedSnackbar>
@@ -43,20 +46,30 @@ export const Error: Story = () => {
   );
 };
 
-export const Warning: Story<Props> = (args: Props) => (
-  <>
-    <CustomizedSnackbar {...args} />
-  </>
-);
+export const Error = Template.bind({});
+Error.args = {
+  severity: 'error',
+  open: true,
+  children: 'エラーです',
+};
 
-export const Info: Story<Props> = (args: Props) => (
-  <>
-    <CustomizedSnackbar {...args} />
-  </>
-);
+export const Warning = Template.bind({});
+Warning.args = {
+  severity: 'warning',
+  open: true,
+  children: '注意です',
+};
 
-export const Success: Story<Props> = (args: Props) => (
-  <>
-    <CustomizedSnackbar {...args} />
-  </>
-);
+export const Info = Template.bind({});
+Info.args = {
+  severity: 'info',
+  open: true,
+  children: 'これはペンです',
+};
+
+export const Success = Template.bind({});
+Success.args = {
+  severity: 'success',
+  open: true,
+  children: '成功です！！',
+};
