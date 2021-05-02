@@ -14,8 +14,11 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@date-io/date-fns": "^2.10.8",
     "@firebase/functions": "^0.6.7",
     "@material-ui/lab": "^4.0.0-alpha.58",
+    "@material-ui/pickers": "^3.3.10",
+    "date-fns": "^2.21.1",
     "firebase": "^8.4.2",
     "firebase-functions": "^3.13.2",
     "react": "^17.0.2",
