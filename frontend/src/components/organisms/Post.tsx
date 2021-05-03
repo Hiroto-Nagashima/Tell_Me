@@ -12,7 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,13 +38,21 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const Post: React.FC = () => {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+export type Props = {
+  title: string;
+  content: string;
+  IsExpanded: boolean;
+  onClickExpand: () => void;
+};
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+export const Post: React.FC<Props> = (props) => {
+  const { title, content, IsExpanded, onClickExpand } = props;
+  const classes = useStyles();
+  // const [expanded, setExpanded] = React.useState(false);
+
+  // const handleExpandClick = () => {
+  //   setExpanded(!expanded);
+  // };
 
   return (
     <Card className={classes.root}>
@@ -55,20 +62,12 @@ export const Post: React.FC = () => {
             R
           </Avatar>
         }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={title}
       />
 
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+          {content}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -77,16 +76,16 @@ export const Post: React.FC = () => {
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
+            [classes.expandOpen]: IsExpanded,
           })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
+          onClick={onClickExpand}
+          aria-expanded={IsExpanded}
           aria-label="show more"
         >
           <ExpandMoreIcon />
         </IconButton>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Collapse in={IsExpanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>コメント</Typography>
         </CardContent>
