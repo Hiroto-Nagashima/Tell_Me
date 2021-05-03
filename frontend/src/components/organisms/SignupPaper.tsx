@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       '& > *': {
         margin: theme.spacing(1),
         width: theme.spacing(50),
-        height: theme.spacing(60),
+        height: theme.spacing(77),
       },
     },
   }),
@@ -55,8 +55,14 @@ export const SignupPaper: React.FC<Props> = (props) => {
   return (
     <div className={classes.root}>
       <Paper elevation={3}>
-        <Box component="h1" p={2} textAlign="center">
+        <Box component="h1" pt={2} textAlign="center">
           Sign UP
+        </Box>
+        <Box m={4}>
+          <RadioButtonGroup
+            value={radioButtonValue}
+            onChange={onChangeRadioButton}
+          />
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
@@ -67,15 +73,9 @@ export const SignupPaper: React.FC<Props> = (props) => {
           />
         </Box>
         <Box textAlign="center" m={4}>
-          <RadioButtonGroup
-            value={radioButtonValue}
-            onChange={onChangeRadioButton}
-          />
-        </Box>
-        <Box textAlign="center" m={4}>
           <SingleLineTextField
             textName="電話番号"
-            placeholder="xxxxxxx@xxx.ne.jp"
+            placeholder="ハイフンなし"
             value={telephoneNumber}
             onChange={onChangeTelephoneNumber}
           />
@@ -101,7 +101,7 @@ export const SignupPaper: React.FC<Props> = (props) => {
             onClick={onClick}
             variant="contained"
             color="primary"
-            label="Login"
+            label="登録"
           />
         </Box>
       </Paper>
