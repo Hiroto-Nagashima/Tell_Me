@@ -21,35 +21,37 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export type Props = {
-  title: string;
-  value: number | null;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  email: string;
+  password: string;
   onClick: () => void;
+  onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
+
 export const LoginPaper: React.FC<Props> = (props) => {
-  const { title, value, onClick, onChange } = props;
+  const { email, password, onChangeEmail, onChangePassword, onClick } = props;
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Paper elevation={3}>
         <Box component="h1" p={2} textAlign="center">
-          {title}
+          Tell Me
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
             textName="email"
             placeholder="xxxxxxx@xxx.ne.jp"
-            value={value}
-            onChange={onChange}
+            value={email}
+            onChange={onChangeEmail}
           />
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
             textName="password"
             placeholder="6文字以上"
-            value={value}
-            onChange={onChange}
+            value={password}
+            onChange={onChangePassword}
           />
         </Box>
         <Box textAlign="center" mx={2}>
