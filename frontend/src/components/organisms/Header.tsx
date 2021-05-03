@@ -23,16 +23,13 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export type Props = {
-  title: string;
-  iconColor: 'inherit' | 'default' | 'primary' | 'secondary';
-  barColor: 'inherit' | 'default' | 'primary' | 'secondary' | 'transparent';
   name?: string;
   daycare_name?: string;
   auth: boolean;
 };
 
 export const MenuAppBar: React.FC<Props> = (props) => {
-  const { title, iconColor, barColor, name, daycare_name, auth } = props;
+  const { name, daycare_name, auth } = props;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -47,10 +44,10 @@ export const MenuAppBar: React.FC<Props> = (props) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color={barColor}>
+      <AppBar position="static" color="primary">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            {title}
+            Tell Me
           </Typography>
           {auth && (
             <div>
@@ -59,7 +56,7 @@ export const MenuAppBar: React.FC<Props> = (props) => {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleMenu}
-                color={iconColor}
+                color="primary"
               >
                 <AccountCircle />
               </IconButton>
