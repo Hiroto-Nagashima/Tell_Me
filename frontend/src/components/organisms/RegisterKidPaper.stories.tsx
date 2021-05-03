@@ -10,4 +10,5 @@ const Template: Story<Props> = (args) => <RegisterKidPaper {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
+  parentName: "永嶋寛人"
 };
