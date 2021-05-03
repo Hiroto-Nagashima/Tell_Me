@@ -4,18 +4,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Paper, { PaperProps } from '@material-ui/core/Paper';
-import Draggable from 'react-draggable';
 import { DefaultButton } from '../atoms/DefaultButton';
-
-const PaperComponent: React.FC = (props: PaperProps) => (
-  <Draggable
-    handle="#draggable-dialog-title"
-    cancel={'[class*="MuiDialogContent-root"]'}
-  >
-    <Paper {...props} />
-  </Draggable>
-);
+import { DraggablePaper } from '../atoms/DraggablePaper';
 export type Props = {
   onClickClose: () => void;
   onClickOpen: () => void;
@@ -38,7 +28,7 @@ export const DraggableDialog: React.FC<Props> = (props) => {
       <Dialog
         open={isOpen}
         onClose={onClickClose}
-        PaperComponent={PaperComponent}
+        PaperComponent={DraggablePaper}
         aria-labelledby="draggable-dialog-title"
       >
         <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
