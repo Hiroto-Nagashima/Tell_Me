@@ -33,8 +33,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
+export type Props = {
+  kidName: string;
+  age: number;
+  onClick: () => void;
+};
 
-export const KidCard = () => {
+export const KidCard: React.FC<Props> = (props) => {
+  const { kidName, age, onClick } = props;
   const classes = useStyles();
 
   return (
@@ -47,15 +53,20 @@ export const KidCard = () => {
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography component="h5" variant="h5">
-            山田太郎
+            {kidName}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            1歳
+            {age}
           </Typography>
         </CardContent>
         <div className={classes.controls}>
           <CardActions>
-            <Button size="large" color="primary" variant="contained">
+            <Button
+              size="large"
+              color="primary"
+              variant="contained"
+              onClick={onClick}
+            >
               決定
             </Button>
           </CardActions>
