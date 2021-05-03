@@ -21,37 +21,97 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export type Props = {
-  email: string;
+  age: number;
+  parentName: string;
+  kidName: string;
+  daycareID: number;
   password: string;
+  favoriteFood: string;
+  favoritePlay: string;
   onClick: () => void;
-  onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeKidName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeAge: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeDaycareID: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeFavoriteFood: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeFavoritePlay: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const RegisterKidPaper: React.FC<Props> = (props) => {
-  const { email, password, onChangeEmail, onChangePassword, onClick } = props;
+  const {
+    age,
+    kidName,
+    daycareID,
+    parentName,
+    favoriteFood,
+    favoritePlay,
+    onClick,
+    onChangeKidName,
+    onChangeAge,
+    onChangeDaycareID,
+    onChangeFavoriteFood,
+    onChangeFavoritePlay,
+  } = props;
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Paper elevation={3}>
         <Box component="h1" p={2} textAlign="center">
-          Tell Me
+          ようこそ、{parentName}さん！
         </Box>
-        <Box textAlign="center" m={4}>
-          <SingleLineTextField
-            textName="email"
-            placeholder="xxxxxxx@xxx.ne.jp"
-            value={email}
-            onChange={onChangeEmail}
-          />
+        <Box component="h1" p={2} textAlign="center">
+          1. 保育園のIDを入力してください
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
             textName="password"
             placeholder="6文字以上"
-            value={password}
-            onChange={onChangePassword}
+            value={daycareID}
+            onChange={onChangeDaycareID}
+          />
+        </Box>
+        <Box component="h1" p={2} textAlign="center">
+          2. お子様のお名前を入力してください
+        </Box>
+        <Box textAlign="center" m={4}>
+          <SingleLineTextField
+            textName="email"
+            placeholder="xxxxxxx@xxx.ne.jp"
+            value={kidName}
+            onChange={onChangeKidName}
+          />
+        </Box>
+        <Box component="h1" p={2} textAlign="center">
+          3. お子様のご年齢を入力してください
+        </Box>
+        <Box textAlign="center" m={4}>
+          <SingleLineTextField
+            textName="email"
+            placeholder="xxxxxxx@xxx.ne.jp"
+            value={age}
+            onChange={onChangeAge}
+          />
+        </Box>
+        <Box component="h1" p={2} textAlign="center">
+          4. お子様の好きな食べ物を<strong>1つ</strong>入力してください
+        </Box>
+        <Box textAlign="center" m={4}>
+          <SingleLineTextField
+            textName="email"
+            placeholder="xxxxxxx@xxx.ne.jp"
+            value={favoriteFood}
+            onChange={onChangeFavoriteFood}
+          />
+        </Box>
+        <Box component="h1" p={2} textAlign="center">
+          5. お子様の好きな遊びを<strong>1つ</strong>入力してください
+        </Box>
+        <Box textAlign="center" m={4}>
+          <SingleLineTextField
+            textName="email"
+            placeholder="xxxxxxx@xxx.ne.jp"
+            value={favoritePlay}
+            onChange={onChangeFavoritePlay}
           />
         </Box>
         <Box textAlign="center" mx={2}>
@@ -59,7 +119,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
             onClick={onClick}
             variant="contained"
             color="primary"
-            label="Login"
+            label="登録"
           />
         </Box>
       </Paper>
