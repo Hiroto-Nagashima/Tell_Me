@@ -1,7 +1,7 @@
 import React from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { Box } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
 import { SingleLineTextField } from '../atoms/SingleLineTextField';
 import { FlexibleButton } from '../atoms/FlexibleButton';
 
@@ -33,25 +33,33 @@ export const LoginPaper: React.FC<Props> = (props) => {
   return (
     <div className={classes.root}>
       <Paper elevation={3}>
-        <Box component="h1" p={2} textAlign="center">
-          {title}
-        </Box>
-        <Box textAlign="center" m={4}>
-          <SingleLineTextField
-            textName="ID"
-            placeholder="1 or 2"
-            value={value}
-            onChange={onChange}
-          />
-        </Box>
-        <Box textAlign="center">
-          <FlexibleButton
-            onClick={onClick}
-            variant="contained"
-            color="primary"
-            label="Login"
-          />
-        </Box>
+        <Grid container direction="column" justify="center" alignItems="center">
+          <Grid item xs={8}>
+            <Box component="h1" p={2} textAlign="center">
+              {title}
+            </Box>
+          </Grid>
+          <Grid item xs={10}>
+            <Box textAlign="center" m={4}>
+              <SingleLineTextField
+                textName="ID"
+                placeholder="1 or 2"
+                value={value}
+                onChange={onChange}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={10}>
+            <Box>
+              <FlexibleButton
+                onClick={onClick}
+                variant="contained"
+                color="primary"
+                label="Login"
+              />
+            </Box>
+          </Grid>
+        </Grid>
       </Paper>
     </div>
   );
