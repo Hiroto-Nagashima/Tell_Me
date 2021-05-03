@@ -28,7 +28,7 @@ export type Props = {
   auth: boolean;
 };
 
-export const MenuAppBar: React.FC<Props> = (props) => {
+export const Header: React.FC<Props> = (props) => {
   const { name, daycare_name, auth } = props;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
