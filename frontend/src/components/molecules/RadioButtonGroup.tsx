@@ -4,10 +4,24 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
-export const RadioButtonGroup: React.FC = () => {
+type Props = {
+  value: 0 | 1;
+  onChange: () => void;
+};
+
+export const RadioButtonGroup: React.FC<Props> = (props) => {
+  const { value, onChange } = props;
+
   return (
     <FormControl component="fieldset">
-      <RadioGroup row aria-label="position" name="position" defaultValue="top">
+      <RadioGroup
+        row
+        aria-label="position"
+        name="position"
+        defaultValue={0}
+        value={value}
+        onChange={onChange}
+      >
         <FormControlLabel
           value={0}
           control={<Radio color="primary" />}
