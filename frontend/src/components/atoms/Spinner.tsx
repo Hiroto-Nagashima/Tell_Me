@@ -12,13 +12,17 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
+export type Props = {
+  color?: 'inherit' | 'primary' | 'secondary';
+};
 
-export const Spinner: React.FC = () => {
+export const Spinner: React.FC<Props> = (props) => {
+  const { color } = props;
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <CircularProgress />
+      <CircularProgress color={color} />
     </div>
   );
 };
