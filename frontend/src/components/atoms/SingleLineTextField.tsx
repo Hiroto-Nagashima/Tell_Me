@@ -18,7 +18,7 @@ export const SingleLineTextField: VFC<Props> = (props) => {
   `;
 
   return (
-    <SFormControl variant="outlined">
+    <SFormControl variant="outlined" fullWidth>
       <InputLabel htmlFor="component-outlined">{textName}</InputLabel>
       <OutlinedInput
         style={{ width: '100%' }}

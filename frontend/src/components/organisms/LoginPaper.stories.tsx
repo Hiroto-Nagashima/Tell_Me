@@ -10,5 +10,5 @@ const Template: Story<Props> = (args) => <LoginPaper {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  title: '連絡帳',
+  title: 'Tell Me',
 };
