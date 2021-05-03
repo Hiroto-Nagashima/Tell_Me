@@ -13,7 +13,7 @@ export type Props = {
 const SButton = styled(Button)`
   width: 90%;
 `;
-export const MyButton: React.FC<Props> = (props) => {
+export const FlexibleButton: React.FC<Props> = (props) => {
   const { variant, color, label, url, onClick } = props;
 
   return (
