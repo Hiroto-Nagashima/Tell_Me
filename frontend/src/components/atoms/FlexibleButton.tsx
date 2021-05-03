@@ -1,5 +1,4 @@
 import React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
 

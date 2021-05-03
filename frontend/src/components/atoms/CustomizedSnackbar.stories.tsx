@@ -4,7 +4,7 @@ import { Props, CustomizedSnackbar } from './CustomizedSnackbar';
 import { DefaultButton } from './DefaultButton';
 
 export default {
-  title: 'atoms/Alert',
+  title: 'atoms/Snackbar',
   component: CustomizedSnackbar,
   decorators: [
     (Story) => (
@@ -38,6 +38,7 @@ export const ActualMovement: Story = () => {
         color="primary"
         onClick={handleClick}
         label="ボタン"
+        size= "medium"
       />
       <CustomizedSnackbar onClose={handleClose} open={open} severity="error">
         エラーです
