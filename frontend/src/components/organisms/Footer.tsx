@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 export type Props = {
-  label: string;
+  addressOfDaycare: string;
+  telephoneNumberOfDaycare: string;
 };
 const SFooter = styled.footer`
   background-color: #3f51b5;
@@ -14,7 +15,12 @@ const SFooter = styled.footer`
   width: 100%;
 `;
 export const Footer: React.FC<Props> = (props) => {
-  const { label } = props;
+  const { addressOfDaycare, telephoneNumberOfDaycare } = props;
 
-  return <SFooter>{label}</SFooter>;
+  return (
+    <SFooter>
+      <div>{addressOfDaycare}</div>
+      <div>{telephoneNumberOfDaycare}</div>
+    </SFooter>
+  );
 };
