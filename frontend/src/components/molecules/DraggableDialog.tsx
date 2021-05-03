@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -7,6 +6,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper, { PaperProps } from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
+import { DefaultButton } from '../atoms/DefaultButton';
 
 const PaperComponent: React.FC = (props: PaperProps) => (
   <Draggable
@@ -28,9 +28,13 @@ export const DraggableDialog: React.FC<Props> = (props) => {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={onClickOpen}>
-        登録
-      </Button>
+      <DefaultButton
+        variant="contained"
+        color="primary"
+        onClick={onClickOpen}
+        label="確認"
+        size="medium"
+      />
       <Dialog
         open={isOpen}
         onClose={onClickClose}
@@ -44,12 +48,20 @@ export const DraggableDialog: React.FC<Props> = (props) => {
           <DialogContentText>この内容で登録しますか？</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClickClose} color="primary">
-            戻る
-          </Button>
-          <Button onClick={onClickRegister} color="primary">
-            登録
-          </Button>
+          <DefaultButton
+            variant="outlined"
+            color="primary"
+            onClick={onClickOpen}
+            label="戻る"
+            size="medium"
+          />
+          <DefaultButton
+            variant="outlined"
+            color="primary"
+            onClick={onClickRegister}
+            label="登録"
+            size="medium"
+          />
         </DialogActions>
       </Dialog>
     </div>
