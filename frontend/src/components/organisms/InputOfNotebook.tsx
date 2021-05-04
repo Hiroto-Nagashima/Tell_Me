@@ -60,7 +60,7 @@ export const InputOfNotebook: React.FC<Props> = (props) => {
         <Box component="h2" pt={2} textAlign="center">
           {selectedDate}の連絡帳
         </Box>
-        <Box component="h4" px={2} textAlign="center">
+        <Box component="h4" px={4}>
           1. 朝に測った体温を記入してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -72,7 +72,7 @@ export const InputOfNotebook: React.FC<Props> = (props) => {
             onChange={onChangeBodyTemperature}
           />
         </Box>
-        <Box component="h4" px={2} textAlign="center">
+        <Box component="h4" px={4}>
           2. 昨晩の入浴の有無を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -83,7 +83,7 @@ export const InputOfNotebook: React.FC<Props> = (props) => {
             secondLabel="無"
           />
         </Box>
-        <Box component="h4" px={2} textAlign="center">
+        <Box component="h4" px={4}>
           3. 昨日の夕飯を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -94,7 +94,7 @@ export const InputOfNotebook: React.FC<Props> = (props) => {
             onChange={onChangeDinner}
           />
         </Box>
-        <Box component="h4" px={2} textAlign="center">
+        <Box component="h4" px={4}>
           4. 今朝の朝食を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -105,7 +105,7 @@ export const InputOfNotebook: React.FC<Props> = (props) => {
             onChange={onChangeBreakfast}
           />
         </Box>
-        <Box component="h4" px={2} textAlign="center">
+        <Box component="h4" px={4}>
           5. 連絡事項を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
