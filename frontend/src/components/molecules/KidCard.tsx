@@ -47,7 +47,7 @@ export const KidCard: React.FC<Props> = (props) => {
     <Card className={classes.root}>
       <CardMedia
         className={classes.cover}
-        image={`${process.env.PUBLIC_URL}/favicon.ico`}
+        image={`${process.env.PUBLIC_URL}/noimage.jpeg`}
         title="Live from space album cover"
       />
       <div className={classes.details}>
@@ -56,7 +56,7 @@ export const KidCard: React.FC<Props> = (props) => {
             {kidName}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            {age}
+            {age}さい
           </Typography>
         </CardContent>
         <div className={classes.controls}>
