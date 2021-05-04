@@ -47,7 +47,7 @@ export const KidCard: React.FC<Props> = (props) => {
     <Card className={classes.root}>
       <CardMedia
         className={classes.cover}
-        image="/static/images/cards/live-from-space.jpg"
+        image={`${process.env.PUBLIC_URL}/favicon.ico`}
         title="Live from space album cover"
       />
       <div className={classes.details}>
