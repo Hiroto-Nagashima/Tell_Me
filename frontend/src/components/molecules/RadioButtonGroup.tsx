@@ -5,7 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
 type Props = {
-  value: 0 | 1;
+  value: 0 | 1 | null;
   firstLabel: string;
   secondLabel: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;

@@ -3,7 +3,9 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
 import { SingleLineTextField } from '../atoms/SingleLineTextField';
+import { MultipleLinesTextField } from '../atoms/MultipleLinesTextField';
 import { FlexibleButton } from '../atoms/FlexibleButton';
+import { RadioButtonGroup } from '../molecules/RadioButtonGroup';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,23 +23,35 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export type Props = {
+  bath: 0 | 1 | null;
+  memo: string | null;
+  dinner: string | null;
+  breakfast: string | null;
   selectedDate: Date | string;
   bodyTemperature: number | string | null;
-  kidName: string;
-  daycareID: number;
-  password: string;
-  favoriteFood: string;
-  favoritePlay: string;
   onClick: () => void;
+  onChangeMemo: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeBath: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeDinner: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeBreakfast: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeBodyTemperature: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeAge: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeDaycareID: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeFavoriteFood: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeFavoritePlay: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const RegisterKidPaper: React.FC<Props> = (props) => {
-  const { selectedDate } = props;
+  const {
+    selectedDate,
+    bodyTemperature,
+    bath,
+    memo,
+    dinner,
+    breakfast,
+    onClick,
+    onChangeBath,
+    onChangeMemo,
+    onChangeDinner,
+    onChangeBreakfast,
+    onChangeBodyTemperature,
+  } = props;
   const classes = useStyles();
 
   return (
@@ -58,47 +72,47 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
           />
         </Box>
         <Box component="h4" px={2} textAlign="center">
-          2. 昨日の夜、入浴はしましたか？
+          2. 昨晩の入浴の有無を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
-          <SingleLineTextField
-            textName="お名前"
-            placeholder="空欄は入れないでください"
-            value={kidName}
-            onChange={onChangeKidName}
+          <RadioButtonGroup
+            value={bath}
+            onChange={onChangeBath}
+            firstLabel="有"
+            secondLabel="無"
           />
         </Box>
         <Box component="h4" px={2} textAlign="center">
-          3. お子様のご年齢を入力してください
+          3. 昨日の夕飯を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
-          <SingleLineTextField
-            textName="ご年齢"
-            placeholder="数字のみ入力してください"
-            value={age}
-            onChange={onChangeAge}
+          <MultipleLinesTextField
+            label="夕飯"
+            row={2}
+            value={dinner}
+            onChange={onChangeDinner}
           />
         </Box>
         <Box component="h4" px={2} textAlign="center">
-          4. お子様の好きな食べ物を入力してください
+          4. 今朝の朝食を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
-          <SingleLineTextField
-            textName="好きな食べ物"
-            placeholder="餃子"
-            value={favoriteFood}
-            onChange={onChangeFavoriteFood}
+          <MultipleLinesTextField
+            label="朝食"
+            row={2}
+            value={breakfast}
+            onChange={onChangeBreakfast}
           />
         </Box>
         <Box component="h4" px={2} textAlign="center">
-          5. お子様の好きな遊びを入力してください
+          5. 連絡事項を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
-          <SingleLineTextField
-            textName="好きな遊び"
-            placeholder="おままごと"
-            value={favoritePlay}
-            onChange={onChangeFavoritePlay}
+          <MultipleLinesTextField
+            label="連絡事項"
+            row={2}
+            value={memo}
+            onChange={onChangeMemo}
           />
         </Box>
         <Box textAlign="center" m={2}>
