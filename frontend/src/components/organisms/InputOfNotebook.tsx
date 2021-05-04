@@ -65,8 +65,9 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" mx={4}>
           <SingleLineTextField
-            textName="ID"
-            placeholder="保育園ID"
+            textName="体温"
+            isFullWidth={false}
+            placeholder="36.5"
             value={bodyTemperature}
             onChange={onChangeBodyTemperature}
           />

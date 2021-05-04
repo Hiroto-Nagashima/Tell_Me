@@ -69,6 +69,7 @@ export const SignupPaper: React.FC<Props> = (props) => {
         <Box textAlign="center" m={4}>
           <SingleLineTextField
             textName="お名前"
+            isFullWidth={true}
             placeholder="お父様かお母様のお名前"
             value={parentName}
             onChange={onChangeParentName}
@@ -77,6 +78,7 @@ export const SignupPaper: React.FC<Props> = (props) => {
         <Box textAlign="center" m={4}>
           <SingleLineTextField
             textName="電話番号"
+            isFullWidth={true}
             placeholder="ハイフンなし"
             value={telephoneNumber}
             onChange={onChangeTelephoneNumber}
@@ -85,6 +87,7 @@ export const SignupPaper: React.FC<Props> = (props) => {
         <Box textAlign="center" m={4}>
           <SingleLineTextField
             textName="email"
+            isFullWidth={true}
             placeholder="xxxxxxx@xxx.ne.jp"
             value={email}
             onChange={onChangeEmail}
@@ -93,6 +96,7 @@ export const SignupPaper: React.FC<Props> = (props) => {
         <Box textAlign="center" m={4}>
           <SingleLineTextField
             textName="password"
+            isFullWidth={true}
             placeholder="6文字以上"
             value={password}
             onChange={onChangePassword}
