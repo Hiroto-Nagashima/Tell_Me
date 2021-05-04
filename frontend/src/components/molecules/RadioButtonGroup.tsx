@@ -6,11 +6,13 @@ import FormControl from '@material-ui/core/FormControl';
 
 type Props = {
   value: 0 | 1;
+  firstLabel: string;
+  secondLabel: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const RadioButtonGroup: React.FC<Props> = (props) => {
-  const { value, onChange } = props;
+  const { value, firstLabel, secondLabel, onChange } = props;
 
   return (
     <FormControl component="fieldset">
@@ -25,12 +27,12 @@ export const RadioButtonGroup: React.FC<Props> = (props) => {
         <FormControlLabel
           value={0}
           control={<Radio color="primary" />}
-          label="母"
+          label={firstLabel}
         />
         <FormControlLabel
           value={1}
           control={<Radio color="primary" />}
-          label="父"
+          label={secondLabel}
         />
       </RadioGroup>
     </FormControl>

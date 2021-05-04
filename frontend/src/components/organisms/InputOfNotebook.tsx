@@ -21,15 +21,15 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export type Props = {
-  age: number;
-  parentName: string;
+  selectedDate: Date | string;
+  bodyTemperature: number | string | null;
   kidName: string;
   daycareID: number;
   password: string;
   favoriteFood: string;
   favoritePlay: string;
   onClick: () => void;
-  onChangeKidName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeBodyTemperature: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeAge: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeDaycareID: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeFavoriteFood: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -37,43 +37,28 @@ export type Props = {
 };
 
 export const RegisterKidPaper: React.FC<Props> = (props) => {
-  const {
-    age,
-    kidName,
-    daycareID,
-    parentName,
-    favoriteFood,
-    favoritePlay,
-    onClick,
-    onChangeKidName,
-    onChangeAge,
-    onChangeDaycareID,
-    onChangeFavoriteFood,
-    onChangeFavoritePlay,
-  } = props;
+  const { selectedDate } = props;
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Paper elevation={3}>
         <Box component="h2" pt={2} textAlign="center">
-          ようこそ
-          <br />
-          {parentName}さん！
+          {selectedDate}の連絡帳
         </Box>
         <Box component="h4" px={2} textAlign="center">
-          1. 保育園のIDを入力してください
+          1. 朝に測った体温を記入してください
         </Box>
         <Box textAlign="center" mx={4}>
           <SingleLineTextField
             textName="ID"
             placeholder="保育園ID"
-            value={daycareID}
-            onChange={onChangeDaycareID}
+            value={bodyTemperature}
+            onChange={onChangeBodyTemperature}
           />
         </Box>
         <Box component="h4" px={2} textAlign="center">
-          2. お子様のお名前を入力してください
+          2. 昨日の夜、入浴はしましたか？
         </Box>
         <Box textAlign="center" mx={4}>
           <SingleLineTextField
