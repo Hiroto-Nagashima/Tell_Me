@@ -37,7 +37,7 @@ export type Props = {
   onChangeBodyTemperature: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const RegisterKidPaper: React.FC<Props> = (props) => {
+export const InputOfNotebook: React.FC<Props> = (props) => {
   const {
     selectedDate,
     bodyTemperature,
