@@ -1,5 +1,5 @@
 import React from 'react';
-// import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -8,19 +8,19 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
-// const useStyles = makeStyles((theme: Theme) =>
-//   createStyles({
-//     root: {
-//       flexGrow: 1,
-//     },
-//     menuButton: {
-//       marginRight: theme.spacing(2),
-//     },
-//     title: {
-//       flexGrow: 1,
-//     },
-//   }),
-// );
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    title: {
+      flexGrow: 1,
+    },
+  }),
+);
 
 export type Props = {
   name?: string;
@@ -40,12 +40,15 @@ export const Header: React.FC<Props> = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const classes = useStyles();
 
   return (
-    <div>
+    <div className={classes.root}>
       <AppBar position="static" color="primary">
         <Toolbar>
-          <Typography variant="h6">Tell Me</Typography>
+          <Typography variant="h6" className={classes.title}>
+            Tell Me
+          </Typography>
           {auth && (
             <div>
               <IconButton
