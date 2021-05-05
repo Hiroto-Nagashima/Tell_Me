@@ -1,4 +1,4 @@
-import React, { memo, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { Header } from '../organisms/Header';
 import { Footer } from '../organisms/Footer';
 
@@ -6,7 +6,7 @@ type Props = {
   // タグで囲われているやつはReactNode
   children: ReactNode;
 };
-export const DefaultLayout: React.FC<Props> = memo((props) => {
+export const DefaultLayout: React.FC<Props> = (props) => {
   const { children } = props;
 
   return (
@@ -19,6 +19,6 @@ export const DefaultLayout: React.FC<Props> = memo((props) => {
       />
     </>
   );
-});
+};
 
 DefaultLayout.displayName = 'DefaultLayout';

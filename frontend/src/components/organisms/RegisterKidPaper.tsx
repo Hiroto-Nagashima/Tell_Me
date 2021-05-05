@@ -66,6 +66,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" mx={4}>
           <SingleLineTextField
+            isFullWidth={true}
             textName="ID"
             placeholder="保育園ID"
             value={daycareID}
@@ -77,6 +78,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" mx={4}>
           <SingleLineTextField
+            isFullWidth={true}
             textName="お名前"
             placeholder="空欄は入れないでください"
             value={kidName}
@@ -88,6 +90,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" mx={4}>
           <SingleLineTextField
+            isFullWidth={false}
             textName="ご年齢"
             placeholder="数字のみ入力してください"
             value={age}
@@ -99,6 +102,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" mx={4}>
           <SingleLineTextField
+            isFullWidth={true}
             textName="好きな食べ物"
             placeholder="餃子"
             value={favoriteFood}
@@ -110,6 +114,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" mx={4}>
           <SingleLineTextField
+            isFullWidth={true}
             textName="好きな遊び"
             placeholder="おままごと"
             value={favoritePlay}

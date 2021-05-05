@@ -6,16 +6,16 @@ import { Home } from './components/pages/Home';
 import { Login } from './components/pages/Login';
 import { SignUp } from './components/pages/SignUp';
 import { HeaderLayout } from './components/templates/HeaderLayout';
-import { DefaultLayout } from './components/templates/DefaultLayout';
+// import { DefaultLayout } from './components/templates/DefaultLayout';
 
 const App: React.FC = () => {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Switch>
-          <DefaultLayout>
+          <HeaderLayout>
             <PrivateRoute exact path="/" component={Home} />
-          </DefaultLayout>
+          </HeaderLayout>
           <HeaderLayout>
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={SignUp} />

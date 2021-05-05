@@ -40,6 +40,7 @@ export const LoginPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
+            isFullWidth={true}
             textName="email"
             placeholder="xxxxxxx@xxx.ne.jp"
             value={email}
@@ -48,6 +49,7 @@ export const LoginPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
+            isFullWidth={true}
             textName="password"
             placeholder="6文字以上"
             value={password}
