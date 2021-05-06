@@ -1,6 +1,3 @@
-window.React2 = require('react');
-console.log(window.React1);
-console.log(window.React1 === window.React2);
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import PrivateRoute from './router/PrivateRoute';
@@ -10,10 +7,8 @@ import { Login } from './components/pages/Login';
 import { SignUp } from './components/pages/SignUp';
 // import { HeaderLayout } from './components/templates/HeaderLayout';
 import { DefaultLayout } from './components/templates/DefaultLayout';
-require('react-dom');
 
 const App: React.FC = () => {
-
   return (
     <AuthProvider>
       <BrowserRouter>
