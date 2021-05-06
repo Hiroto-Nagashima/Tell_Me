@@ -1,13 +1,19 @@
 import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
-
+import Image from '../../images/kid.jpg';
 import { withRouter } from 'react-router';
 import * as H from 'history';
 import { AuthContext } from '../../auth/AuthProvider';
 import { LoginPaper } from '../organisms/LoginPaper';
-
+import styled from 'styled-components';
 type Props = {
   history: H.History;
 };
+const BackgroundImage = styled.div`
+  background-image: url(${Image});
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+`;
 
 export const Login: React.FC<Props> = ({ history }) => {
   const { login } = useContext(AuthContext);
@@ -28,13 +34,15 @@ export const Login: React.FC<Props> = ({ history }) => {
   };
 
   return (
-    <LoginPaper
-      email={email}
-      onChangeEmail={onChangeEmail}
-      password={password}
-      onChangePassword={onChangePassword}
-      onClick={handleSubmit}
-    />
+    <BackgroundImage>
+      <LoginPaper
+        email={email}
+        onChangeEmail={onChangeEmail}
+        password={password}
+        onChangePassword={onChangePassword}
+        onClick={handleSubmit}
+      />
+    </BackgroundImage>
   );
 };
 export default withRouter(Login);
