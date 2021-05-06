@@ -16,7 +16,7 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
     'plugin:prettier/recommended',
     'plugin:react/recommended',
-    "plugin:react-hooks/recommended",
+    'plugin:react-hooks/recommended',
     'prettier',
   ],
   globals: {
@@ -132,7 +132,7 @@ module.exports = {
     'import/resolver': {
       node: {
         extensions: ['.js', 'jsx', '.ts', '.tsx'],
-        paths: ['src'],
+        moduleDirectory: ['node_modules', 'src/'],
       },
     },
     react: {

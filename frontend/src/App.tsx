@@ -20,6 +20,9 @@ const App: React.FC = () => {
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/login" component={Login} />
           </HeaderLayout>
+          {/* <Route path="*">
+            <Page404 />
+          </Route> */}
         </Switch>
       </BrowserRouter>
     </AuthProvider>
