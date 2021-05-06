@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
 import { SingleLineTextField } from '../atoms/SingleLineTextField';
 import { FlexibleButton } from '../atoms/FlexibleButton';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,13 +24,19 @@ const useStyles = makeStyles((theme: Theme) =>
 export type Props = {
   email: string;
   password: string;
-  onClick: (e: unknown) => void;
+  onClickLogin: (e: unknown) => void;
   onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const LoginPaper: React.FC<Props> = (props) => {
-  const { email, password, onChangeEmail, onChangePassword, onClick } = props;
+  const {
+    email,
+    password,
+    onChangeEmail,
+    onChangePassword,
+    onClickLogin,
+  } = props;
   const classes = useStyles();
 
   return (
@@ -60,11 +67,23 @@ export const LoginPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" mx={2}>
           <FlexibleButton
-            onClick={onClick}
+            onClick={onClickLogin}
             variant="contained"
             color="primary"
             label="Login"
           />
+        </Box>
+        <Box textAlign="center" m={3}>
+          ------アカウントをお持ちでない方------
+        </Box>
+        <Box textAlign="center" mx={2}>
+          <Link to="/signup">
+            <FlexibleButton
+              variant="contained"
+              color="primary"
+              label="Sign Up"
+            />
+          </Link>
         </Box>
       </Paper>
     </div>

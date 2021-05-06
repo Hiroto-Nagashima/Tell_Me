@@ -44,7 +44,7 @@ export const Login: React.FC<Props> = ({ history }) => {
             onChangeEmail={onChangeEmail}
             password={password}
             onChangePassword={onChangePassword}
-            onClick={handleSubmit}
+            onClickLogin={handleSubmit}
           />
         </Grid>
       </Grid>
