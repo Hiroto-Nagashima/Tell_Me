@@ -3,6 +3,7 @@ import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
 import { withRouter } from 'react-router';
 import * as H from 'history';
 import { AuthContext } from '../../auth/AuthProvider';
+import { LoginPaper } from '../organisms/LoginPaper';
 
 type Props = {
   history: H.History;
@@ -22,38 +23,18 @@ export const Login: React.FC<Props> = ({ history }) => {
   }, []);
 
   // AuthContextからlogin関数を受け取る
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     login!(email, password, history);
   };
 
   return (
-    <div>
-      <h1>Log in</h1>
-      <form>
-        <label>
-          Email
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            onChange={onChangeEmail}
-            value={email}
-          />
-        </label>
-        <label>
-          Password
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            onChange={onChangePassword}
-            value={password}
-          />
-        </label>
-        <button onClick={handleSubmit}>Log in</button>
-      </form>
-    </div>
+    <LoginPaper
+      email={email}
+      onChangeEmail={onChangeEmail}
+      password={password}
+      onChangePassword={onChangePassword}
+      onClick={handleSubmit}
+    />
   );
 };
 export default withRouter(Login);

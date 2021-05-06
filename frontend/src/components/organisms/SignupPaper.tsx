@@ -68,6 +68,7 @@ export const SignupPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
+            id="お名前"
             textName="お名前"
             isFullWidth={true}
             placeholder="お父様かお母様のお名前"
@@ -77,6 +78,7 @@ export const SignupPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
+            id="電話番号"
             textName="電話番号"
             isFullWidth={true}
             placeholder="ハイフンなし"
@@ -86,6 +88,7 @@ export const SignupPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
+            id="email"
             textName="email"
             isFullWidth={true}
             placeholder="xxxxxxx@xxx.ne.jp"
@@ -95,6 +98,7 @@ export const SignupPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
+            id="password"
             textName="password"
             isFullWidth={true}
             placeholder="6文字以上"

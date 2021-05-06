@@ -13,6 +13,7 @@ export const Email = (args: Props) => (
   <Grid container>
     <Grid item xs={6}>
       <SingleLineTextField
+        id="email"
         isFullWidth={true}
         textName="Email"
         placeholder="xxxxx@xxx.ne.jp"
@@ -25,6 +26,7 @@ export const Password = (args: Props) => (
   <Grid container>
     <Grid item xs={6}>
       <SingleLineTextField
+        id="password"
         textName="Password"
         placeholder="xxxxx"
         isFullWidth={true}
@@ -37,6 +39,7 @@ export const BodyTemperature = (args: Props) => (
   <Grid container>
     <Grid item xs={6}>
       <SingleLineTextField
+        id="体温"
         textName="体温"
         placeholder="36.x"
         isFullWidth={true}

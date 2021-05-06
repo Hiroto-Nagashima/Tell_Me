@@ -5,6 +5,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import styled from 'styled-components';
 
 export type Props = {
+  id: string;
   textName: string;
   placeholder: string;
   isFullWidth: boolean;
@@ -12,7 +13,7 @@ export type Props = {
   value?: number | string | null;
 };
 export const SingleLineTextField: VFC<Props> = (props) => {
-  const { isFullWidth, textName, placeholder, onChange, value } = props;
+  const { isFullWidth, textName, placeholder, onChange, value, id } = props;
   const SFormControl = styled(FormControl)`
     display: grid
     step: "0.1"
@@ -23,7 +24,7 @@ export const SingleLineTextField: VFC<Props> = (props) => {
       <InputLabel htmlFor="component-outlined">{textName}</InputLabel>
       <OutlinedInput
         style={{ width: '100%' }}
-        id="component-outlined"
+        id={id}
         value={value}
         onChange={onChange}
         label={textName}

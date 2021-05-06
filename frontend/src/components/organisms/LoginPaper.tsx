@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export type Props = {
   email: string;
   password: string;
-  onClick: () => void;
+  onClick: (e: unknown) => void;
   onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
@@ -40,6 +40,7 @@ export const LoginPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
+            id="email"
             isFullWidth={true}
             textName="email"
             placeholder="xxxxxxx@xxx.ne.jp"
@@ -49,6 +50,7 @@ export const LoginPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
+            id="password"
             isFullWidth={true}
             textName="password"
             placeholder="6文字以上"

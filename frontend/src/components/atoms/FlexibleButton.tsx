@@ -7,7 +7,7 @@ export type Props = {
   color: 'inherit' | 'primary' | 'secondary' | 'default';
   label: string;
   url?: string;
-  onClick?: () => void;
+  onClick?: (e: unknown) => void;
 };
 
 const SButton = styled(Button)`
