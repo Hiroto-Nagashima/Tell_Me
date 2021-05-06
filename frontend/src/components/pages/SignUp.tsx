@@ -2,6 +2,7 @@ import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
 import { withRouter } from 'react-router';
 import * as H from 'history';
 import { AuthContext } from '../../auth/AuthProvider';
+import { SignupPaper } from '../organisms/SignupPaper';
 
 type Props = {
   history: H.History;
@@ -21,38 +22,19 @@ export const SignUp: React.FC<Props> = ({ history }) => {
   }, []);
 
   // AuthContextからlogin関数を受け取る
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    // e.preventDefault();
     signup!(email, password, history);
   };
 
   return (
-    <div>
-      <h1>Sign Up</h1>
-      <form>
-        <label>
-          Email
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            onChange={onChangeEmail}
-            value={email}
-          />
-        </label>
-        <label>
-          Password
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            onChange={onChangePassword}
-            value={password}
-          />
-        </label>
-        <button onClick={handleSubmit}>SignUp</button>
-      </form>
-    </div>
+    <SignupPaper
+      email={email}
+      password={password}
+      onClick={handleSubmit}
+      onChangeEmail={onChangeEmail}
+      onChangePassword={onChangePassword}
+    />
   );
 };
 export default withRouter(SignUp);
