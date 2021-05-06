@@ -5,21 +5,21 @@ import { AuthProvider } from './auth/AuthProvider';
 import { Home } from './components/pages/Home';
 import { Login } from './components/pages/Login';
 import { SignUp } from './components/pages/SignUp';
-// import { HeaderLayout } from './components/templates/HeaderLayout';
-import { DefaultLayout } from './components/templates/DefaultLayout';
+import { HeaderLayout } from './components/templates/HeaderLayout';
+// import { DefaultLayout } from './components/templates/DefaultLayout';
 
 const App: React.FC = () => {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Switch>
-          <DefaultLayout>
+          <HeaderLayout>
             <PrivateRoute exact path="/" component={Home} />
-          </DefaultLayout>
-          <DefaultLayout>
+          </HeaderLayout>
+          <HeaderLayout>
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/login" component={Login} />
-          </DefaultLayout>
+          </HeaderLayout>
         </Switch>
       </BrowserRouter>
     </AuthProvider>
