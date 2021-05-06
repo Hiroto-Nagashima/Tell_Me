@@ -17,9 +17,11 @@ const Template: Story<Props> = (args) => <Header {...args} />;
 export const LoggedIn = Template.bind({});
 LoggedIn.args = {
   auth: true,
+  color: 'inherit',
 };
 
 export const LoggedOut = Template.bind({});
 LoggedOut.args = {
   auth: false,
+  color: 'inherit',
 };

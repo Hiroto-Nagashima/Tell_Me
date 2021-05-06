@@ -10,7 +10,7 @@ export const HeaderLayout: VFC<Props> = memo((props) => {
 
   return (
     <>
-      <Header auth={false} />
+      <Header color="primary" auth={false} />
       {children}
     </>
   );

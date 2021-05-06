@@ -1,10 +1,11 @@
 import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
-import Image from '../../images/kid.jpg';
+import Image from '../../images/kid.jpeg';
 import { withRouter } from 'react-router';
 import * as H from 'history';
 import { AuthContext } from '../../auth/AuthProvider';
 import { LoginPaper } from '../organisms/LoginPaper';
 import styled from 'styled-components';
+import Grid from '@material-ui/core/Grid';
 type Props = {
   history: H.History;
 };
@@ -13,6 +14,7 @@ const BackgroundImage = styled.div`
   background-size: cover;
   background-position: center;
   height: 100vh;
+  padding-top: 120px;
 `;
 
 export const Login: React.FC<Props> = ({ history }) => {
@@ -35,13 +37,17 @@ export const Login: React.FC<Props> = ({ history }) => {
 
   return (
     <BackgroundImage>
-      <LoginPaper
-        email={email}
-        onChangeEmail={onChangeEmail}
-        password={password}
-        onChangePassword={onChangePassword}
-        onClick={handleSubmit}
-      />
+      <Grid container justify="flex-end" alignItems="flex-end">
+        <Grid item xs={6}>
+          <LoginPaper
+            email={email}
+            onChangeEmail={onChangeEmail}
+            password={password}
+            onChangePassword={onChangePassword}
+            onClick={handleSubmit}
+          />
+        </Grid>
+      </Grid>
     </BackgroundImage>
   );
 };
