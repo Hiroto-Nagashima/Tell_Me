@@ -3,15 +3,19 @@ import { Route, RouteComponentProps } from 'react-router-dom';
 import { HeaderLayout } from '../components/templates/HeaderLayout';
 type Props = {
   component: ComponentType<RouteComponentProps>;
+  exact: boolean;
+  path: string;
 };
 
 const LoginLayoutRoute: React.FC<Props> = ({
   component: Component,
-  ...rest
+  exact,
+  path,
 }) => {
   return (
     <Route
-      {...rest}
+      exact={exact}
+      path={path}
       render={(props) => (
         <HeaderLayout>
           <Component {...props} />
