@@ -26,10 +26,11 @@ export type Props = {
   name?: string;
   daycare_name?: string;
   auth: boolean;
+  color: 'default' | 'inherit' | 'primary' | 'secondary' | 'transparent';
 };
 
 export const Header: React.FC<Props> = (props) => {
-  const { name, daycare_name, auth } = props;
+  const { name, daycare_name, auth, color } = props;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -44,7 +45,7 @@ export const Header: React.FC<Props> = (props) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="primary">
+      <AppBar position="static" color={color}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Tell Me

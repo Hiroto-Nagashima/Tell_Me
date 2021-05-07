@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       '& > *': {
         margin: theme.spacing(1),
         width: theme.spacing(50),
-        height: theme.spacing(77),
+        height: theme.spacing(90),
       },
     },
   }),
@@ -24,29 +24,32 @@ const useStyles = makeStyles((theme: Theme) =>
 export type Props = {
   email: string;
   password: string;
-  parentName: string;
-  radioButtonValue: 0 | 1;
-  telephoneNumber: number;
+  firstName: string;
+  lastName: string;
+  gender: number;
+  telephoneNumber: string;
   onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeParentName: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeRadioButton: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeFirstName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeLastName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeGender: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeTelephoneNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClick: () => void;
 };
-export const SignupPaper: React.FC<Props> = (props) => {
+export const SignUpPaper: React.FC<Props> = (props) => {
   const {
     email,
     password,
-    parentName,
-    radioButtonValue,
+    lastName,
+    firstName,
+    gender,
     telephoneNumber,
     onChangeEmail,
     onChangePassword,
-    onChangeParentName,
-    onChangeRadioButton,
+    onChangeFirstName,
+    onChangeLastName,
+    onChangeGender,
     onChangeTelephoneNumber,
-
     onClick,
   } = props;
 
@@ -60,23 +63,35 @@ export const SignupPaper: React.FC<Props> = (props) => {
         </Box>
         <Box m={4}>
           <RadioButtonGroup
-            value={radioButtonValue}
-            onChange={onChangeRadioButton}
+            value={gender}
+            onChange={onChangeGender}
             firstLabel="母"
             secondLabel="父"
           />
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
-            textName="お名前"
-            isFullWidth={true}
-            placeholder="お父様かお母様のお名前"
-            value={parentName}
-            onChange={onChangeParentName}
+            id="姓"
+            textName="姓"
+            isFullWidth={false}
+            placeholder="親御様の姓"
+            value={lastName}
+            onChange={onChangeLastName}
           />
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
+            id="名"
+            textName="名"
+            isFullWidth={false}
+            placeholder="親御様の名"
+            value={firstName}
+            onChange={onChangeFirstName}
+          />
+        </Box>
+        <Box textAlign="center" m={4}>
+          <SingleLineTextField
+            id="電話番号"
             textName="電話番号"
             isFullWidth={true}
             placeholder="ハイフンなし"
@@ -86,6 +101,7 @@ export const SignupPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
+            id="email"
             textName="email"
             isFullWidth={true}
             placeholder="xxxxxxx@xxx.ne.jp"
@@ -95,6 +111,7 @@ export const SignupPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
+            id="password"
             textName="password"
             isFullWidth={true}
             placeholder="6文字以上"

@@ -65,6 +65,7 @@ export const InputOfNotebook: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" mx={4}>
           <SingleLineTextField
+            id="体温"
             textName="体温"
             isFullWidth={false}
             placeholder="36.5"

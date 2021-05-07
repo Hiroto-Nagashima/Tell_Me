@@ -16,6 +16,7 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
     'plugin:prettier/recommended',
     'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
     'prettier',
   ],
   globals: {
@@ -108,7 +109,7 @@ module.exports = {
 
     // react hooks
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
 
     // import
     'import/extensions': [
@@ -131,7 +132,7 @@ module.exports = {
     'import/resolver': {
       node: {
         extensions: ['.js', 'jsx', '.ts', '.tsx'],
-        paths: ['src'],
+        moduleDirectory: ['node_modules', 'src/'],
       },
     },
     react: {

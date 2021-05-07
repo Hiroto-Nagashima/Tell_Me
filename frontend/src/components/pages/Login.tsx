@@ -1,12 +1,21 @@
 import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
-
+import Image from '../../images/kid.jpeg';
 import { withRouter } from 'react-router';
 import * as H from 'history';
 import { AuthContext } from '../../auth/AuthProvider';
-
+import { LoginPaper } from '../organisms/LoginPaper';
+import styled from 'styled-components';
+import Grid from '@material-ui/core/Grid';
 type Props = {
   history: H.History;
 };
+const BackgroundImage = styled.div`
+  background-image: url(${Image});
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  padding-top: 120px;
+`;
 
 export const Login: React.FC<Props> = ({ history }) => {
   const { login } = useContext(AuthContext);
@@ -22,38 +31,24 @@ export const Login: React.FC<Props> = ({ history }) => {
   }, []);
 
   // AuthContextからlogin関数を受け取る
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     login!(email, password, history);
   };
 
   return (
-    <div>
-      <h1>Log in</h1>
-      <form>
-        <label>
-          Email
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            onChange={onChangeEmail}
-            value={email}
+    <BackgroundImage>
+      <Grid container justify="flex-end" alignItems="flex-end">
+        <Grid item xs={6}>
+          <LoginPaper
+            email={email}
+            onChangeEmail={onChangeEmail}
+            password={password}
+            onChangePassword={onChangePassword}
+            onClickLogin={handleSubmit}
           />
-        </label>
-        <label>
-          Password
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            onChange={onChangePassword}
-            value={password}
-          />
-        </label>
-        <button onClick={handleSubmit}>Log in</button>
-      </form>
-    </div>
+        </Grid>
+      </Grid>
+    </BackgroundImage>
   );
 };
 export default withRouter(Login);

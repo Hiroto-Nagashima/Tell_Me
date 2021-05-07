@@ -5,5 +5,5 @@ interface NewAlertProps extends AlertProps {
   onClose: () => void;
 }
 export const Alert: React.FC<NewAlertProps> = (props: NewAlertProps) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+  return <MuiAlert variant="filled" {...props} />;
 };
