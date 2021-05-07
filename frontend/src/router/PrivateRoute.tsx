@@ -3,7 +3,7 @@ import { Route, RouteComponentProps } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthProvider';
 import { Login } from '../components/pages/Login';
 type Props = {
-  component: ComponentType<RouteComponentProps<number>>;
+  component: ComponentType<RouteComponentProps>;
   exact?: boolean;
   path?: string;
 };
