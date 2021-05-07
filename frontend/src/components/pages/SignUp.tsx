@@ -1,4 +1,10 @@
-import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
+import React, {
+  ChangeEvent,
+  useCallback,
+  useContext,
+  useState,
+  useEffect,
+} from 'react';
 import { withRouter } from 'react-router';
 import * as H from 'history';
 import { AuthContext } from '../../auth/AuthProvider';
@@ -51,6 +57,10 @@ export const SignUp: React.FC<Props> = ({ history }) => {
     // e.preventDefault();
     signup!(email, password, history);
   };
+
+  useEffect(() => {
+    console.log('hey');
+  }, []);
 
   return (
     <SignUpPaper
