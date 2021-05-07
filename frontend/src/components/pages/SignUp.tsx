@@ -9,6 +9,7 @@ import { withRouter } from 'react-router';
 import * as H from 'history';
 import { AuthContext } from '../../auth/AuthProvider';
 import { SignUpPaper } from '../organisms/SignUpPaper';
+import axios from 'axios';
 
 type Props = {
   history: H.History;
@@ -17,6 +18,7 @@ type Props = {
 
 export const SignUp: React.FC<Props> = ({ history }) => {
   const { signup } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [gender, setGender] = useState(0);
   const [firstName, setFirstName] = useState('');
@@ -51,12 +53,40 @@ export const SignUp: React.FC<Props> = ({ history }) => {
     },
     [],
   );
-
-  // AuthContextからlogin関数を受け取る
+  // 認証後Rails側にリクエストを送る
   const handleSubmit = () => {
-    // e.preventDefault();
-    signup!(email, password, history);
+    const request = async () => {
+      await signup!(email, password, history);
+      // Firebase Authの認証
+      if (currentUser) {
+        const token = await currentUser.getIdToken(true);
+        const config = { token };
+        // Rails側にリクエストを送る
+        try {
+          await axios.post('/api/v1/registration', {
+            params: {
+              email: email,
+              password: password,
+              gender: gender,
+              firstName: firstName,
+              lastName: lastName,
+              telephoneNumber: telephoneNumber,
+              uid: config,
+            },
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
+    request();
   };
+
+  // // AuthContextからlogin関数を受け取る
+  // const handleSubmit = () => {
+  //   // e.preventDefault();
+  //   signup!(email, password, history);
+  // };
 
   useEffect(() => {
     console.log('hey');
