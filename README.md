@@ -14,26 +14,18 @@
 $ docker-compose build
 $ docker-compose up
 ```
-http://localhost:3000 でAPIサーバとWebpackサーバが起動します
+http://localhost:8000 でWebpackサーバ, http://localhost:3000 でAPIサーバーが起動します
 
 ## Technology stack
 - frontend
   - React
   - TypeScript
+  - styled-components
+  - atomic design
+  - jest
 - backend
   - Ruby on Rails
-- style
-  - styled-components
-- test
   - RSpec
-  - jest
-- infrastructure
-  - Docker
-  - AWS ECS
-- database
-  - MySQL
-
-
 
 ## Unit Test
 
