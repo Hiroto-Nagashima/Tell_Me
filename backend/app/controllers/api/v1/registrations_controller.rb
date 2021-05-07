@@ -7,7 +7,7 @@ module Api
         FirebaseIdToken::Certificates.request
         raise ArgumentError, 'BadRequest Parameter' if payload.blank?
         @parent = Parent.find_or_initialize_by(uid: payload['sub'])
-        if @user.save
+        if @parent.save(parent_params)
           render json: @parent, status: :ok
         else
           render json: @parent.errors, status: :unprocessable_entity
@@ -26,6 +26,10 @@ module Api
 
       def payload
         @payload ||= FirebaseIdToken::Signature.verify token
+      end
+
+      def parent_params
+        params.require(:parent).permit(:email, :password, :first_name, :last_name, :gender, :telephone_number, :uid)
       end
     end
   end
