@@ -6,10 +6,7 @@ import { Home } from './components/pages/Home';
 import { Login } from './components/pages/Login';
 import { SignUp } from './components/pages/SignUp';
 import { Page404 } from './components/pages/Page404';
-import HeaderLayoutRoute from './router/HeaderLayoutRoute';
-
-// import { HeaderLayout } from './components/templates/HeaderLayout';
-// import { DefaultLayout } from './components/templates/DefaultLayout';
+// import HeaderLayoutRoute from './router/HeaderLayoutRoute';
 
 const App: React.FC = () => {
   return (
@@ -17,7 +14,7 @@ const App: React.FC = () => {
       <BrowserRouter>
         <Switch>
           <PrivateRoute exact={true} path="/" component={Home} />
-          <HeaderLayoutRoute exact path="/signup" component={SignUp} />
+          <Route exact path="/signup" component={SignUp} />
           <Route exact path="/login" component={Login} />
           <Route path="*">
             <Page404 />
