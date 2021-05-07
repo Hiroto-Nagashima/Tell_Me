@@ -10,12 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_07_025957) do
+ActiveRecord::Schema.define(version: 2021_05_07_032240) do
 
   create_table "daycares", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.string "telephone_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "kids", charset: "utf8mb4", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "gender"
+    t.integer "age"
+    t.integer "daycare_id"
+    t.string "favorite_play"
+    t.string "favorite_food"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -28,6 +40,7 @@ ActiveRecord::Schema.define(version: 2021_05_07_025957) do
     t.string "uid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "kid_id"
   end
 
 end
