@@ -12,6 +12,8 @@ import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import { getAuth } from '../../helper/FirebaseAuthHelper';
 import { ChooseKid } from './ChooseKid';
+import { Spinner } from '../atoms/Spinner';
+
 type Props = {
   history: H.History;
 };
@@ -49,14 +51,10 @@ export const Login: React.FC<Props> = () => {
   };
 
   if (error) {
-    return (
-      <div>
-        <p>Error: {error.message}</p>
-      </div>
-    );
+    return <Spinner color="primary" />;
   }
   if (loading) {
-    return <p>Loading...</p>;
+    return <Spinner color="primary" />;
   }
   if (user) {
     return (
