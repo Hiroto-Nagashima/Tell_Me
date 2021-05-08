@@ -1,6 +1,9 @@
 import 'firebase/auth';
 import firebase from 'firebase/app';
 import firebaseConfig from '../config/firebaseConfig.json';
+import { useHistory } from 'react-router';
+
+
 
 let _app: firebase.app.App | null = null;
 
@@ -18,9 +21,11 @@ export function getAuth() {
   return getApp().auth();
 }
 
-export const login = (email: string, password: string) => {
-  firebase.auth().signInWithEmailAndPassword(email, password);
-};
+// export const login = (email: string, password: string) => {
+//   const history = useHistory();
+//   firebase.auth().signInWithEmailAndPassword(email, password);
+
+// };
 
 export async function logout() {
   try {

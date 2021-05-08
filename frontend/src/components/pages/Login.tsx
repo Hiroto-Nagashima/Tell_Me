@@ -1,11 +1,13 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
-import { login } from '../../helper/FirebaseAuthHelper';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+// import { login } from '../../helper/FirebaseAuthHelper';
 import Image from '../../images/kid.jpeg';
 import { withRouter } from 'react-router';
 import * as H from 'history';
 import { LoginPaper } from '../organisms/LoginPaper';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
+import { getAuth } from '../../helper/FirebaseAuthHelper';
 type Props = {
   history: H.History;
 };
@@ -20,6 +22,12 @@ const BackgroundImage = styled.div`
 export const Login: React.FC<Props> = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [
+    signInWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useSignInWithEmailAndPassword(getAuth());
 
   const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     return setEmail(e.target.value);
@@ -30,9 +38,25 @@ export const Login: React.FC<Props> = () => {
   }, []);
 
   // AuthContextからlogin関数を受け取る
-  const handleSubmit = () => {
-    login(email, password);
-  };
+  const handleSubmit = () => signInWithEmailAndPassword(email, password);
+
+  if (error) {
+    return (
+      <div>
+        <p>Error: {error.message}</p>
+      </div>
+    );
+  }
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  if (user) {
+    return (
+      <div>
+        <p>Signed In User</p>
+      </div>
+    );
+  }
 
   return (
     <BackgroundImage>
