@@ -11,9 +11,7 @@ import { LoginPaper } from '../organisms/LoginPaper';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import { getAuth } from '../../helper/FirebaseAuthHelper';
-
-import { KidCard } from '../molecules/KidCard';
-import { DefaultLayout } from '../templates/DefaultLayout';
+import { ChooseKid } from './ChooseKid';
 type Props = {
   history: H.History;
 };
@@ -61,14 +59,11 @@ export const Login: React.FC<Props> = () => {
   }
   if (user) {
     return (
-      <DefaultLayout>
-        <p>お子様を選択してください</p>
-        <KidCard
-          kidName={parent!.uid}
-          age={1}
-          onClick={() => console.log(parent)}
-        />
-      </DefaultLayout>
+      <ChooseKid
+        kidName={parent!.email}
+        age={1}
+        onClick={() => console.log(user)}
+      />
     );
   }
 
