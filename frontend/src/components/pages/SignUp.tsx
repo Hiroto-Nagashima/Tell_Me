@@ -56,27 +56,30 @@ export const SignUp: React.FC<Props> = ({ history }) => {
   // 認証後Rails側にリクエストを送る
   const handleSubmit = () => {
     const request = async () => {
+      console.log(0);
       await signup!(email, password, history);
       // Firebase Authの認証
-      if (currentUser) {
-        const token = await currentUser.getIdToken(true);
-        const config = { token };
-        // Rails側にリクエストを送る
-        try {
-          await axios.post('/api/v1/registration', {
-            params: {
-              email: email,
-              password: password,
-              gender: gender,
-              firstName: firstName,
-              lastName: lastName,
-              telephoneNumber: telephoneNumber,
-              uid: config,
-            },
-          });
-        } catch (error) {
-          console.log(error);
-        }
+      console.log(1);
+      console.log(currentUser);
+      const token = await currentUser.getIdToken(true);
+      const config = { token };
+      // Rails側にリクエストを送る
+      console.log(3);
+      try {
+        console.log(4);
+        await axios.post('/api/v1/registration', {
+          params: {
+            email: email,
+            password: password,
+            gender: gender,
+            firstName: firstName,
+            lastName: lastName,
+            telephoneNumber: telephoneNumber,
+            uid: config,
+          },
+        });
+      } catch (error) {
+        console.log(error);
       }
     };
     request();

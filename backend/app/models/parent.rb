@@ -1,3 +1,3 @@
 class Parent < ApplicationRecord
-  belong_to: kid
+  belongs_to :kid
 end
