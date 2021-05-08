@@ -221,6 +221,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   firebase-auth-rails
+  jwt
   listen (~> 3.3)
   msgpack (~> 1.4.2)
   mysql2 (~> 0.5)
