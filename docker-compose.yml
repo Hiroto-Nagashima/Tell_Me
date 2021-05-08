@@ -1,25 +1,17 @@
 version: "3"
 
 services:
-  redis:
-    image: "redis:latest"
-    ports:
-      - "6379:6379"
+  frontend:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
     volumes:
-      - "./data/redis:/data"
-  db:
-    container_name: db
-    image: mysql:5.7.30
-    environment:
-      TZ: Asia/Tokyo
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-    volumes:
-      - mysql_data:/var/lib/mysql
+      - ./frontend:/usr/src/app
+    command: sh -c "yarn start"
     ports:
-      - 3307:3306
-    networks:
-      app_net:
-        ipv4_address: '172.20.0.2'
+      - "8000:3000"
+    stdin_open: true
+    tty: true
 
   backend:
     container_name: backend
@@ -45,17 +37,19 @@ services:
       app_net:
         ipv4_address: '172.20.0.3'
 
-  frontend:
-    build:
-      context: ./frontend/
-      dockerfile: Dockerfile
+  db:
+    container_name: db
+    image: mysql:5.7.30
+    environment:
+      TZ: Asia/Tokyo
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
-      - ./frontend:/usr/src/app
-    command: sh -c "yarn start"
+      - mysql_data:/var/lib/mysql
     ports:
-      - "8000:3000"
-    stdin_open: true
-    tty: true
+      - 3307:3306
+    networks:
+      app_net:
+        ipv4_address: '172.20.0.2'
 
 networks:
   app_net:
