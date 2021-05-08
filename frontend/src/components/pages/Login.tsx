@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
+import React, { ChangeEvent, useCallback, useState } from 'react';
+import { login } from '../../helper/FirebaseAuthHelper';
 import Image from '../../images/kid.jpeg';
 import { withRouter } from 'react-router';
 import * as H from 'history';
-import { AuthContext } from '../../auth/AuthProvider';
 import { LoginPaper } from '../organisms/LoginPaper';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
@@ -17,8 +17,7 @@ const BackgroundImage = styled.div`
   padding-top: 120px;
 `;
 
-export const Login: React.FC<Props> = ({ history }) => {
-  const { login } = useContext(AuthContext);
+export const Login: React.FC<Props> = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -32,7 +31,7 @@ export const Login: React.FC<Props> = ({ history }) => {
 
   // AuthContextからlogin関数を受け取る
   const handleSubmit = () => {
-    login!(email, password, history);
+    login(email, password);
   };
 
   return (

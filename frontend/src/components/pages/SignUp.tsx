@@ -1,7 +1,9 @@
-import React, { ChangeEvent, useCallback, useState, useEffect } from 'react';
-import { withRouter } from 'react-router';
+import React, { ChangeEvent, useCallback, useState } from 'react';
+import { useHistory, withRouter } from 'react-router';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import * as H from 'history';
 import { SignUpPaper } from '../organisms/SignUpPaper';
+import { getAuth } from '../../helper/FirebaseAuthHelper';
 import axios from 'axios';
 
 type Props = {
@@ -10,12 +12,14 @@ type Props = {
 // console.log("hey")
 
 export const SignUp: React.FC<Props> = () => {
+  const [user, loading] = useAuthState(getAuth());
   const [email, setEmail] = useState('');
   const [gender, setGender] = useState(0);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [telephoneNumber, setTelephoneNumber] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
 
   const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     return setEmail(e.target.value);
@@ -44,47 +48,46 @@ export const SignUp: React.FC<Props> = () => {
     },
     [],
   );
-  // // 認証後Rails側にリクエストを送る
-  // const handleSubmit = () => {
-  //   const request = async () => {
-  //     console.log(0);
-  //     await signup!(email, password, history);
-  //     // Firebase Authの認証
-  //     console.log(1);
-  //     console.log(currentUser);
-  //     const token = await currentUser.getIdToken(true);
-  //     const config = { token };
-  //     // Rails側にリクエストを送る
-  //     console.log(3);
-  //     try {
-  //       console.log(4);
-  //       await axios.post('/api/v1/registration', {
-  //         params: {
-  //           email: email,
-  //           password: password,
-  //           gender: gender,
-  //           firstName: firstName,
-  //           lastName: lastName,
-  //           telephoneNumber: telephoneNumber,
-  //           uid: config,
-  //         },
-  //       });
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   request();
-  // };
+
+  if (loading) {
+    return <div className="py-20 text-center">Loading...</div>;
+  }
+
+  if (!loading && !user) {
+    history.push('/login');
+  }
+  // 認証後Rails側にリクエストを送る
+  const handleSubmit = () => {
+    const request = async () => {
+      if (user) {
+        const token = await user.getIdToken(true);
+        const config = { headers: { authorization: `Bearer ${token}` } };
+        try {
+          await axios.post('/api/v1/registration', {
+            params: {
+              email: email,
+              password: password,
+              gender: gender,
+              firstName: firstName,
+              lastName: lastName,
+              telephoneNumber: telephoneNumber,
+              uid: config,
+            },
+          });
+          history.push('/');
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
+    };
+    request();
+  };
 
   // // AuthContextからlogin関数を受け取る
   // const handleSubmit = () => {
   //   // e.preventDefault();
   //   signup!(email, password, history);
   // };
-
-  useEffect(() => {
-    console.log('hey');
-  }, []);
 
   return (
     <SignUpPaper

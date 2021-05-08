@@ -18,16 +18,9 @@ export function getAuth() {
   return getApp().auth();
 }
 
-export async function loginWithGoogle() {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  try {
-    const user = await firebase.auth().signInWithPopup(provider);
-    return user;
-  } catch (error) {
-    console.error('login failed', error);
-    return null;
-  }
-}
+export const login = (email: string, password: string) => {
+  firebase.auth().signInWithEmailAndPassword(email, password);
+};
 
 export async function logout() {
   try {
