@@ -13,6 +13,7 @@ import Grid from '@material-ui/core/Grid';
 import { getAuth } from '../../helper/FirebaseAuthHelper';
 
 import { KidCard } from '../molecules/KidCard';
+import { DefaultLayout } from '../templates/DefaultLayout';
 type Props = {
   history: H.History;
 };
@@ -59,7 +60,15 @@ export const Login: React.FC<Props> = () => {
     return <p>Loading...</p>;
   }
   if (user) {
-    return <KidCard kidName={parent!.email} age={1} />;
+    return (
+      <DefaultLayout>
+        <KidCard
+          kidName={parent!.uid}
+          age={1}
+          onClick={() => console.log(parent)}
+        />
+      </DefaultLayout>
+    );
   }
 
   return (
