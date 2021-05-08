@@ -10,6 +10,7 @@ module Api
         render json: { message: 'すでに登録されています' } and return if User.find_by(uid: uid)
 
         user = User.new(name: uid, uid: uid)
+        byebug
         if user.save
           render json: { message: '登録が成功しました' }
         else

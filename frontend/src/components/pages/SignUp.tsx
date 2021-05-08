@@ -1,6 +1,9 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
+import {
+  useCreateUserWithEmailAndPassword,
+  useAuthState,
+} from 'react-firebase-hooks/auth';
 import { useHistory, withRouter } from 'react-router';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import * as H from 'history';
 import { SignUpPaper } from '../organisms/SignUpPaper';
 import { getAuth } from '../../helper/FirebaseAuthHelper';
@@ -12,13 +15,20 @@ type Props = {
 // console.log("hey")
 
 export const SignUp: React.FC<Props> = () => {
-  const [user, loading] = useAuthState(getAuth());
   const [email, setEmail] = useState('');
   const [gender, setGender] = useState(0);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [telephoneNumber, setTelephoneNumber] = useState('');
   const [password, setPassword] = useState('');
+  const [userr] = useAuthState(getAuth());
+  const [
+    createUserWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useCreateUserWithEmailAndPassword(getAuth());
+
   const history = useHistory();
 
   const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -49,21 +59,38 @@ export const SignUp: React.FC<Props> = () => {
     [],
   );
 
+  if (error) {
+    return (
+      <div>
+        <p>Error: {error.message}</p>
+      </div>
+    );
+  }
   if (loading) {
-    return <div className="py-20 text-center">Loading...</div>;
+    return <p>Loading...</p>;
+  }
+  if (user) {
+    return (
+      <div>
+        <p>Signed In User</p>
+      </div>
+    );
   }
 
-  if (!loading && !user) {
-    history.push('/login');
-  }
   // 認証後Rails側にリクエストを送る
   const handleSubmit = () => {
     const request = async () => {
-      if (user) {
-        const token = await user.getIdToken(true);
+      console.log(0);
+      await createUserWithEmailAndPassword(email, password);
+      console.log(1);
+      if (userr) {
+        console.log(2);
+        const token = await userr.getIdToken(true);
+        console.log(3);
         const config = { headers: { authorization: `Bearer ${token}` } };
+        console.log(4);
         try {
-          await axios.post('/api/v1/registration', {
+          await axios.post('http://localhost:3000/api/v1/parents', {
             params: {
               email: email,
               password: password,

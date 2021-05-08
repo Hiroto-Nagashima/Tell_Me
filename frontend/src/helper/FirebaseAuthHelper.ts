@@ -1,9 +1,6 @@
 import 'firebase/auth';
 import firebase from 'firebase/app';
 import firebaseConfig from '../config/firebaseConfig.json';
-import { useHistory } from 'react-router';
-
-
 
 let _app: firebase.app.App | null = null;
 

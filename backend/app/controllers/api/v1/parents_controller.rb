@@ -6,7 +6,7 @@ module Api
 
       include CreateUserConcern
       def create
-        create_user(@auth)
+        create_user!(@auth)
       end
 
       def show
