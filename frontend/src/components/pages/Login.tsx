@@ -5,7 +5,7 @@ import {
 } from 'react-firebase-hooks/auth';
 // import { login } from '../../helper/FirebaseAuthHelper';
 import Image from '../../images/kid.jpeg';
-import { withRouter } from 'react-router';
+import { useHistory, withRouter } from 'react-router';
 import * as H from 'history';
 import { LoginPaper } from '../organisms/LoginPaper';
 import styled from 'styled-components';
@@ -27,6 +27,7 @@ export const Login: React.FC<Props> = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [parent] = useAuthState(getAuth());
+  const history = useHistory();
   const [
     signInWithEmailAndPassword,
     user,
@@ -62,7 +63,7 @@ export const Login: React.FC<Props> = () => {
       <ChooseKid
         kidName={parent!.email}
         age={1}
-        onClick={() => console.log(user)}
+        onClick={() => history.push('/home')}
       />
     );
   }
