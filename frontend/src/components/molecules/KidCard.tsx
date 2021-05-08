@@ -34,9 +34,9 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 export type Props = {
-  kidName: string;
-  age: number;
-  onClick: () => void;
+  kidName: string | null;
+  age: number | null;
+  onClick?: () => void;
 };
 
 export const KidCard: React.FC<Props> = (props) => {

@@ -6,6 +6,7 @@ module Api
 
       include CreateUserConcern
       def create
+        byebug
         create_user!(@auth)
       end
 
@@ -16,6 +17,7 @@ module Api
       private
 
       def set_auth
+        byebug
         @auth = authenticate_token_by_firebase
       end
     end

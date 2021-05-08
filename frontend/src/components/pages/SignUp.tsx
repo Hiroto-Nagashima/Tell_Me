@@ -101,7 +101,7 @@ export const SignUp: React.FC<Props> = () => {
               uid: config,
             },
           });
-          history.push('/');
+          history.push('/home');
         } catch (error) {
           console.log(error.message);
         }

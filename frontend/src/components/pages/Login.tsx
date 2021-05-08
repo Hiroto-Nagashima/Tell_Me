@@ -1,5 +1,8 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import {
+  useAuthState,
+  useSignInWithEmailAndPassword,
+} from 'react-firebase-hooks/auth';
 // import { login } from '../../helper/FirebaseAuthHelper';
 import Image from '../../images/kid.jpeg';
 import { withRouter } from 'react-router';
@@ -8,6 +11,8 @@ import { LoginPaper } from '../organisms/LoginPaper';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import { getAuth } from '../../helper/FirebaseAuthHelper';
+
+import { KidCard } from '../molecules/KidCard';
 type Props = {
   history: H.History;
 };
@@ -22,13 +27,13 @@ const BackgroundImage = styled.div`
 export const Login: React.FC<Props> = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [parent] = useAuthState(getAuth());
   const [
     signInWithEmailAndPassword,
     user,
     loading,
     error,
   ] = useSignInWithEmailAndPassword(getAuth());
-
   const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     return setEmail(e.target.value);
   }, []);
@@ -38,7 +43,10 @@ export const Login: React.FC<Props> = () => {
   }, []);
 
   // AuthContextからlogin関数を受け取る
-  const handleSubmit = () => signInWithEmailAndPassword(email, password);
+  const handleSubmit = async () => {
+    await signInWithEmailAndPassword(email, password);
+    // history.push('/');
+  };
 
   if (error) {
     return (
@@ -51,11 +59,7 @@ export const Login: React.FC<Props> = () => {
     return <p>Loading...</p>;
   }
   if (user) {
-    return (
-      <div>
-        <p>Signed In User</p>
-      </div>
-    );
+    return <KidCard kidName={parent!.email} age={1} />;
   }
 
   return (
