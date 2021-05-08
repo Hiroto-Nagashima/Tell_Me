@@ -62,6 +62,7 @@ export const Login: React.FC<Props> = () => {
   if (user) {
     return (
       <DefaultLayout>
+        <p>お子様を選択してください</p>
         <KidCard
           kidName={parent!.uid}
           age={1}
