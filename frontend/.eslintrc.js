@@ -72,7 +72,6 @@ module.exports = {
         markers: ['/'],
       },
     ],
-
     // @typescript-eslint
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-member-accessibility': 'off',
@@ -81,7 +80,6 @@ module.exports = {
     '@typescript-eslint/no-unnecessary-type-assertion': 'error',
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/prefer-interface': 'off',
-
     // prefer-arrow
     'prefer-arrow/prefer-arrow-functions': [
       'error',
@@ -91,7 +89,6 @@ module.exports = {
         classPropertiesAllowed: false,
       },
     ],
-
     // react
     'react/jsx-filename-extension': [
       'error',
@@ -106,11 +103,9 @@ module.exports = {
       },
     ],
     'react/prop-types': 'off',
-
     // react hooks
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
-
     // import
     'import/extensions': [
       'error',
