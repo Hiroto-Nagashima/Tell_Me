@@ -1,13 +1,6 @@
-import React, {
-  ChangeEvent,
-  useCallback,
-  useContext,
-  useState,
-  useEffect,
-} from 'react';
+import React, { ChangeEvent, useCallback, useState, useEffect } from 'react';
 import { withRouter } from 'react-router';
 import * as H from 'history';
-import { AuthContext } from '../../auth/AuthProvider';
 import { SignUpPaper } from '../organisms/SignUpPaper';
 import axios from 'axios';
 
@@ -16,9 +9,7 @@ type Props = {
 };
 // console.log("hey")
 
-export const SignUp: React.FC<Props> = ({ history }) => {
-  const { signup } = useContext(AuthContext);
-  const { currentUser } = useContext(AuthContext);
+export const SignUp: React.FC<Props> = () => {
   const [email, setEmail] = useState('');
   const [gender, setGender] = useState(0);
   const [firstName, setFirstName] = useState('');
@@ -53,37 +44,37 @@ export const SignUp: React.FC<Props> = ({ history }) => {
     },
     [],
   );
-  // 認証後Rails側にリクエストを送る
-  const handleSubmit = () => {
-    const request = async () => {
-      console.log(0);
-      await signup!(email, password, history);
-      // Firebase Authの認証
-      console.log(1);
-      console.log(currentUser);
-      const token = await currentUser.getIdToken(true);
-      const config = { token };
-      // Rails側にリクエストを送る
-      console.log(3);
-      try {
-        console.log(4);
-        await axios.post('/api/v1/registration', {
-          params: {
-            email: email,
-            password: password,
-            gender: gender,
-            firstName: firstName,
-            lastName: lastName,
-            telephoneNumber: telephoneNumber,
-            uid: config,
-          },
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    request();
-  };
+  // // 認証後Rails側にリクエストを送る
+  // const handleSubmit = () => {
+  //   const request = async () => {
+  //     console.log(0);
+  //     await signup!(email, password, history);
+  //     // Firebase Authの認証
+  //     console.log(1);
+  //     console.log(currentUser);
+  //     const token = await currentUser.getIdToken(true);
+  //     const config = { token };
+  //     // Rails側にリクエストを送る
+  //     console.log(3);
+  //     try {
+  //       console.log(4);
+  //       await axios.post('/api/v1/registration', {
+  //         params: {
+  //           email: email,
+  //           password: password,
+  //           gender: gender,
+  //           firstName: firstName,
+  //           lastName: lastName,
+  //           telephoneNumber: telephoneNumber,
+  //           uid: config,
+  //         },
+  //       });
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   request();
+  // };
 
   // // AuthContextからlogin関数を受け取る
   // const handleSubmit = () => {
