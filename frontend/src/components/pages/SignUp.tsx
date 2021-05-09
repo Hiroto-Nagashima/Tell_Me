@@ -110,12 +110,6 @@ export const SignUp: React.FC<Props> = () => {
     request();
   };
 
-  // // AuthContextからlogin関数を受け取る
-  // const handleSubmit = () => {
-  //   // e.preventDefault();
-  //   signup!(email, password, history);
-  // };
-
   return (
     <SignUpPaper
       email={email}
