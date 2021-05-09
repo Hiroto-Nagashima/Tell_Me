@@ -90,7 +90,7 @@ export const SignUp: React.FC<Props> = () => {
         const config = { headers: { authorization: `Bearer ${token}` } };
         console.log(4);
         try {
-          await axios.post('http://localhost:3000/api/v1/parents', {
+          await axios.post('http://localhost:5000/api/v1/parents', {
             params: {
               email: email,
               password: password,

@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ParentsController < Api::V1::ApplicationController
+    class ParentsController < ApplicationController
       include FirebaseAuthConcern
       before_action :set_auth, only: %i[create update]
 
