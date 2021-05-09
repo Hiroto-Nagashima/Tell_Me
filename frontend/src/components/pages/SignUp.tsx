@@ -90,17 +90,22 @@ export const SignUp: React.FC<Props> = () => {
         const config = { headers: { authorization: `Bearer ${token}` } };
         console.log(4);
         try {
-          await axios.post('http://localhost:5000/api/v1/parents', {
-            params: {
-              email: email,
-              password: password,
-              gender: gender,
-              firstName: firstName,
-              lastName: lastName,
-              telephoneNumber: telephoneNumber,
-              uid: config,
+          await axios.post(
+            'http://localhost:5000/api/v1/parents',
+            {
+              params: {
+                email: email,
+                password: password,
+                gender: gender,
+                firstName: firstName,
+                lastName: lastName,
+                telephoneNumber: telephoneNumber,
+                config: config,
+              },
             },
-          });
+            config,
+          );
+
           history.push('/home');
         } catch (error) {
           console.log(error.message);
