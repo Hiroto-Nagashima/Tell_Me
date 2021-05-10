@@ -3,10 +3,11 @@ import { Route, RouteComponentProps } from 'react-router-dom';
 import { HeaderLayout } from '../components/templates/HeaderLayout';
 type Props = {
   component: ComponentType<RouteComponentProps>;
-  rest: { exact: boolean; path: string };
+  exact: boolean;
+  path: string;
 };
 
-const LoginLayoutRoute: React.FC<Props> = ({
+const HeaderLayoutRoute: React.FC<Props> = ({
   component: Component,
   ...rest
 }) => {
@@ -21,4 +22,4 @@ const LoginLayoutRoute: React.FC<Props> = ({
     />
   );
 };
-export default LoginLayoutRoute;
+export default HeaderLayoutRoute;
