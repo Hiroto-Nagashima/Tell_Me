@@ -1,4 +1,4 @@
-import React, { memo, ReactNode, VFC } from 'react';
+import React, { memo, ReactNode } from 'react';
 import { Footer } from '../organisms/Footer';
 import { Header } from '../organisms/Header';
 
@@ -6,7 +6,7 @@ type Props = {
   // タグで囲われているやつはReactNode
   children: ReactNode;
 };
-export const DefaultLayout: VFC<Props> = memo((props) => {
+export const DefaultLayout: React.FC<Props> = memo((props) => {
   const { children } = props;
 
   return (
