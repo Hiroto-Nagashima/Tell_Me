@@ -3,12 +3,11 @@ module Api
     module CreateUserConcern
       extend ActiveSupport::Concern
 
-      def create_user(auth)
+      def create_parent(auth)
         render json: auth, status: :unauthorized and return unless auth[:data]
 
         uid = auth[:data][:uid]
         # render json: { message: 'すでに登録されています' } and return if User.find_by(uid: uid)
-
         parent = Parent.new(parent_params)
         parent.uid = uid
 
@@ -20,7 +19,7 @@ module Api
       end
       private
       def parent_params
-        params.permit(:email, :password, :first_name, :last_name, :gender, :telephone_number, :uid)
+        params.require(:params).permit(:email, :password, :first_name, :last_name, :gender, :telephone_number, :uid)
       end
     end
   end
