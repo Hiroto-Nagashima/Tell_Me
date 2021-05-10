@@ -6,7 +6,6 @@ import { SignUp } from './components/pages/SignUp';
 import { Page404 } from './components/pages/Page404';
 import GlobalStyle from './theme/globalStyle';
 import HeaderLayoutRoute from './router/HeaderLayoutRoute';
-import DefaultLayoutRoute from './router/DefaultLayoutRoute';
 import PrivateRoute from './router/PrivateRoute';
 
 const App: React.FC = () => {
@@ -15,7 +14,6 @@ const App: React.FC = () => {
       <GlobalStyle />
       <BrowserRouter>
         <Switch>
-          <DefaultLayoutRoute exact={true} path="/home" component={Home} />
           <HeaderLayoutRoute exact path="/signup" component={SignUp} />
           <PrivateRoute exact path="/" component={Home} />
           <Route path="*">
