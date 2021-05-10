@@ -10,7 +10,7 @@ import * as H from 'history';
 import { LoginPaper } from '../organisms/LoginPaper';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
-import { getAuth } from '../../helper/FirebaseAuthHelper';
+import { getAuth } from '../../helper/firebaseAuthHelper';
 import { ChooseKid } from './ChooseKid';
 import { Spinner } from '../atoms/Spinner';
 import { CustomizedSnackbar } from '../atoms/CustomizedSnackbar';

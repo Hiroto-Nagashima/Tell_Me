@@ -4,7 +4,7 @@ import { Route, RouteComponentProps } from 'react-router-dom';
 import { Login } from '../components/pages/Login';
 import { DefaultLayout } from '../components/templates/DefaultLayout';
 import { HeaderLayout } from '../components/templates/HeaderLayout';
-import { getAuth } from '../helper/FirebaseAuthHelper';
+import { getAuth } from '../helper/firebaseAuthHelper';
 
 type Props = {
   component: ComponentType<RouteComponentProps>;

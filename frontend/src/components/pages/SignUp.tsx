@@ -2,7 +2,7 @@ import React, { ChangeEvent, useCallback, useState } from 'react';
 import { useHistory, withRouter } from 'react-router';
 import * as H from 'history';
 import { SignUpPaper } from '../organisms/SignUpPaper';
-import { getAuth } from '../../helper/FirebaseAuthHelper';
+import { getAuth } from '../../helper/firebaseAuthHelper';
 import axios from 'axios';
 import {
   useCreateUserWithEmailAndPassword,
