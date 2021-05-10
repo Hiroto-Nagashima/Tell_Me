@@ -5,7 +5,7 @@ import { Login } from './components/pages/Login';
 import { SignUp } from './components/pages/SignUp';
 import { Page404 } from './components/pages/Page404';
 import GlobalStyle from './theme/globalStyle';
-// import HeaderLayoutRoute from './router/HeaderLayoutRoute';
+// import LoginLayoutRoute from './router/HeaderLayoutRoute';
 
 const App: React.FC = () => {
   return (
@@ -13,6 +13,7 @@ const App: React.FC = () => {
       <GlobalStyle />
       <BrowserRouter>
         <Switch>
+          {/* <LoginLayoutRoute exact={true} path="/home" component={Home} /> */}
           <Route exact={true} path="/home" component={Home} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/" component={Login} />

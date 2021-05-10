@@ -60,6 +60,7 @@ export const LoginPaper: React.FC<Props> = (props) => {
             id="password"
             isFullWidth={true}
             textName="password"
+            type="password"
             placeholder="6文字以上"
             value={password}
             onChange={onChangePassword}

@@ -9,6 +9,8 @@ import {
   useAuthState,
 } from 'react-firebase-hooks/auth';
 import { Spinner } from '../atoms/Spinner';
+// import { HeaderLayout } from '../templates/HeaderLayout';
+// import { RegisterKidPaper } from '../organisms/RegisterKidPaper';
 
 type Props = {
   history: H.History;
@@ -64,9 +66,10 @@ export const SignUp: React.FC<Props> = () => {
   }
   if (user) {
     return (
-      <div>
-        <p>Signed In User</p>
-      </div>
+      // <HeaderLayout>
+      //   <RegisterKidPaper age={1} kidName={hoge}  />
+      // </HeaderLayout>
+      <div>hoge</div>
     );
   }
 
