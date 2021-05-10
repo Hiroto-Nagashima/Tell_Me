@@ -2,6 +2,8 @@ import React, { ComponentType } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Route, RouteComponentProps } from 'react-router-dom';
 import { Login } from '../components/pages/Login';
+import { DefaultLayout } from '../components/templates/DefaultLayout';
+import { HeaderLayout } from '../components/templates/HeaderLayout';
 import { getAuth } from '../helper/FirebaseAuthHelper';
 
 type Props = {
@@ -10,13 +12,28 @@ type Props = {
   path: string;
 };
 
-const PrivateRoute: React.FC<Props> = (props) => {
+const PrivateRoute: React.FC<Props> = ({ component: Component, ...rest }) => {
   const [user] = useAuthState(getAuth());
 
   return user ? (
-    <Route {...props} />
+    <Route
+      {...rest}
+      render={(props) => (
+        <DefaultLayout>
+          <Component {...props} />
+        </DefaultLayout>
+      )}
+    />
   ) : (
-    <Route exact path={'/'} component={Login} />
+    <Route
+      exact
+      path={'/'}
+      render={(props) => (
+        <HeaderLayout>
+          <Login {...props} />
+        </HeaderLayout>
+      )}
+    />
   );
 };
 export default PrivateRoute;
