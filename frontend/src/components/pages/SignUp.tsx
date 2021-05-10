@@ -1,18 +1,18 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
-import {
-  useCreateUserWithEmailAndPassword,
-  useAuthState,
-} from 'react-firebase-hooks/auth';
 import { useHistory, withRouter } from 'react-router';
 import * as H from 'history';
 import { SignUpPaper } from '../organisms/SignUpPaper';
 import { getAuth } from '../../helper/FirebaseAuthHelper';
 import axios from 'axios';
+import {
+  useCreateUserWithEmailAndPassword,
+  useAuthState,
+} from 'react-firebase-hooks/auth';
+import { Spinner } from '../atoms/Spinner';
 
 type Props = {
   history: H.History;
 };
-// console.log("hey")
 
 export const SignUp: React.FC<Props> = () => {
   const [email, setEmail] = useState('');
@@ -26,7 +26,6 @@ export const SignUp: React.FC<Props> = () => {
     createUserWithEmailAndPassword,
     user,
     loading,
-    error,
   ] = useCreateUserWithEmailAndPassword(getAuth());
 
   const history = useHistory();
@@ -52,6 +51,7 @@ export const SignUp: React.FC<Props> = () => {
 
     return setGender(value);
   }, []);
+
   const onChangeTelephoneNumber = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       return setTelephoneNumber(e.target.value);
@@ -59,15 +59,8 @@ export const SignUp: React.FC<Props> = () => {
     [],
   );
 
-  if (error) {
-    return (
-      <div>
-        <p>Error: {error.message}</p>
-      </div>
-    );
-  }
   if (loading) {
-    return <p>Loading...</p>;
+    return <Spinner color="primary" />;
   }
   if (user) {
     return (
@@ -81,7 +74,6 @@ export const SignUp: React.FC<Props> = () => {
   const handleSubmit = () => {
     const request = async () => {
       await createUserWithEmailAndPassword(email, password);
-
       if (parent) {
         const token = await parent.getIdToken(true);
         const config = { headers: { authorization: `Bearer ${token}` } };
