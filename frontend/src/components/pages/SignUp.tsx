@@ -21,7 +21,7 @@ export const SignUp: React.FC<Props> = () => {
   const [lastName, setLastName] = useState('');
   const [telephoneNumber, setTelephoneNumber] = useState('');
   const [password, setPassword] = useState('');
-  const [userr] = useAuthState(getAuth());
+  const [parent] = useAuthState(getAuth());
   const [
     createUserWithEmailAndPassword,
     user,
@@ -80,15 +80,11 @@ export const SignUp: React.FC<Props> = () => {
   // 認証後Rails側にリクエストを送る
   const handleSubmit = () => {
     const request = async () => {
-      console.log(0);
       await createUserWithEmailAndPassword(email, password);
-      console.log(1);
-      if (userr) {
-        console.log(2);
-        const token = await userr.getIdToken(true);
-        console.log(3);
+
+      if (parent) {
+        const token = await parent.getIdToken(true);
         const config = { headers: { authorization: `Bearer ${token}` } };
-        console.log(4);
         try {
           await axios.post(
             'http://localhost:5000/api/v1/parents',
