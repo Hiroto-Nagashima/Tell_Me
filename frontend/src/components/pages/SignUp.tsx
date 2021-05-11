@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import { useHistory, withRouter } from 'react-router';
-import * as H from 'history';
 import { SignUpPaper } from '../organisms/SignUpPaper';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import axios from 'axios';
@@ -11,11 +10,7 @@ import {
 import { Spinner } from '../atoms/Spinner';
 // import { Spinner } from '../atoms/Spinner';
 
-type Props = {
-  history: H.History;
-};
-
-export const SignUp: React.FC<Props> = () => {
+export const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
   const [gender, setGender] = useState(0);
   const [firstName, setFirstName] = useState('');
