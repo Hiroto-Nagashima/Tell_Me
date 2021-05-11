@@ -3,12 +3,8 @@ import { useHistory, withRouter } from 'react-router';
 import { SignUpPaper } from '../organisms/SignUpPaper';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import axios from 'axios';
-import {
-  useCreateUserWithEmailAndPassword,
-  useAuthState,
-} from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Spinner } from '../atoms/Spinner';
-// import { Spinner } from '../atoms/Spinner';
 
 export const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -17,7 +13,6 @@ export const SignUp: React.FC = () => {
   const [lastName, setLastName] = useState('');
   const [telephoneNumber, setTelephoneNumber] = useState('');
   const [password, setPassword] = useState('');
-  const [parent] = useAuthState(getAuth());
   const [
     createUserWithEmailAndPassword,
     user,
@@ -57,27 +52,21 @@ export const SignUp: React.FC = () => {
   );
 
   if (loading) {
-    return <Spinner color="secondary" />;
+    return <Spinner color="primary" />;
   }
 
   if (error) {
     return <div>{error.message}</div>;
   }
 
-  // 認証後Rails側にリクエストを送る
   const handleSubmit = () => {
     const request = async () => {
-      console.log('1');
       await createUserWithEmailAndPassword(email, password);
-      console.log(parent);
-      console.log(user);
       const auth = getAuth();
       const currentUser = auth.currentUser;
       if (auth && currentUser) {
-        console.log('3');
         const token = await currentUser.getIdToken(true);
         const config = { headers: { authorization: `Bearer ${token}` } };
-        console.log(parent);
         try {
           await axios.post(
             'http://localhost:5000/api/v1/parents',
@@ -95,8 +84,8 @@ export const SignUp: React.FC = () => {
           );
           history.push('/register-kid');
         } catch (error) {
-          console.log('4');
           console.log(error.message);
+          console.log(user);
         }
       }
     };
