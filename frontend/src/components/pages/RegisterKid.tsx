@@ -1,16 +1,20 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useHistory, withRouter } from 'react-router';
 import * as H from 'history';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import axios from 'axios';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { RegisterKidPaper } from '../organisms/RegisterKidPaper';
+import { Spinner } from '../atoms/Spinner';
 
 type Props = {
   history: H.History;
 };
 
 export const RegisterKid: React.FC<Props> = () => {
+  const [parentName, setParentName] = useState('');
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [age, setAge] = useState<number | null>(null);
   const [gender, setGender] = useState(0);
   const [firstName, setFirstName] = useState<string | null>('');
@@ -79,26 +83,53 @@ export const RegisterKid: React.FC<Props> = () => {
       .then(() => history.push('/'))
       .catch((e) => console.log(e));
   };
+  const fetchParent = () =>
+    axios
+      .get(`http://localhost:3000/api/v1/parent`, {
+        params: {
+          uid: parent!.uid,
+        },
+      })
+      .then((res) => {
+        setParentName(res.data);
+        console.log(res);
+      })
+      .catch((e) => setError(e))
+      .finally(() => setLoading(false));
+
+  useEffect(() => {
+    fetchParent();
+  }, []);
 
   return (
-    <RegisterKidPaper
-      age={age}
-      parentName={parentName}
-      daycareID={daycareID}
-      firstName={firstName}
-      lastName={lastName}
-      gender={gender}
-      favoriteFood={favoriteFood}
-      favoritePlay={favoritePlay}
-      onClick={handleSubmit}
-      onChangeAge={onChangeAge}
-      onChangeDaycareID={onChangeDaycareID}
-      onChangeFirstName={onChangeFirstName}
-      onChangeLastName={onChangeLastName}
-      onChangeGender={onChangeGender}
-      onChangeFavoriteFood={onChangeFavoriteFood}
-      onChangeFavoritePlay={onChangeFavoritePlay}
-    />
+    <>
+      {loading ? (
+        <Spinner />
+      ) : error ? (
+        <h1>エラー</h1>
+      ) : (
+        <>
+          <RegisterKidPaper
+            age={age}
+            parentName={parentName}
+            daycareID={daycareID}
+            firstName={firstName}
+            lastName={lastName}
+            gender={gender}
+            favoriteFood={favoriteFood}
+            favoritePlay={favoritePlay}
+            onClick={handleSubmit}
+            onChangeAge={onChangeAge}
+            onChangeDaycareID={onChangeDaycareID}
+            onChangeFirstName={onChangeFirstName}
+            onChangeLastName={onChangeLastName}
+            onChangeGender={onChangeGender}
+            onChangeFavoriteFood={onChangeFavoriteFood}
+            onChangeFavoritePlay={onChangeFavoritePlay}
+          />
+        </>
+      )}
+    </>
   );
 };
 export default withRouter(RegisterKid);

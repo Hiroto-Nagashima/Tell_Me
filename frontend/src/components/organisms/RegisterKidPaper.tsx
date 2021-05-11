@@ -31,7 +31,6 @@ export type Props = {
   firstName: string | null;
   lastName: string | null;
   daycareID: number | null;
-  password: string | null;
   favoriteFood: string | null;
   favoritePlay: string | null;
   onClick: () => void;
