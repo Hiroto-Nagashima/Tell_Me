@@ -7,6 +7,7 @@ import { Page404 } from './components/pages/Page404';
 import GlobalStyle from './theme/globalStyle';
 import HeaderLayoutRoute from './router/HeaderLayoutRoute';
 import PrivateRoute from './router/PrivateRoute';
+import { RegisterKid } from './components/pages/RegisterKid';
 
 const App: React.FC = () => {
   return (
@@ -14,8 +15,9 @@ const App: React.FC = () => {
       <GlobalStyle />
       <BrowserRouter>
         <Switch>
-          <HeaderLayoutRoute exact path="/signup" component={SignUp} />
+          <PrivateRoute exact path="/register-kid" component={RegisterKid} />
           <PrivateRoute exact path="/" component={Home} />
+          <HeaderLayoutRoute exact path="/signup" component={SignUp} />
           <Route path="*">
             <Page404 />
           </Route>

@@ -26,7 +26,6 @@ export const SignUp: React.FC<Props> = () => {
   const [parent] = useAuthState(getAuth());
   const [
     createUserWithEmailAndPassword,
-    user,
     loading,
   ] = useCreateUserWithEmailAndPassword(getAuth());
 
@@ -63,14 +62,6 @@ export const SignUp: React.FC<Props> = () => {
 
   if (loading) {
     return <Spinner color="primary" />;
-  }
-  if (user) {
-    return (
-      // <HeaderLayout>
-      //   <RegisterKidPaper age={1} kidName={hoge}  />
-      // </HeaderLayout>
-      <div>hoge</div>
-    );
   }
 
   // 認証後Rails側にリクエストを送る
