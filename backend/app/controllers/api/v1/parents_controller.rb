@@ -11,7 +11,8 @@ module Api
 
       def fetchParent
         parent = Parent.find_by(uid: params[:uid])
-        render json: parent, status: 200
+        @parent_name = parent.last_name + parent.first_name
+        render json: @parent_name, status: 200
       end
 
       private

@@ -19,7 +19,7 @@ module Api
       end
 
       def index
-　　　　　kids = Kids.all
+        kids = Kids.all
         render json: kid, status: 200
       end
 

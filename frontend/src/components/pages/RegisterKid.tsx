@@ -65,7 +65,6 @@ export const RegisterKid: React.FC<Props> = () => {
     [],
   );
 
-  // 認証後Rails側にリクエストを送る
   const handleSubmit = () => {
     axios
       .post(`http://localhost:5000/api/v1/daycares/${daycareID}/kids`, {
