@@ -70,12 +70,12 @@ export const RegisterKid: React.FC<Props> = () => {
       .post(`http://localhost:5000/api/v1/daycares/${daycareID}/kids`, {
         params: {
           age: age,
-          firstName: firstName,
-          lastName: lastName,
+          first_name: firstName,
+          last_name: lastName,
           gender: gender,
           daycare_id: daycareID,
           favorite_food: favoriteFood,
-          favoritePlay: favoritePlay,
+          favorite_play: favoritePlay,
           uid: parent!.uid,
         },
       })

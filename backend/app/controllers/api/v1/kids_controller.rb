@@ -5,7 +5,7 @@ module Api
         daycare = Daycare.find(params[:daycare_id])
         kid = daycare.kids.build(kid_params)
         if kid.save
-          parent = Parent.find_by(uid: params[:uid])
+          parent = Parent.find_by(uid: params[:params][:uid])
           parent.kid_id = kid.id
           render json: {
             status: "ok"
@@ -13,7 +13,7 @@ module Api
         else
           render json: {
             status: 400,
-            message: "未入力箇所に誤りがあります"
+            message: "入力箇所に誤りがあります"
           }
         end
       end
