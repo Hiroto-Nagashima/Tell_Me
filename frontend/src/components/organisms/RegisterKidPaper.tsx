@@ -21,13 +21,13 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export type Props = {
-  age: number;
-  parentName: string;
-  kidName: string;
-  daycareID: number;
-  password: string;
-  favoriteFood: string;
-  favoritePlay: string;
+  age: number | null;
+  parentName: string | null;
+  kidName: string | null;
+  daycareID: number | null;
+  password: string | null;
+  favoriteFood: string | null;
+  favoritePlay: string | null;
   onClick: () => void;
   onChangeKidName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeAge: (e: React.ChangeEvent<HTMLInputElement>) => void;
