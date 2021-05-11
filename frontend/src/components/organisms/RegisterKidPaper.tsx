@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
 import { SingleLineTextField } from '../atoms/SingleLineTextField';
 import { FlexibleButton } from '../atoms/FlexibleButton';
+import styled from 'styled-components';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,17 +20,21 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-
+const Flexbox = styled.div`
+  display: flex;
+`;
 export type Props = {
   age: number | null;
   parentName: string | null;
-  kidName: string | null;
+  firstName: string | null;
+  lastName: string | null;
   daycareID: number | null;
   password: string | null;
   favoriteFood: string | null;
   favoritePlay: string | null;
   onClick: () => void;
-  onChangeKidName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeFirstName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeLastName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeAge: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeDaycareID: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeFavoriteFood: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -39,13 +44,15 @@ export type Props = {
 export const RegisterKidPaper: React.FC<Props> = (props) => {
   const {
     age,
-    kidName,
+    firstName,
+    lastName,
     daycareID,
     parentName,
     favoriteFood,
     favoritePlay,
     onClick,
-    onChangeKidName,
+    onChangeFirstName,
+    onChangeLastName,
     onChangeAge,
     onChangeDaycareID,
     onChangeFavoriteFood,
@@ -77,25 +84,37 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
         <Box component="h4" px={2} textAlign="center">
           2. お子様のお名前を入力してください
         </Box>
-        <Box textAlign="center" mx={4}>
-          <SingleLineTextField
-            id="お名前"
-            isFullWidth={true}
-            textName="お名前"
-            placeholder="空欄は入れないでください"
-            value={kidName}
-            onChange={onChangeKidName}
-          />
-        </Box>
+        <Flexbox>
+          <Box textAlign="center" ml={4} mr={1}>
+            <SingleLineTextField
+              id="姓"
+              isFullWidth={false}
+              textName="姓"
+              placeholder="山田"
+              value={firstName}
+              onChange={onChangeFirstName}
+            />
+          </Box>
+          <Box textAlign="center" mr={4} ml={1}>
+            <SingleLineTextField
+              id="名"
+              isFullWidth={false}
+              textName="太郎"
+              placeholder="空欄は入れないでください"
+              value={lastName}
+              onChange={onChangeLastName}
+            />
+          </Box>
+        </Flexbox>
         <Box component="h4" px={2} textAlign="center">
           3. お子様のご年齢を入力してください
         </Box>
-        <Box textAlign="center" mx={4}>
+        <Box textAlign="center" mx={5}>
           <SingleLineTextField
             id="ご年齢"
             isFullWidth={false}
             textName="ご年齢"
-            placeholder="数字のみ入力してください"
+            placeholder="数字のみ"
             value={age}
             onChange={onChangeAge}
           />
