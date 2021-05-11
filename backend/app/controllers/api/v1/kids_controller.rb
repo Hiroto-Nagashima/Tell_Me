@@ -26,7 +26,7 @@ module Api
       private
 
       def kid_params
-        params.require(:params).permit(:age, :first_name, :last_name, :gender, :favorite_food, :favorite_play, :uid)
+        params.require(:params).permit(:age, :first_name, :last_name, :gender, :favorite_food, :favorite_play)
       end
     end
   end

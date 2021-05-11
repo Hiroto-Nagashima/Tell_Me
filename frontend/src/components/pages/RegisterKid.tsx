@@ -68,7 +68,7 @@ export const RegisterKid: React.FC<Props> = () => {
   // 認証後Rails側にリクエストを送る
   const handleSubmit = () => {
     axios
-      .post('http://localhost:5000/api/v1/kids', {
+      .post(`http://localhost:5000/api/v1/daycares/${daycareID}/kids`, {
         params: {
           age: age,
           firstName: firstName,
@@ -86,7 +86,7 @@ export const RegisterKid: React.FC<Props> = () => {
 
   const fetchParent = () =>
     axios
-      .get(`http://localhost:5000/api/v1/parents`, {
+      .get(`http://localhost:5000/api/v1/parents/fetchParent`, {
         params: {
           uid: parent!.uid,
         },
