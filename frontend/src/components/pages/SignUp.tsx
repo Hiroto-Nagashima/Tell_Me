@@ -9,8 +9,6 @@ import {
   useAuthState,
 } from 'react-firebase-hooks/auth';
 import { Spinner } from '../atoms/Spinner';
-// import { HeaderLayout } from '../templates/HeaderLayout';
-// import { RegisterKidPaper } from '../organisms/RegisterKidPaper';
 
 type Props = {
   history: H.History;
@@ -27,6 +25,7 @@ export const SignUp: React.FC<Props> = () => {
   const [
     createUserWithEmailAndPassword,
     loading,
+    error,
   ] = useCreateUserWithEmailAndPassword(getAuth());
 
   const history = useHistory();
@@ -61,17 +60,27 @@ export const SignUp: React.FC<Props> = () => {
   );
 
   if (loading) {
-    return <Spinner color="primary" />;
+    return <Spinner color="secondary" />;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
   }
 
   // 認証後Rails側にリクエストを送る
   const handleSubmit = () => {
+    console.log('0');
     const request = async () => {
+      console.log('1');
       await createUserWithEmailAndPassword(email, password);
+      console.log('2');
       if (parent) {
+        console.log('3');
         const token = await parent.getIdToken(true);
         const config = { headers: { authorization: `Bearer ${token}` } };
+        console.log(parent);
         try {
+          console.log('huga');
           await axios.post(
             'http://localhost:5000/api/v1/parents',
             {
@@ -87,8 +96,8 @@ export const SignUp: React.FC<Props> = () => {
             },
             config,
           );
-
-          history.push('/home');
+          console.log('hoge');
+          history.push('/register-kid');
         } catch (error) {
           console.log(error.message);
         }

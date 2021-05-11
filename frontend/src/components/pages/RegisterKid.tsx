@@ -83,9 +83,10 @@ export const RegisterKid: React.FC<Props> = () => {
       .then(() => history.push('/'))
       .catch((e) => console.log(e));
   };
+
   const fetchParent = () =>
     axios
-      .get(`http://localhost:3000/api/v1/parent`, {
+      .get(`http://localhost:5000/api/v1/parents`, {
         params: {
           uid: parent!.uid,
         },
@@ -98,6 +99,7 @@ export const RegisterKid: React.FC<Props> = () => {
       .finally(() => setLoading(false));
 
   useEffect(() => {
+    console.log('you');
     fetchParent();
   }, []);
 

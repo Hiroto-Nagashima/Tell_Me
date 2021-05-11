@@ -9,8 +9,9 @@ module Api
         create_parent(@auth)
       end
 
-      def show
-        render json: current_parent, status: 200
+      def fetchParent
+        parent = Parent.find_by(uid: params[:uid])
+        render json: parent, status: 200
       end
 
       private
