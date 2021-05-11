@@ -63,17 +63,21 @@ export const RegisterKid: React.FC<Props> = () => {
 
   // 認証後Rails側にリクエストを送る
   const handleSubmit = () => {
-    await axios.post('http://localhost:5000/api/v1/parents', {
-      params: {
-        email: email,
-        password: password,
-        gender: gender,
-        first_name: firstName,
-        last_name: lastName,
-        telephone_number: telephoneNumber,
-        config: config,
-      },
-    });
+    axios
+      .post('http://localhost:5000/api/v1/kids', {
+        params: {
+          age: age,
+          firstName: firstName,
+          lastName: lastName,
+          gender: gender,
+          daycare_id: daycareID,
+          favorite_food: favoriteFood,
+          favoritePlay: favoritePlay,
+          uid: parent!.uid,
+        },
+      })
+      .then(() => history.push('/'))
+      .catch((e) => console.log(e));
   };
 
   return (
