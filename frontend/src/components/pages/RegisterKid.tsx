@@ -12,7 +12,7 @@ type Props = {
 
 export const RegisterKid: React.FC<Props> = () => {
   const [age, setAge] = useState<number | null>(null);
-  const [gender, setGender] = useState<number | null>(0);
+  const [gender, setGender] = useState(0);
   const [firstName, setFirstName] = useState<string | null>('');
   const [lastName, setLastName] = useState<string | null>('');
   const [daycareID, setDaycareId] = useState<number | null>(null);
@@ -91,7 +91,7 @@ export const RegisterKid: React.FC<Props> = () => {
       favoriteFood={favoriteFood}
       favoritePlay={favoritePlay}
       onClick={handleSubmit}
-      onChangeEAge={onChangeAge}
+      onChangeAge={onChangeAge}
       onChangeDaycareID={onChangeDaycareID}
       onChangeFirstName={onChangeFirstName}
       onChangeLastName={onChangeLastName}

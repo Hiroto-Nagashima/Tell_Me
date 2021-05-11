@@ -5,6 +5,7 @@ import { Box } from '@material-ui/core';
 import { SingleLineTextField } from '../atoms/SingleLineTextField';
 import { FlexibleButton } from '../atoms/FlexibleButton';
 import styled from 'styled-components';
+import { RadioButtonGroup } from '../molecules/RadioButtonGroup';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
       '& > *': {
         margin: theme.spacing(1),
         width: theme.spacing(50),
-        height: theme.spacing(100),
+        height: theme.spacing(120),
       },
     },
   }),
@@ -25,6 +26,7 @@ const Flexbox = styled.div`
 `;
 export type Props = {
   age: number | null;
+  gender: number;
   parentName: string | null;
   firstName: string | null;
   lastName: string | null;
@@ -35,6 +37,7 @@ export type Props = {
   onClick: () => void;
   onChangeFirstName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeLastName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeGender: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeAge: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeDaycareID: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeFavoriteFood: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -44,6 +47,7 @@ export type Props = {
 export const RegisterKidPaper: React.FC<Props> = (props) => {
   const {
     age,
+    gender,
     firstName,
     lastName,
     daycareID,
@@ -54,6 +58,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
     onChangeFirstName,
     onChangeLastName,
     onChangeAge,
+    onChangeGender,
     onChangeDaycareID,
     onChangeFavoriteFood,
     onChangeFavoritePlay,
@@ -82,7 +87,18 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
           />
         </Box>
         <Box component="h4" px={2} textAlign="center">
-          2. お子様のお名前を入力してください
+          2. お子様のお名前を性別を選択してください
+        </Box>
+        <Box textAlign="center" m={4}>
+          <RadioButtonGroup
+            value={gender}
+            onChange={onChangeGender}
+            firstLabel="女の子"
+            secondLabel="男の子"
+          />
+        </Box>
+        <Box component="h4" px={2} textAlign="center">
+          3. お子様のお名前を入力してください
         </Box>
         <Flexbox>
           <Box textAlign="center" ml={4} mr={1}>
@@ -107,7 +123,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
           </Box>
         </Flexbox>
         <Box component="h4" px={2} textAlign="center">
-          3. お子様のご年齢を入力してください
+          4. お子様のご年齢を入力してください
         </Box>
         <Box textAlign="center" mx={5}>
           <SingleLineTextField
@@ -120,7 +136,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
           />
         </Box>
         <Box component="h4" px={2} textAlign="center">
-          4. お子様の好きな食べ物を入力してください
+          5. お子様の好きな食べ物を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
           <SingleLineTextField
@@ -133,7 +149,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
           />
         </Box>
         <Box component="h4" px={2} textAlign="center">
-          5. お子様の好きな遊びを入力してください
+          6. お子様の好きな遊びを入力してください
         </Box>
         <Box textAlign="center" mx={4}>
           <SingleLineTextField
