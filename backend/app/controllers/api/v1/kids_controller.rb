@@ -6,7 +6,9 @@ module Api
         kid = daycare.kids.build(kid_params)
         if kid.save
           parent = Parent.find_by(uid: params[:params][:uid])
-          parent.kid_id = kid.id
+          parent_kid = Parent.kids_parents.build
+          parent_kid.kid_id = kid.id
+          parent_kid.save!
           render json: {
             status: "ok"
           }
