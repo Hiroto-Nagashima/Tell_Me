@@ -36,7 +36,7 @@ export const ChooseKid: React.FC = () => {
       .finally(() => setLoading(false));
 
   useEffect(() => {
-    console.log('you');
+    console.log('Choose！！！！');
     fetchKid();
   }, []);
 

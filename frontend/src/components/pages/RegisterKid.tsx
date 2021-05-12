@@ -67,7 +67,7 @@ export const RegisterKid: React.FC<Props> = () => {
 
   const handleSubmit = () => {
     axios
-      .post(`http://localhost:5000/api/v1/daycares/${daycareID}/kids`, {
+      .post(`http://localhost:5000/api/v1/kids`, {
         params: {
           age: age,
           first_name: firstName,

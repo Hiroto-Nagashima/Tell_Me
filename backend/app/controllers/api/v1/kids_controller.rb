@@ -27,6 +27,7 @@ module Api
         kid_parents.each do |kid_parent|
           kids_box << Kid.find(kid_parent.kid_id)
         end
+　　　　　byebug
         render json: kids_box, status: 200
       end
 
