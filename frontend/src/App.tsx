@@ -8,6 +8,7 @@ import GlobalStyle from './theme/globalStyle';
 import HeaderLayoutRoute from './router/HeaderLayoutRoute';
 import PrivateRoute from './router/PrivateRoute';
 import { RegisterKid } from './components/pages/RegisterKid';
+import PrivateHeaderRoute from './router/PrivateHeaderRoute';
 
 const App: React.FC = () => {
   return (
@@ -15,7 +16,11 @@ const App: React.FC = () => {
       <GlobalStyle />
       <BrowserRouter>
         <Switch>
-          <PrivateRoute exact path="/register-kid" component={RegisterKid} />
+          <PrivateHeaderRoute
+            exact
+            path="/register-kid"
+            component={RegisterKid}
+          />
           <PrivateRoute exact path="/" component={Home} />
           <HeaderLayoutRoute exact path="/signup" component={SignUp} />
           <Route path="*">
