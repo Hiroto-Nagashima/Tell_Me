@@ -1,23 +1,13 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
-import {
-  useAuthState,
-  useSignInWithEmailAndPassword,
-} from 'react-firebase-hooks/auth';
-// import { login } from '../../helper/FirebaseAuthHelper';
 import Image from '../../images/kid.jpeg';
-import { useHistory, withRouter } from 'react-router';
+import { withRouter } from 'react-router';
 import * as H from 'history';
 import { LoginPaper } from '../organisms/LoginPaper';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
-import { getAuth } from '../../helper/firebaseAuthHelper';
-import { ChooseKid } from './ChooseKid';
-import { Spinner } from '../atoms/Spinner';
 import { CustomizedSnackbar } from '../atoms/CustomizedSnackbar';
+import firebase from 'firebase';
 
-type Props = {
-  history: H.History;
-};
 const BackgroundImage = styled.div`
   background-image: url(${Image});
   background-size: cover;
@@ -26,18 +16,13 @@ const BackgroundImage = styled.div`
   padding-top: 120px;
 `;
 
-export const Login: React.FC<Props> = () => {
+export const Login: React.FC = () => {
   const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
   const [password, setPassword] = useState('');
-  const [parent] = useAuthState(getAuth());
-  const [open, setOpen] = useState(true);
-  const history = useHistory();
-  const [
-    signInWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useSignInWithEmailAndPassword(getAuth());
+  // const [parent] = useAuthState(getAuth());
+  const [open, setOpen] = useState(false);
+  // const history = useHistory();
   const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     return setEmail(e.target.value);
   }, []);
@@ -57,26 +42,31 @@ export const Login: React.FC<Props> = () => {
   };
 
   const handleSubmit = async () => {
-    try {
-      console.log('jifjao');
-      await signInWithEmailAndPassword(email, password);
-    } catch (e) {
-      console.log(e);
-    }
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        console.log('success');
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setError(errorMessage);
+        setOpen(true);
+      });
   };
 
-  if (loading) {
-    return <Spinner color="primary" />;
-  }
-  if (user) {
-    return (
-      <ChooseKid
-        kidName={parent!.email}
-        age={1}
-        onClick={() => history.push('/home')}
-      />
-    );
-  }
+  // if (loading) {
+  //   return <Spinner color="primary" />;
+  // }
+  // if (user) {
+  //   return (
+  //     <ChooseKid
+  //       kidName={parent!.email}
+  //       age={1}
+  //       onClick={() => signInWithEmailAndPassword(email, password)}
+  //     />
+  //   );
+  // }
 
   return (
     <BackgroundImage>
@@ -91,15 +81,9 @@ export const Login: React.FC<Props> = () => {
           />
         </Grid>
       </Grid>
-      {error && (
-        <CustomizedSnackbar
-          open={open}
-          onClose={handleClose}
-          severity="warning"
-        >
-          ログインに失敗しました
-        </CustomizedSnackbar>
-      )}
+      <CustomizedSnackbar open={open} onClose={handleClose} severity="error">
+        {error}
+      </CustomizedSnackbar>
     </BackgroundImage>
   );
 };
