@@ -7,7 +7,11 @@ import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import { CustomizedSnackbar } from '../atoms/CustomizedSnackbar';
 import firebase from 'firebase';
+import { useHistory } from 'react-router-dom';
 
+type Props = {
+  history: H.History;
+};
 const BackgroundImage = styled.div`
   background-image: url(${Image});
   background-size: cover;
@@ -16,13 +20,12 @@ const BackgroundImage = styled.div`
   padding-top: 120px;
 `;
 
-export const Login: React.FC = () => {
+export const Login: React.FC<Props> = () => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [password, setPassword] = useState('');
-  // const [parent] = useAuthState(getAuth());
   const [open, setOpen] = useState(false);
-  // const history = useHistory();
+  const history = useHistory();
   const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     return setEmail(e.target.value);
   }, []);
@@ -46,7 +49,7 @@ export const Login: React.FC = () => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        console.log('success');
+        history.push('/choose-kid');
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -54,19 +57,6 @@ export const Login: React.FC = () => {
         setOpen(true);
       });
   };
-
-  // if (loading) {
-  //   return <Spinner color="primary" />;
-  // }
-  // if (user) {
-  //   return (
-  //     <ChooseKid
-  //       kidName={parent!.email}
-  //       age={1}
-  //       onClick={() => signInWithEmailAndPassword(email, password)}
-  //     />
-  //   );
-  // }
 
   return (
     <BackgroundImage>
