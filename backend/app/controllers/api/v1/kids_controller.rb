@@ -21,8 +21,13 @@ module Api
       end
 
       def index
-        kids = Kids.all
-        render json: kid, status: 200
+        kids_box = []
+        parent = Parent.find_by(uid: params[:uid])
+        kid_parents = Kid.kid_parents.where(parent_id: parent.id)
+        kid_parents.each do |kid_parent|
+          kids_box << Kid.find(kid_parent.kid_id)
+        end
+        render json: kids_box, status: 200
       end
 
       private

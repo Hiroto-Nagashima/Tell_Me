@@ -6,7 +6,6 @@ import { useLocation } from 'react-router-dom';
 import { Kid } from '../../types/kid';
 import { Spinner } from '../atoms/Spinner';
 
-// import { logout } from '../../helper/FirebaseAuthHelper';
 const logout = () => {
   firebase.auth().signOut();
 };
