@@ -1,6 +1,6 @@
 class Parent < ApplicationRecord
-  belongs_to :kid, optional: true
-
+  belongs_to :kid, through: :kids_parents, optional: true
+  has_many :kids_parents
   validates :first_name, :last_name, :telephone_number, :gender, :uid, :email, :password, presence: true
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
