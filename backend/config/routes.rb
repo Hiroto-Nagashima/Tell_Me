@@ -9,7 +9,6 @@ Rails.application.routes.draw do
         resources :communication_notebooks, only: [:index, :create, :update]
       end
       resources :kids, only: [:index, :create, :update]
-      get '/kids/index', to: 'parents#fetchParent'
       get '/parents/fetchParent', to: 'parents#fetchParent'
       resources :parents, only: [:create, :update]
     end

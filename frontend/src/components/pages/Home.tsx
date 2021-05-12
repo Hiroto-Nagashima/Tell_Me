@@ -3,7 +3,7 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useHistory } from 'react-router';
 import { useLocation } from 'react-router-dom';
-import { Kid } from '../../types/kid';
+import { Kid } from '../../types/api/kid';
 import { Spinner } from '../atoms/Spinner';
 
 const logout = () => {

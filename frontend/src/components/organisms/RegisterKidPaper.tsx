@@ -107,7 +107,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
               isFullWidth={false}
               textName="姓"
               placeholder="山田"
-              value={firstName}
+              value={lastName}
               onChange={onChangeFirstName}
             />
           </Box>
@@ -117,7 +117,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
               isFullWidth={false}
               textName="太郎"
               placeholder="空欄は入れないでください"
-              value={lastName}
+              value={firstName}
               onChange={onChangeLastName}
             />
           </Box>

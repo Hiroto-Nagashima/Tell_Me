@@ -12,6 +12,7 @@ type Props = {
 };
 
 export const RegisterKid: React.FC<Props> = () => {
+  console.log(4);
   const [parentName, setParentName] = useState('');
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -64,7 +65,7 @@ export const RegisterKid: React.FC<Props> = () => {
     },
     [],
   );
-
+  console.log(5);
   const handleSubmit = () => {
     axios
       .post(`http://localhost:5000/api/v1/kids`, {
@@ -83,22 +84,23 @@ export const RegisterKid: React.FC<Props> = () => {
       .catch((e) => console.log(e));
   };
 
-  const fetchParent = () =>
-    axios
-      .get(`http://localhost:5000/api/v1/parents/fetchParent`, {
-        params: {
-          uid: parent!.uid,
-        },
-      })
-      .then((res) => {
-        setParentName(res.data);
-        console.log(res);
-      })
-      .catch((e) => setError(e))
-      .finally(() => setLoading(false));
+  const fetchParent = () => console.log(2);
+  axios
+    .get(`http://localhost:5000/api/v1/parents/fetchParent`, {
+      params: {
+        uid: parent!.uid,
+      },
+    })
+    .then((res) => {
+      console.log(3);
+      setParentName(res.data);
+      console.log(res);
+    })
+    .catch((e) => setError(e))
+    .finally(() => setLoading(false));
 
   useEffect(() => {
-    console.log('you');
+    console.log('1');
     fetchParent();
   }, []);
 
