@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme: Theme) =>
       flexWrap: 'wrap',
       justifyContent: 'center',
       '& > *': {
-        margin: theme.spacing(1),
-        width: theme.spacing(50),
+        margin: theme.spacing(5),
+        width: theme.spacing(70),
         height: theme.spacing(120),
       },
     },
@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 const Flexbox = styled.div`
   display: flex;
+  justify-content: center;
 `;
 export type Props = {
   age: number | null;
@@ -78,7 +79,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
         <Box textAlign="center" mx={4}>
           <SingleLineTextField
             id="ID"
-            isFullWidth={true}
+            isFullWidth={false}
             textName="ID"
             placeholder="保育園ID"
             value={daycareID}
