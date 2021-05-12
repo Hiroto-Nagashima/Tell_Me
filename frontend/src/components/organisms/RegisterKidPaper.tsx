@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
       '& > *': {
         margin: theme.spacing(5),
         width: theme.spacing(70),
-        height: theme.spacing(120),
+        height: theme.spacing(155),
       },
     },
   }),
@@ -68,12 +68,12 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
   return (
     <div className={classes.root}>
       <Paper elevation={3}>
-        <Box component="h2" pt={2} textAlign="center">
-          ようこそ
+        <Box component="h1" pt={2} my={4} textAlign="center">
+          ようこそ!
           <br />
           {parentName}さん！
         </Box>
-        <Box component="h4" px={2} textAlign="center">
+        <Box component="h3" px={2} my={5} textAlign="center">
           1. 保育園のIDを入力してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -86,7 +86,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
             onChange={onChangeDaycareID}
           />
         </Box>
-        <Box component="h4" px={2} textAlign="center">
+        <Box component="h3" px={2} textAlign="center">
           2. お子様のお名前を性別を選択してください
         </Box>
         <Box textAlign="center" m={4}>
@@ -97,7 +97,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
             secondLabel="男の子"
           />
         </Box>
-        <Box component="h4" px={2} textAlign="center">
+        <Box component="h3" px={2} my={5} textAlign="center">
           3. お子様のお名前を入力してください
         </Box>
         <Flexbox>
@@ -122,7 +122,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
             />
           </Box>
         </Flexbox>
-        <Box component="h4" px={2} textAlign="center">
+        <Box component="h3" px={2} my={5} textAlign="center">
           4. お子様のご年齢を入力してください
         </Box>
         <Box textAlign="center" mx={5}>
@@ -135,7 +135,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
             onChange={onChangeAge}
           />
         </Box>
-        <Box component="h4" px={2} textAlign="center">
+        <Box component="h3" px={2} my={5} textAlign="center">
           5. お子様の好きな食べ物を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -148,7 +148,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
             onChange={onChangeFavoriteFood}
           />
         </Box>
-        <Box component="h4" px={2} textAlign="center">
+        <Box component="h3" px={2} my={5} textAlign="center">
           6. お子様の好きな遊びを入力してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -161,7 +161,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
             onChange={onChangeFavoritePlay}
           />
         </Box>
-        <Box textAlign="center" m={2}>
+        <Box textAlign="center" m={5}>
           <FlexibleButton
             onClick={onClick}
             variant="contained"
