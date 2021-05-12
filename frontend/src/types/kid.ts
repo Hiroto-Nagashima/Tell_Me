@@ -1,4 +1,5 @@
 export type Kid = {
+  id: number;
   age: number | null;
   gender: number;
   parentName: string | null;

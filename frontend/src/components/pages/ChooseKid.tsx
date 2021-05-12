@@ -4,14 +4,17 @@ import axios from 'axios';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Spinner } from '../atoms/Spinner';
+import { Kid } from '../../types/kid';
+import { useHistory } from 'react-router';
 
 export const ChooseKid: React.FC = () => {
-  const [kids, setKids] = useState<Array<string | number>>();
+  const [kids, setKids] = useState<Array<Kid>>();
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [parent] = useAuthState(getAuth());
+  const history = useHistory();
 
-  const onClickButton = (kid) => {
+  const onClickButton = (kid: Array<Kid>) => {
     history.push({
       pathname: '/',
       state: kid,
@@ -50,8 +53,8 @@ export const ChooseKid: React.FC = () => {
             <KidCard
               key={kid.id}
               kidName={kid.firstName}
-              age={age}
-              onClick={() => onClickButton(kid)}
+              age={kid.age}
+              onClick={() => onClickButton(Array(kid))}
             />;
           })}
         </>
