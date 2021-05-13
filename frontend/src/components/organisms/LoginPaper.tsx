@@ -30,13 +30,8 @@ export type Props = {
 };
 
 export const LoginPaper: React.FC<Props> = (props) => {
-  const {
-    email,
-    password,
-    onChangeEmail,
-    onChangePassword,
-    onClickLogin,
-  } = props;
+  const { email, password, onChangeEmail, onChangePassword, onClickLogin } =
+    props;
   const classes = useStyles();
 
   return (
