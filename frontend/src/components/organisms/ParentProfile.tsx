@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     backgroundColor: '#3f51b5',
   },
 });
-const KidNameArea = styled(Typography)`
+const ParentNameArea = styled(Typography)`
   font-size: 25px;
 `;
 const ProfileImageBox = styled(Box)`
@@ -43,13 +43,13 @@ const ButtonWrapper = styled(Box)`
 `;
 
 export type Props = {
-  kidName: string | null;
+  parentName: string | null;
+  email: string | null;
   telephoneNumber: string | null;
-  address: string | null;
 };
 
 export const ParentProfile: React.FC<Props> = (props) => {
-  const { kidName, telephoneNumber, address } = props;
+  const { parentName, telephoneNumber, email } = props;
   const classes = useStyles();
 
   return (
@@ -61,9 +61,9 @@ export const ParentProfile: React.FC<Props> = (props) => {
             <ProfileImage />
           </ProfileImageBox>
           <Box mt={5}>
-            <KidNameArea variant="subtitle1" color="inherit" align="center">
-              {kidName}
-            </KidNameArea>
+            <ParentNameArea variant="subtitle1" color="inherit" align="center">
+              {parentName}
+            </ParentNameArea>
           </Box>
           <Box mt={2}>
             <Typography variant="subtitle1" color="inherit" component="h2">
@@ -82,7 +82,7 @@ export const ParentProfile: React.FC<Props> = (props) => {
           </Box>
           <Box mt={2}>
             <Typography variant="subtitle1" color="inherit" component="h2">
-              住所
+              メールアドレス
             </Typography>
           </Box>
           <Box mt={1}>
@@ -92,7 +92,7 @@ export const ParentProfile: React.FC<Props> = (props) => {
               component="h1"
               align="center"
             >
-              {address}
+              {email}
             </Typography>
           </Box>
         </CardContent>
