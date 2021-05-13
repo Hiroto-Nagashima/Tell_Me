@@ -27,7 +27,6 @@ const KidNameArea = styled(Typography)`
 `;
 const ProfileImageBox = styled(Box)`
   position: absolute;
-  right: 100px;
   top: 20px;
 `;
 const MyCardActions = styled(CardActions)`
@@ -59,23 +58,37 @@ export const KidProfile: React.FC<Props> = (props) => {
       <MyCardActionArea>
         <CardMedia className={classes.media} title="Contemplative Reptile" />
         <CardContent>
-          <ProfileImageBox>
-            <ProfileImage />
-          </ProfileImageBox>
+          <Box display="flex" justifyContent="center">
+            <ProfileImageBox>
+              <ProfileImage />
+            </ProfileImageBox>
+          </Box>
           <Box mt={5}>
             <KidNameArea variant="subtitle1" color="inherit" align="center">
               {kidName}
             </KidNameArea>
           </Box>
-          <Box>
-            <Typography
-              variant="subtitle1"
-              color="textSecondary"
-              component="h2"
-              align="center"
-            >
-              {age}才
-            </Typography>
+          <Box display="flex" justifyContent="center">
+            <Box mr={2}>
+              <Typography
+                variant="subtitle1"
+                color="textSecondary"
+                component="h2"
+                align="center"
+              >
+                {age}
+              </Typography>
+            </Box>
+            <Box ml={2}>
+              <Typography
+                variant="subtitle1"
+                color="textSecondary"
+                component="h2"
+                align="center"
+              >
+                {age}才
+              </Typography>
+            </Box>
           </Box>
           <Box mt={2}>
             <Typography variant="subtitle1" color="inherit" component="h2">
