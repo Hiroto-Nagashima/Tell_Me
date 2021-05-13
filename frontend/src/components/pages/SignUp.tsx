@@ -13,12 +13,8 @@ export const SignUp: React.FC = () => {
   const [lastName, setLastName] = useState('');
   const [telephoneNumber, setTelephoneNumber] = useState('');
   const [password, setPassword] = useState('');
-  const [
-    createUserWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useCreateUserWithEmailAndPassword(getAuth());
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(getAuth());
 
   const history = useHistory();
 

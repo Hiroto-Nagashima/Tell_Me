@@ -18,15 +18,8 @@ const SFormControl = styled(FormControl)`
     step: "0.1"
   `;
 export const SingleLineTextField: VFC<Props> = (props) => {
-  const {
-    isFullWidth,
-    textName,
-    placeholder,
-    onChange,
-    value,
-    id,
-    type,
-  } = props;
+  const { isFullWidth, textName, placeholder, onChange, value, id, type } =
+    props;
 
   return (
     <SFormControl variant="outlined" fullWidth={isFullWidth}>
