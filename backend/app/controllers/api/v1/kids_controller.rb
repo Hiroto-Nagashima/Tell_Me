@@ -21,7 +21,7 @@ module Api
 
       def index
         parent = Parent.find_by(uid: params[:uid])
-        if parent != nil
+        if parent.kid_parents.present?
           kids_box = []
           kid_parents = parent.kid_parents
           kid_parents.each do |kid_parent|

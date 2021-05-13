@@ -31,9 +31,12 @@ export const ChooseKid: React.FC = () => {
         },
       })
       .then((res) => {
-        console.log(3);
-        setKids(res.data);
-        console.log(res);
+        if (res.data.message === '子供が未登録です') {
+          history.push('/register-kid');
+        } else {
+          setKids(res.data);
+          console.log(res);
+        }
       })
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
