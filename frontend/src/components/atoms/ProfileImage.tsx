@@ -11,8 +11,8 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     large: {
-      width: theme.spacing(9),
-      height: theme.spacing(9),
+      width: theme.spacing(15),
+      height: theme.spacing(15),
     },
   }),
 );
