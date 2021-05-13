@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const ProfileImage = () => {
+export const ProfileImage: React.FC = () => {
   const classes = useStyles();
 
   return (
