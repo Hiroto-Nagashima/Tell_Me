@@ -9,7 +9,7 @@ export const HeaderLayout: React.FC<Props> = memo((props) => {
 
   return (
     <>
-      <Header color="primary" auth={false} />
+      <Header />
       {children}
     </>
   );

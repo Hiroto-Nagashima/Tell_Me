@@ -11,7 +11,7 @@ export const DefaultLayout: React.FC<Props> = memo((props) => {
 
   return (
     <>
-      <Header auth={false} color="primary" />
+      <Header />
       {children}
       <Footer addressOfDaycare="hey" telephoneNumberOfDaycare="you" />
     </>
