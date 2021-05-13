@@ -14,7 +14,7 @@ import { Box } from '@material-ui/core';
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
-    height: 400,
+    height: 440,
     position: 'relative',
   },
   media: {
@@ -35,7 +35,7 @@ const MyCardActions = styled(CardActions)`
 `;
 
 const MyCardActionArea = styled(Box)`
-  height: 360px;
+  height: 390px;
 `;
 
 const ButtonWrapper = styled(Box)`
@@ -43,7 +43,15 @@ const ButtonWrapper = styled(Box)`
   margin: 0 0 0 auto;
 `;
 
-export const KidProfile: React.FC = () => {
+export type Props = {
+  age: number | null;
+  kidName: string | null;
+  favoritePlay: string | null;
+  favoriteFood: string | null;
+};
+
+export const KidProfile: React.FC<Props> = (props) => {
+  const { age, kidName, favoriteFood, favoritePlay } = props;
   const classes = useStyles();
 
   return (
@@ -55,20 +63,22 @@ export const KidProfile: React.FC = () => {
             <ProfileImage />
           </ProfileImageBox>
           <Box mt={5}>
-            <KidNameArea
-              variant="subtitle1"
-              color="textSecondary"
-              align="center"
-            >
-              鈴木太郎
+            <KidNameArea variant="subtitle1" color="inherit" align="center">
+              {kidName}
             </KidNameArea>
           </Box>
-          <Box mt={2}>
+          <Box>
             <Typography
               variant="subtitle1"
               color="textSecondary"
               component="h2"
+              align="center"
             >
+              {age}才
+            </Typography>
+          </Box>
+          <Box mt={2}>
+            <Typography variant="subtitle1" color="inherit" component="h2">
               好きな遊び
             </Typography>
           </Box>
@@ -79,15 +89,11 @@ export const KidProfile: React.FC = () => {
               component="h1"
               align="center"
             >
-              サッカー
+              {favoritePlay}
             </Typography>
           </Box>
           <Box mt={2}>
-            <Typography
-              variant="subtitle1"
-              color="textSecondary"
-              component="h2"
-            >
+            <Typography variant="subtitle1" color="inherit" component="h2">
               好きな食べ物
             </Typography>
           </Box>
@@ -98,7 +104,7 @@ export const KidProfile: React.FC = () => {
               component="h1"
               align="center"
             >
-              カレーライス、酢豚
+              {favoriteFood}
             </Typography>
           </Box>
         </CardContent>
