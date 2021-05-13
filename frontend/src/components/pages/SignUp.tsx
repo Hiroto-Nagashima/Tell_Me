@@ -5,6 +5,7 @@ import { getAuth } from '../../helper/firebaseAuthHelper';
 import axios from 'axios';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Spinner } from '../atoms/Spinner';
+import { signUpSchema } from '../../joi/schema/signUp';
 
 export const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -68,17 +69,19 @@ export const SignUp: React.FC = () => {
         const token = await currentUser.getIdToken(true);
         const config = { headers: { authorization: `Bearer ${token}` } };
         try {
+          const value = await signUpSchema.validateAsync({
+            email: email,
+            password: password,
+            gender: gender,
+            first_name: firstName,
+            last_name: lastName,
+            telephone_number: telephoneNumber,
+          });
+          console.log(value);
           await axios.post(
             'http://localhost:5000/api/v1/parents',
             {
-              params: {
-                email: email,
-                password: password,
-                gender: gender,
-                first_name: firstName,
-                last_name: lastName,
-                telephone_number: telephoneNumber,
-              },
+              params: value,
             },
             config,
           );
