@@ -12,8 +12,9 @@ const logout = () => {
 
 export const Home: React.FC = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
-  const { state } = useLocation<Kid>();
+  const { state } = useLocation<Array<Kid>>();
   const history = useHistory();
+
   if (loading) {
     return <Spinner color="primary" />;
   }
@@ -30,8 +31,12 @@ export const Home: React.FC = () => {
 
   return (
     <>
-      <div>Homeです </div>
-      <button onClick={() => logout()}>{state}</button>
+      {state.map((kid) => (
+        <>
+          <div>Homeです </div>
+          <button onClick={() => logout()}>{kid.favorite_food}</button>
+        </>
+      ))}
     </>
   );
 };

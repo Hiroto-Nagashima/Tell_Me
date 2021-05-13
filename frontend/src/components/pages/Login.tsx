@@ -44,7 +44,7 @@ export const Login: React.FC<Props> = () => {
     return;
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)

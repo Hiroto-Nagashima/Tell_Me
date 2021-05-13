@@ -20,13 +20,19 @@ module Api
       end
 
       def index
-        kids_box = []
         parent = Parent.find_by(uid: params[:uid])
-        kid_parents = parent.kid_parents
-        kid_parents.each do |kid_parent|
-          kids_box << Kid.find(kid_parent.kid_id)
+        if parent != nil
+          kids_box = []
+          kid_parents = parent.kid_parents
+          kid_parents.each do |kid_parent|
+            kids_box << Kid.find(kid_parent.kid_id)
+          end
+          render json: kids_box, status: 200
+        else
+          render json: {
+            message: "子供が未登録です"
+          }
         end
-        render json: kids_box, status: 200
       end
 
       private
