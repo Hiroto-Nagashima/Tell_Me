@@ -2,10 +2,10 @@ import React, { ChangeEvent, useCallback, useState } from 'react';
 import Image from '../../images/kid.jpeg';
 import { withRouter } from 'react-router';
 import * as H from 'history';
-import { LoginPaper } from '../organisms/LoginPaper';
+import { LoginPaper } from '../organisms/LoginPaper/LoginPaper';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
-import { CustomizedSnackbar } from '../atoms/CustomizedSnackbar';
+import { CustomizedSnackbar } from '../atoms/CustomizedSnackbar/CustomizedSnackbar';
 import firebase from 'firebase';
 import { useHistory } from 'react-router-dom';
 

@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { getAuth } from '../../helper/firebaseAuthHelper';
+import { getAuth } from '../../../helper/firebaseAuthHelper';
 import firebase from 'firebase';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -57,7 +57,7 @@ export const Header: React.FC = () => {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleMenu}
-                color="primary"
+                color="inherit"
               >
                 <AccountCircle />
               </IconButton>

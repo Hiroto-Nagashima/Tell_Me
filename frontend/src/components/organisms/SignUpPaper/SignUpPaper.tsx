@@ -2,9 +2,9 @@ import React from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
-import { SingleLineTextField } from '../atoms/SingleLineTextField';
-import { FlexibleButton } from '../atoms/FlexibleButton';
-import { RadioButtonGroup } from '../molecules/RadioButtonGroup';
+import { SingleLineTextField } from '../../atoms/SIngleLineTextField/SingleLineTextField';
+import { FlexibleButton } from '../../atoms/FlexibleButton/FlexibleButton';
+import { RadioButtonGroup } from '../../molecules/RadioButtonGroup';
 import styled from 'styled-components';
 
 const useStyles = makeStyles((theme: Theme) =>

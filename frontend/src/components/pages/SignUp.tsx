@@ -1,10 +1,10 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import { useHistory, withRouter } from 'react-router';
-import { SignUpPaper } from '../organisms/SignUpPaper';
+import { SignUpPaper } from '../organisms/SignUpPaper/SignUpPaper';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import axios from 'axios';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { Spinner } from '../atoms/Spinner';
+import { Spinner } from '../atoms/Spinner/Spinner';
 
 export const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');

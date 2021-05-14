@@ -1,5 +1,5 @@
 import React, { memo, ReactNode } from 'react';
-import { Header } from '../organisms/Header';
+import { Header } from '../organisms/Header/Header';
 
 type Props = {
   children: ReactNode;

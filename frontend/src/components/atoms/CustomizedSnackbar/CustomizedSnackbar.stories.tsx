@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react';
 import { Props, CustomizedSnackbar } from './CustomizedSnackbar';
-import { DefaultButton } from './DefaultButton';
+import { DefaultButton } from '../DefaultButton/DefaultButton';
 
 export default {
   title: 'atoms/Snackbar',

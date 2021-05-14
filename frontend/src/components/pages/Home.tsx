@@ -4,7 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useHistory } from 'react-router';
 // import { useLocation } from 'react-router-dom';
 // import { Kid } from '../../types/api/kid';
-import { Spinner } from '../atoms/Spinner';
+import { Spinner } from '../atoms/Spinner/Spinner';
 
 const logout = () => {
   firebase.auth().signOut();

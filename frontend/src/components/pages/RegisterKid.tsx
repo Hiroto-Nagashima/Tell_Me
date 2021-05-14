@@ -4,8 +4,8 @@ import * as H from 'history';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import axios from 'axios';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { RegisterKidPaper } from '../organisms/RegisterKidPaper';
-import { Spinner } from '../atoms/Spinner';
+import { RegisterKidPaper } from '../organisms/RegisterKidPaper/RegisterKidPaper';
+import { Spinner } from '../atoms/Spinner/Spinner';
 
 type Props = {
   history: H.History;
