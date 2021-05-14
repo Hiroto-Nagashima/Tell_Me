@@ -5,10 +5,7 @@ import { useHistory } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import { Kid } from '../../types/api/kid';
 import { Spinner } from '../atoms/Spinner/Spinner';
-
-const logout = () => {
-  firebase.auth().signOut();
-};
+import { KidProfile } from '../organisms/KidProfile/KidProfile';
 
 export const Home: React.FC = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
@@ -31,12 +28,29 @@ export const Home: React.FC = () => {
 
   return (
     <>
-      {state.map((kid) => (
+      {loading ? (
+        <Spinner />
+      ) : error ? (
+        <h1>エラーです</h1>
+      ) : (
         <>
-          <div>Homeです </div>
-          <button onClick={() => logout()}></button>
+          <p>Home</p>
+          {state?.map((kid) => {
+            console.log(kid);
+
+            return (
+              <div key={kid.id}>
+                <KidProfile
+                  age={kid.age}
+                  kidName={kid.last_name}
+                  favoriteFood={kid.favorite_food}
+                  favoritePlay={kid.favorite_play}
+                />
+              </div>
+            );
+          })}
         </>
-      ))}
+      )}
     </>
   );
 };
