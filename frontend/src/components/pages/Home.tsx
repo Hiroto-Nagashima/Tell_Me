@@ -6,13 +6,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useHistory } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import { Kid } from '../../types/api/kid';
+import { Parent } from '../../types/api/parent';
 import { Spinner } from '../atoms/Spinner/Spinner';
 import { KidProfile } from '../organisms/KidProfile/KidProfile';
 import { ParentProfile } from '../organisms/ParentProfile/ParentProfile';
 
 export const Home: React.FC = () => {
   const [user] = useAuthState(firebase.auth());
-  const [parent, setParent] = useState();
+  const [parent, setParent] = useState<Array<Parent>>();
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const { state } = useLocation<Array<Kid>>();
