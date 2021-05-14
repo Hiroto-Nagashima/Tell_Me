@@ -16,6 +16,10 @@ export const SignUp: React.FC = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(getAuth());
 
+  const telephoneNumberRegex = /^(0{1}\d{10,11})$/;
+  const firstNameError = '';
+  const lastNameError = '';
+
   const history = useHistory();
 
   const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -51,41 +55,45 @@ export const SignUp: React.FC = () => {
     return <Spinner color="primary" />;
   }
 
-  if (error) {
-    return <div>{error.message}</div>;
-  }
-
   const handleSubmit = () => {
-    const request = async () => {
-      await createUserWithEmailAndPassword(email, password);
-      const auth = getAuth();
-      const currentUser = auth.currentUser;
-      if (auth && currentUser) {
-        const token = await currentUser.getIdToken(true);
-        const config = { headers: { authorization: `Bearer ${token}` } };
-        try {
-          await axios.post(
-            'http://localhost:5000/api/v1/parents',
-            {
-              params: {
-                email: email,
-                password: password,
-                gender: gender,
-                first_name: firstName,
-                last_name: lastName,
-                telephone_number: telephoneNumber,
+    if (telephoneNumber.match(telephoneNumberRegex) == null) {
+      alert('telephone_numberエラー');
+    } else if (lastName == lastNameError) {
+      alert('lastNameError');
+    } else if (firstName == firstNameError) {
+      alert('firstNameError');
+    } else {
+      const request = async () => {
+        await createUserWithEmailAndPassword(email, password);
+        const auth = getAuth();
+        const currentUser = auth.currentUser;
+        if (auth && currentUser) {
+          const token = await currentUser.getIdToken(true);
+          const config = { headers: { authorization: `Bearer ${token}` } };
+          try {
+            await axios.post(
+              'http://localhost:5000/api/v1/parents',
+              {
+                params: {
+                  email: email,
+                  password: password,
+                  gender: gender,
+                  first_name: firstName,
+                  last_name: lastName,
+                  telephone_number: telephoneNumber,
+                },
               },
-            },
-            config,
-          );
-          history.push('/register-kid');
-        } catch (error) {
-          console.log(error.message);
-          console.log(user);
+              config,
+            );
+            history.push('/register-kid');
+          } catch {
+            alert(error?.message);
+            console.log(user);
+          }
         }
-      }
-    };
-    request();
+      };
+      request();
+    }
   };
 
   return (
