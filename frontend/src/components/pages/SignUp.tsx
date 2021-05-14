@@ -3,19 +3,18 @@ import { useHistory, withRouter } from 'react-router';
 import { SignUpPaper } from '../organisms/SignUpPaper/SignUpPaper';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import axios from 'axios';
-// import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-// import { Spinner } from '../atoms/Spinner/Spinner';
 import firebase from 'firebase';
+import { CustomizedSnackbar } from '../atoms/CustomizedSnackbar/CustomizedSnackbar';
 
 export const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [open, setOpen] = useState(false);
   const [gender, setGender] = useState(0);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [telephoneNumber, setTelephoneNumber] = useState('');
   const [password, setPassword] = useState('');
-  // const [createUserWithEmailAndPassword, user, loading, error] =
-  //   useCreateUserWithEmailAndPassword(getAuth());
 
   const telephoneNumberRegex = /^(0{1}\d{10,11})$/;
   const firstNameError = '';
@@ -51,14 +50,26 @@ export const SignUp: React.FC = () => {
     },
     [],
   );
+  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+
+    return;
+  };
 
   const handleSubmit = () => {
     if (telephoneNumber.match(telephoneNumberRegex) == null) {
-      alert('telephone_numberエラー');
+      setError('telephone number is invalid');
+      setOpen(true);
     } else if (lastName == lastNameError) {
-      alert('lastNameError');
+      setError('last name is invalid');
+      setOpen(true);
     } else if (firstName == firstNameError) {
-      alert('firstNameError');
+      setError('first name is invalid');
+      setOpen(true);
     } else {
       const request = async () => {
         firebase
@@ -87,13 +98,15 @@ export const SignUp: React.FC = () => {
                 );
                 history.push('/register-kid');
               } catch (error) {
-                alert(error?.message);
+                setError(error?.message);
+                setOpen(true);
               }
             }
           })
           .catch((error) => {
             const errorMessage = error.message;
-            alert(errorMessage);
+            setError(errorMessage);
+            setOpen(true);
           });
       };
       request();
@@ -101,21 +114,26 @@ export const SignUp: React.FC = () => {
   };
 
   return (
-    <SignUpPaper
-      email={email}
-      password={password}
-      firstName={firstName}
-      lastName={lastName}
-      gender={gender}
-      telephoneNumber={telephoneNumber}
-      onClick={handleSubmit}
-      onChangeEmail={onChangeEmail}
-      onChangePassword={onChangePassword}
-      onChangeFirstName={onChangeFirstName}
-      onChangeLastName={onChangeLastName}
-      onChangeGender={onChangeGender}
-      onChangeTelephoneNumber={onChangeTelephoneNumber}
-    />
+    <>
+      <SignUpPaper
+        email={email}
+        password={password}
+        firstName={firstName}
+        lastName={lastName}
+        gender={gender}
+        telephoneNumber={telephoneNumber}
+        onClick={handleSubmit}
+        onChangeEmail={onChangeEmail}
+        onChangePassword={onChangePassword}
+        onChangeFirstName={onChangeFirstName}
+        onChangeLastName={onChangeLastName}
+        onChangeGender={onChangeGender}
+        onChangeTelephoneNumber={onChangeTelephoneNumber}
+      />
+      <CustomizedSnackbar open={open} onClose={handleClose} severity="error">
+        {error}
+      </CustomizedSnackbar>
+    </>
   );
 };
 export default withRouter(SignUp);
