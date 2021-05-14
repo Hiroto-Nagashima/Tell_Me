@@ -108,7 +108,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
               textName="姓"
               placeholder="山田"
               value={lastName}
-              onChange={onChangeFirstName}
+              onChange={onChangeLastName}
             />
           </Box>
           <Box textAlign="center" mr={4} ml={1}>
@@ -118,7 +118,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
               textName="太郎"
               placeholder="空欄は入れないでください"
               value={firstName}
-              onChange={onChangeLastName}
+              onChange={onChangeFirstName}
             />
           </Box>
         </Flexbox>

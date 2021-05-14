@@ -100,7 +100,7 @@ export const RegisterKid: React.FC<Props> = () => {
     .finally(() => setLoading(false));
 
   useEffect(() => {
-    console.log('1');
+    console.log('aaaaaaaaaaaaaaa');
     fetchParent();
   }, []);
 
