@@ -9,7 +9,7 @@ module Api
           parent_kid.kid_id = kid.id
           parent_kid.save!
           render json: {
-            status: "ok"
+            kid_id: kid.id
           }
         else
           render json: {
