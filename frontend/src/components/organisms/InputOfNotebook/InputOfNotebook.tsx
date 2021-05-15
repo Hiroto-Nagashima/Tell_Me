@@ -25,9 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export type Props = {
-  bath: 0 | 1 | null;
   memo: string | null;
   dinner: string | null;
+  hasBathed: boolean;
   breakfast: string | null;
   selectedDate: Date | string;
   bodyTemperature: number | string | null;
@@ -43,7 +43,7 @@ export const InputOfNotebook: React.FC<Props> = (props) => {
   const {
     selectedDate,
     bodyTemperature,
-    bath,
+    hasBathed,
     memo,
     dinner,
     breakfast,
@@ -80,7 +80,7 @@ export const InputOfNotebook: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" mx={4}>
           <RadioButtonGroup
-            value={bath}
+            value={hasBathed}
             onChange={onChangeBath}
             firstLabel="有"
             secondLabel="無"
