@@ -20,7 +20,7 @@ const App: React.FC = () => {
       <GlobalStyle />
       <BrowserRouter>
         <Switch>
-          <PrivateSidebarRoute exact path="/favorite" component={Favorites} />
+          <PrivateSidebarRoute exact path="/favorites" component={Favorites} />
           <PrivateSidebarRoute
             exact
             path="/announcement"

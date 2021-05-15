@@ -91,7 +91,7 @@ export const SidebarLayout: React.FC<Props> = (props) => {
     <div>
       <h1>Tell Me</h1>
       <List>
-        <ListItem button>
+        <ListItem button onClick={() => history.push('/')}>
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
@@ -99,7 +99,7 @@ export const SidebarLayout: React.FC<Props> = (props) => {
         </ListItem>
       </List>
       <List>
-        <ListItem button>
+        <ListItem button onClick={() => history.push('/notebook')}>
           <ListItemIcon>
             <MenuBookIcon />
           </ListItemIcon>
@@ -107,7 +107,7 @@ export const SidebarLayout: React.FC<Props> = (props) => {
         </ListItem>
       </List>
       <List>
-        <ListItem button>
+        <ListItem button onClick={() => history.push('/announcement')}>
           <ListItemIcon>
             <AnnouncementIcon />
           </ListItemIcon>
@@ -115,7 +115,7 @@ export const SidebarLayout: React.FC<Props> = (props) => {
         </ListItem>
       </List>
       <List>
-        <ListItem button>
+        <ListItem button onClick={() => history.push('/favorites')}>
           <ListItemIcon>
             <FavoriteIcon />
           </ListItemIcon>
