@@ -6,7 +6,7 @@ import { SignUp } from './components/pages/SignUp';
 import { Page404 } from './components/pages/Page404';
 import GlobalStyle from './theme/globalStyle';
 import HeaderLayoutRoute from './router/HeaderLayoutRoute';
-import PrivateRoute from './router/PrivateRoute';
+import PrivateRoute from './router/PrivateSidebarRoute';
 import { RegisterKid } from './components/pages/RegisterKid';
 import PrivateHeaderRoute from './router/PrivateHeaderRoute';
 import { ChooseKid } from './components/pages/ChooseKid';
