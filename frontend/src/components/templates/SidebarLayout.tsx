@@ -73,9 +73,17 @@ export const SidebarLayout: React.FC<Props> = (props) => {
   const { window, children } = props;
   const classes = useStyles();
   const theme = useTheme();
+  const history = useHistory();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [title, setTitle] = useState('Home');
-  const history = useHistory();
+  const [isOpen, setOpen] = useState(false);
+
+  const onClickOpen = () => {
+    setOpen(true);
+  };
+  const onClickClose = () => {
+    setOpen(false);
+  };
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -142,7 +150,7 @@ export const SidebarLayout: React.FC<Props> = (props) => {
       </List>
       <Divider />
       <List>
-        <ListItem button onClick={() => logout()}>
+        <ListItem button onClick={onClickOpen}>
           <ListItemIcon>
             <ExitToAppIcon />
           </ListItemIcon>
@@ -209,7 +217,13 @@ export const SidebarLayout: React.FC<Props> = (props) => {
         <div className={classes.toolbar} />
         {children}
       </main>
-      <DraggableDialog />
+      <DraggableDialog
+        isOpen={isOpen}
+        okLabel="ログアウト"
+        content="本当にログアウトしますか？"
+        onClickClose={onClickClose}
+        onClickOK={() => logout()}
+      />
     </div>
   );
 };
