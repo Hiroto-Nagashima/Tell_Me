@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { useHistory, withRouter } from 'react-router';
-import * as H from 'history';
-import { getAuth } from '../../helper/firebaseAuthHelper';
 import axios from 'axios';
+import * as H from 'history';
+import { useHistory, withRouter } from 'react-router';
+import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { RegisterKidPaper } from '../organisms/RegisterKidPaper/RegisterKidPaper';
 import { Spinner } from '../atoms/Spinner/Spinner';
+import { RegisterKidPaper } from '../organisms/RegisterKidPaper/RegisterKidPaper';
 
 type Props = {
   history: H.History;

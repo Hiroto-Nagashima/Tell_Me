@@ -1,9 +1,8 @@
 import React from 'react';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
-import { SingleLineTextField } from '../../atoms/SingleLineTextField/SingleLineTextField';
-import { FlexibleButton } from '../../atoms/FlexibleButton/FlexibleButton';
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import { SingleLineTextField, FlexibleButton } from '../../atoms/index';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>

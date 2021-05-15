@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Spinner } from '../atoms/Spinner/Spinner';
 import { KidCard } from '../molecules/KidCard/KidCard';
 import axios from 'axios';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Spinner } from '../atoms/Spinner/Spinner';
 import { Kid } from '../../types/api/kid';
 import { useHistory } from 'react-router';
 

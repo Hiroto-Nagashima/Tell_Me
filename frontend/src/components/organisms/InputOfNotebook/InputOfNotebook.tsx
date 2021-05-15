@@ -1,11 +1,13 @@
 import React from 'react';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
-import { SingleLineTextField } from '../../atoms/SingleLineTextField/SingleLineTextField';
-import { MultipleLinesTextField } from '../../atoms/MultipleLinesTextField/MultipleLinesTextField';
-import { FlexibleButton } from '../../atoms/FlexibleButton/FlexibleButton';
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup';
+import {
+  SingleLineTextField,
+  MultipleLinesTextField,
+  FlexibleButton,
+} from '../../atoms/index';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -7,8 +7,7 @@ import { useLocation } from 'react-router-dom';
 import { Kid } from '../../types/api/kid';
 import { Parent } from '../../types/api/parent';
 import { Spinner } from '../atoms/Spinner/Spinner';
-import { KidProfile } from '../organisms/KidProfile/KidProfile';
-import { ParentProfile } from '../organisms/ParentProfile/ParentProfile';
+import { KidProfile, ParentProfile } from '../organisms/index';
 
 export const Home: React.FC = () => {
   const [user] = useAuthState(firebase.auth());
