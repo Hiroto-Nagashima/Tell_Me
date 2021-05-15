@@ -26,6 +26,7 @@ import {
 import { useHistory } from 'react-router';
 import firebase from 'firebase';
 import { DraggableDialog } from '../molecules';
+import { Box } from '@material-ui/core';
 
 const drawerWidth = 240;
 
@@ -114,8 +115,10 @@ export const SidebarLayout: React.FC<Props> = (props) => {
   };
 
   const drawer = (
-    <div>
-      <h1>Tell Me</h1>
+    <>
+      <Box textAlign="center">
+        <h2>Tell Me</h2>
+      </Box>
       <List>
         <ListItem button onClick={onClickHome}>
           <ListItemIcon>
@@ -157,7 +160,7 @@ export const SidebarLayout: React.FC<Props> = (props) => {
           <ListItemText primary="Logout" />
         </ListItem>
       </List>
-    </div>
+    </>
   );
 
   const container =
