@@ -119,7 +119,7 @@ export const SidebarLayout: React.FC<Props> = (props) => {
           <ListItemIcon>
             <FavoriteIcon />
           </ListItemIcon>
-          <ListItemText primary="Favorite" />
+          <ListItemText primary="Favorites" />
         </ListItem>
       </List>
       <Divider />
