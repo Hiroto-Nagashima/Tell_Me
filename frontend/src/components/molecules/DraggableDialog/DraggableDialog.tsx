@@ -6,6 +6,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { DefaultButton } from '../../atoms/DefaultButton/DefaultButton';
 import { DraggablePaper } from '../../atoms/DraggablePaper';
+import { title } from 'process';
 export type Props = {
   onClickClose: () => void;
   onClickOpen: () => void;
@@ -15,6 +16,7 @@ export type Props = {
 
 export const DraggableDialog: React.FC<Props> = (props) => {
   const { isOpen, onClickOpen, onClickClose, onClickRegister } = props;
+  // const [isOpen, onClickOpen] = useState()
 
   return (
     <div>
@@ -32,10 +34,10 @@ export const DraggableDialog: React.FC<Props> = (props) => {
         aria-labelledby="draggable-dialog-title"
       >
         <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-          登録確認
+          {title}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText>この内容で登録しますか？</DialogContentText>
+          <DialogContentText>{content}</DialogContentText>
         </DialogContent>
         <DialogActions>
           <DefaultButton

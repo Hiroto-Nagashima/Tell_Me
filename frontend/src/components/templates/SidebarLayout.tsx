@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
@@ -25,6 +25,7 @@ import {
 } from '@material-ui/core/styles';
 import { useHistory } from 'react-router';
 import firebase from 'firebase';
+import { DraggableDialog } from '../molecules';
 
 const drawerWidth = 240;
 
@@ -72,13 +73,30 @@ export const SidebarLayout: React.FC<Props> = (props) => {
   const { window, children } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [title, setTitle] = useState('Home');
+  const history = useHistory();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const onClickHome = () => {
+    history.push('/');
+    setTitle('Home');
+  };
+  const onClickNotebook = () => {
+    history.push('/notebook');
+    setTitle('Notebook');
+  };
+  const onClickAnnouncement = () => {
+    history.push('/announcement');
+    setTitle('Announcement');
+  };
 
-  const history = useHistory();
+  const onClickFavorites = () => {
+    history.push('/favorites');
+    setTitle('Favorites');
+  };
   const logout = async () => {
     await firebase
       .auth()
@@ -91,7 +109,7 @@ export const SidebarLayout: React.FC<Props> = (props) => {
     <div>
       <h1>Tell Me</h1>
       <List>
-        <ListItem button onClick={() => history.push('/')}>
+        <ListItem button onClick={onClickHome}>
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
@@ -99,7 +117,7 @@ export const SidebarLayout: React.FC<Props> = (props) => {
         </ListItem>
       </List>
       <List>
-        <ListItem button onClick={() => history.push('/notebook')}>
+        <ListItem button onClick={onClickNotebook}>
           <ListItemIcon>
             <MenuBookIcon />
           </ListItemIcon>
@@ -107,7 +125,7 @@ export const SidebarLayout: React.FC<Props> = (props) => {
         </ListItem>
       </List>
       <List>
-        <ListItem button onClick={() => history.push('/announcement')}>
+        <ListItem button onClick={onClickAnnouncement}>
           <ListItemIcon>
             <AnnouncementIcon />
           </ListItemIcon>
@@ -115,7 +133,7 @@ export const SidebarLayout: React.FC<Props> = (props) => {
         </ListItem>
       </List>
       <List>
-        <ListItem button onClick={() => history.push('/favorites')}>
+        <ListItem button onClick={onClickFavorites}>
           <ListItemIcon>
             <FavoriteIcon />
           </ListItemIcon>
@@ -152,7 +170,7 @@ export const SidebarLayout: React.FC<Props> = (props) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Responsive drawer
+            {title}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -191,6 +209,7 @@ export const SidebarLayout: React.FC<Props> = (props) => {
         <div className={classes.toolbar} />
         {children}
       </main>
+      <DraggableDialog />
     </div>
   );
 };
