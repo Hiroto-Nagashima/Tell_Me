@@ -89,7 +89,7 @@ export const RegisterKid: React.FC<Props> = () => {
 
   const fetchParent = () => console.log(2);
   axios
-    .get(`http://localhost:5000/api/v1/parents/fetchParent`, {
+    .get(`http://localhost:5000/api/v1/parents/fetchParentName`, {
       params: {
         uid: parent!.uid,
       },

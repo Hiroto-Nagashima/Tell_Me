@@ -42,9 +42,9 @@ const ButtonWrapper = styled(Box)`
 `;
 
 export type Props = {
-  parentName: string | null;
-  email: string | null;
-  telephoneNumber: string | null;
+  parentName: string | null | undefined;
+  email: string | null | undefined;
+  telephoneNumber: string | null | undefined;
 };
 
 export const ParentProfile: React.FC<Props> = (props) => {

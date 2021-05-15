@@ -9,10 +9,15 @@ module Api
         create_parent(@auth)
       end
 
-      def fetchParent
+      def fetchParentName
         parent = Parent.find_by(uid: params[:uid])
         @parent_name = parent.last_name + parent.first_name
         render json: @parent_name, status: 200
+      end
+
+      def fetchParentArray
+        @parent = Parent.find_by(uid: params[:uid])
+        render json: @parent, status: 200
       end
 
       private
