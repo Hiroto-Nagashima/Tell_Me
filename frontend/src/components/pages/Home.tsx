@@ -1,4 +1,4 @@
-// import { Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import axios from 'axios';
 import firebase from 'firebase';
 import React, { useEffect, useState } from 'react';
@@ -43,12 +43,14 @@ export const Home: React.FC = () => {
       ) : error ? (
         <h1>エラーです</h1>
       ) : (
-        <>
+        <Box display="flex" justifyContent="space-around">
           {state?.map((kid) => (
             <div key={kid.id}>
               <KidProfile
                 age={kid.age}
-                kidName={kid.last_name}
+                gender={kid.gender}
+                firstName={kid.first_name}
+                lastName={kid.last_name}
                 favoriteFood={kid.favorite_food}
                 favoritePlay={kid.favorite_play}
               />
@@ -61,7 +63,7 @@ export const Home: React.FC = () => {
               parentName={parent?.last_name}
             />
           </div>
-        </>
+        </Box>
       )}
     </>
   );

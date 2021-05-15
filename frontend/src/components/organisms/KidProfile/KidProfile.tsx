@@ -12,7 +12,7 @@ import { Box } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    width: 345,
     height: 440,
     position: 'relative',
   },
@@ -43,13 +43,16 @@ const ButtonWrapper = styled(Box)`
 
 export type Props = {
   age: number | null;
-  kidName: string | null;
+  gender: number;
+  firstName: string | null;
+  lastName: string | null;
   favoritePlay: string | null;
   favoriteFood: string | null;
 };
 
 export const KidProfile: React.FC<Props> = (props) => {
-  const { age, kidName, favoriteFood, favoritePlay } = props;
+  const { age, firstName, lastName, gender, favoriteFood, favoritePlay } =
+    props;
   const classes = useStyles();
 
   return (
@@ -64,25 +67,26 @@ export const KidProfile: React.FC<Props> = (props) => {
           </Box>
           <Box mt={5}>
             <KidNameArea variant="subtitle1" color="inherit" align="center">
-              {kidName}
+              {lastName}
+              {firstName}
             </KidNameArea>
           </Box>
           <Box display="flex" justifyContent="center">
             <Box mr={2}>
               <Typography
-                variant="subtitle1"
+                variant="subtitle2"
                 color="textSecondary"
-                component="h2"
+                component="h3"
                 align="center"
               >
-                {age}
+                {gender === 0 ? '女の子' : '男の子'}
               </Typography>
             </Box>
             <Box ml={2}>
               <Typography
-                variant="subtitle1"
+                variant="subtitle2"
                 color="textSecondary"
-                component="h2"
+                component="h3"
                 align="center"
               >
                 {age}才
@@ -96,24 +100,24 @@ export const KidProfile: React.FC<Props> = (props) => {
           </Box>
           <Box mt={1}>
             <Typography
-              variant="subtitle1"
+              variant="h6"
               color="textSecondary"
-              component="h1"
+              component="h6"
               align="center"
             >
               {favoritePlay}
             </Typography>
           </Box>
           <Box mt={2}>
-            <Typography variant="subtitle1" color="inherit" component="h2">
+            <Typography variant="subtitle1" color="textPrimary" component="h2">
               好きな食べ物
             </Typography>
           </Box>
           <Box mt={1}>
             <Typography
-              variant="subtitle1"
+              variant="h6"
               color="textSecondary"
-              component="h1"
+              component="h6"
               align="center"
             >
               {favoriteFood}

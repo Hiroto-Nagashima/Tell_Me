@@ -6,6 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -22,6 +23,8 @@ import {
   Theme,
   createStyles,
 } from '@material-ui/core/styles';
+import { useHistory } from 'react-router';
+import firebase from 'firebase';
 
 const drawerWidth = 240;
 
@@ -75,10 +78,18 @@ export const SidebarLayout: React.FC<Props> = (props) => {
     setMobileOpen(!mobileOpen);
   };
 
+  const history = useHistory();
+  const logout = async () => {
+    await firebase
+      .auth()
+      .signOut()
+      .then(() => history.push('/'))
+      .catch((e) => alert(e));
+  };
+
   const drawer = (
     <div>
       <h1>Tell Me</h1>
-
       <List>
         <ListItem button>
           <ListItemIcon>
@@ -112,6 +123,14 @@ export const SidebarLayout: React.FC<Props> = (props) => {
         </ListItem>
       </List>
       <Divider />
+      <List>
+        <ListItem button onClick={() => logout()}>
+          <ListItemIcon>
+            <ExitToAppIcon />
+          </ListItemIcon>
+          <ListItemText primary="Logout" />
+        </ListItem>
+      </List>
     </div>
   );
 

@@ -11,7 +11,8 @@ const Template: Story<Props> = (args) => <KidProfile {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   age: 1,
-  kidName: '鈴木健斗',
+  lastName: '鈴木',
+  firstName: '健斗',
   favoritePlay: 'おままごと',
   favoriteFood: 'カレー、焼肉',
 };

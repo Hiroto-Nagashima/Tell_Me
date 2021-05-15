@@ -12,7 +12,7 @@ import { ProfileImage } from '../../atoms/ProfileImage/ProfileImage';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    width: 345,
     height: 440,
     position: 'relative',
   },
