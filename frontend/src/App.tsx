@@ -6,10 +6,13 @@ import { SignUp } from './components/pages/SignUp';
 import { Page404 } from './components/pages/Page404';
 import GlobalStyle from './theme/globalStyle';
 import HeaderLayoutRoute from './router/HeaderLayoutRoute';
-import PrivateRoute from './router/PrivateSidebarRoute';
+import { PrivateSidebarRoute } from './router/PrivateSidebarRoute';
 import { RegisterKid } from './components/pages/RegisterKid';
 import PrivateHeaderRoute from './router/PrivateHeaderRoute';
 import { ChooseKid } from './components/pages/ChooseKid';
+import { Notebook } from './components/pages/Notebook';
+import { Favorites } from './components/pages/Favorites';
+import { Announcement } from './components/pages/Announcement';
 
 const App: React.FC = () => {
   return (
@@ -17,7 +20,14 @@ const App: React.FC = () => {
       <GlobalStyle />
       <BrowserRouter>
         <Switch>
-          <PrivateRoute exact path="/" component={Home} />
+          <PrivateSidebarRoute exact path="/favorite" component={Favorites} />
+          <PrivateSidebarRoute
+            exact
+            path="/announcement"
+            component={Announcement}
+          />
+          <PrivateSidebarRoute exact path="/notebook" component={Notebook} />
+          <PrivateSidebarRoute exact path="/" component={Home} />
           <PrivateHeaderRoute
             exact
             path="/register-kid"

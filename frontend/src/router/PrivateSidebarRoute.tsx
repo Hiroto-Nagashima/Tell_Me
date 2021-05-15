@@ -12,7 +12,10 @@ type Props = {
   path: string;
 };
 
-const PrivateRoute: React.FC<Props> = ({ component: Component, ...rest }) => {
+export const PrivateSidebarRoute: React.FC<Props> = ({
+  component: Component,
+  ...rest
+}) => {
   const [user] = useAuthState(getAuth());
 
   return user ? (
@@ -36,4 +39,3 @@ const PrivateRoute: React.FC<Props> = ({ component: Component, ...rest }) => {
     />
   );
 };
-export default PrivateRoute;
