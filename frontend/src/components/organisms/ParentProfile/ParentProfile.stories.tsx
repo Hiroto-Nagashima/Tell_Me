@@ -10,7 +10,8 @@ const Template: Story<Props> = (args) => <ParentProfile {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  parentName: '鈴木道夫',
+  firstName: '道夫',
+  lastName: '鈴木',
   email: 'suzukimichio@gmail.com',
   telephoneNumber: '08012345678',
 };

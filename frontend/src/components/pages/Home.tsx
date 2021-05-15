@@ -59,8 +59,10 @@ export const Home: React.FC = () => {
           <div key={parent?.id}>
             <ParentProfile
               email={parent?.email}
+              gender={parent?.gender}
               telephoneNumber={parent?.telephone_number}
-              parentName={parent?.last_name}
+              firstName={parent?.first_name}
+              lastName={parent?.last_name}
             />
           </div>
         </Box>

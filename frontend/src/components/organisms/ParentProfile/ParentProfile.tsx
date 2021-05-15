@@ -5,7 +5,9 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
+import MailIcon from '@material-ui/icons/Mail';
 import Typography from '@material-ui/core/Typography';
+import PhoneIcon from '@material-ui/icons/Phone';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { ProfileImage } from '../../atoms/ProfileImage/ProfileImage';
@@ -13,7 +15,7 @@ import { ProfileImage } from '../../atoms/ProfileImage/ProfileImage';
 const useStyles = makeStyles({
   root: {
     width: 345,
-    height: 440,
+    height: 385,
     position: 'relative',
   },
   media: {
@@ -33,7 +35,7 @@ const MyCardActions = styled(CardActions)`
 `;
 
 const MyCardActionArea = styled(Box)`
-  height: 390px;
+  height: 340px;
 `;
 
 const ButtonWrapper = styled(Box)`
@@ -42,13 +44,15 @@ const ButtonWrapper = styled(Box)`
 `;
 
 export type Props = {
-  parentName: string | null | undefined;
+  firstName: string | null | undefined;
+  lastName: string | null | undefined;
+  gender: number | null | undefined;
   email: string | null | undefined;
   telephoneNumber: string | null | undefined;
 };
 
 export const ParentProfile: React.FC<Props> = (props) => {
-  const { parentName, telephoneNumber, email } = props;
+  const { firstName, lastName, telephoneNumber, email, gender } = props;
   const classes = useStyles();
 
   return (
@@ -63,34 +67,41 @@ export const ParentProfile: React.FC<Props> = (props) => {
           </Box>
           <Box mt={5}>
             <ParentNameArea variant="subtitle1" color="inherit" align="center">
-              {parentName}
+              {lastName}
+              {firstName}
             </ParentNameArea>
           </Box>
-          <Box mt={2}>
-            <Typography variant="subtitle1" color="inherit" component="h2">
-              電話番号
+          <Box mb={2}>
+            <Typography
+              variant="subtitle2"
+              color="textSecondary"
+              component="h3"
+              align="center"
+            >
+              {gender === 0 ? 'お母さん' : 'お父さん'}
             </Typography>
           </Box>
-          <Box mt={1}>
+          <Box mt={1} display="flex" justifyContent="center">
+            <Box mr={4} mb={2}>
+              <PhoneIcon />
+            </Box>
             <Typography
-              variant="subtitle1"
+              variant="h6"
               color="textSecondary"
-              component="h1"
+              component="h6"
               align="center"
             >
               {telephoneNumber}
             </Typography>
           </Box>
-          <Box mt={2}>
-            <Typography variant="subtitle1" color="inherit" component="h2">
-              メールアドレス
-            </Typography>
-          </Box>
-          <Box mt={1}>
+          <Box mt={1} display="flex" justifyContent="center">
+            <Box mr={4}>
+              <MailIcon />
+            </Box>
             <Typography
-              variant="subtitle1"
+              variant="h6"
               color="textSecondary"
-              component="h1"
+              component="h6"
               align="center"
             >
               {email}
