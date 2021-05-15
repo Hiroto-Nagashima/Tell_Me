@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import AppBar from '@material-ui/core/AppBar';
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Header: React.FC = () => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const [parent] = useAuthState(getAuth());
   const history = useHistory();
