@@ -2,8 +2,8 @@ import React, { ComponentType } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Route, RouteComponentProps } from 'react-router-dom';
 import { Login } from '../components/pages/Login';
-import { DefaultLayout } from '../components/templates/DefaultLayout';
 import { HeaderLayout } from '../components/templates/HeaderLayout';
+import { SidebarLayout } from '../components/templates/SidebarLayout';
 import { getAuth } from '../helper/firebaseAuthHelper';
 
 type Props = {
@@ -19,9 +19,9 @@ const PrivateRoute: React.FC<Props> = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) => (
-        <DefaultLayout>
+        <SidebarLayout>
           <Component {...props} />
-        </DefaultLayout>
+        </SidebarLayout>
       )}
     />
   ) : (
