@@ -42,12 +42,12 @@ const ButtonWrapper = styled(Box)`
 `;
 
 export type Props = {
-  age: number | null;
-  gender: number;
-  firstName: string | null;
-  lastName: string | null;
-  favoritePlay: string | null;
-  favoriteFood: string | null;
+  age: number | null | undefined;
+  gender: number | undefined;
+  firstName: string | null | undefined;
+  lastName: string | null | undefined;
+  favoritePlay: string | null | undefined;
+  favoriteFood: string | null | undefined;
 };
 
 export const KidProfile: React.FC<Props> = (props) => {

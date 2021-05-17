@@ -35,6 +35,11 @@ module Api
         end
       end
 
+      def show
+        kid = Kid.find(params[:id])
+        render json: kid, status: 200
+      end
+
       private
 
       def kid_params

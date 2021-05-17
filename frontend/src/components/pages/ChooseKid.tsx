@@ -16,11 +16,8 @@ export const ChooseKid: React.FC = () => {
   const history = useHistory();
   console.log(5);
 
-  const onClickButton = (kid: Array<Kid>) => {
-    history.push({
-      pathname: '/',
-      state: kid,
-    });
+  const onClickButton = (kidId: number) => {
+    history.push(`/kids/${kidId}`);
   };
   console.log(6);
   const fetchKid = () =>
@@ -65,7 +62,7 @@ export const ChooseKid: React.FC = () => {
                 <KidCard
                   kidName={kid.first_name}
                   age={kid.age}
-                  onClick={() => onClickButton(Array(kid))}
+                  onClick={() => onClickButton(kid.id)}
                 />
               </div>
             );

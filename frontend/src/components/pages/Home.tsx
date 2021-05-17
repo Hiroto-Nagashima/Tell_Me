@@ -3,7 +3,7 @@ import axios from 'axios';
 import firebase from 'firebase';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Kid } from '../../types/api/kid';
 import { Parent } from '../../types/api/parent';
 import { Spinner } from '../atoms/Spinner/Spinner';
@@ -12,9 +12,10 @@ import { KidProfile, ParentProfile } from '../organisms/index';
 export const Home: React.FC = () => {
   const [user] = useAuthState(firebase.auth());
   const [parent, setParent] = useState<Parent | null>(null);
+  const [kid, setKid] = useState<Kid | null>(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { state } = useLocation<Array<Kid>>();
+  const { id } = useParams<{ id: string }>();
 
   const fetchParent = async () =>
     await axios
@@ -24,9 +25,18 @@ export const Home: React.FC = () => {
         },
       })
       .then((res) => {
-        console.log(3);
         setParent(res.data);
         console.log(parent);
+      })
+      .catch((e) => setError(e))
+      .finally(() => setLoading(false));
+
+  const fetchKid = async () =>
+    await axios
+      .get(`http://localhost:5000/api/v1/kids/${id}`)
+      .then((res) => {
+        setKid(res.data);
+        console.log(kid);
       })
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
@@ -34,6 +44,7 @@ export const Home: React.FC = () => {
   useEffect(() => {
     console.log('aaaaaaaaaaaaaaa');
     fetchParent();
+    fetchKid();
   }, []);
 
   return (
@@ -44,18 +55,14 @@ export const Home: React.FC = () => {
         <h1>エラーです</h1>
       ) : (
         <Box display="flex" justifyContent="space-around">
-          {state?.map((kid) => (
-            <div key={kid.id}>
-              <KidProfile
-                age={kid.age}
-                gender={kid.gender}
-                firstName={kid.first_name}
-                lastName={kid.last_name}
-                favoriteFood={kid.favorite_food}
-                favoritePlay={kid.favorite_play}
-              />
-            </div>
-          ))}
+          <KidProfile
+            age={kid?.age}
+            gender={kid?.gender}
+            firstName={kid?.first_name}
+            lastName={kid?.last_name}
+            favoriteFood={kid?.favorite_food}
+            favoritePlay={kid?.favorite_play}
+          />
           <div key={parent?.id}>
             <ParentProfile
               email={parent?.email}
