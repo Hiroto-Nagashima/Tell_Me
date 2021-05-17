@@ -11,7 +11,6 @@ import { RegisterKid } from './components/pages/RegisterKid';
 import PrivateHeaderRoute from './router/PrivateHeaderRoute';
 import { ChooseKid } from './components/pages/ChooseKid';
 import { Notebook } from './components/pages/Notebook';
-import { Favorites } from './components/pages/Favorites';
 import { Announcement } from './components/pages/Announcement';
 import { Login } from './components/pages/Login';
 import { Home } from './components/pages/Home';
@@ -31,13 +30,16 @@ const App: React.FC = () => {
             component={RegisterKid}
           />
           <PrivateSidebarRoute exact path="/kids/:id" component={Home} />
-          <PrivateSidebarRoute exact path="/favorites" component={Favorites} />
           <PrivateSidebarRoute
             exact
-            path="/announcement"
+            path="/kids/:id/notebook"
+            component={Notebook}
+          />
+          <PrivateSidebarRoute
+            exact
+            path="/kids/:id/announcement"
             component={Announcement}
           />
-          <PrivateSidebarRoute exact path="/notebook" component={Notebook} />
           <Route path="*">
             <Page404 />
           </Route>

@@ -9,7 +9,6 @@ import Drawer from '@material-ui/core/Drawer';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -23,7 +22,7 @@ import {
   Theme,
   createStyles,
 } from '@material-ui/core/styles';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import firebase from 'firebase';
 import { DraggableDialog } from '../molecules';
 import { Box } from '@material-ui/core';
@@ -78,6 +77,7 @@ export const SidebarLayout: React.FC<Props> = (props) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [title, setTitle] = useState('Home');
   const [isOpen, setOpen] = useState(false);
+  const { id } = useParams<{ id: string }>();
 
   const onClickOpen = () => {
     setOpen(true);
@@ -90,22 +90,18 @@ export const SidebarLayout: React.FC<Props> = (props) => {
     setMobileOpen(!mobileOpen);
   };
   const onClickHome = () => {
-    history.push('/');
+    history.push(`/kids/${id}`);
     setTitle('Home');
   };
   const onClickNotebook = () => {
-    history.push('/notebook');
+    history.push(`/kids/${id}/notebook`);
     setTitle('Notebook');
   };
   const onClickAnnouncement = () => {
-    history.push('/announcement');
+    history.push(`/kids/${id}/announcement`);
     setTitle('Announcement');
   };
 
-  const onClickFavorites = () => {
-    history.push('/favorites');
-    setTitle('Favorites');
-  };
   const logout = async () => {
     await firebase
       .auth()
@@ -141,14 +137,6 @@ export const SidebarLayout: React.FC<Props> = (props) => {
             <AnnouncementIcon />
           </ListItemIcon>
           <ListItemText primary="Announcement" />
-        </ListItem>
-      </List>
-      <List>
-        <ListItem button onClick={onClickFavorites}>
-          <ListItemIcon>
-            <FavoriteIcon />
-          </ListItemIcon>
-          <ListItemText primary="Favorites" />
         </ListItem>
       </List>
       <Divider />
