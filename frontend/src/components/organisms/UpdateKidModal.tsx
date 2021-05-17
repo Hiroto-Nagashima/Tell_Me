@@ -40,7 +40,7 @@ const Flexbox = styled.div`
   display: flex;
   justify-content: center;
 `;
-type Props = {
+export type Props = {
   isOpen: boolean;
   onClose: () => void;
 };
