@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import * as H from 'history';
-import { useHistory, withRouter } from 'react-router';
+import { useHistory } from 'react-router';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Spinner } from '../atoms/Spinner/Spinner';
@@ -138,4 +138,3 @@ export const RegisterKid: React.FC<Props> = () => {
     </>
   );
 };
-export default withRouter(RegisterKid);

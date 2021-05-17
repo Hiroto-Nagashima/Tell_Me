@@ -48,7 +48,6 @@ type Props = {
 export const UpdateKidModal: React.FC<Props> = (props) => {
   const { isOpen, onClose } = props;
   const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
   const [age, setAge] = useState<number | null>(null);
   const [gender, setGender] = useState(0);

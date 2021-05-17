@@ -25,12 +25,12 @@ export const RadioButtonGroup: React.FC<Props> = (props) => {
         onChange={onChange}
       >
         <FormControlLabel
-          value="true"
+          value={0}
           control={<Radio color="primary" />}
           label={firstLabel}
         />
         <FormControlLabel
-          value="false"
+          value={1}
           control={<Radio color="primary" />}
           label={secondLabel}
         />

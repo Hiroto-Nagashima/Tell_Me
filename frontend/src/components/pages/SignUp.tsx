@@ -2,7 +2,7 @@ import React, { ChangeEvent, useCallback, useState } from 'react';
 import axios from 'axios';
 import firebase from 'firebase';
 import { getAuth } from '../../helper/firebaseAuthHelper';
-import { useHistory, withRouter } from 'react-router';
+import { useHistory } from 'react-router';
 import { SignUpPaper } from '../organisms/SignUpPaper/SignUpPaper';
 import { CustomizedSnackbar } from '../atoms/CustomizedSnackbar/CustomizedSnackbar';
 
@@ -96,7 +96,7 @@ export const SignUp: React.FC = () => {
                   },
                   config,
                 );
-                history.push('/register-kid');
+                history.push('/kids/register');
               } catch (error) {
                 setError(error?.message);
                 setOpen(true);
@@ -136,4 +136,3 @@ export const SignUp: React.FC = () => {
     </>
   );
 };
-export default withRouter(SignUp);

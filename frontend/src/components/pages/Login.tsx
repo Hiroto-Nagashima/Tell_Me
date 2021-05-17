@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import firebase from 'firebase';
 import * as H from 'history';
-import { withRouter } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import { CustomizedSnackbar } from '../atoms/CustomizedSnackbar/CustomizedSnackbar';
 import { LoginPaper } from '../organisms/LoginPaper/LoginPaper';
@@ -49,7 +48,7 @@ export const Login: React.FC<Props> = () => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        history.push('/choose-kid');
+        history.push('/kids');
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -77,4 +76,3 @@ export const Login: React.FC<Props> = () => {
     </BackgroundImage>
   );
 };
-export default withRouter(Login);
