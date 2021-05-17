@@ -70,6 +70,7 @@ yarn-error.log*
 -
 #firebase
 firebaseConfig.json
+carrierwave.rb
 
 # --------------------------backend--------------------------
 # Ignore bundler config.

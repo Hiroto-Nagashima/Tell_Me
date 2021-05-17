@@ -5,4 +5,5 @@ class Kid < ApplicationRecord
   has_many :notebooks
   validates :first_name, :last_name, :age, :gender, :daycare_id, :favorite_food, :favorite_play, presence: true
   validates :age, :daycare_id, numericality: true
+  mount_uploader :image, ImageUploader
 end

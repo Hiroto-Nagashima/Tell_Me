@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { ProfileImage } from '../../atoms/ProfileImage/ProfileImage';
 import { Box } from '@material-ui/core';
+// import Dropzone from 'react-dropzone';
+// import { readFile } from 'fs';
 
 const useStyles = makeStyles({
   root: {
