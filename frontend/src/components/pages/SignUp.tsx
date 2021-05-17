@@ -96,7 +96,7 @@ export const SignUp: React.FC = () => {
                   },
                   config,
                 );
-                history.push('/register-kid');
+                history.push('/kids/register');
               } catch (error) {
                 setError(error?.message);
                 setOpen(true);

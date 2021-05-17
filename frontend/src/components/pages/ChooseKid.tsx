@@ -32,7 +32,7 @@ export const ChooseKid: React.FC = () => {
       })
       .then((res) => {
         if (res.data.message === '子供が未登録です') {
-          history.push('/register-kid');
+          history.push('/kids/register');
         } else {
           setKids(res.data);
           console.log(res);
