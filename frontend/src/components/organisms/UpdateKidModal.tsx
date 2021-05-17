@@ -40,12 +40,16 @@ const Flexbox = styled.div`
   display: flex;
   justify-content: center;
 `;
+type Props = {
+  isOpen: boolean;
+  onClose: () => void;
+};
 
-export const UpdateKidModal = () => {
+export const UpdateKidModal: React.FC<Props> = (props) => {
+  const { isOpen, onClose } = props;
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
+  const [modalStyle] = useState(getModalStyle);
   const [age, setAge] = useState<number | null>(null);
   const [gender, setGender] = useState(0);
   const [firstName, setFirstName] = useState<string | null>('');
@@ -106,22 +110,12 @@ export const UpdateKidModal = () => {
       })
       .catch((e) => console.log(e));
   };
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        Open Modal
-      </button>
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={isOpen}
+        onClose={onClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
