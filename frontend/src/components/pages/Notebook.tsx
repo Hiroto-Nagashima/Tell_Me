@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { Kid } from '../../types/api/kid';
-import { CustomizedSnackbar, DefaultButton, Spinner } from '../atoms';
+import { CustomizedSnackbar, Spinner } from '../atoms';
 import { DatePicker } from '../molecules';
 import { useParams } from 'react-router-dom';
 import { InputOfNotebook } from '../organisms';
@@ -81,11 +81,11 @@ export const Notebook: React.FC = () => {
     return;
   };
 
-  const handleCloseNotebook = () => setIsNotebookOpen(false);
+  // const handleCloseNotebook = () => setIsNotebookOpen(false);
 
   const onClickCheck = () => {
     setLoading(true);
-    console.log(1);
+    console.log(selectedDate);
     axios
       .get(
         `http://localhost:5000/api/v1/kids/${kid!.id}/notebooks/fetchNotebook`,
@@ -185,16 +185,16 @@ export const Notebook: React.FC = () => {
           <div>日付を選択してください</div>
           <DatePicker
             onChangeDate={handleDateChange}
-            onAccept={handleCloseNotebook}
+            onAccept={onClickCheck}
             selectedDate={selectedDate}
           />
-          <DefaultButton
+          {/* <DefaultButton
             variant="contained"
             color="primary"
             label="連絡帳を確認"
             size="medium"
             onClick={onClickCheck}
-          />
+          /> */}
           {isNotebookOpen ? (
             <InputOfNotebook
               memo={memo}
