@@ -27,31 +27,31 @@ const useStyles = makeStyles((theme: Theme) =>
 export type Props = {
   memo: string | null;
   dinner: string | null;
-  hasBathed: boolean;
+  hasBathed: boolean | null;
   breakfast: string | null;
-  selectedDate: Date | string;
+  selectedDate: Date | string | null;
   bodyTemperature: number | string | null;
   onClick: () => void;
   onChangeMemo: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeBath: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeDinner: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeHasBathed: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeBreakfast: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeBodyTemperature: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const InputOfNotebook: React.FC<Props> = (props) => {
   const {
-    selectedDate,
-    bodyTemperature,
-    hasBathed,
     memo,
     dinner,
+    hasBathed,
     breakfast,
+    selectedDate,
+    bodyTemperature,
     onClick,
-    onChangeBath,
     onChangeMemo,
     onChangeDinner,
     onChangeBreakfast,
+    onChangeHasBathed,
     onChangeBodyTemperature,
   } = props;
   const classes = useStyles();
@@ -69,6 +69,7 @@ export const InputOfNotebook: React.FC<Props> = (props) => {
           <SingleLineTextField
             id="体温"
             textName="体温"
+            type="number"
             isFullWidth={false}
             placeholder="36.5"
             value={bodyTemperature}
@@ -81,7 +82,9 @@ export const InputOfNotebook: React.FC<Props> = (props) => {
         <Box textAlign="center" mx={4}>
           <RadioButtonGroup
             value={hasBathed}
-            onChange={onChangeBath}
+            firstValue={true}
+            secondValue={false}
+            onChange={onChangeHasBathed}
             firstLabel="有"
             secondLabel="無"
           />

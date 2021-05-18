@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import styled from 'styled-components';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -7,7 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { ProfileImage } from '../../atoms/ProfileImage/ProfileImage';
+// import { ProfileImage } from '../../atoms/ProfileImage/ProfileImage';
 import { Box } from '@material-ui/core';
 const useStyles = makeStyles({
   root: {
@@ -61,6 +61,7 @@ export const KidProfile: React.FC<Props> = (props) => {
     onClick,
   } = props;
   const classes = useStyles();
+  const fileInput = createRef<HTMLInputElement>();
 
   return (
     <>
@@ -107,6 +108,28 @@ export const KidProfile: React.FC<Props> = (props) => {
               </Typography>
             </Box>
             <Box mt={1}>
+    <Card className={classes.root}>
+      <MyCardActionArea>
+        <CardMedia className={classes.media} title="Contemplative Reptile" />
+        <CardContent>
+          <Box display="flex" justifyContent="center">
+            <ProfileImageBox>
+              <input
+                type="file"
+                name="image"
+                ref={fileInput}
+                accept="image/*"
+              />
+            </ProfileImageBox>
+          </Box>
+          <Box mt={5}>
+            <KidNameArea variant="subtitle1" color="inherit" align="center">
+              {lastName}
+              {firstName}
+            </KidNameArea>
+          </Box>
+          <Box display="flex" justifyContent="center">
+            <Box mr={2}>
               <Typography
                 variant="h6"
                 color="textSecondary"

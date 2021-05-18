@@ -90,6 +90,8 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
         </Box>
         <Box textAlign="center" m={4}>
           <RadioButtonGroup
+            firstValue={0}
+            secondValue={1}
             value={gender}
             onChange={onChangeGender}
             firstLabel="女の子"

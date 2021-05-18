@@ -70,6 +70,8 @@ export const SignUpPaper: React.FC<Props> = (props) => {
         <Box m={4}>
           <RadioButtonGroup
             value={gender}
+            firstValue={0}
+            secondValue={1}
             onChange={onChangeGender}
             firstLabel="母"
             secondLabel="父"
