@@ -29,12 +29,12 @@ export type Props = {
   dinner: string | null;
   hasBathed: boolean;
   breakfast: string | null;
-  selectedDate: Date | string;
+  selectedDate: Date | null;
   bodyTemperature: number | string | null;
   onClick: () => void;
   onChangeMemo: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeBath: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeDinner: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeHasBathed: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeBreakfast: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeBodyTemperature: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
@@ -48,10 +48,10 @@ export const InputOfNotebook: React.FC<Props> = (props) => {
     dinner,
     breakfast,
     onClick,
-    onChangeBath,
     onChangeMemo,
     onChangeDinner,
     onChangeBreakfast,
+    onChangeHasBathed,
     onChangeBodyTemperature,
   } = props;
   const classes = useStyles();
@@ -81,7 +81,7 @@ export const InputOfNotebook: React.FC<Props> = (props) => {
         <Box textAlign="center" mx={4}>
           <RadioButtonGroup
             value={hasBathed}
-            onChange={onChangeBath}
+            onChange={onChangeHasBathed}
             firstLabel="有"
             secondLabel="無"
           />

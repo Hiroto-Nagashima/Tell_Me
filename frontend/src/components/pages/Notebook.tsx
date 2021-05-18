@@ -1,9 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { Kid } from '../../types/api/kid';
 import { DefaultButton, Spinner } from '../atoms';
 import { DatePicker } from '../molecules';
 import { useParams } from 'react-router-dom';
+import { InputOfNotebook } from '../organisms';
+import { Box } from '@material-ui/core';
 
 export const Notebook: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -11,6 +13,42 @@ export const Notebook: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [dinner, setDinner] = useState<string | null>(null);
+  const [breakfast, setBreakfast] = useState<string | null>(null);
+  const [memo, setMemo] = useState<string | null>(null);
+  const [bodyTemperature, setBodyTemperature] =
+    useState<number | string | null>(null);
+  const [hasBathed, setHasBathed] = useState<string | null>(null);
+
+  const handleDinnerChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setDinner(e.target.value);
+  }, []);
+
+  const handleBreakfastChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setBreakfast(e.target.value);
+    },
+    [],
+  );
+
+  const handleMemoChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setMemo(e.target.value);
+  }, []);
+
+  const handleBodyTemperatureChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setBodyTemperature(e.target.value);
+    },
+    [],
+  );
+
+  const handleHasBathedChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setHasBathed((e.target as HTMLInputElement).value);
+    },
+    [],
+  );
+
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
     console.log(date);
@@ -61,6 +99,22 @@ export const Notebook: React.FC = () => {
             size="medium"
             onClick={onClickCheck}
           />
+          <Box>
+            <InputOfNotebook
+              memo={memo}
+              hasBathed={hasBathed}
+              dinner={dinner}
+              breakfast={breakfast}
+              bodyTemperature={bodyTemperature}
+              onChangeMemo={handleMemoChange}
+              onChangeHasBathed={handleHasBathedChange}
+              onChangeBodyTemperature={handleBodyTemperatureChange}
+              onChangeDinner={handleDinnerChange}
+              onChangeBreakfast={handleBreakfastChange}
+              selectedDate={selectedDate}
+              onClick={onClickComfirm}
+            />
+          </Box>
         </>
       )}
     </>
