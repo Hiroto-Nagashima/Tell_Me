@@ -20,15 +20,17 @@ class ExtendedUtils extends DateFnsUtils {
 export type Props = {
   onChangeDate: (date: Date | null) => void;
   selectedDate: string | Date | null;
+  onAccept?: () => void;
 };
 
 export const DatePicker: React.FC<Props> = (props) => {
-  const { onChangeDate, selectedDate } = props;
+  const { onChangeDate, selectedDate, onAccept } = props;
 
   return (
     <MuiPickersUtilsProvider locale={ja} utils={ExtendedUtils}>
       <KeyboardDatePicker
         margin="normal"
+        onAccept={onAccept}
         id="date"
         label="日付選択"
         okLabel="決定"

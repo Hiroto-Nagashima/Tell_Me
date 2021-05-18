@@ -81,6 +81,8 @@ export const Notebook: React.FC = () => {
     return;
   };
 
+  const handleCloseNotebook = () => setIsNotebookOpen(false);
+
   const onClickCheck = () => {
     setLoading(true);
     console.log(1);
@@ -183,6 +185,7 @@ export const Notebook: React.FC = () => {
           <div>日付を選択してください</div>
           <DatePicker
             onChangeDate={handleDateChange}
+            onAccept={handleCloseNotebook}
             selectedDate={selectedDate}
           />
           <DefaultButton
