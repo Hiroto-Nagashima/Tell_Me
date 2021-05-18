@@ -2,8 +2,10 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { DefaultButton, Spinner } from '../atoms';
 import { DatePicker } from '../molecules';
+import { useParams } from 'react-router-dom';
 
 export const Notebook: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
@@ -15,7 +17,7 @@ export const Notebook: React.FC = () => {
   const onClickCheck = () => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/api/v1/kids/#{kid.id}/notebook`, {
+      .get(`http://localhost:5000/api/v1/kids/${kid.id}/notebook`, {
         params: {
           date: selectedDate,
         },
