@@ -27,7 +27,7 @@ export const Notebook: React.FC = () => {
   const onClickCheck = () => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/api/v1/kids/${kid!.id}/notebook`, {
+      .get(`http://localhost:5000/api/v1/kids/${kid!.id}/notebooks`, {
         params: {
           date: selectedDate,
         },

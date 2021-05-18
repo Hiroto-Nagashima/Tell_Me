@@ -35,31 +35,15 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
     render json: notebooks
   end
 
-  def findByDate
+  def fetchNotebook
     target_date = params[:target_date]
     new_date = target_date.slice(0..9)
-    notebook = CommunicationNotebook.where("date like?", "#{new_date}%")
+    notebook = Notebook.where("date like?", "#{new_date}%")
     if notebook.present?
       render json: notebook
     else
       @notebook= CommunicationNotebook.new
-      @notebook.mood = 1
       render json: @notebook
-    end
-  end
-
-  def doesExist
-    target_date = params[:target_date]
-    new_date = target_date.slice(0..9)
-    notebook = CommunicationNotebook.where("date like?", "#{new_date}%")
-    if notebook.present?
-      render json: {
-        status: "already exist"
-      }
-    else
-      render json: {
-        status: "no data"
-      }
     end
   end
 
