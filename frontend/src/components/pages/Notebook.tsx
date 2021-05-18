@@ -5,13 +5,13 @@ import { DefaultButton, Spinner } from '../atoms';
 import { DatePicker } from '../molecules';
 import { useParams } from 'react-router-dom';
 import { InputOfNotebook } from '../organisms';
-import { Box } from '@material-ui/core';
 import format from 'date-fns/format';
 
 export const Notebook: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [notebookId, setNotebookID] = useState<number | null>(null);
   const [isUpdate, setIsUpdate] = useState(false);
+  const [isNotebookOpen, setIsNotebookOpen] = useState(false);
   const [kid, setKid] = useState<Kid | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -94,6 +94,7 @@ export const Notebook: React.FC = () => {
           setBodyTemperature(res.data.body_temperature);
           setHasBathed(res.data.has_bathed);
         }
+        setIsNotebookOpen(true);
       })
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
@@ -159,7 +160,7 @@ export const Notebook: React.FC = () => {
             size="medium"
             onClick={onClickCheck}
           />
-          <Box>
+          {isNotebookOpen ? (
             <InputOfNotebook
               memo={memo}
               hasBathed={hasBathed}
@@ -174,7 +175,9 @@ export const Notebook: React.FC = () => {
               selectedDate={newDate}
               onClick={handleClickRegister}
             />
-          </Box>
+          ) : (
+            <div></div>
+          )}
         </>
       )}
     </>
