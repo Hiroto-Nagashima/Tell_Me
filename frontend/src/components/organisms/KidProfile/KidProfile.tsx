@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import styled from 'styled-components';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -7,7 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { ProfileImage } from '../../atoms/ProfileImage/ProfileImage';
+// import { ProfileImage } from '../../atoms/ProfileImage/ProfileImage';
 import { Box } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -54,6 +54,7 @@ export const KidProfile: React.FC<Props> = (props) => {
   const { age, firstName, lastName, gender, favoriteFood, favoritePlay } =
     props;
   const classes = useStyles();
+  const fileInput = createRef<HTMLInputElement>();
 
   return (
     <Card className={classes.root}>
@@ -62,7 +63,12 @@ export const KidProfile: React.FC<Props> = (props) => {
         <CardContent>
           <Box display="flex" justifyContent="center">
             <ProfileImageBox>
-              <ProfileImage />
+              <input
+                type="file"
+                name="image"
+                ref={fileInput}
+                accept="image/*"
+              />
             </ProfileImageBox>
           </Box>
           <Box mt={5}>
