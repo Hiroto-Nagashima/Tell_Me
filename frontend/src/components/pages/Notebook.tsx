@@ -75,7 +75,13 @@ export const Notebook: React.FC = () => {
           },
         },
       )
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        setDinner(res.data.dinner);
+        setBreakfast(res.data.breakfast);
+        setMemo(res.data.memo);
+        setBodyTemperature(res.data.body_temperature);
+        setHasBathed(res.data.has_bathed);
+      })
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
   };
