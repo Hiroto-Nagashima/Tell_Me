@@ -10,5 +10,4 @@ const Template: Story<Props> = (args) => <InputOfNotebook {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  selectedDate:"2021-6-15"
 };

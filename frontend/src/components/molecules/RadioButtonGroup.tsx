@@ -6,13 +6,16 @@ import FormControl from '@material-ui/core/FormControl';
 
 type Props = {
   value: boolean | number | null;
+  firstValue: boolean | number | null;
+  secondValue: boolean | number | null;
   firstLabel: string;
   secondLabel: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const RadioButtonGroup: React.FC<Props> = (props) => {
-  const { value, firstLabel, secondLabel, onChange } = props;
+  const { value, firstLabel, secondLabel, firstValue, secondValue, onChange } =
+    props;
 
   return (
     <FormControl component="fieldset">
@@ -25,12 +28,12 @@ export const RadioButtonGroup: React.FC<Props> = (props) => {
         onChange={onChange}
       >
         <FormControlLabel
-          value={0}
+          value={firstValue}
           control={<Radio color="primary" />}
           label={firstLabel}
         />
         <FormControlLabel
-          value={1}
+          value={secondValue}
           control={<Radio color="primary" />}
           label={secondLabel}
         />

@@ -6,6 +6,7 @@ import { DatePicker } from '../molecules';
 import { useParams } from 'react-router-dom';
 import { InputOfNotebook } from '../organisms';
 import { Box } from '@material-ui/core';
+import format from 'date-fns/format';
 
 export const Notebook: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -18,7 +19,7 @@ export const Notebook: React.FC = () => {
   const [memo, setMemo] = useState<string | null>(null);
   const [bodyTemperature, setBodyTemperature] =
     useState<number | string | null>(null);
-  const [hasBathed, setHasBathed] = useState<string | null>(null);
+  const [hasBathed, setHasBathed] = useState<boolean | null>(null);
 
   const handleDinnerChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setDinner(e.target.value);
@@ -42,17 +43,17 @@ export const Notebook: React.FC = () => {
     [],
   );
 
-  const handleHasBathedChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      setHasBathed((e.target as HTMLInputElement).value);
-    },
-    [],
-  );
+  const handleHasBathedChange = useCallback(() => {
+    setHasBathed(!hasBathed);
+  }, []);
 
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
     console.log(date);
   };
+
+  const newDate = format(selectedDate!, 'yyyy/MM/dd');
+
   const fetchKid = async () =>
     await axios
       .get(`http://localhost:5000/api/v1/kids/${id}`)
@@ -64,16 +65,22 @@ export const Notebook: React.FC = () => {
 
   const onClickCheck = () => {
     setLoading(true);
+    console.log(1);
     axios
-      .get(`http://localhost:5000/api/v1/kids/${kid!.id}/notebooks`, {
-        params: {
-          date: selectedDate,
+      .get(
+        `http://localhost:5000/api/v1/kids/${kid!.id}/notebooks/fetchNotebook`,
+        {
+          params: {
+            date: selectedDate,
+          },
         },
-      })
+      )
       .then((res) => console.log(res.data))
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
   };
+
+  const onClickConfirm = () => console.log(newDate);
 
   useEffect(() => {
     fetchKid();
@@ -111,8 +118,8 @@ export const Notebook: React.FC = () => {
               onChangeBodyTemperature={handleBodyTemperatureChange}
               onChangeDinner={handleDinnerChange}
               onChangeBreakfast={handleBreakfastChange}
-              selectedDate={selectedDate}
-              onClick={onClickComfirm}
+              selectedDate={newDate}
+              onClick={onClickConfirm}
             />
           </Box>
         </>

@@ -27,9 +27,9 @@ const useStyles = makeStyles((theme: Theme) =>
 export type Props = {
   memo: string | null;
   dinner: string | null;
-  hasBathed: boolean;
+  hasBathed: boolean | null;
   breakfast: string | null;
-  selectedDate: Date | null;
+  selectedDate: Date | string | null;
   bodyTemperature: number | string | null;
   onClick: () => void;
   onChangeMemo: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -41,12 +41,12 @@ export type Props = {
 
 export const InputOfNotebook: React.FC<Props> = (props) => {
   const {
-    selectedDate,
-    bodyTemperature,
-    hasBathed,
     memo,
     dinner,
+    hasBathed,
     breakfast,
+    selectedDate,
+    bodyTemperature,
     onClick,
     onChangeMemo,
     onChangeDinner,
@@ -81,6 +81,8 @@ export const InputOfNotebook: React.FC<Props> = (props) => {
         <Box textAlign="center" mx={4}>
           <RadioButtonGroup
             value={hasBathed}
+            firstValue={true}
+            secondValue={false}
             onChange={onChangeHasBathed}
             firstLabel="有"
             secondLabel="無"
