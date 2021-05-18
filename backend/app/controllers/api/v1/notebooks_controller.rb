@@ -36,13 +36,14 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
   end
 
   def fetchNotebook
-    target_date = params[:target_date]
-    new_date = target_date.slice(0..9)
-    notebook = Notebook.where("date like?", "#{new_date}%")
+    kid = Kid.find(params[:id])
+    date = params[:date]
+    new_date = date.slice(0..9)
+    notebook = kid.notebooks.find_by(created_at: "#{new_date}%")
     if notebook.present?
       render json: notebook
     else
-      @notebook= CommunicationNotebook.new
+      @notebook= kid.notebooks.build
       render json: @notebook
     end
   end
