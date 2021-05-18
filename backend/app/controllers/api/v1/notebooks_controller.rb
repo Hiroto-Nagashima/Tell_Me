@@ -6,7 +6,8 @@ module Api
         @notebook = @kid.notebooks.build(notebook_params)
         if @notebook.save!
           render json: {
-            status: "ok"
+            status: "ok",
+            message: "登録が完了しました"
           }
         else
           render json: {
@@ -21,12 +22,13 @@ module Api
         notebook = kid.notebooks.find_by(id: params[:id])
         if notebook.update(notebook_params)
           render json: {
-            status: "ok"
+            status: "ok",
+            message: "更新が完了しました"
           }
         else
           render json: {
             status: 400,
-            message: "未入力箇所があります"
+            message: "更新に失敗しました"
           }
         end
       end

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { Kid } from '../../types/api/kid';
-import { DefaultButton, Spinner } from '../atoms';
+import { CustomizedSnackbar, DefaultButton, Spinner } from '../atoms';
 import { DatePicker } from '../molecules';
 import { useParams } from 'react-router-dom';
 import { InputOfNotebook } from '../organisms';
@@ -11,7 +11,11 @@ export const Notebook: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [notebookId, setNotebookID] = useState<number | null>(null);
   const [isUpdate, setIsUpdate] = useState(false);
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [isNotebookOpen, setIsNotebookOpen] = useState(false);
+  const [message, setMassage] = useState('');
+  const [severity, setSeverity] =
+    useState<'error' | 'warning' | 'info' | 'success'>('error');
   const [kid, setKid] = useState<Kid | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -64,6 +68,18 @@ export const Notebook: React.FC = () => {
       })
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
+
+  const handleSnackbarClose = (
+    event?: React.SyntheticEvent,
+    reason?: string,
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setIsSnackbarOpen(false);
+
+    return;
+  };
 
   const onClickCheck = () => {
     setLoading(true);
@@ -118,8 +134,16 @@ export const Notebook: React.FC = () => {
             },
           },
         )
-        .then((res) => console.log(res))
-        .catch((e) => console.log(e));
+        .then((res) => {
+          setSeverity('success');
+          setMassage(res.data.message);
+          setIsSnackbarOpen(true);
+        })
+        .catch((e) => {
+          setSeverity('error');
+          setMassage(e.data.message);
+          setIsSnackbarOpen(true);
+        });
     } else
       axios
         .post(`http://localhost:3000/api/v1/kids/${kid!.id}/notebooks`, {
@@ -132,8 +156,16 @@ export const Notebook: React.FC = () => {
             date: selectedDate,
           },
         })
-        .then((res) => console.log(res))
-        .catch((e) => console.log(e));
+        .then((res) => {
+          setSeverity('success');
+          setMassage(res.data.message);
+          setIsSnackbarOpen(true);
+        })
+        .catch((e) => {
+          setSeverity('error');
+          setMassage(e.data.message);
+          setIsSnackbarOpen(true);
+        });
   };
 
   useEffect(() => {
@@ -178,6 +210,13 @@ export const Notebook: React.FC = () => {
           ) : (
             <div></div>
           )}
+          <CustomizedSnackbar
+            open={isSnackbarOpen}
+            onClose={handleSnackbarClose}
+            severity={severity}
+          >
+            {message}
+          </CustomizedSnackbar>
         </>
       )}
     </>
