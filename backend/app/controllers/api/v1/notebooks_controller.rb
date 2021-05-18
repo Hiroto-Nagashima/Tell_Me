@@ -53,7 +53,7 @@ module Api
       private
 
       def notebook_params
-        params.require(:notebook).permit(:body_temperature, :has_bath, :breakfast, :dinner, :memo, :date)
+        params.require(:notebook).permit(:body_temperature, :has_bathed, :breakfast, :dinner, :memo, :date)
       end
     end
   end

@@ -10,6 +10,8 @@ import format from 'date-fns/format';
 
 export const Notebook: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const [notebookId, setNotebookID] = useState<number | null>(null);
+  const [isUpdate, setIsUpdate] = useState(false);
   const [kid, setKid] = useState<Kid | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -76,17 +78,62 @@ export const Notebook: React.FC = () => {
         },
       )
       .then((res) => {
-        setDinner(res.data.dinner);
-        setBreakfast(res.data.breakfast);
-        setMemo(res.data.memo);
-        setBodyTemperature(res.data.body_temperature);
-        setHasBathed(res.data.has_bathed);
+        if (res.data.dinner == null) {
+          setIsUpdate(false);
+          setDinner(res.data.dinner);
+          setBreakfast(res.data.breakfast);
+          setMemo(res.data.memo);
+          setBodyTemperature(res.data.body_temperature);
+          setHasBathed(res.data.has_bathed);
+        } else {
+          setIsUpdate(true);
+          setNotebookID(res.data.id);
+          setDinner(res.data.dinner);
+          setBreakfast(res.data.breakfast);
+          setMemo(res.data.memo);
+          setBodyTemperature(res.data.body_temperature);
+          setHasBathed(res.data.has_bathed);
+        }
       })
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
   };
 
-  const onClickConfirm = () => console.log(newDate);
+  const handleClickRegister = () => {
+    if (isUpdate) {
+      axios
+        .put(
+          `http://localhost:3000/api/v1/kids/${
+            kid!.id
+          }/notebooks/${notebookId}`,
+          {
+            notebook: {
+              body_temperature: bodyTemperature,
+              has_bathed: hasBathed,
+              breakfast: breakfast,
+              dinner: dinner,
+              memo: memo,
+              date: selectedDate,
+            },
+          },
+        )
+        .then((res) => console.log(res))
+        .catch((e) => console.log(e));
+    } else
+      axios
+        .post(`http://localhost:3000/api/v1/kids/${kid!.id}/notebooks`, {
+          notebook: {
+            body_temperature: bodyTemperature,
+            has_bathed: hasBathed,
+            breakfast: breakfast,
+            dinner: dinner,
+            memo: memo,
+            date: selectedDate,
+          },
+        })
+        .then((res) => console.log(res))
+        .catch((e) => console.log(e));
+  };
 
   useEffect(() => {
     fetchKid();
@@ -125,7 +172,7 @@ export const Notebook: React.FC = () => {
               onChangeDinner={handleDinnerChange}
               onChangeBreakfast={handleBreakfastChange}
               selectedDate={newDate}
-              onClick={onClickConfirm}
+              onClick={handleClickRegister}
             />
           </Box>
         </>
