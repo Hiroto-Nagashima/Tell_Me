@@ -43,7 +43,7 @@ module Api
         kid = Kid.find(params[:kid_id])
         date = params[:date]
         new_date = date.slice(0..9)
-        notebook = kid.notebooks.find_by(created_at: "#{new_date}%")
+        notebook = kid.notebooks.find_by(date: new_date)
         if notebook.present?
           render json: notebook
         else
