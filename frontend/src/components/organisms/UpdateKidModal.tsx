@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, createRef, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
@@ -103,6 +103,7 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
   //     console.log(err);
   //   }
   // };
+  const fileInput = createRef<HTMLInputElement>();
 
   return (
     <div>
@@ -117,7 +118,7 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
             1.写真をアップロードしてください
           </Box>
           <Box textAlign="center" mx={4}>
-            {/* <input type="file" onChange={handleFileChange} /> */}
+            <input type="file" name="image" ref={fileInput} accept="image/*" />
           </Box>
           <Box component="h3" px={2} my={5} textAlign="center">
             2.登録済み情報を更新してください
@@ -125,6 +126,8 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
           <Box textAlign="center" m={4}>
             <RadioButtonGroup
               value={gender}
+              firstValue={0}
+              secondValue={1}
               onChange={onChangeGender}
               firstLabel="女の子"
               secondLabel="男の子"
