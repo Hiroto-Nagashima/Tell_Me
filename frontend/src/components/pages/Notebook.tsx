@@ -120,7 +120,7 @@ export const Notebook: React.FC = () => {
     if (isUpdate) {
       axios
         .put(
-          `http://localhost:3000/api/v1/kids/${
+          `http://localhost:5000/api/v1/kids/${
             kid!.id
           }/notebooks/${notebookId}`,
           {
@@ -146,7 +146,7 @@ export const Notebook: React.FC = () => {
         });
     } else
       axios
-        .post(`http://localhost:3000/api/v1/kids/${kid!.id}/notebooks`, {
+        .post(`http://localhost:5000/api/v1/kids/${kid!.id}/notebooks`, {
           notebook: {
             body_temperature: bodyTemperature,
             has_bathed: hasBathed,
@@ -161,9 +161,9 @@ export const Notebook: React.FC = () => {
           setMassage(res.data.message);
           setIsSnackbarOpen(true);
         })
-        .catch((e) => {
+        .catch(() => {
           setSeverity('error');
-          setMassage(e.data.message);
+          setMassage('登録に失敗しました');
           setIsSnackbarOpen(true);
         });
   };
