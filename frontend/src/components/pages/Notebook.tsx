@@ -1,11 +1,13 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Kid } from '../../types/api/kid';
 import { DefaultButton, Spinner } from '../atoms';
 import { DatePicker } from '../molecules';
 import { useParams } from 'react-router-dom';
 
 export const Notebook: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const [kid, setKid] = useState<Kid | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
@@ -13,11 +15,19 @@ export const Notebook: React.FC = () => {
     setSelectedDate(date);
     console.log(date);
   };
+  const fetchKid = async () =>
+    await axios
+      .get(`http://localhost:5000/api/v1/kids/${id}`)
+      .then((res) => {
+        setKid(res.data);
+      })
+      .catch((e) => setError(e))
+      .finally(() => setLoading(false));
 
   const onClickCheck = () => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/api/v1/kids/${kid.id}/notebook`, {
+      .get(`http://localhost:5000/api/v1/kids/${kid!.id}/notebook`, {
         params: {
           date: selectedDate,
         },
@@ -26,6 +36,10 @@ export const Notebook: React.FC = () => {
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
   };
+
+  useEffect(() => {
+    fetchKid();
+  }, []);
 
   return (
     <>
