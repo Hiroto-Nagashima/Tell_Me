@@ -13739,6 +13739,16 @@ react-helmet-async@^1.0.7:
     react-fast-compare "^3.2.0"
     shallowequal "^1.1.0"
 
+react-image-file-resizer@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/react-image-file-resizer/-/react-image-file-resizer-0.4.4.tgz#07d47d795e07a8a9850d480765c618686a4af4dd"
+  integrity sha512-qSZ5VJwWDkFan8IKCxDZqkAlQ6OW+mIDQLA9Y8T6/mLNUbHfnl3kjTpUWACeuh7cyPDXr1i6/GjlinyI75rBmQ==
+
+react-image-resizer@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-image-resizer/-/react-image-resizer-1.3.0.tgz#99e25bb94ab2fe888c26538c5d764abd2b4e2a93"
+  integrity sha512-JZwNWumImYwPNeaf+MV5wEtUvyPK8crjLYo7AVf3/3LQ92oPwi/Clxmg76f14EQm73cbwxKgXTlJbFOSRGQGtA==
+
 react-inspector@^5.1.0:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/react-inspector/-/react-inspector-5.1.1.tgz#58476c78fde05d5055646ed8ec02030af42953c8"

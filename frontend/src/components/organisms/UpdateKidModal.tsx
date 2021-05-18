@@ -1,13 +1,11 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { SingleLineTextField, FlexibleButton } from '../atoms/index';
 import { RadioButtonGroup } from '../molecules/RadioButtonGroup';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import axios from 'axios';
-import { getAuth } from '../../helper/firebaseAuthHelper';
+// import Resizer from 'react-image-file-resizer';
 
 const rand = () => {
   return Math.round(Math.random() * 20) - 10;
@@ -43,72 +41,68 @@ const Flexbox = styled.div`
 export type Props = {
   isOpen: boolean;
   onClose: () => void;
+  age: number | null;
+  gender: number;
+  firstName: string | null;
+  lastName: string | null;
+  favoriteFood: string | null;
+  favoritePlay: string | null;
+  onChangeAge: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeFirstName: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeLastName: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeGender: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeFavoriteFood: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeFavoritePlay: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: () => void;
 };
 
 export const UpdateKidModal: React.FC<Props> = (props) => {
-  const { isOpen, onClose } = props;
+  const {
+    isOpen,
+    onClose,
+    age,
+    gender,
+    firstName,
+    lastName,
+    favoriteFood,
+    favoritePlay,
+    onChangeAge,
+    onChangeGender,
+    onChangeFirstName,
+    onChangeLastName,
+    onChangeFavoriteFood,
+    onChangeFavoritePlay,
+    onSubmit,
+  } = props;
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
-  const [age, setAge] = useState<number | null>(null);
-  const [gender, setGender] = useState(0);
-  const [firstName, setFirstName] = useState<string | null>('');
-  const [lastName, setLastName] = useState<string | null>('');
-  const [favoriteFood, setFavoriteFood] = useState<string | null>('');
-  const [favoritePlay, setFavoritePlay] = useState<string | null>('');
-  const [parent] = useAuthState(getAuth());
+  // const [image, setImage] = useState('');
 
-  const onChangeAge = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
-
-    return setAge(value);
-  }, []);
-
-  const onChangeFirstName = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    return setFirstName(e.target.value);
-  }, []);
-
-  const onChangeLastName = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    return setLastName(e.target.value);
-  }, []);
-
-  const onChangeGender = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
-
-    return setGender(value);
-  }, []);
-
-  const onChangeFavoriteFood = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      return setFavoriteFood(e.target.value);
-    },
-    [],
-  );
-  const onChangeFavoritePlay = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      return setFavoritePlay(e.target.value);
-    },
-    [],
-  );
-
-  const handleSubmit = () => {
-    axios
-      .post(`http://localhost:5000/api/v1/kids`, {
-        params: {
-          age: age,
-          first_name: firstName,
-          last_name: lastName,
-          gender: gender,
-          favorite_food: favoriteFood,
-          favorite_play: favoritePlay,
-          uid: parent!.uid,
-        },
-      })
-      .then((res) => {
-        // history.push({ pathname: '/', state: res.data.kid });
-        console.log(res.data.kid);
-      })
-      .catch((e) => console.log(e));
-  };
+  // const resizeFile = (file: File) =>
+  //   new Promise((resolve) => {
+  //     Resizer.imageFileResizer(
+  //       file,
+  //       300,
+  //       300,
+  //       'JPEG',
+  //       100,
+  //       0,
+  //       (uri) => {
+  //         resolve(uri);
+  //       },
+  //       'base64',
+  //     );
+  //   });
+  // const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
+  //   try {
+  //     const file = event.target.files![0];
+  //     const image = await resizeFile(file);
+  //     setImage(image);
+  //     console.log(image);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   return (
     <div>
@@ -123,7 +117,7 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
             1.写真をアップロードしてください
           </Box>
           <Box textAlign="center" mx={4}>
-            <input type="file" />
+            {/* <input type="file" onChange={handleFileChange} /> */}
           </Box>
           <Box component="h3" px={2} my={5} textAlign="center">
             2.登録済み情報を更新してください
@@ -190,7 +184,7 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
           </Box>
           <Box textAlign="center" m={5}>
             <FlexibleButton
-              onClick={handleSubmit}
+              onClick={onSubmit}
               variant="contained"
               color="primary"
               label="登録"
