@@ -22,6 +22,13 @@ export const SignUp: React.FC = () => {
 
   const history = useHistory();
 
+  const [role, setRole] = useState<number | null>(null);
+
+  const onChangeRole = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const targetValue = Number(e.target.value);
+    setRole(targetValue);
+  };
+
   const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     return setEmail(e.target.value);
   }, []);
@@ -117,12 +124,14 @@ export const SignUp: React.FC = () => {
     <>
       <SignUpPaper
         email={email}
+        role={role}
         password={password}
         firstName={firstName}
         lastName={lastName}
         gender={gender}
         telephoneNumber={telephoneNumber}
         onClick={handleSubmit}
+        onChangeRole={onChangeRole}
         onChangeEmail={onChangeEmail}
         onChangePassword={onChangePassword}
         onChangeFirstName={onChangeFirstName}

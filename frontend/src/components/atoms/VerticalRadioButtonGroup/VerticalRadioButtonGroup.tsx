@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -6,17 +6,12 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
 export type Props = {
-  value: number | null;
-  onChange: () => void;
+  role: number | null;
+  onChangeRole: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const VerticalRadioButtonsGroup: React.FC = () => {
-  const [role, setRole] = useState<number | null>(null);
-
-  const handleRoleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const targetValue = Number(e.target.value);
-    setRole(targetValue);
-  };
+export const VerticalRadioButtonsGroup: React.FC<Props> = (props) => {
+  const { role, onChangeRole } = props;
 
   return (
     <FormControl component="fieldset">
@@ -24,8 +19,8 @@ export const VerticalRadioButtonsGroup: React.FC = () => {
       <RadioGroup
         aria-label="gender"
         name="gender1"
-        value={value}
-        onChange={onChange}
+        value={role}
+        onChange={onChangeRole}
       >
         <FormControlLabel
           value={0}

@@ -5,6 +5,7 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { SingleLineTextField, FlexibleButton } from '../../atoms/index';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup';
+import { VerticalRadioButtonsGroup } from '../../atoms/VerticalRadioButtonGroup/VerticalRadioButtonGroup';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,6 +26,7 @@ const Flexbox = styled.div`
 `;
 
 export type Props = {
+  role: number | null;
   email: string;
   password: string;
   firstName: string;
@@ -32,6 +34,7 @@ export type Props = {
   gender: number;
   telephoneNumber: string;
   onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeRole: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeFirstName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeLastName: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -41,6 +44,7 @@ export type Props = {
 };
 export const SignUpPaper: React.FC<Props> = (props) => {
   const {
+    role,
     email,
     password,
     lastName,
@@ -48,6 +52,7 @@ export const SignUpPaper: React.FC<Props> = (props) => {
     gender,
     telephoneNumber,
     onChangeEmail,
+    onChangeRole,
     onChangePassword,
     onChangeFirstName,
     onChangeLastName,
@@ -130,6 +135,7 @@ export const SignUpPaper: React.FC<Props> = (props) => {
             onChange={onChangePassword}
           />
         </Box>
+        <VerticalRadioButtonsGroup role={role} onChangeRole={onChangeRole} />
         <Box textAlign="center" mx={2}>
           <FlexibleButton
             onClick={onClick}
