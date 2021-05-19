@@ -6,12 +6,6 @@ import { red } from '@material-ui/core/colors';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-// import clsx from 'clsx';
-// import CardActions from '@material-ui/core/CardActions';
-// import Collapse from '@material-ui/core/Collapse';
-// import IconButton from '@material-ui/core/IconButton';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     media: {
       height: 0,
-      paddingTop: '56.25%', // 16:9
+      paddingTop: '56.25%',
     },
     expand: {
       transform: 'rotate(0deg)',
@@ -49,11 +43,6 @@ export type Props = {
 export const Post: React.FC<Props> = (props) => {
   const { title, content, created_at } = props;
   const classes = useStyles();
-  // const [expanded, setExpanded] = React.useState(false);
-
-  // const handleExpandClick = () => {
-  //   setExpanded(!expanded);
-  // };
 
   return (
     <Card className={classes.root}>
@@ -72,26 +61,6 @@ export const Post: React.FC<Props> = (props) => {
           {content}
         </Typography>
       </CardContent>
-      {/* <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: IsExpanded,
-          })}
-          onClick={onClickExpand}
-          aria-expanded={IsExpanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={IsExpanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>コメント</Typography>
-        </CardContent>
-      </Collapse> */}
     </Card>
   );
 };
