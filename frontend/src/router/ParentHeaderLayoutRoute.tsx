@@ -11,7 +11,7 @@ type Props = {
   path: string;
 };
 
-export const PrivateHeaderRoute: React.FC<Props> = ({
+export const ParentHeaderLayoutRoute: React.FC<Props> = ({
   component: Component,
   ...rest
 }) => {

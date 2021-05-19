@@ -8,7 +8,7 @@ import GlobalStyle from './theme/globalStyle';
 import HeaderLayoutRoute from './router/HeaderLayoutRoute';
 import { ParentRoute } from './router/ParentRoute';
 import { RegisterKid } from './components/pages/RegisterKid';
-import { PrivateHeaderRoute } from './router/PrivateHeaderRoute';
+import { ParentHeaderLayoutRoute } from './router/ParentHeaderLayoutRoute';
 import { ChooseKid } from './components/pages/ChooseKid';
 import { Notebook } from './components/pages/Notebook';
 import { Announcement } from './components/pages/Announcement';
@@ -23,8 +23,8 @@ const App: React.FC = () => {
         <Switch>
           <HeaderLayoutRoute exact path="/" component={Login} />
           <HeaderLayoutRoute exact path="/signup" component={SignUp} />
-          <PrivateHeaderRoute exact path="/kids" component={ChooseKid} />
-          <PrivateHeaderRoute
+          <ParentHeaderLayoutRoute exact path="/kids" component={ChooseKid} />
+          <ParentHeaderLayoutRoute
             exact
             path="/kids/register"
             component={RegisterKid}
