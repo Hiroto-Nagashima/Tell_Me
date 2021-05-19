@@ -6,7 +6,7 @@ import { SignUp } from './components/pages/SignUp';
 import { Page404 } from './components/pages/Page404';
 import GlobalStyle from './theme/globalStyle';
 import HeaderLayoutRoute from './router/HeaderLayoutRoute';
-import { PrivateSidebarRoute } from './router/PrivateSidebarRoute';
+import { ParentRoute } from './router/ParentRoute';
 import { RegisterKid } from './components/pages/RegisterKid';
 import { PrivateHeaderRoute } from './router/PrivateHeaderRoute';
 import { ChooseKid } from './components/pages/ChooseKid';
@@ -29,13 +29,9 @@ const App: React.FC = () => {
             path="/kids/register"
             component={RegisterKid}
           />
-          <PrivateSidebarRoute exact path="/kids/:id" component={Home} />
-          <PrivateSidebarRoute
-            exact
-            path="/kids/:id/notebook"
-            component={Notebook}
-          />
-          <PrivateSidebarRoute
+          <ParentRoute exact path="/kids/:id" component={Home} />
+          <ParentRoute exact path="/kids/:id/notebook" component={Notebook} />
+          <ParentRoute
             exact
             path="/kids/:id/announcement"
             component={Announcement}
