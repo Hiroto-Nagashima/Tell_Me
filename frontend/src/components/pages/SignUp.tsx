@@ -10,11 +10,12 @@ export const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [open, setOpen] = useState(false);
-  const [gender, setGender] = useState(0);
+  const [gender, setGender] = useState<number | null>(null);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [telephoneNumber, setTelephoneNumber] = useState('');
   const [password, setPassword] = useState('');
+  const [daycareId, setDaycareId] = useState<number | null>(null);
 
   const telephoneNumberRegex = /^(0{1}\d{10,11})$/;
   const firstNameError = '';
@@ -49,6 +50,12 @@ export const SignUp: React.FC = () => {
     const value = Number(e.target.value);
 
     return setGender(value);
+  }, []);
+
+  const onChangeDaycareId = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const value = Number(e.target.value);
+
+    return setDaycareId(value);
   }, []);
 
   const onChangeTelephoneNumber = useCallback(
@@ -125,12 +132,14 @@ export const SignUp: React.FC = () => {
       <SignUpPaper
         email={email}
         role={role}
+        daycareId={daycareId}
         password={password}
         firstName={firstName}
         lastName={lastName}
         gender={gender}
         telephoneNumber={telephoneNumber}
         onClick={handleSubmit}
+        onChangeDaycareId={onChangeDaycareId}
         onChangeRole={onChangeRole}
         onChangeEmail={onChangeEmail}
         onChangePassword={onChangePassword}

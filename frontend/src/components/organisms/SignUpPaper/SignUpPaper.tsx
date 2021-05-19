@@ -4,8 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { SingleLineTextField, FlexibleButton } from '../../atoms/index';
-import { RadioButtonGroup } from '../../molecules/RadioButtonGroup';
-import { VerticalRadioButtonsGroup } from '../../atoms/VerticalRadioButtonGroup/VerticalRadioButtonGroup';
+import { ChooseRole } from '../../molecules/ChooseRole/ChooseRole';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       '& > *': {
         margin: theme.spacing(1),
         width: theme.spacing(50),
-        height: theme.spacing(90),
+        height: theme.spacing(100),
       },
     },
   }),
@@ -31,10 +30,12 @@ export type Props = {
   password: string;
   firstName: string;
   lastName: string;
-  gender: number;
+  gender: number | null;
+  daycareId: number | null;
   telephoneNumber: string;
   onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeRole: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeDaycareId: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeFirstName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeLastName: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -47,12 +48,14 @@ export const SignUpPaper: React.FC<Props> = (props) => {
     role,
     email,
     password,
+    daycareId,
     lastName,
     firstName,
     gender,
     telephoneNumber,
     onChangeEmail,
     onChangeRole,
+    onChangeDaycareId,
     onChangePassword,
     onChangeFirstName,
     onChangeLastName,
@@ -71,16 +74,6 @@ export const SignUpPaper: React.FC<Props> = (props) => {
         </Box>
         <Box component="p" pt={2} textAlign="center">
           以下のフォームを入力してください
-        </Box>
-        <Box m={4}>
-          <RadioButtonGroup
-            value={gender}
-            firstValue={0}
-            secondValue={1}
-            onChange={onChangeGender}
-            firstLabel="母"
-            secondLabel="父"
-          />
         </Box>
         <Flexbox>
           <Box textAlign="center" ml={4} mr={1}>
@@ -135,7 +128,16 @@ export const SignUpPaper: React.FC<Props> = (props) => {
             onChange={onChangePassword}
           />
         </Box>
-        <VerticalRadioButtonsGroup role={role} onChangeRole={onChangeRole} />
+        <Box m={4}>
+          <ChooseRole
+            role={role}
+            gender={gender}
+            daycareId={daycareId}
+            onChangeGender={onChangeGender}
+            onChangeDaycareId={onChangeDaycareId}
+            onChangeRole={onChangeRole}
+          />
+        </Box>
         <Box textAlign="center" mx={2}>
           <FlexibleButton
             onClick={onClick}

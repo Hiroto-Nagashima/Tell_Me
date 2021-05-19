@@ -3,9 +3,9 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import { RadioButtonGroup } from '../RadioButtonGroup';
 import { SingleLineTextField } from '../../atoms';
+import { Box } from '@material-ui/core';
 
 export type Props = {
   role: number | null;
@@ -16,7 +16,7 @@ export type Props = {
   onChangeDaycareId: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const VerticalRadioButtonsGroup: React.FC<Props> = (props) => {
+export const ChooseRole: React.FC<Props> = (props) => {
   const {
     role,
     gender,
@@ -29,23 +29,26 @@ export const VerticalRadioButtonsGroup: React.FC<Props> = (props) => {
   return (
     <>
       <FormControl component="fieldset">
-        <FormLabel component="legend">Gender</FormLabel>
         <RadioGroup
           aria-label="gender"
           name="gender1"
           value={role}
           onChange={onChangeRole}
         >
-          <FormControlLabel
-            value={0}
-            control={<Radio />}
-            label="私は保護者です"
-          />
-          <FormControlLabel
-            value={1}
-            control={<Radio />}
-            label="私は先生です"
-          />
+          <Box mb={2}>
+            <FormControlLabel
+              value={0}
+              control={<Radio />}
+              label="私は保護者です"
+            />
+          </Box>
+          <Box mb={2}>
+            <FormControlLabel
+              value={1}
+              control={<Radio />}
+              label="私は先生です"
+            />
+          </Box>
         </RadioGroup>
       </FormControl>
       {role == 0 ? (
@@ -58,6 +61,9 @@ export const VerticalRadioButtonsGroup: React.FC<Props> = (props) => {
           onChange={onChangeGender}
         />
       ) : (
+        <div></div>
+      )}
+      {role == 1 ? (
         <SingleLineTextField
           id="保育園のID"
           textName="保育園のID"
@@ -66,6 +72,8 @@ export const VerticalRadioButtonsGroup: React.FC<Props> = (props) => {
           value={daycareId}
           onChange={onChangeDaycareId}
         />
+      ) : (
+        <div></div>
       )}
     </>
   );
