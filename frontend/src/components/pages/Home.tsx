@@ -5,13 +5,13 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
 import { Kid } from '../../types/api/kid';
-import { Parent } from '../../types/api/parent';
+import { User } from '../../types/api/user';
 import { Spinner } from '../atoms/Spinner/Spinner';
 import { KidProfile, ParentProfile } from '../organisms/index';
 
 export const Home: React.FC = () => {
   const [user] = useAuthState(firebase.auth());
-  const [parent, setParent] = useState<Parent | null>(null);
+  const [parent, setParent] = useState<User | null>(null);
   const [kid, setKid] = useState<Kid | null>(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);

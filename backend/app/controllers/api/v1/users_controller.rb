@@ -15,7 +15,7 @@ module Api
         render json: @user_name, status: 200
       end
 
-      def fetchUserArray
+      def fetchUser
         @user = User.find_by(uid: params[:uid])
         render json: @user, status: 200
       end

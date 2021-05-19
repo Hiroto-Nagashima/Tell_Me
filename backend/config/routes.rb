@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       get '/parents/fetchParentArray', to: 'parents#fetchParentArray'
       resources :parents, only: [:create, :update]
       get '/users/fetchParentName', to: 'users#fetchParentName'
-      get '/users/fetchParentArray', to: 'users#fetchParentArray'
+      get '/users/fetchUser', to: 'users#fetchUser'
       resources :users, only: [:create, :update]
     end
   end

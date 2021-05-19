@@ -11,7 +11,7 @@ type Props = {
   path: string;
 };
 
-const PrivateHeaderRoute: React.FC<Props> = ({
+export const PrivateHeaderRoute: React.FC<Props> = ({
   component: Component,
   ...rest
 }) => {
@@ -38,4 +38,3 @@ const PrivateHeaderRoute: React.FC<Props> = ({
     />
   );
 };
-export default PrivateHeaderRoute;

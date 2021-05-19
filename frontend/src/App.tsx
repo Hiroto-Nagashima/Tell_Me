@@ -8,7 +8,7 @@ import GlobalStyle from './theme/globalStyle';
 import HeaderLayoutRoute from './router/HeaderLayoutRoute';
 import { PrivateSidebarRoute } from './router/PrivateSidebarRoute';
 import { RegisterKid } from './components/pages/RegisterKid';
-import PrivateHeaderRoute from './router/PrivateHeaderRoute';
+import { PrivateHeaderRoute } from './router/PrivateHeaderRoute';
 import { ChooseKid } from './components/pages/ChooseKid';
 import { Notebook } from './components/pages/Notebook';
 import { Announcement } from './components/pages/Announcement';

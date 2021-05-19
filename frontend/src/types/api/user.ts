@@ -1,4 +1,4 @@
-export type Parent = {
+export type User = {
   id: number;
   email: string | null;
   password: string | null;
