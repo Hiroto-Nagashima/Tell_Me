@@ -27,7 +27,7 @@ const Flexbox = styled.div`
 export type Props = {
   age: number | null;
   gender: number;
-  parentName: string | null;
+  userName: string | null;
   firstName: string | null;
   lastName: string | null;
   daycareID: number | null;
@@ -50,7 +50,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
     firstName,
     lastName,
     daycareID,
-    parentName,
+    userName,
     favoriteFood,
     favoritePlay,
     onClick,
@@ -70,7 +70,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
         <Box component="h1" pt={2} my={4} textAlign="center">
           ようこそ!
           <br />
-          {parentName}さん！
+          {userName}さん！
         </Box>
         <Box component="h3" px={2} my={5} textAlign="center">
           1. 保育園のIDを入力してください

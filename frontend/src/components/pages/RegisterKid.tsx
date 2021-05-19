@@ -13,7 +13,7 @@ type Props = {
 
 export const RegisterKid: React.FC<Props> = () => {
   console.log(4);
-  const [parentName, setParentName] = useState('');
+  const [userName, setUserName] = useState('');
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [age, setAge] = useState<number | null>(null);
@@ -23,7 +23,7 @@ export const RegisterKid: React.FC<Props> = () => {
   const [daycareID, setDaycareId] = useState<number | null>(null);
   const [favoriteFood, setFavoriteFood] = useState<string | null>('');
   const [favoritePlay, setFavoritePlay] = useState<string | null>('');
-  const [parent] = useAuthState(getAuth());
+  const [user] = useAuthState(getAuth());
 
   const history = useHistory();
 
@@ -77,7 +77,7 @@ export const RegisterKid: React.FC<Props> = () => {
           daycare_id: daycareID,
           favorite_food: favoriteFood,
           favorite_play: favoritePlay,
-          uid: parent!.uid,
+          uid: user!.uid,
         },
       })
       .then((res) => {
@@ -87,16 +87,16 @@ export const RegisterKid: React.FC<Props> = () => {
       .catch((e) => console.log(e));
   };
 
-  const fetchParent = () => console.log(2);
+  const fetchUser = () => console.log(2);
   axios
-    .get(`http://localhost:5000/api/v1/parents/fetchParentName`, {
+    .get(`http://localhost:5000/api/v1/users/fetchUserName`, {
       params: {
-        uid: parent!.uid,
+        uid: user!.uid,
       },
     })
     .then((res) => {
       console.log(3);
-      setParentName(res.data);
+      setUserName(res.data);
       console.log(res);
     })
     .catch((e) => setError(e))
@@ -104,7 +104,7 @@ export const RegisterKid: React.FC<Props> = () => {
 
   useEffect(() => {
     console.log('aaaaaaaaaaaaaaa');
-    fetchParent();
+    fetchUser();
   }, []);
 
   return (
@@ -117,7 +117,7 @@ export const RegisterKid: React.FC<Props> = () => {
         <>
           <RegisterKidPaper
             age={age}
-            parentName={parentName}
+            userName={userName}
             daycareID={daycareID}
             firstName={firstName}
             lastName={lastName}

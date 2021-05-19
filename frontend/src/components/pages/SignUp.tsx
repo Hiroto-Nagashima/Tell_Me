@@ -76,16 +76,22 @@ export const SignUp: React.FC = () => {
 
   const handleSubmit = () => {
     if (telephoneNumber.match(telephoneNumberRegex) == null) {
-      setError('telephone number is invalid');
+      setError('電話番号が無効です');
       setOpen(true);
     } else if (lastName == lastNameError) {
-      setError('last name is invalid');
+      setError('姓が無効です');
       setOpen(true);
     } else if (firstName == firstNameError) {
-      setError('first name is invalid');
+      setError('名が無効です');
+      setOpen(true);
+    } else if (role == 0 && gender == null) {
+      setError('お父様かお母様か選択してください');
+      setOpen(true);
+    } else if (role == 1 && daycareId == null) {
+      setError('保育園のIDを入力してください');
       setOpen(true);
     } else if (daycareId != null && gender != null) {
-      setError('保育園のIDと「父か母か」は同時に選択しないでください');
+      setError('保育園のIDと「父か母か」を同時に選択しないでください.');
       setOpen(true);
     } else {
       const request = async () => {
@@ -100,7 +106,7 @@ export const SignUp: React.FC = () => {
               const config = { headers: { authorization: `Bearer ${token}` } };
               try {
                 await axios.post(
-                  'http://localhost:5000/api/v1/parents',
+                  'http://localhost:5000/api/v1/users',
                   {
                     params: {
                       email: email,

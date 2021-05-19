@@ -110,7 +110,7 @@ export const SignUpPaper: React.FC<Props> = (props) => {
         <Box textAlign="center" m={4}>
           <SingleLineTextField
             id="email"
-            textName="email"
+            textName="メールアドレス"
             isFullWidth={true}
             placeholder="xxxxxxx@xxx.ne.jp"
             value={email}
@@ -120,7 +120,7 @@ export const SignUpPaper: React.FC<Props> = (props) => {
         <Box textAlign="center" m={4}>
           <SingleLineTextField
             id="password"
-            textName="password"
+            textName="パスワード"
             isFullWidth={true}
             placeholder="6文字以上"
             type="password"
