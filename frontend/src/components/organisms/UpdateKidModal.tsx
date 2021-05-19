@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, createRef, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
@@ -6,6 +6,8 @@ import Modal from '@material-ui/core/Modal';
 import { SingleLineTextField, FlexibleButton } from '../atoms/index';
 import { RadioButtonGroup } from '../molecules/RadioButtonGroup';
 import Resizer from 'react-image-file-resizer';
+import axios from 'axios';
+import { useParams } from 'react-router';
 
 const rand = () => {
   return Math.round(Math.random() * 20) - 10;
@@ -76,7 +78,7 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
   } = props;
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
-  const [image, setImage] = useState('');
+  const { id } = useParams<{ id: string }>();
 
   const resizeFile = (file: File) =>
     new Promise((resolve) => {
@@ -97,11 +99,31 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
     try {
       const file = event.target.files![0];
       const image = await resizeFile(file);
-      setImage(image);
       console.log(image);
+
+      return image;
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const fileInput = createRef<HTMLInputElement>();
+
+  const handleSubmit = async (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    const submitData = new FormData();
+
+    submitData.append('image', fileInput.current!.files![0]);
+
+    await axios.post(
+      `http://localhost:5000/api/v1/kids/${id}/registerImage`,
+      submitData,
+      {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      },
+    );
   };
 
   return (
@@ -117,12 +139,17 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
             1.写真をアップロードしてください
           </Box>
           <Box textAlign="center" mx={4}>
-            <img src={image} alt="" />
             <input
               type="file"
               name="image"
               onChange={handleFileChange}
               accept="image/*"
+            />
+            <input
+              type="button"
+              value="Submit"
+              ref={fileInput}
+              onSubmit={handleSubmit}
             />
           </Box>
           <Box component="h3" px={2} my={5} textAlign="center">
