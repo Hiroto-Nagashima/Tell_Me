@@ -4,10 +4,10 @@ module Api
       def create
         kid = Kid.new(kid_params)
         if kid.save
-          parent = Parent.find_by(uid: params[:params][:uid])
-          parent_kid = parent.kid_parents.build
-          parent_kid.kid_id = kid.id
-          parent_kid.save!
+          user = User.find_by(uid: params[:params][:uid])
+          kid_user = user.kid_users.build
+          kid_user.kid_id = kid.id
+          kid_user.save!
           render json: {
             kid: kid.to_a
           }
@@ -20,12 +20,12 @@ module Api
       end
 
       def index
-        parent = Parent.find_by(uid: params[:uid])
-        if parent.kid_parents.present?
+        user = User.find_by(uid: params[:uid])
+        if user.kid_users.present?
           kids_box = []
-          kid_parents = parent.kid_parents
-          kid_parents.each do |kid_parent|
-            kids_box << Kid.find(kid_parent.kid_id)
+          kid_users = user.kid_users
+          kid_users.each do |kid_user|
+            kids_box << Kid.find(kid_user.kid_id)
           end
           render json: kids_box, status: 200
         else

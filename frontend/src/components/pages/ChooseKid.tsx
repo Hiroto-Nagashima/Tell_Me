@@ -12,7 +12,7 @@ export const ChooseKid: React.FC = () => {
   const [kids, setKids] = useState<Array<Kid>>();
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [parent] = useAuthState(getAuth());
+  const [user] = useAuthState(getAuth());
   const history = useHistory();
   console.log(5);
 
@@ -24,7 +24,7 @@ export const ChooseKid: React.FC = () => {
     axios
       .get('http://localhost:5000/api/v1/kids', {
         params: {
-          uid: parent!.uid,
+          uid: user!.uid,
         },
       })
       .then((res) => {
