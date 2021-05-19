@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const TeacherHome: React.FC = () => {
+export const TeacherAnnouncement: React.FC = () => {
   return <div>TeacherHomeページだよ</div>;
 };
