@@ -1,17 +1,17 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+import { red } from '@material-ui/core/colors';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+// import clsx from 'clsx';
+// import CardActions from '@material-ui/core/CardActions';
+// import Collapse from '@material-ui/core/Collapse';
+// import IconButton from '@material-ui/core/IconButton';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
+// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,12 +41,13 @@ const useStyles = makeStyles((theme: Theme) =>
 export type Props = {
   title: string;
   content: string;
+  created_at: string;
   IsExpanded: boolean;
   onClickExpand: () => void;
 };
 
 export const Post: React.FC<Props> = (props) => {
-  const { title, content, IsExpanded, onClickExpand } = props;
+  const { title, content, created_at } = props;
   const classes = useStyles();
   // const [expanded, setExpanded] = React.useState(false);
 
@@ -63,6 +64,7 @@ export const Post: React.FC<Props> = (props) => {
           </Avatar>
         }
         title={title}
+        subheader={created_at}
       />
 
       <CardContent>
@@ -70,7 +72,7 @@ export const Post: React.FC<Props> = (props) => {
           {content}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
+      {/* <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
@@ -89,7 +91,7 @@ export const Post: React.FC<Props> = (props) => {
         <CardContent>
           <Typography paragraph>コメント</Typography>
         </CardContent>
-      </Collapse>
+      </Collapse> */}
     </Card>
   );
 };
