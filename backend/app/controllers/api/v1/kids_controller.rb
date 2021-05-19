@@ -39,12 +39,14 @@ module Api
         kid = Kid.find(params[:id])
         render json: kid, status: 200
       end
+
       def registerImage
         kid = Kid.find(params[:id])
         kid.image = params[:submitData]
+        byebug
         if kid.save
           render json: {
-            status: ok,
+            status: "ok",
           }
         else
           render json: {

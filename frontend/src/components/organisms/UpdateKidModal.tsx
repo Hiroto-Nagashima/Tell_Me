@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import { SingleLineTextField, FlexibleButton } from '../atoms/index';
+import { SingleLineTextField } from '../atoms/index';
 import { RadioButtonGroup } from '../molecules/RadioButtonGroup';
 import Resizer from 'react-image-file-resizer';
 import axios from 'axios';
@@ -66,19 +66,20 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
     gender,
     firstName,
     lastName,
-    favoriteFood,
-    favoritePlay,
+    // favoriteFood,
+    // favoritePlay,
     onChangeAge,
     onChangeGender,
     onChangeFirstName,
     onChangeLastName,
-    onChangeFavoriteFood,
-    onChangeFavoritePlay,
-    onSubmit,
+    // onChangeFavoriteFood,
+    // onChangeFavoritePlay,
+    // onSubmit,
   } = props;
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const { id } = useParams<{ id: string }>();
+  const [image, setImage] = useState<any>('');
 
   const resizeFile = (file: File) =>
     new Promise((resolve) => {
@@ -95,10 +96,14 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
         'blob',
       );
     });
+
+  const fileInput = createRef<HTMLInputElement>();
+
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     try {
       const file = event.target.files![0];
       const image = await resizeFile(file);
+      setImage(image);
       console.log(image);
 
       return image;
@@ -107,13 +112,10 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
     }
   };
 
-  const fileInput = createRef<HTMLInputElement>();
-
-  const handleSubmit = async (event: ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
     const submitData = new FormData();
 
-    submitData.append('image', fileInput.current!.files![0]);
+    submitData.append('image', image);
 
     await axios.post(
       `http://localhost:5000/api/v1/kids/${id}/registerImage`,
@@ -149,7 +151,7 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
               type="button"
               value="Submit"
               ref={fileInput}
-              onSubmit={handleSubmit}
+              onClick={handleSubmit}
             />
           </Box>
           <Box component="h3" px={2} my={5} textAlign="center">
@@ -197,7 +199,7 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
               onChange={onChangeAge}
             />
           </Box>
-          <Box textAlign="center" mb={2}>
+          {/* <Box textAlign="center" mb={2}>
             <SingleLineTextField
               id="好きな食べ物"
               isFullWidth={true}
@@ -206,8 +208,8 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
               value={favoriteFood}
               onChange={onChangeFavoriteFood}
             />
-          </Box>
-          <Box textAlign="center">
+          </Box> */}
+          {/* <Box textAlign="center">
             <SingleLineTextField
               id="好きな食べ物"
               isFullWidth={true}
@@ -216,15 +218,15 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
               value={favoritePlay}
               onChange={onChangeFavoritePlay}
             />
-          </Box>
-          <Box textAlign="center" m={5}>
+          </Box> */}
+          {/* <Box textAlign="center" m={5}>
             <FlexibleButton
               onClick={onSubmit}
               variant="contained"
               color="primary"
               label="登録"
             />
-          </Box>
+          </Box> */}
         </div>
       </Modal>
     </div>
