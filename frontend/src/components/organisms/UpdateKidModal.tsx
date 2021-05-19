@@ -1,11 +1,11 @@
-import React, { ChangeEvent, createRef, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { SingleLineTextField, FlexibleButton } from '../atoms/index';
 import { RadioButtonGroup } from '../molecules/RadioButtonGroup';
-// import Resizer from 'react-image-file-resizer';
+import Resizer from 'react-image-file-resizer';
 
 const rand = () => {
   return Math.round(Math.random() * 20) - 10;
@@ -76,34 +76,33 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
   } = props;
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
-  // const [image, setImage] = useState('');
+  const [image, setImage] = useState('');
 
-  // const resizeFile = (file: File) =>
-  //   new Promise((resolve) => {
-  //     Resizer.imageFileResizer(
-  //       file,
-  //       300,
-  //       300,
-  //       'JPEG',
-  //       100,
-  //       0,
-  //       (uri) => {
-  //         resolve(uri);
-  //       },
-  //       'base64',
-  //     );
-  //   });
-  // const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
-  //   try {
-  //     const file = event.target.files![0];
-  //     const image = await resizeFile(file);
-  //     setImage(image);
-  //     console.log(image);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-  const fileInput = createRef<HTMLInputElement>();
+  const resizeFile = (file: File) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        300,
+        300,
+        'JPEG',
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        'blob',
+      );
+    });
+  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    try {
+      const file = event.target.files![0];
+      const image = await resizeFile(file);
+      setImage(image);
+      console.log(image);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
@@ -118,7 +117,13 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
             1.写真をアップロードしてください
           </Box>
           <Box textAlign="center" mx={4}>
-            <input type="file" name="image" ref={fileInput} accept="image/*" />
+            <img src={image} alt="" />
+            <input
+              type="file"
+              name="image"
+              onChange={handleFileChange}
+              accept="image/*"
+            />
           </Box>
           <Box component="h3" px={2} my={5} textAlign="center">
             2.登録済み情報を更新してください
