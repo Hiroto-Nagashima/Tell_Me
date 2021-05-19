@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  enum role: { 保護者: 0, 先生: 1 }
   has_many :kids, through: :kid_users
   has_many :kid_users
   validates :first_name, :last_name, :telephone_number, :uid, :email, :password, presence: true
