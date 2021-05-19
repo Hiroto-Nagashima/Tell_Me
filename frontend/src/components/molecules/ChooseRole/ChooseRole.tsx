@@ -66,6 +66,7 @@ export const ChooseRole: React.FC<Props> = (props) => {
       {role == 1 ? (
         <SingleLineTextField
           id="保育園のID"
+          type="number"
           textName="保育園のID"
           placeholder="数字"
           isFullWidth={false}

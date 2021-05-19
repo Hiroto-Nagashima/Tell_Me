@@ -84,6 +84,9 @@ export const SignUp: React.FC = () => {
     } else if (firstName == firstNameError) {
       setError('first name is invalid');
       setOpen(true);
+    } else if (daycareId != null && gender != null) {
+      setError('保育園のIDと「父か母か」は同時に選択しないでください');
+      setOpen(true);
     } else {
       const request = async () => {
         firebase
