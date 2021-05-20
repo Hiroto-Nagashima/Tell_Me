@@ -93,7 +93,7 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
         (uri) => {
           resolve(uri);
         },
-        'blob',
+        'base64',
       );
     });
 
@@ -116,7 +116,7 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
     const submitData = new FormData();
 
     submitData.append('image', image);
-
+    console.log(submitData);
     await axios.post(
       `http://localhost:5000/api/v1/kids/${id}/registerImage`,
       submitData,
