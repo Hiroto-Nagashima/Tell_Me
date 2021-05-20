@@ -7,7 +7,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { ProfileImage } from '../../atoms/ProfileImage/ProfileImage';
 import { Box } from '@material-ui/core';
 const useStyles = makeStyles({
   root: {
@@ -42,6 +41,7 @@ const ButtonWrapper = styled(Box)`
 
 export type Props = {
   age: number | null | undefined;
+  src: string | undefined;
   onClick: () => void;
   gender: number | undefined;
   firstName: string | null | undefined;
@@ -51,7 +51,8 @@ export type Props = {
 };
 
 export const KidProfile: React.FC<Props> = (props) => {
-  const { firstName, lastName, favoriteFood, favoritePlay, onClick } = props;
+  const { firstName, src, lastName, favoriteFood, favoritePlay, onClick } =
+    props;
   const classes = useStyles();
 
   return (
@@ -61,7 +62,7 @@ export const KidProfile: React.FC<Props> = (props) => {
         <CardContent>
           <Box display="flex" justifyContent="center">
             <ProfileImageBox>
-              <ProfileImage />
+              <img src={`https://s3.amazonaws.com/tell-me-s3/${src}`} alt="" />
             </ProfileImageBox>
           </Box>
           <Box mt={5}>

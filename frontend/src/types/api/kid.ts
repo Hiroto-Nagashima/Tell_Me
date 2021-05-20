@@ -1,6 +1,7 @@
 export type Kid = {
   id: number;
   age: number | null;
+  image: string | undefined;
   gender: number;
   first_name: string | null;
   last_name: string | null;
