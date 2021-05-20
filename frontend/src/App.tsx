@@ -15,42 +15,45 @@ import { Login } from './components/pages/Login';
 import { Home } from './components/pages/Home';
 import { TeacherHome } from './components/pages/TeacherHome';
 import { TeacherAnnouncement } from './components/pages/TeacherAnnouncement';
+import { UserProvider } from './providers/UserProvider';
 
 const App: React.FC = () => {
   return (
     <>
       <GlobalStyle />
       <BrowserRouter>
-        <Switch>
-          <HeaderLayoutRoute exact path="/" component={Login} />
-          <HeaderLayoutRoute exact path="/signup" component={SignUp} />
-          <TeacherRoute
-            exact
-            path="/daycares/:id/teachers/:id"
-            component={TeacherHome}
-          />
-          <TeacherRoute
-            exact
-            path="/daycares/:id/teachers/:id/announcement"
-            component={TeacherAnnouncement}
-          />
-          <ParentHeaderLayoutRoute exact path="/kids" component={ChooseKid} />
-          <ParentHeaderLayoutRoute
-            exact
-            path="/kids/register"
-            component={RegisterKid}
-          />
-          <ParentRoute exact path="/kids/:id" component={Home} />
-          <ParentRoute exact path="/kids/:id/notebook" component={Notebook} />
-          <ParentRoute
-            exact
-            path="/kids/:id/announcement"
-            component={Announcement}
-          />
-          <Route path="*">
-            <Page404 />
-          </Route>
-        </Switch>
+        <UserProvider>
+          <Switch>
+            <TeacherRoute
+              exact
+              path="/daycares/:id/teachers/:id"
+              component={TeacherHome}
+            />
+            <TeacherRoute
+              exact
+              path="/daycares/:id/teachers/:id/announcement"
+              component={TeacherAnnouncement}
+            />
+            <ParentHeaderLayoutRoute exact path="/kids" component={ChooseKid} />
+            <ParentHeaderLayoutRoute
+              exact
+              path="/kids/register"
+              component={RegisterKid}
+            />
+            <ParentRoute exact path="/kids/:id" component={Home} />
+            <ParentRoute exact path="/kids/:id/notebook" component={Notebook} />
+            <ParentRoute
+              exact
+              path="/kids/:id/announcement"
+              component={Announcement}
+            />
+            <HeaderLayoutRoute exact path="/" component={Login} />
+            <HeaderLayoutRoute exact path="/signup" component={SignUp} />
+            <Route path="*">
+              <Page404 />
+            </Route>
+          </Switch>
+        </UserProvider>
       </BrowserRouter>
     </>
   );
