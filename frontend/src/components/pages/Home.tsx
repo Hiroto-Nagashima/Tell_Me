@@ -5,13 +5,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { Kid } from '../../types/api/kid';
-import { Parent } from '../../types/api/parent';
+import { User } from '../../types/api/user';
 import { Spinner } from '../atoms/Spinner/Spinner';
 import { KidProfile, ParentProfile } from '../organisms/index';
 import { UpdateKidModal } from '../organisms/UpdateKidModal';
 
 export const Home: React.FC = () => {
-  const [parent, setParent] = useState<Parent | null>(null);
+  const [parent] = useAuthState(getAuth());
+  const [user, setUser] = useState<User | null>(null);
   const [kid, setKid] = useState<Kid | null>(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -23,7 +24,6 @@ export const Home: React.FC = () => {
   const [lastName, setLastName] = useState<string | null>('');
   const [favoriteFood, setFavoriteFood] = useState<string | null>('');
   const [favoritePlay, setFavoritePlay] = useState<string | null>('');
-  const [user] = useAuthState(getAuth());
 
   const onChangeAge = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
@@ -67,7 +67,7 @@ export const Home: React.FC = () => {
           gender: gender,
           favorite_food: favoriteFood,
           favorite_play: favoritePlay,
-          uid: user!.uid,
+          uid: parent!.uid,
         },
       })
       .then((res) => {
@@ -85,16 +85,16 @@ export const Home: React.FC = () => {
     setKidUpdateOpen(true);
   };
 
-  const fetchParent = async () =>
+  const fetchUser = async () =>
     await axios
-      .get(`http://localhost:5000/api/v1/parents/fetchParentArray`, {
+      .get(`http://localhost:5000/api/v1/users/fetchUser`, {
         params: {
-          uid: user!.uid,
+          uid: parent!.uid,
         },
       })
       .then((res) => {
-        setParent(res.data);
-        console.log(parent);
+        setUser(res.data);
+        console.log(user);
       })
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
@@ -111,7 +111,7 @@ export const Home: React.FC = () => {
 
   useEffect(() => {
     console.log('aaaaaaaaaaaaaaa');
-    fetchParent();
+    fetchUser();
     fetchKid();
   }, []);
 
@@ -131,15 +131,14 @@ export const Home: React.FC = () => {
               lastName={kid?.last_name}
               favoriteFood={kid?.favorite_food}
               favoritePlay={kid?.favorite_play}
-              onClick={onClickUpdateKid}
             />
-            <div key={parent?.id}>
+            <div key={user?.id}>
               <ParentProfile
-                email={parent?.email}
-                gender={parent?.gender}
-                telephoneNumber={parent?.telephone_number}
-                firstName={parent?.first_name}
-                lastName={parent?.last_name}
+                email={user?.email}
+                gender={user?.gender}
+                telephoneNumber={user?.telephone_number}
+                firstName={user?.first_name}
+                lastName={user?.last_name}
               />
             </div>
           </Box>

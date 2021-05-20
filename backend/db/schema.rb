@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2021_05_16_133034) do
+=======
+ActiveRecord::Schema.define(version: 2021_05_19_153006) do
+>>>>>>> develop
 
   create_table "daycares", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -23,6 +27,13 @@ ActiveRecord::Schema.define(version: 2021_05_16_133034) do
   create_table "kid_parents", charset: "utf8mb4", force: :cascade do |t|
     t.integer "kid_id"
     t.integer "parent_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "kid_users", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "kid_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -62,6 +73,20 @@ ActiveRecord::Schema.define(version: 2021_05_16_133034) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "password"
     t.string "email"
+  end
+
+  create_table "users", charset: "utf8mb4", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.integer "gender"
+    t.string "telephone_number"
+    t.string "password"
+    t.integer "role"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "uid"
+    t.integer "daycare_id"
   end
 
 end

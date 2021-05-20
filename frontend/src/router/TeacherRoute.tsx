@@ -3,7 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Route, RouteComponentProps } from 'react-router-dom';
 import { Login } from '../components/pages/Login';
 import { HeaderLayout } from '../components/templates/HeaderLayout';
-import { SidebarLayout } from '../components/templates/SidebarLayout';
+import { TeacherSidebarLayout } from '../components/templates/TeacherSidebarLayout';
 import { getAuth } from '../helper/firebaseAuthHelper';
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
   path: string;
 };
 
-export const PrivateSidebarRoute: React.FC<Props> = ({
+export const TeacherRoute: React.FC<Props> = ({
   component: Component,
   ...rest
 }) => {
@@ -22,9 +22,9 @@ export const PrivateSidebarRoute: React.FC<Props> = ({
     <Route
       {...rest}
       render={(props) => (
-        <SidebarLayout>
+        <TeacherSidebarLayout>
           <Component {...props} />
-        </SidebarLayout>
+        </TeacherSidebarLayout>
       )}
     />
   ) : (

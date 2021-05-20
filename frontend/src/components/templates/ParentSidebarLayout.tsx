@@ -69,7 +69,7 @@ type Props = {
   window?: () => Window;
 };
 
-export const SidebarLayout: React.FC<Props> = (props) => {
+export const ParentSidebarLayout: React.FC<Props> = (props) => {
   const { window, children } = props;
   const classes = useStyles();
   const theme = useTheme();

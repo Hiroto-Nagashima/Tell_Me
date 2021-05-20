@@ -51,62 +51,27 @@ export type Props = {
 };
 
 export const KidProfile: React.FC<Props> = (props) => {
-  const {
-    age,
-    firstName,
-    lastName,
-    gender,
-    favoriteFood,
-    favoritePlay,
-    onClick,
-  } = props;
+  const { firstName, lastName, favoriteFood, favoritePlay, onClick } = props;
   const classes = useStyles();
 
   return (
-    <>
-      <Card className={classes.root}>
-        <MyCardActionArea>
-          <CardMedia className={classes.media} title="Contemplative Reptile" />
-          <CardContent>
-            <Box display="flex" justifyContent="center">
-              <ProfileImageBox>
-                <ProfileImage />
-              </ProfileImageBox>
-            </Box>
-            <Box mt={5}>
-              <KidNameArea variant="subtitle1" color="inherit" align="center">
-                {lastName}
-                {firstName}
-              </KidNameArea>
-            </Box>
-            <Box display="flex" justifyContent="center">
-              <Box mr={2}>
-                <Typography
-                  variant="subtitle2"
-                  color="textSecondary"
-                  component="h3"
-                  align="center"
-                >
-                  {gender === 0 ? '女の子' : '男の子'}
-                </Typography>
-              </Box>
-              <Box ml={2}>
-                <Typography
-                  variant="subtitle2"
-                  color="textSecondary"
-                  component="h3"
-                  align="center"
-                >
-                  {age}才
-                </Typography>
-              </Box>
-            </Box>
-            <Box mt={2}>
-              <Typography variant="subtitle1" color="inherit" component="h2">
-                好きな遊び
-              </Typography>
-            </Box>
-            <Box mt={1}>
+    <Card className={classes.root}>
+      <MyCardActionArea>
+        <CardMedia className={classes.media} title="Contemplative Reptile" />
+        <CardContent>
+          <Box display="flex" justifyContent="center">
+            <ProfileImageBox>
+              <ProfileImage />
+            </ProfileImageBox>
+          </Box>
+          <Box mt={5}>
+            <KidNameArea variant="subtitle1" color="inherit" align="center">
+              {lastName}
+              {firstName}
+            </KidNameArea>
+          </Box>
+          <Box display="flex" justifyContent="center">
+            <Box mr={2}>
               <Typography
                 variant="h6"
                 color="textSecondary"
@@ -135,16 +100,16 @@ export const KidProfile: React.FC<Props> = (props) => {
                 {favoriteFood}
               </Typography>
             </Box>
-          </CardContent>
-        </MyCardActionArea>
-        <MyCardActions>
-          <ButtonWrapper>
-            <Button size="small" color="primary" onClick={onClick}>
-              Update
-            </Button>
-          </ButtonWrapper>
-        </MyCardActions>
-      </Card>
-    </>
+          </Box>
+        </CardContent>
+      </MyCardActionArea>
+      <MyCardActions>
+        <ButtonWrapper>
+          <Button size="small" color="primary" onClick={onClick}>
+            Update
+          </Button>
+        </ButtonWrapper>
+      </MyCardActions>
+    </Card>
   );
 };
