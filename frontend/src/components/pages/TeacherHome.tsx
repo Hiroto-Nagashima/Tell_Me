@@ -1,5 +1,9 @@
 import React from 'react';
+import * as H from 'history';
 
-export const TeacherHome: React.FC = () => {
+type Props = {
+  history: H.History;
+};
+export const TeacherHome: React.FC<Props> = () => {
   return <div>TeacherHomeページだよ</div>;
 };

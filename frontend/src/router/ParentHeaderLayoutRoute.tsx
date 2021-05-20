@@ -1,9 +1,12 @@
-import React, { ComponentType } from 'react';
+import React, { ComponentType, useContext } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Route, RouteComponentProps } from 'react-router-dom';
 import { Login } from '../components/pages/Login';
+import { TeacherHome } from '../components/pages/TeacherHome';
 import { HeaderLayout } from '../components/templates/HeaderLayout';
+import { TeacherSidebarLayout } from '../components/templates/TeacherSidebarLayout';
 import { getAuth } from '../helper/firebaseAuthHelper';
+import { CurrentUserContext } from '../providers/UserProvider';
 
 type Props = {
   component: ComponentType<RouteComponentProps>;
@@ -16,25 +19,41 @@ export const ParentHeaderLayoutRoute: React.FC<Props> = ({
   ...rest
 }) => {
   const [user] = useAuthState(getAuth());
-
-  return user ? (
-    <Route
-      {...rest}
-      render={(props) => (
-        <HeaderLayout>
-          <Component {...props} />
-        </HeaderLayout>
-      )}
-    />
-  ) : (
-    <Route
-      exact
-      path={'/'}
-      render={(props) => (
-        <HeaderLayout>
-          <Login {...props} />
-        </HeaderLayout>
-      )}
-    />
-  );
+  const currentUser = useContext(CurrentUserContext);
+  if (user && currentUser!.role == 0) {
+    return (
+      <Route
+        {...rest}
+        render={(props) => (
+          <HeaderLayout>
+            <Component {...props} />
+          </HeaderLayout>
+        )}
+      />
+    );
+  } else if (user && currentUser!.role == 1) {
+    return (
+      <Route
+        exact
+        path={`/daycares/${currentUser!.daycareId}/teachers/${currentUser!.id}`}
+        render={(props) => (
+          <TeacherSidebarLayout>
+            <TeacherHome {...props} />
+          </TeacherSidebarLayout>
+        )}
+      />
+    );
+  } else {
+    return (
+      <Route
+        exact
+        path={'/'}
+        render={(props) => (
+          <HeaderLayout>
+            <Login {...props} />
+          </HeaderLayout>
+        )}
+      />
+    );
+  }
 };

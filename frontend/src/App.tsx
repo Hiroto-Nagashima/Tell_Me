@@ -21,9 +21,11 @@ const App: React.FC = () => {
   return (
     <>
       <GlobalStyle />
-      <BrowserRouter>
-        <UserProvider>
+      <UserProvider>
+        <BrowserRouter>
           <Switch>
+            <HeaderLayoutRoute exact path="/" component={Login} />
+            <HeaderLayoutRoute exact path="/signup" component={SignUp} />
             <TeacherRoute
               exact
               path="/daycares/:id/teachers/:id"
@@ -47,14 +49,12 @@ const App: React.FC = () => {
               path="/kids/:id/announcement"
               component={Announcement}
             />
-            <HeaderLayoutRoute exact path="/" component={Login} />
-            <HeaderLayoutRoute exact path="/signup" component={SignUp} />
             <Route path="*">
               <Page404 />
             </Route>
           </Switch>
-        </UserProvider>
-      </BrowserRouter>
+        </BrowserRouter>
+      </UserProvider>
     </>
   );
 };
