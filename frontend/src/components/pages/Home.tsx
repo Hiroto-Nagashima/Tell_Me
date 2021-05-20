@@ -10,23 +10,23 @@ import { Spinner } from '../atoms/Spinner/Spinner';
 import { KidProfile, ParentProfile } from '../organisms/index';
 
 export const Home: React.FC = () => {
-  const [user] = useAuthState(firebase.auth());
-  const [parent, setParent] = useState<User | null>(null);
+  const [parent] = useAuthState(firebase.auth());
+  const [user, setUser] = useState<User | null>(null);
   const [kid, setKid] = useState<Kid | null>(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const { id } = useParams<{ id: string }>();
 
-  const fetchParent = async () =>
+  const fetchUser = async () =>
     await axios
-      .get(`http://localhost:5000/api/v1/parents/fetchParentArray`, {
+      .get(`http://localhost:5000/api/v1/users/fetchUser`, {
         params: {
-          uid: user!.uid,
+          uid: parent!.uid,
         },
       })
       .then((res) => {
-        setParent(res.data);
-        console.log(parent);
+        setUser(res.data);
+        console.log(user);
       })
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
@@ -43,7 +43,7 @@ export const Home: React.FC = () => {
 
   useEffect(() => {
     console.log('aaaaaaaaaaaaaaa');
-    fetchParent();
+    fetchUser();
     fetchKid();
   }, []);
 
@@ -63,13 +63,13 @@ export const Home: React.FC = () => {
             favoriteFood={kid?.favorite_food}
             favoritePlay={kid?.favorite_play}
           />
-          <div key={parent?.id}>
+          <div key={user?.id}>
             <ParentProfile
-              email={parent?.email}
-              gender={parent?.gender}
-              telephoneNumber={parent?.telephone_number}
-              firstName={parent?.first_name}
-              lastName={parent?.last_name}
+              email={user?.email}
+              gender={user?.gender}
+              telephoneNumber={user?.telephone_number}
+              firstName={user?.first_name}
+              lastName={user?.last_name}
             />
           </div>
         </Box>
