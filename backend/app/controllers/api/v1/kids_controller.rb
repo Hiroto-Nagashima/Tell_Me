@@ -9,7 +9,7 @@ module Api
           kid_user.kid_id = kid.id
           kid_user.save!
           render json: {
-            kid: kid.to_a
+            kid: kid
           }
         else
           render json: {

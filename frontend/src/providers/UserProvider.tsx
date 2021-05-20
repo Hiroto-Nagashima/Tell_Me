@@ -8,8 +8,13 @@ import { User } from '../types/api/user';
 type Props = {
   children: ReactNode;
 };
-export const CurrentUserContext = createContext<User | null>(null);
-export const LoadingCurrentUserContext = createContext<boolean>(false);
+
+type CurrentUserContextType = {
+  currentUser: User | null;
+  loadingCurrentUser: boolean;
+};
+export const CurrentUserContext =
+  createContext<CurrentUserContextType | null>(null);
 export const UserProvider: React.FC<Props> = (props) => {
   const { children } = props;
   const [user] = useAuthState(getAuth());
@@ -39,10 +44,8 @@ export const UserProvider: React.FC<Props> = (props) => {
   }, []);
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <LoadingCurrentUserContext.Provider value={loadingCurrentUser}>
-        {children}
-      </LoadingCurrentUserContext.Provider>
+    <CurrentUserContext.Provider value={{ currentUser, loadingCurrentUser }}>
+      {children}
     </CurrentUserContext.Provider>
   );
 };

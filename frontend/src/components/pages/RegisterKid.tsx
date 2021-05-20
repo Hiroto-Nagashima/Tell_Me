@@ -81,7 +81,10 @@ export const RegisterKid: React.FC<Props> = () => {
         },
       })
       .then((res) => {
-        history.push({ pathname: '/', state: res.data.kid });
+        history.push({
+          pathname: `/kid/${res.data.kid.id}`,
+          state: res.data.kid,
+        });
         console.log(res.data.kid);
       })
       .catch((e) => console.log(e));
