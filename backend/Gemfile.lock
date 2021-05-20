@@ -79,6 +79,10 @@ GEM
       marcel (~> 1.0.0)
       mini_mime (>= 0.1.3)
       ssrf_filter (~> 1.0)
+    carrierwave-base64 (2.10.0)
+      carrierwave (>= 2.2.1)
+      marcel (~> 1.0.0)
+      mime-types (~> 3.0)
     concurrent-ruby (1.1.8)
     crass (1.0.6)
     declarative (0.0.20)
@@ -481,6 +485,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   carrierwave
+  carrierwave-base64
   firebase-auth-rails
   fog
   jwt

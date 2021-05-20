@@ -23,6 +23,8 @@ gem 'jwt'
 
 gem 'carrierwave'
 
+gem 'carrierwave-base64'
+
 gem 'fog'
 
 group :development, :test do

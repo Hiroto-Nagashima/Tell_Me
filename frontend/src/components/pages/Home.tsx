@@ -131,6 +131,7 @@ export const Home: React.FC = () => {
               lastName={kid?.last_name}
               favoriteFood={kid?.favorite_food}
               favoritePlay={kid?.favorite_play}
+              onClick={onClickUpdateKid}
             />
             <div key={user?.id}>
               <ParentProfile
