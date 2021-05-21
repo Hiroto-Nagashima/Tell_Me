@@ -69,7 +69,6 @@ yarn-error.log*
 # husky
 -
 
-
 # --------------------------backend--------------------------
 # Ignore bundler config.
 /.bundle
@@ -92,4 +91,3 @@ yarn-error.log*
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-

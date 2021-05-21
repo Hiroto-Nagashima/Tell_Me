@@ -16,6 +16,7 @@ export const SignUp: React.FC = () => {
   const [telephoneNumber, setTelephoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [daycareId, setDaycareId] = useState<number | null>(null);
+  const [role, setRole] = useState<string | null>(null);
 
   const telephoneNumberRegex = /^(0{1}\d{10,11})$/;
   const firstNameError = '';
@@ -23,11 +24,8 @@ export const SignUp: React.FC = () => {
 
   const history = useHistory();
 
-  const [role, setRole] = useState<number | null>(null);
-
   const onChangeRole = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const targetValue = Number(e.target.value);
-    setRole(targetValue);
+    return setRole(e.target.value);
   };
 
   const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -84,10 +82,10 @@ export const SignUp: React.FC = () => {
     } else if (firstName == firstNameError) {
       setError('名が無効です');
       setOpen(true);
-    } else if (role == 0 && gender == null) {
+    } else if (role == '保護者' && gender == null) {
       setError('お父様かお母様か選択してください');
       setOpen(true);
-    } else if (role == 1 && daycareId == null) {
+    } else if (role == '先生' && daycareId == null) {
       setError('保育園のIDを入力してください');
       setOpen(true);
     } else if (daycareId != null && gender != null) {
@@ -121,7 +119,7 @@ export const SignUp: React.FC = () => {
                   },
                   config,
                 );
-                history.push('/kids/register');
+                if (role == '保護者') history.push('/kids/register');
               } catch (error) {
                 setError(error?.message);
                 setOpen(true);

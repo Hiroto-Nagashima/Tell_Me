@@ -1,2 +1,2 @@
 project_info:
-  project_id: tell-me-14e7a
+  project_id: ENV['PROJECT_ID']

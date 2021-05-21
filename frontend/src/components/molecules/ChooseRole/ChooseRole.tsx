@@ -8,7 +8,7 @@ import { SingleLineTextField } from '../../atoms';
 import { Box } from '@material-ui/core';
 
 export type Props = {
-  role: number | null;
+  role: string | null;
   gender: number | null;
   daycareId: number | null;
   onChangeRole: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -51,7 +51,7 @@ export const ChooseRole: React.FC<Props> = (props) => {
           </Box>
         </RadioGroup>
       </FormControl>
-      {role == 0 ? (
+      {role == '保護者' ? (
         <RadioButtonGroup
           value={gender}
           firstLabel="私は母です"
@@ -63,7 +63,7 @@ export const ChooseRole: React.FC<Props> = (props) => {
       ) : (
         <div></div>
       )}
-      {role == 1 ? (
+      {role == '先生' ? (
         <SingleLineTextField
           id="Daycare_ID"
           type="number"

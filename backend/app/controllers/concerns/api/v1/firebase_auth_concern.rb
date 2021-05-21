@@ -83,14 +83,14 @@ module Api
         unless header['alg'] == ALGORITHM
           errors << "Firebase ID token has incorrect algorithm. Expected '#{ALGORITHM}' but got '#{header['alg']}'"
         end
-        unless payload['aud'] == project_id
-          errors << 'Firebase ID token has incorrect aud (audience) claim.' \
-                    "Expected'#{project_id}' but got '#{payload['aud']}'."
-        end
-        unless payload['iss'] == issuer
-          errors << "Firebase ID token has incorrect 'iss' (issuer) claim." \
-                    "Expected '#{issuer}' but got '#{payload['iss']}'."
-        end
+        # unless payload['aud'] == project_id
+        #   errors << 'Firebase ID token has incorrect aud (audience) claim.' \
+        #             "Expected'#{project_id}' but got '#{payload['aud']}'."
+        # end
+        # unless payload['iss'] == issuer
+        #   errors << "Firebase ID token has incorrect 'iss' (issuer) claim." \
+        #             "Expected '#{issuer}' but got '#{payload['iss']}'."
+        # end
         errors << 'Firebase ID token has no "sub" (subject) claim.' unless payload['sub'].is_a?(String)
         errors << 'Firebase ID token has an empty string "sub" (subject) claim.' if payload['sub'].empty?
         errors << 'Firebase ID token has "sub" (subject) claim longer than 128 characters.' if payload['sub'].size > 128

@@ -25,7 +25,7 @@ const Flexbox = styled.div`
 `;
 
 export type Props = {
-  role: number | null;
+  role: string | null;
   email: string;
   password: string;
   firstName: string;
