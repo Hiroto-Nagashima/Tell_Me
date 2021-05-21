@@ -42,6 +42,7 @@ const ButtonWrapper = styled(Box)`
 export type Props = {
   age: number | null | undefined;
   src: string | undefined;
+  kidId: string | null;
   onClick: () => void;
   gender: number | undefined;
   firstName: string | null | undefined;
@@ -51,8 +52,15 @@ export type Props = {
 };
 
 export const KidProfile: React.FC<Props> = (props) => {
-  const { firstName, src, lastName, favoriteFood, favoritePlay, onClick } =
-    props;
+  const {
+    firstName,
+    src,
+    kidId,
+    lastName,
+    favoriteFood,
+    favoritePlay,
+    onClick,
+  } = props;
   const classes = useStyles();
 
   return (
@@ -62,7 +70,10 @@ export const KidProfile: React.FC<Props> = (props) => {
         <CardContent>
           <Box display="flex" justifyContent="center">
             <ProfileImageBox>
-              <img src={`https://s3.amazonaws.com/tell-me-s3/${src}`} alt="" />
+              <img
+                src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/kid/image/${kidId}/${src}`}
+                alt=""
+              />
             </ProfileImageBox>
           </Box>
           <Box mt={5}>

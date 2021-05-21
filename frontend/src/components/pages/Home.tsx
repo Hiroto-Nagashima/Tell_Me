@@ -126,7 +126,8 @@ export const Home: React.FC = () => {
           <Box display="flex" justifyContent="space-around">
             <KidProfile
               age={kid?.age}
-              src={kid?.image}
+              kidId={id}
+              src="image.jpeg"
               gender={kid?.gender}
               firstName={kid?.first_name}
               lastName={kid?.last_name}
