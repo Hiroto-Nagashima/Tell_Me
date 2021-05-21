@@ -9,7 +9,7 @@ module Api
         user = User.new(user_params)
         user.uid = uid
         if user.save!
-          render json: { message: '登録が成功しました' }
+          render json: user
         else
           render json: user.errors.messages, status: :unprocessable_entity
         end

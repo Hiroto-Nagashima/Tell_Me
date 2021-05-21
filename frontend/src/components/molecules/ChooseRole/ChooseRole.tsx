@@ -37,14 +37,14 @@ export const ChooseRole: React.FC<Props> = (props) => {
         >
           <Box mb={2}>
             <FormControlLabel
-              value={0}
+              value="保護者"
               control={<Radio />}
               label="私は保護者です"
             />
           </Box>
           <Box mb={2}>
             <FormControlLabel
-              value={1}
+              value="先生"
               control={<Radio />}
               label="私は先生です"
             />

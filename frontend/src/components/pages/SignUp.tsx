@@ -103,26 +103,39 @@ export const SignUp: React.FC = () => {
               const token = await currentUser.getIdToken(true);
               const config = { headers: { authorization: `Bearer ${token}` } };
               try {
-                await axios.post(
-                  'http://localhost:5000/api/v1/users',
-                  {
-                    params: {
-                      email: email,
-                      role: role,
-                      daycare_id: daycareId,
-                      password: password,
-                      gender: gender,
-                      first_name: firstName,
-                      last_name: lastName,
-                      telephone_number: telephoneNumber,
+                await axios
+                  .post(
+                    'http://localhost:5000/api/v1/users',
+                    {
+                      params: {
+                        email: email,
+                        role: role,
+                        daycare_id: daycareId,
+                        password: password,
+                        gender: gender,
+                        first_name: firstName,
+                        last_name: lastName,
+                        telephone_number: telephoneNumber,
+                      },
                     },
-                  },
-                  config,
-                );
-                if (role == '保護者') history.push('/kids/register');
-              } catch (error) {
-                setError(error?.message);
-                setOpen(true);
+                    config,
+                  )
+                  .then((res) => {
+                    if (res.data.role == '保護者') {
+                      history.push('/kids/register');
+                    } else {
+                      history.push(
+                        `daycares/${res.data.daycare_id}/teachers/${res.data.id}`,
+                      );
+                    }
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                    setError(error?.message);
+                    setOpen(true);
+                  });
+              } catch {
+                console.log('error');
               }
             }
           })
