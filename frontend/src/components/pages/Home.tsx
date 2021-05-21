@@ -1,9 +1,16 @@
 import { Box } from '@material-ui/core';
 import axios from 'axios';
-import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import React, {
+  ChangeEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
 import { getAuth } from '../../helper/firebaseAuthHelper';
+import { CurrentUserContext } from '../../providers/UserProvider';
 import { Kid } from '../../types/api/kid';
 import { User } from '../../types/api/user';
 import { Spinner } from '../atoms/Spinner/Spinner';
@@ -15,7 +22,7 @@ export const Home: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const [kid, setKid] = useState<Kid | null>(null);
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const { id } = useParams<{ id: string }>();
   const [kidUpdateOpen, setKidUpdateOpen] = useState(false);
   const [age, setAge] = useState<number | null>(null);
@@ -24,6 +31,7 @@ export const Home: React.FC = () => {
   const [lastName, setLastName] = useState<string | null>('');
   const [favoriteFood, setFavoriteFood] = useState<string | null>('');
   const [favoritePlay, setFavoritePlay] = useState<string | null>('');
+  const { loadingCurrentUser } = useContext(CurrentUserContext);
 
   const onChangeAge = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
@@ -96,8 +104,8 @@ export const Home: React.FC = () => {
         setUser(res.data);
         console.log(user);
       })
-      .catch((e) => setError(e))
-      .finally(() => setLoading(false));
+      .catch((e) => setError(e));
+  // .finally(() => setLoading(false));
 
   const fetchKid = async () =>
     await axios
@@ -106,8 +114,8 @@ export const Home: React.FC = () => {
         setKid(res.data);
         console.log(kid);
       })
-      .catch((e) => setError(e))
-      .finally(() => setLoading(false));
+      .catch((e) => setError(e));
+  // .finally(() => setLoading(false));
 
   useEffect(() => {
     console.log('aaaaaaaaaaaaaaa');
@@ -117,7 +125,7 @@ export const Home: React.FC = () => {
 
   return (
     <>
-      {loading ? (
+      {loadingCurrentUser ? (
         <Spinner />
       ) : error ? (
         <h1>エラーです</h1>
@@ -162,6 +170,7 @@ export const Home: React.FC = () => {
             onChangeFavoritePlay={onChangeFavoritePlay}
             onSubmit={handleUpdateKidSubmit}
           />
+          <button onClick={() => console.log(kid)} />
         </>
       )}
     </>
