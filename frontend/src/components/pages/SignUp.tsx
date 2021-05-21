@@ -110,6 +110,8 @@ export const SignUp: React.FC = () => {
                   {
                     params: {
                       email: email,
+                      role: role,
+                      daycare_id: daycareId,
                       password: password,
                       gender: gender,
                       first_name: firstName,

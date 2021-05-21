@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
 import Image from '../../images/kid.jpeg';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
@@ -7,6 +7,9 @@ import * as H from 'history';
 import { useHistory } from 'react-router-dom';
 import { CustomizedSnackbar } from '../atoms/CustomizedSnackbar/CustomizedSnackbar';
 import { LoginPaper } from '../organisms/LoginPaper/LoginPaper';
+import { CurrentUserContext } from '../../providers/UserProvider';
+import axios from 'axios';
+import { getAuth } from '../../helper/firebaseAuthHelper';
 
 type Props = {
   history: H.History;
@@ -25,6 +28,7 @@ export const Login: React.FC<Props> = () => {
   const [password, setPassword] = useState('');
   const [open, setOpen] = useState(false);
   const history = useHistory();
+  const { setCurrentUser } = useContext(CurrentUserContext);
   const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     return setEmail(e.target.value);
   }, []);
@@ -47,8 +51,29 @@ export const Login: React.FC<Props> = () => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        history.push('/kids');
+      .then(async () => {
+        const loginUser = getAuth().currentUser;
+        try {
+          await axios
+            .get(`http://localhost:5000/api/v1/users/fetchUser`, {
+              params: {
+                uid: loginUser!.uid,
+              },
+            })
+            .then((res) => {
+              setCurrentUser(res.data);
+              if (res.data.role == '保護者') {
+                history.push('/kids');
+              } else {
+                history.push(
+                  `daycares/${res.data.daycare_id}/teachers/${res.data.id}`,
+                );
+              }
+            })
+            .catch((e) => setError(e));
+        } catch {
+          console.log('hey');
+        }
       })
       .catch((error) => {
         const errorMessage = error.message;

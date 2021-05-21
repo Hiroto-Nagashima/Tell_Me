@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Spinner } from '../atoms/Spinner/Spinner';
 import { KidCard } from '../molecules/KidCard/KidCard';
 import axios from 'axios';
@@ -6,6 +6,7 @@ import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Kid } from '../../types/api/kid';
 import { useHistory } from 'react-router';
+import { CurrentUserContext } from '../../providers/UserProvider';
 
 export const ChooseKid: React.FC = () => {
   console.log(4);
@@ -14,7 +15,8 @@ export const ChooseKid: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [user] = useAuthState(getAuth());
   const history = useHistory();
-  console.log(5);
+  const { currentUser } = useContext(CurrentUserContext);
+  console.log(currentUser);
 
   const onClickButton = (kidId: number) => {
     history.push(`/kids/${kidId}`);
