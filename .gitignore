@@ -68,8 +68,6 @@ yarn-error.log*
 
 # husky
 -
-#firebase
-firebaseConfig.json
 
 
 # --------------------------backend--------------------------
@@ -95,4 +93,3 @@ firebaseConfig.json
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-firebase_Config.yml
