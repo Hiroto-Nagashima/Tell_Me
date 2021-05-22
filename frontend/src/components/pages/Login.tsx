@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { CustomizedSnackbar } from '../atoms/CustomizedSnackbar/CustomizedSnackbar';
 import { LoginPaper } from '../organisms/LoginPaper/LoginPaper';
 import { CurrentUserContext } from '../../providers/UserProvider';
+import { Spinner } from '../atoms';
 
 type Props = {
   history: H.History;
@@ -27,10 +28,11 @@ export const Login: React.FC<Props> = () => {
 
   const { setCurrentUser } = useContext(CurrentUserContext);
 
+  const [open, setOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState('');
-  const [open, setOpen] = useState(false);
 
   const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     return setEmail(e.target.value);
@@ -50,6 +52,7 @@ export const Login: React.FC<Props> = () => {
   };
 
   const handleSubmit = () => {
+    setLoading(true);
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
@@ -81,25 +84,40 @@ export const Login: React.FC<Props> = () => {
         const errorMessage = error.message;
         setError(errorMessage);
         setOpen(true);
-      });
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
-    <BackgroundImage>
-      <Grid container justify="flex-end" alignItems="flex-end">
-        <Grid item xs={6}>
-          <LoginPaper
-            email={email}
-            onChangeEmail={onChangeEmail}
-            password={password}
-            onChangePassword={onChangePassword}
-            onClickLogin={handleSubmit}
-          />
-        </Grid>
-      </Grid>
-      <CustomizedSnackbar open={open} onClose={handleClose} severity="error">
-        {error}
-      </CustomizedSnackbar>
-    </BackgroundImage>
+    <>
+      {loading ? (
+        <Spinner />
+      ) : error ? (
+        <div>エラー</div>
+      ) : (
+        <>
+          <BackgroundImage>
+            <Grid container justify="flex-end" alignItems="flex-end">
+              <Grid item xs={6}>
+                <LoginPaper
+                  email={email}
+                  onChangeEmail={onChangeEmail}
+                  password={password}
+                  onChangePassword={onChangePassword}
+                  onClickLogin={handleSubmit}
+                />
+              </Grid>
+            </Grid>
+            <CustomizedSnackbar
+              open={open}
+              onClose={handleClose}
+              severity="error"
+            >
+              {error}
+            </CustomizedSnackbar>
+          </BackgroundImage>
+        </>
+      )}
+    </>
   );
 };
