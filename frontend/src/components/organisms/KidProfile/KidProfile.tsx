@@ -124,6 +124,6 @@ export const KidProfile: React.FC<Props> = memo((props) => {
       </MyCardActions>
     </Card>
   );
-})
+});
 
 KidProfile.displayName = 'KidProfile';

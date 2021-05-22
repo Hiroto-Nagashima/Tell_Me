@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -51,7 +51,7 @@ export type Props = {
   telephoneNumber: string | null | undefined;
 };
 
-export const ParentProfile: React.FC<Props> = (props) => {
+export const ParentProfile: React.FC<Props> = memo((props) => {
   const { firstName, lastName, telephoneNumber, email, gender } = props;
   const classes = useStyles();
 
@@ -118,4 +118,6 @@ export const ParentProfile: React.FC<Props> = (props) => {
       </MyCardActions>
     </Card>
   );
-};
+});
+
+ParentProfile.displayName = 'ParentProfile';
