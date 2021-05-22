@@ -1,10 +1,11 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
 import axios from 'axios';
 import firebase from 'firebase';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router';
 import { SignUpPaper } from '../organisms/SignUpPaper/SignUpPaper';
 import { CustomizedSnackbar } from '../atoms/CustomizedSnackbar/CustomizedSnackbar';
+import { CurrentUserContext } from '../../providers/UserProvider';
 
 export const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -17,6 +18,7 @@ export const SignUp: React.FC = () => {
   const [password, setPassword] = useState('');
   const [daycareId, setDaycareId] = useState<number | null>(null);
   const [role, setRole] = useState<string | null>(null);
+  const { setCurrentUser } = useContext(CurrentUserContext);
 
   const telephoneNumberRegex = /^(0{1}\d{10,11})$/;
   const firstNameError = '';
@@ -121,6 +123,7 @@ export const SignUp: React.FC = () => {
                     config,
                   )
                   .then((res) => {
+                    setCurrentUser(res.data);
                     if (res.data.role == '保護者') {
                       history.push('/kids/register');
                     } else {

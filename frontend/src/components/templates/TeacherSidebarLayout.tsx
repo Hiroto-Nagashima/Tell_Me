@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useContext, useState } from 'react';
 import HomeIcon from '@material-ui/icons/Home';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import AppBar from '@material-ui/core/AppBar';
@@ -21,10 +21,11 @@ import {
   Theme,
   createStyles,
 } from '@material-ui/core/styles';
-import { useHistory, useParams } from 'react-router';
+import { useHistory } from 'react-router';
 import firebase from 'firebase';
 import { DraggableDialog } from '../molecules';
 import { Box } from '@material-ui/core';
+import { CurrentUserContext } from '../../providers/UserProvider';
 
 const drawerWidth = 240;
 
@@ -76,7 +77,7 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [title, setTitle] = useState('Home');
   const [isOpen, setOpen] = useState(false);
-  const { id } = useParams<{ id: string }>();
+  const { currentUser } = useContext(CurrentUserContext);
 
   const onClickOpen = () => {
     setOpen(true);
@@ -89,12 +90,16 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
     setMobileOpen(!mobileOpen);
   };
   const onClickHome = () => {
-    history.push(`/kids/${id}`);
+    history.push(
+      `/daycares/${currentUser?.id}/teachers/${currentUser?.daycareId}`,
+    );
     setTitle('Home');
   };
 
   const onClickAnnouncement = () => {
-    history.push(`/kids/${id}/announcement`);
+    history.push(
+      `/daycares/${currentUser?.daycareId}/teachers/${currentUser?.id}/announcement`,
+    );
     setTitle('Announcement');
   };
 

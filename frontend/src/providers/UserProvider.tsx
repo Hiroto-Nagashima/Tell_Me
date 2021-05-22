@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth } from '../helper/firebaseAuthHelper';
 import { User } from '../types/api/user';
 
@@ -19,10 +20,10 @@ export const UserProvider: React.FC<Props> = (props) => {
   const { children } = props;
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [loadingCurrentUser, setLoadingCurrentUser] = useState(false);
+  const [user, loading] = useAuthState(getAuth());
 
   const fetchUser = async () => {
     setLoadingCurrentUser(true);
-    const user = await getAuth().currentUser;
     if (user) {
       axios
         .get(`http://localhost:5000/api/v1/users/fetchUser`, {
@@ -45,8 +46,12 @@ export const UserProvider: React.FC<Props> = (props) => {
 
   useEffect(() => {
     console.log('heyo');
-    fetchUser();
-  }, []);
+    !loading && fetchUser();
+  }, [loading]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <CurrentUserContext.Provider

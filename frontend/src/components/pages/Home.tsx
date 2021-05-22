@@ -31,7 +31,7 @@ export const Home: React.FC = () => {
   const [lastName, setLastName] = useState<string | null>('');
   const [favoriteFood, setFavoriteFood] = useState<string | null>('');
   const [favoritePlay, setFavoritePlay] = useState<string | null>('');
-  const { loadingCurrentUser } = useContext(CurrentUserContext);
+  const { loadingCurrentUser, currentUser } = useContext(CurrentUserContext);
 
   const onChangeAge = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
@@ -170,7 +170,7 @@ export const Home: React.FC = () => {
             onChangeFavoritePlay={onChangeFavoritePlay}
             onSubmit={handleUpdateKidSubmit}
           />
-          <button onClick={() => console.log(kid)} />
+          <button onClick={() => console.log(currentUser)} />
         </>
       )}
     </>
