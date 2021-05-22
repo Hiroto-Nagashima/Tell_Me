@@ -37,7 +37,17 @@ module Api
 
       def show
         kid = Kid.find(params[:id])
-        render json: kid, status: 200
+        render json: {
+          kid:{
+            age: kid.age,
+            gender: kid.gender,
+            lastName: kid.last_name,
+            firstName: kid.first_name,
+            daycareId: kid.daycare_id,
+            favoritePlay: kid.favorite_play,
+            favoriteFood: kid.favorite_food,
+          }
+        }, status: 200
       end
 
       def registerImage

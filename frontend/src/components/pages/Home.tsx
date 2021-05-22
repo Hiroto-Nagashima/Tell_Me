@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import axios from 'axios';
 import { Box } from '@material-ui/core';
-import { Kid } from '../../types/api/kid';
+import { Kid } from '../../types/frontend/kid';
 import { Spinner } from '../atoms/Spinner/Spinner';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useParams } from 'react-router-dom';
@@ -27,10 +27,10 @@ export const Home: React.FC = () => {
   const [error, setError] = useState(false);
   const [gender, setGender] = useState(kid.gender);
   const [loading, setLoading] = useState(false);
-  const [lastName, setLastName] = useState<string>(kid.last_name);
-  const [firstName, setFirstName] = useState<string>('');
-  const [favoriteFood, setFavoriteFood] = useState<string>('');
-  const [favoritePlay, setFavoritePlay] = useState<string>('');
+  const [lastName, setLastName] = useState<string>(kid.lastName);
+  const [firstName, setFirstName] = useState<string>(kid.firstName);
+  const [favoriteFood, setFavoriteFood] = useState<string>(kid.favoriteFood);
+  const [favoritePlay, setFavoritePlay] = useState<string>(kid.favoritePlay);
   const [kidUpdateOpen, setKidUpdateOpen] = useState(false);
 
   const onChangeAge = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -97,7 +97,7 @@ export const Home: React.FC = () => {
     await axios
       .get(`http://localhost:5000/api/v1/kids/${id}`)
       .then((res) => {
-        setKid(res.data);
+        setKid(res.data.kid);
       })
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
@@ -117,13 +117,13 @@ export const Home: React.FC = () => {
         <>
           <Box display="flex" justifyContent="space-around">
             <KidProfile
-              age={kid?.age}
+              age={kid.age}
               kidId={id}
-              gender={kid?.gender}
-              firstName={kid?.first_name}
-              lastName={kid?.last_name}
-              favoriteFood={kid?.favorite_food}
-              favoritePlay={kid?.favorite_play}
+              gender={kid.gender}
+              firstName={kid.firstName}
+              lastName={kid.lastName}
+              favoriteFood={kid.favoriteFood}
+              favoritePlay={kid.favoritePlay}
               onClick={onClickUpdateKid}
             />
             <div key={currentUser?.id}>
@@ -153,6 +153,7 @@ export const Home: React.FC = () => {
             onChangeFavoritePlay={onChangeFavoritePlay}
             onSubmit={handleUpdateKidSubmit}
           />
+          {/* <button onClick={() => console.log(kid)} /> */}
         </>
       )}
     </>

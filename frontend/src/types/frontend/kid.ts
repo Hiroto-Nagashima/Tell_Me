@@ -1,7 +1,7 @@
 export type Kid = {
   id: number;
   age: number;
-  image: string;
+  image: string | null;
   gender: number;
   firstName: string;
   lastName: string;
