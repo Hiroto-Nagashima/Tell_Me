@@ -34,6 +34,13 @@ const MyCardActionArea = styled(Box)`
   height: 390px;
 `;
 
+const ProfileImage = styled.img`
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+`;
+
 const ButtonWrapper = styled(Box)`
   width: 100px;
   margin: 0 0 0 auto;
@@ -70,7 +77,7 @@ export const KidProfile: React.FC<Props> = memo((props) => {
         <CardContent>
           <Box display="flex" justifyContent="center">
             <ProfileImageBox>
-              <img
+              <ProfileImage
                 src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/kid/image/${kidId}/${src}`}
                 alt=""
               />
