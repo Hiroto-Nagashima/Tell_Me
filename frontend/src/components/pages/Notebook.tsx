@@ -57,7 +57,6 @@ export const Notebook: React.FC = () => {
 
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
-    console.log(date);
   };
 
   const fetchKid = async () =>
@@ -83,7 +82,6 @@ export const Notebook: React.FC = () => {
 
   const onClickCheck = () => {
     setLoading(true);
-    console.log(selectedDate);
     axios
       .get(
         `http://localhost:5000/api/v1/kids/${kid!.id}/notebooks/fetchNotebook`,

@@ -30,7 +30,7 @@ export type Props = {
   userName: string | null;
   firstName: string | null;
   lastName: string | null;
-  daycareID: number | null;
+  daycareId: number | null;
   favoriteFood: string | null;
   favoritePlay: string | null;
   onClick: () => void;
@@ -38,7 +38,7 @@ export type Props = {
   onChangeLastName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeGender: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeAge: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeDaycareID: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeDaycareId: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeFavoriteFood: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeFavoritePlay: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
@@ -49,7 +49,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
     gender,
     firstName,
     lastName,
-    daycareID,
+    daycareId,
     userName,
     favoriteFood,
     favoritePlay,
@@ -58,7 +58,7 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
     onChangeLastName,
     onChangeAge,
     onChangeGender,
-    onChangeDaycareID,
+    onChangeDaycareId,
     onChangeFavoriteFood,
     onChangeFavoritePlay,
   } = props;
@@ -81,8 +81,8 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
             isFullWidth={false}
             textName="ID"
             placeholder="保育園ID"
-            value={daycareID}
-            onChange={onChangeDaycareID}
+            value={daycareId}
+            onChange={onChangeDaycareId}
           />
         </Box>
         <Box component="h3" px={2} textAlign="center">

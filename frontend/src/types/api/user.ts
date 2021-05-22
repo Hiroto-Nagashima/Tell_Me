@@ -2,7 +2,7 @@ export type User = {
   id: number;
   role: '保護者' | '先生';
   email: string | null;
-  daycareId: number;
+  daycare_id: number;
   password: string | null;
   gender: number;
   first_name: string | null;
