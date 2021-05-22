@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import { Alert } from '../Alert';
 import { makeStyles, Theme } from '@material-ui/core/styles';
@@ -18,7 +18,7 @@ export type Props = {
   severity: 'error' | 'warning' | 'info' | 'success';
   children: string;
 };
-export const CustomizedSnackbar: React.FC<Props> = (props) => {
+export const CustomizedSnackbar: React.FC<Props> = memo((props) => {
   const { open, onClose, severity, children } = props;
   const classes = useStyles();
 
@@ -31,4 +31,6 @@ export const CustomizedSnackbar: React.FC<Props> = (props) => {
       </Snackbar>
     </div>
   );
-};
+});
+
+CustomizedSnackbar.displayName = 'CustomizedSnackbar';
