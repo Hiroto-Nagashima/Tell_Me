@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -51,7 +51,7 @@ export type Props = {
   favoriteFood: string | null | undefined;
 };
 
-export const KidProfile: React.FC<Props> = (props) => {
+export const KidProfile: React.FC<Props> = memo((props) => {
   const {
     firstName,
     src,
@@ -124,4 +124,6 @@ export const KidProfile: React.FC<Props> = (props) => {
       </MyCardActions>
     </Card>
   );
-};
+})
+
+KidProfile.displayName = 'KidProfile';
