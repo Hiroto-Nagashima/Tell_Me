@@ -1,31 +1,33 @@
-import axios from 'axios';
 import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import axios from 'axios';
+import format from 'date-fns/format';
 import { Kid } from '../../types/api/kid';
-import { CustomizedSnackbar, Spinner } from '../atoms';
 import { DatePicker } from '../molecules';
 import { useParams } from 'react-router-dom';
 import { InputOfNotebook } from '../organisms';
-import format from 'date-fns/format';
+import { CustomizedSnackbar, Spinner } from '../atoms';
 
 export const Notebook: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [notebookId, setNotebookID] = useState<number | null>(null);
+  const [kid, setKid] = useState<Kid | null>(null);
+  const [memo, setMemo] = useState<string | null>(null);
+  const [error, setError] = useState('');
+  const [dinner, setDinner] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [message, setMassage] = useState('');
   const [isUpdate, setIsUpdate] = useState(false);
+  const [breakfast, setBreakfast] = useState<string | null>(null);
+  const [hasBathed, setHasBathed] = useState<boolean | null>(null);
+  const [notebookId, setNotebookID] = useState<number | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [isNotebookOpen, setIsNotebookOpen] = useState(false);
-  const [message, setMassage] = useState('');
   const [severity, setSeverity] =
     useState<'error' | 'warning' | 'info' | 'success'>('error');
-  const [kid, setKid] = useState<Kid | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  const [dinner, setDinner] = useState<string | null>(null);
-  const [breakfast, setBreakfast] = useState<string | null>(null);
-  const [memo, setMemo] = useState<string | null>(null);
   const [bodyTemperature, setBodyTemperature] =
     useState<number | string | null>(null);
-  const [hasBathed, setHasBathed] = useState<boolean | null>(null);
+
+  const newDate = format(selectedDate!, 'yyyy/MM/dd');
 
   const handleDinnerChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setDinner(e.target.value);
@@ -58,8 +60,6 @@ export const Notebook: React.FC = () => {
     console.log(date);
   };
 
-  const newDate = format(selectedDate!, 'yyyy/MM/dd');
-
   const fetchKid = async () =>
     await axios
       .get(`http://localhost:5000/api/v1/kids/${id}`)
@@ -80,8 +80,6 @@ export const Notebook: React.FC = () => {
 
     return;
   };
-
-  // const handleCloseNotebook = () => setIsNotebookOpen(false);
 
   const onClickCheck = () => {
     setLoading(true);
@@ -188,13 +186,6 @@ export const Notebook: React.FC = () => {
             onAccept={onClickCheck}
             selectedDate={selectedDate}
           />
-          {/* <DefaultButton
-            variant="contained"
-            color="primary"
-            label="連絡帳を確認"
-            size="medium"
-            onClick={onClickCheck}
-          /> */}
           {isNotebookOpen ? (
             <InputOfNotebook
               memo={memo}

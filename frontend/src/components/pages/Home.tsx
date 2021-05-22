@@ -79,7 +79,6 @@ export const Home: React.FC = () => {
         },
       })
       .then((res) => {
-        // history.push({ pathname: '/', state: res.data.kid });
         console.log(res.data.kid);
       })
       .catch((e) => console.log(e));
