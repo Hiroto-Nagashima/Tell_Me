@@ -1,34 +1,28 @@
 import React, { ChangeEvent, createRef, memo, useState } from 'react';
-import styled from 'styled-components';
-import { Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import { SingleLineTextField } from '../atoms/index';
-import { RadioButtonGroup } from '../molecules/RadioButtonGroup';
-import Resizer from 'react-image-file-resizer';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 import axios from 'axios';
 import { useParams } from 'react-router';
+import { FlexibleButton, SingleLineTextField } from '../atoms/index';
+import { RadioButtonGroup } from '../molecules/RadioButtonGroup';
+import Resizer from 'react-image-file-resizer';
+import styled from 'styled-components';
+import { Box } from '@material-ui/core';
 
-const rand = () => {
-  return Math.round(Math.random() * 20) - 10;
-};
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
+const Flexbox = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     paper: {
-      position: 'absolute',
-      width: 400,
       backgroundColor: theme.palette.background.paper,
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
@@ -36,19 +30,15 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-const Flexbox = styled.div`
-  display: flex;
-  justify-content: center;
-`;
 export type Props = {
-  isOpen: boolean;
-  onClose: () => void;
   age: number | null;
+  open: boolean;
   gender: number;
   firstName: string | null;
   lastName: string | null;
   favoriteFood: string | null;
   favoritePlay: string | null;
+  onClose: () => void;
   onChangeAge: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeFirstName: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeLastName: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -60,24 +50,23 @@ export type Props = {
 
 export const UpdateKidModal: React.FC<Props> = memo((props) => {
   const {
-    isOpen,
-    onClose,
     age,
+    open,
     gender,
     firstName,
     lastName,
-    // favoriteFood,
-    // favoritePlay,
+    favoriteFood,
+    favoritePlay,
+    onClose,
     onChangeAge,
     onChangeGender,
     onChangeFirstName,
     onChangeLastName,
-    // onChangeFavoriteFood,
-    // onChangeFavoritePlay,
-    // onSubmit,
+    onChangeFavoriteFood,
+    onChangeFavoritePlay,
+    onSubmit,
   } = props;
   const classes = useStyles();
-  const [modalStyle] = useState(getModalStyle);
   const { id } = useParams<{ id: string }>();
   const [image, setImage] = useState<any>('');
 
@@ -131,103 +120,111 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
   return (
     <div>
       <Modal
-        open={isOpen}
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
         onClose={onClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
       >
-        <div style={modalStyle} className={classes.paper}>
-          <Box component="h3" px={2} my={5} textAlign="center">
-            1.写真をアップロードしてください
-          </Box>
-          <Box textAlign="center" mx={4}>
-            <input
-              type="file"
-              name="image"
-              onChange={handleFileChange}
-              accept="image/*"
-            />
-            <input
-              type="button"
-              value="Submit"
-              ref={fileInput}
-              onClick={handleSubmit}
-            />
-          </Box>
-          <Box component="h3" px={2} my={5} textAlign="center">
-            2.登録済み情報を更新してください
-          </Box>
-          <Box textAlign="center" m={4}>
-            <RadioButtonGroup
-              value={gender}
-              firstValue={0}
-              secondValue={1}
-              onChange={onChangeGender}
-              firstLabel="女の子"
-              secondLabel="男の子"
-            />
-          </Box>
-          <Flexbox>
-            <Box textAlign="center" mr={1} mb={2}>
-              <SingleLineTextField
-                id="姓"
-                isFullWidth={false}
-                textName="姓"
-                placeholder="山田"
-                value={lastName}
-                onChange={onChangeLastName}
+        <Fade in={open}>
+          <div className={classes.paper}>
+            <Box component="h3" px={2} my={5} textAlign="center">
+              1.写真をアップロードしてください
+            </Box>
+            <Box textAlign="center" mx={4}>
+              <input
+                type="file"
+                name="image"
+                onChange={handleFileChange}
+                accept="image/*"
+              />
+              <input
+                type="button"
+                value="Submit"
+                ref={fileInput}
+                onClick={handleSubmit}
               />
             </Box>
-            <Box textAlign="center" ml={1}>
-              <SingleLineTextField
-                id="名"
-                isFullWidth={false}
-                textName="太郎"
-                placeholder="空欄は入れないでください"
-                value={firstName}
-                onChange={onChangeFirstName}
+            <Box component="h3" px={2} my={5} textAlign="center">
+              2.登録済み情報を更新してください
+            </Box>
+            <Box textAlign="center" m={4}>
+              <RadioButtonGroup
+                value={gender}
+                firstValue={0}
+                secondValue={1}
+                onChange={onChangeGender}
+                firstLabel="女の子"
+                secondLabel="男の子"
               />
             </Box>
-          </Flexbox>
-          <Box mb={2}>
-            <SingleLineTextField
-              id="ご年齢"
-              isFullWidth={false}
-              textName="ご年齢"
-              placeholder="数字のみ"
-              value={age}
-              onChange={onChangeAge}
-            />
-          </Box>
-          {/* <Box textAlign="center" mb={2}>
-            <SingleLineTextField
-              id="好きな食べ物"
-              isFullWidth={true}
-              textName="好きな食べ物"
-              placeholder="餃子"
-              value={favoriteFood}
-              onChange={onChangeFavoriteFood}
-            />
-          </Box> */}
-          {/* <Box textAlign="center">
-            <SingleLineTextField
-              id="好きな食べ物"
-              isFullWidth={true}
-              textName="好きな遊び"
-              placeholder="おままごと"
-              value={favoritePlay}
-              onChange={onChangeFavoritePlay}
-            />
-          </Box> */}
-          {/* <Box textAlign="center" m={5}>
-            <FlexibleButton
-              onClick={onSubmit}
-              variant="contained"
-              color="primary"
-              label="登録"
-            />
-          </Box> */}
-        </div>
+            <Flexbox>
+              <Box textAlign="center" mr={1} mb={2}>
+                <SingleLineTextField
+                  id="姓"
+                  isFullWidth={false}
+                  textName="姓"
+                  placeholder="山田"
+                  value={lastName}
+                  onChange={onChangeLastName}
+                />
+              </Box>
+              <Box textAlign="center" ml={1}>
+                <SingleLineTextField
+                  id="名"
+                  isFullWidth={false}
+                  textName="太郎"
+                  placeholder="空欄は入れないでください"
+                  value={firstName}
+                  onChange={onChangeFirstName}
+                />
+              </Box>
+            </Flexbox>
+            <Box mb={2}>
+              <SingleLineTextField
+                id="ご年齢"
+                isFullWidth={false}
+                textName="ご年齢"
+                placeholder="数字のみ"
+                value={age}
+                onChange={onChangeAge}
+              />
+            </Box>
+            <Box textAlign="center" mb={2}>
+              <SingleLineTextField
+                id="好きな食べ物"
+                isFullWidth={true}
+                textName="好きな食べ物"
+                placeholder="餃子"
+                value={favoriteFood}
+                onChange={onChangeFavoriteFood}
+              />
+            </Box>
+            <Box textAlign="center">
+              <SingleLineTextField
+                id="好きな食べ物"
+                isFullWidth={true}
+                textName="好きな遊び"
+                placeholder="おままごと"
+                value={favoritePlay}
+                onChange={onChangeFavoritePlay}
+              />
+            </Box>
+            <Box textAlign="center" m={5}>
+              <FlexibleButton
+                onClick={onSubmit}
+                variant="contained"
+                color="primary"
+                label="登録"
+              />
+            </Box>
+          </div>
+        </Fade>
       </Modal>
     </div>
   );

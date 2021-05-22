@@ -138,7 +138,7 @@ export const Home: React.FC = () => {
             </div>
           </Box>
           <UpdateKidModal
-            isOpen={kidUpdateOpen}
+            open={kidUpdateOpen}
             onClose={onCloseUpdateKid}
             age={age}
             gender={gender}
