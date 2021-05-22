@@ -23,14 +23,14 @@ export const Home: React.FC = () => {
   const { currentUser } = useContext(CurrentUserContext);
 
   const [age, setAge] = useState<number | null>(null);
-  const [kid, setKid] = useState<Kid | null>(null);
+  const [kid, setKid] = useState<Kid>({} as Kid);
   const [error, setError] = useState(false);
-  const [gender, setGender] = useState(0);
+  const [gender, setGender] = useState(kid.gender);
   const [loading, setLoading] = useState(false);
-  const [lastName, setLastName] = useState<string | null>('');
-  const [firstName, setFirstName] = useState<string | null>('');
-  const [favoriteFood, setFavoriteFood] = useState<string | null>('');
-  const [favoritePlay, setFavoritePlay] = useState<string | null>('');
+  const [lastName, setLastName] = useState<string>(kid.last_name);
+  const [firstName, setFirstName] = useState<string>('');
+  const [favoriteFood, setFavoriteFood] = useState<string>('');
+  const [favoritePlay, setFavoritePlay] = useState<string>('');
   const [kidUpdateOpen, setKidUpdateOpen] = useState(false);
 
   const onChangeAge = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -119,7 +119,6 @@ export const Home: React.FC = () => {
             <KidProfile
               age={kid?.age}
               kidId={id}
-              src="image.jpeg"
               gender={kid?.gender}
               firstName={kid?.first_name}
               lastName={kid?.last_name}

@@ -48,21 +48,21 @@ const ButtonWrapper = styled(Box)`
 
 export type Props = {
   age: number | null | undefined;
-  src: string | undefined;
   kidId: string | null;
-  onClick: () => void;
   gender: number | undefined;
   firstName: string | null | undefined;
   lastName: string | null | undefined;
   favoritePlay: string | null | undefined;
   favoriteFood: string | null | undefined;
+  onClick: () => void;
 };
 
 export const KidProfile: React.FC<Props> = memo((props) => {
   const {
     firstName,
-    src,
+    age,
     kidId,
+    gender,
     lastName,
     favoriteFood,
     favoritePlay,
@@ -78,7 +78,7 @@ export const KidProfile: React.FC<Props> = memo((props) => {
           <Box display="flex" justifyContent="center">
             <ProfileImageBox>
               <ProfileImage
-                src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/kid/image/${kidId}/${src}`}
+                src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/kid/image/${kidId}/image.jpeg`}
                 alt=""
               />
             </ProfileImageBox>
@@ -92,33 +92,55 @@ export const KidProfile: React.FC<Props> = memo((props) => {
           <Box display="flex" justifyContent="center">
             <Box mr={2}>
               <Typography
-                variant="h6"
+                variant="subtitle2"
                 color="textSecondary"
-                component="h6"
+                component="h3"
                 align="center"
               >
-                {favoritePlay}
+                {gender === 0 ? '女の子' : '男の子'}
               </Typography>
             </Box>
-            <Box mt={2}>
+            <Box ml={2}>
               <Typography
-                variant="subtitle1"
-                color="textPrimary"
-                component="h2"
-              >
-                好きな食べ物
-              </Typography>
-            </Box>
-            <Box mt={1}>
-              <Typography
-                variant="h6"
+                variant="subtitle2"
                 color="textSecondary"
-                component="h6"
+                component="h3"
                 align="center"
               >
-                {favoriteFood}
+                {age}才
               </Typography>
             </Box>
+          </Box>
+          <Box mt={2}>
+            <Typography variant="subtitle1" color="inherit" component="h2">
+              好きな遊び
+            </Typography>
+          </Box>
+          <Box mt={1}>
+            <Typography
+              variant="h6"
+              color="textSecondary"
+              component="h6"
+              align="center"
+            >
+              {favoritePlay}
+            </Typography>
+          </Box>
+
+          <Box mt={2}>
+            <Typography variant="subtitle1" color="textPrimary" component="h2">
+              好きな食べ物
+            </Typography>
+          </Box>
+          <Box mt={1}>
+            <Typography
+              variant="h6"
+              color="textSecondary"
+              component="h6"
+              align="center"
+            >
+              {favoriteFood}
+            </Typography>
           </Box>
         </CardContent>
       </MyCardActionArea>
