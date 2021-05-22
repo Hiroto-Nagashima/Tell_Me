@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import 'date-fns';
 import ja from 'date-fns/locale/ja';
 import format from 'date-fns/format';
@@ -23,7 +23,7 @@ export type Props = {
   onAccept?: () => void;
 };
 
-export const DatePicker: React.FC<Props> = (props) => {
+export const DatePicker: React.FC<Props> = memo((props) => {
   const { onChangeDate, selectedDate, onAccept } = props;
 
   return (
@@ -44,4 +44,6 @@ export const DatePicker: React.FC<Props> = (props) => {
       />
     </MuiPickersUtilsProvider>
   );
-};
+});
+
+DatePicker.displayName = 'DatePicker';
