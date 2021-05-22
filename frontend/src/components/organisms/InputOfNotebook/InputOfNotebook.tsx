@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
@@ -39,7 +39,7 @@ export type Props = {
   onChangeBodyTemperature: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const InputOfNotebook: React.FC<Props> = (props) => {
+export const InputOfNotebook: React.FC<Props> = memo((props) => {
   const {
     memo,
     dinner,
@@ -133,4 +133,5 @@ export const InputOfNotebook: React.FC<Props> = (props) => {
       </Paper>
     </div>
   );
-};
+});
+InputOfNotebook.displayName = 'InputOfNotebook';
