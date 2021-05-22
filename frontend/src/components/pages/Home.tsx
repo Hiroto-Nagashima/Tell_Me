@@ -65,7 +65,7 @@ export const Home: React.FC = () => {
     },
     [],
   );
-  const handleUpdateKidSubmit = () => {
+  const handleUpdateKidSubmit = useCallback(() => {
     axios
       .post(`http://localhost:5000/api/v1/kids`, {
         params: {
@@ -82,15 +82,15 @@ export const Home: React.FC = () => {
         console.log(res.data.kid);
       })
       .catch((e) => console.log(e));
-  };
+  }, []);
 
-  const onCloseUpdateKid = () => {
+  const onCloseUpdateKid = useCallback(() => {
     setKidUpdateOpen(false);
-  };
+  }, []);
 
-  const onClickUpdateKid = () => {
+  const onClickUpdateKid = useCallback(() => {
     setKidUpdateOpen(true);
-  };
+  }, []);
 
   const fetchKid = async () => {
     setLoading(true);
