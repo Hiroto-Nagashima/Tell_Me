@@ -1,15 +1,15 @@
 import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
+import * as H from 'history';
+import axios from 'axios';
+import Grid from '@material-ui/core/Grid';
 import Image from '../../images/kid.jpeg';
 import styled from 'styled-components';
-import Grid from '@material-ui/core/Grid';
 import firebase from 'firebase';
-import * as H from 'history';
+import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router-dom';
 import { CustomizedSnackbar } from '../atoms/CustomizedSnackbar/CustomizedSnackbar';
 import { LoginPaper } from '../organisms/LoginPaper/LoginPaper';
 import { CurrentUserContext } from '../../providers/UserProvider';
-import axios from 'axios';
-import { getAuth } from '../../helper/firebaseAuthHelper';
 
 type Props = {
   history: H.History;
@@ -23,12 +23,14 @@ const BackgroundImage = styled.div`
 `;
 
 export const Login: React.FC<Props> = () => {
+  const history = useHistory();
+  const { setCurrentUser } = useContext(CurrentUserContext);
+
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [password, setPassword] = useState('');
   const [open, setOpen] = useState(false);
-  const history = useHistory();
-  const { setCurrentUser } = useContext(CurrentUserContext);
+
   const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     return setEmail(e.target.value);
   }, []);
@@ -41,7 +43,6 @@ export const Login: React.FC<Props> = () => {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
 
     return;
@@ -71,8 +72,8 @@ export const Login: React.FC<Props> = () => {
               }
             })
             .catch((e) => setError(e));
-        } catch {
-          console.log('hey');
+        } catch (error) {
+          setError(error);
         }
       })
       .catch((error) => {
