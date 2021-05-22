@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Spinner } from '../components/atoms';
 import { getAuth } from '../helper/firebaseAuthHelper';
 import { CurrentUser } from '../types/frontend/currentUser';
 
@@ -52,7 +53,7 @@ export const UserProvider: React.FC<Props> = (props) => {
   }, [loading]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Spinner />;
   }
 
   return (

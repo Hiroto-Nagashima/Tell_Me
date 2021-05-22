@@ -72,8 +72,8 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
         <Box component="h1" pt={2} my={4} textAlign="center">
           ようこそ!
           <br />
-          {parentFirstName}
-          {parentLastName}さん！
+          {parentLastName}
+          {parentFirstName}さん！
         </Box>
         <Box component="h3" px={2} my={5} textAlign="center">
           1. 保育園のIDを入力してください

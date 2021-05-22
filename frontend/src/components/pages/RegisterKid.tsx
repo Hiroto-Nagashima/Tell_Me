@@ -6,6 +6,7 @@ import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { RegisterKidPaper } from '../organisms/RegisterKidPaper/RegisterKidPaper';
 import { CurrentUserContext } from '../../providers/UserProvider';
+import { Spinner } from '../atoms';
 
 type Props = {
   history: H.History;
@@ -19,7 +20,9 @@ export const RegisterKid: React.FC<Props> = () => {
   const { currentUser } = useContext(CurrentUserContext);
 
   const [age, setAge] = useState<number | null>(null);
+  const [error, setError] = useState('');
   const [gender, setGender] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [lastName, setLastName] = useState<string | null>('');
   const [firstName, setFirstName] = useState<string | null>('');
   const [daycareId, setDaycareId] = useState<number | null>(null);
@@ -66,6 +69,7 @@ export const RegisterKid: React.FC<Props> = () => {
   );
 
   const handleSubmit = () => {
+    setLoading(true);
     axios
       .post(`http://localhost:5000/api/v1/kids`, {
         params: {
@@ -81,34 +85,43 @@ export const RegisterKid: React.FC<Props> = () => {
       })
       .then((res) => {
         history.push({
-          pathname: `/kid/${res.data.kid.id}`,
+          pathname: `/kids/${res.data.kid.id}`,
           state: res.data.kid,
         });
       })
-      .catch((e) => console.log(e));
+      .catch((e) => setError(e))
+      .finally(() => setLoading(false));
   };
 
   return (
     <>
-      <RegisterKidPaper
-        age={age}
-        parentLastName={currentUser.lastName}
-        parentFirstName={currentUser.firstName}
-        gender={gender}
-        lastName={lastName}
-        daycareId={daycareId}
-        firstName={firstName}
-        favoriteFood={favoriteFood}
-        favoritePlay={favoritePlay}
-        onClick={handleSubmit}
-        onChangeAge={onChangeAge}
-        onChangeDaycareId={onChangeDaycareId}
-        onChangeFirstName={onChangeFirstName}
-        onChangeLastName={onChangeLastName}
-        onChangeGender={onChangeGender}
-        onChangeFavoriteFood={onChangeFavoriteFood}
-        onChangeFavoritePlay={onChangeFavoritePlay}
-      />
+      {loading ? (
+        <Spinner />
+      ) : error ? (
+        <div>{error}</div>
+      ) : (
+        <>
+          <RegisterKidPaper
+            age={age}
+            parentLastName={currentUser.lastName}
+            parentFirstName={currentUser.firstName}
+            gender={gender}
+            lastName={lastName}
+            daycareId={daycareId}
+            firstName={firstName}
+            favoriteFood={favoriteFood}
+            favoritePlay={favoritePlay}
+            onClick={handleSubmit}
+            onChangeAge={onChangeAge}
+            onChangeDaycareId={onChangeDaycareId}
+            onChangeFirstName={onChangeFirstName}
+            onChangeLastName={onChangeLastName}
+            onChangeGender={onChangeGender}
+            onChangeFavoriteFood={onChangeFavoriteFood}
+            onChangeFavoritePlay={onChangeFavoritePlay}
+          />
+        </>
+      )}
     </>
   );
 };

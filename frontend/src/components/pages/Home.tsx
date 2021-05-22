@@ -112,7 +112,7 @@ export const Home: React.FC = () => {
       {loading ? (
         <Spinner />
       ) : error ? (
-        <h1>エラーです</h1>
+        <h1>{error}</h1>
       ) : (
         <>
           <Box display="flex" justifyContent="space-around">

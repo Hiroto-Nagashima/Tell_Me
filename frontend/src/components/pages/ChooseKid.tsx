@@ -48,7 +48,7 @@ export const ChooseKid: React.FC = () => {
       {loading ? (
         <Spinner />
       ) : error ? (
-        <h1>エラーです</h1>
+        <h1>{error}</h1>
       ) : (
         <>
           <p>お子様を選択してください</p>
