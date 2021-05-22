@@ -131,9 +131,9 @@ export const Home: React.FC = () => {
               <ParentProfile
                 email={currentUser?.email}
                 gender={currentUser?.gender}
-                telephoneNumber={currentUser?.telephone_number}
-                firstName={currentUser?.first_name}
-                lastName={currentUser?.last_name}
+                telephoneNumber={currentUser.telephoneNumber}
+                firstName={currentUser.firstName}
+                lastName={currentUser.lastName}
               />
             </div>
           </Box>

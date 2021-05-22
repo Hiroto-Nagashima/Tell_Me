@@ -62,8 +62,8 @@ export const Login: React.FC<Props> = () => {
               },
             })
             .then((res) => {
-              setCurrentUser(res.data);
-              if (res.data.role == '保護者') {
+              setCurrentUser(res.data.user);
+              if (res.data.user.role == '保護者') {
                 history.push('/kids');
               } else {
                 history.push(

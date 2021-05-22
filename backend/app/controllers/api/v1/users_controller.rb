@@ -17,7 +17,19 @@ module Api
 
       def fetchUser
         @user = User.find_by(uid: params[:uid])
-        render json: @user, status: 200
+        render json: {
+          user:{
+            id: @user.id,
+            role: @user.role,
+            email: @user.email,
+            daycareId: @user.daycare_id,
+            password: @user.password,
+            gender: @user.gender,
+            firstName: @user.first_name,
+            lastName: @user.last_name,
+            telephoneNumber: @user.telephone_number
+          }
+        }, status: 200
       end
 
       private

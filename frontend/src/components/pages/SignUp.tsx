@@ -123,7 +123,7 @@ export const SignUp: React.FC = () => {
                     config,
                   )
                   .then((res) => {
-                    setCurrentUser(res.data);
+                    setCurrentUser(res.data.user);
                     if (res.data.role == '保護者') {
                       history.push('/kids/register');
                     } else {

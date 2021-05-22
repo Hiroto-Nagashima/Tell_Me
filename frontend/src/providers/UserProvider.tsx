@@ -35,7 +35,7 @@ export const UserProvider: React.FC<Props> = (props) => {
         })
         .then((res) => {
           console.log('hahahaha');
-          setCurrentUser(res.data);
+          setCurrentUser(res.data.user);
           setLoadingCurrentUser(false);
         })
         .catch((e) => console.log(e));
