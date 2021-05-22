@@ -4,6 +4,7 @@ import { KidProfile } from './KidProfile/KidProfile';
 import { LoginPaper } from './LoginPaper/LoginPaper';
 import { SignUpPaper } from './SignUpPaper/SignUpPaper';
 import { ParentProfile } from './ParentProfile/ParentProfile';
+import { UpdateKidModal } from './UpdateKidModal';
 import { InputOfNotebook } from './InputOfNotebook/InputOfNotebook';
 import { RegisterKidPaper } from './RegisterKidPaper/RegisterKidPaper';
 
@@ -14,6 +15,7 @@ export {
   LoginPaper,
   SignUpPaper,
   ParentProfile,
+  UpdateKidModal,
   InputOfNotebook,
   RegisterKidPaper,
 };

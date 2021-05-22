@@ -1,5 +1,3 @@
-import { Box } from '@material-ui/core';
-import axios from 'axios';
 import React, {
   ChangeEvent,
   useCallback,
@@ -7,31 +5,33 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useParams } from 'react-router-dom';
-import { getAuth } from '../../helper/firebaseAuthHelper';
-import { CurrentUserContext } from '../../providers/UserProvider';
+import axios from 'axios';
+import { Box } from '@material-ui/core';
 import { Kid } from '../../types/api/kid';
-import { User } from '../../types/api/user';
 import { Spinner } from '../atoms/Spinner/Spinner';
-import { KidProfile, ParentProfile } from '../organisms/index';
-import { UpdateKidModal } from '../organisms/UpdateKidModal';
+import { getAuth } from '../../helper/firebaseAuthHelper';
+import { useParams } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { CurrentUserContext } from '../../providers/UserProvider';
+import { KidProfile, UpdateKidModal, ParentProfile } from '../organisms/index';
 
 export const Home: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+
   const [parent] = useAuthState(getAuth());
-  const [user, setUser] = useState<User | null>(null);
+
+  const { currentUser } = useContext(CurrentUserContext);
+
+  const [age, setAge] = useState<number | null>(null);
   const [kid, setKid] = useState<Kid | null>(null);
   const [error, setError] = useState(false);
-  // const [loading, setLoading] = useState(false);
-  const { id } = useParams<{ id: string }>();
-  const [kidUpdateOpen, setKidUpdateOpen] = useState(false);
-  const [age, setAge] = useState<number | null>(null);
   const [gender, setGender] = useState(0);
-  const [firstName, setFirstName] = useState<string | null>('');
+  const [loading, setLoading] = useState(false);
   const [lastName, setLastName] = useState<string | null>('');
+  const [firstName, setFirstName] = useState<string | null>('');
   const [favoriteFood, setFavoriteFood] = useState<string | null>('');
   const [favoritePlay, setFavoritePlay] = useState<string | null>('');
-  const { loadingCurrentUser, currentUser } = useContext(CurrentUserContext);
+  const [kidUpdateOpen, setKidUpdateOpen] = useState(false);
 
   const onChangeAge = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
@@ -93,39 +93,24 @@ export const Home: React.FC = () => {
     setKidUpdateOpen(true);
   };
 
-  const fetchUser = async () =>
-    await axios
-      .get(`http://localhost:5000/api/v1/users/fetchUser`, {
-        params: {
-          uid: parent!.uid,
-        },
-      })
-      .then((res) => {
-        setUser(res.data);
-        console.log(user);
-      })
-      .catch((e) => setError(e));
-  // .finally(() => setLoading(false));
-
-  const fetchKid = async () =>
+  const fetchKid = async () => {
+    setLoading(true);
     await axios
       .get(`http://localhost:5000/api/v1/kids/${id}`)
       .then((res) => {
         setKid(res.data);
-        console.log(kid);
       })
-      .catch((e) => setError(e));
-  // .finally(() => setLoading(false));
+      .catch((e) => setError(e))
+      .finally(() => setLoading(false));
+  };
 
   useEffect(() => {
-    console.log('aaaaaaaaaaaaaaa');
-    fetchUser();
     fetchKid();
   }, []);
 
   return (
     <>
-      {loadingCurrentUser ? (
+      {loading ? (
         <Spinner />
       ) : error ? (
         <h1>エラーです</h1>
@@ -143,13 +128,13 @@ export const Home: React.FC = () => {
               favoritePlay={kid?.favorite_play}
               onClick={onClickUpdateKid}
             />
-            <div key={user?.id}>
+            <div key={currentUser?.id}>
               <ParentProfile
-                email={user?.email}
-                gender={user?.gender}
-                telephoneNumber={user?.telephone_number}
-                firstName={user?.first_name}
-                lastName={user?.last_name}
+                email={currentUser?.email}
+                gender={currentUser?.gender}
+                telephoneNumber={currentUser?.telephone_number}
+                firstName={currentUser?.first_name}
+                lastName={currentUser?.last_name}
               />
             </div>
           </Box>
@@ -170,7 +155,6 @@ export const Home: React.FC = () => {
             onChangeFavoritePlay={onChangeFavoritePlay}
             onSubmit={handleUpdateKidSubmit}
           />
-          <button onClick={() => console.log(currentUser)} />
         </>
       )}
     </>
