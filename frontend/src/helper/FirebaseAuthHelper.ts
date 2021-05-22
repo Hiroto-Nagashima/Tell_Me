@@ -1,6 +1,6 @@
 import 'firebase/auth';
 import firebase from 'firebase/app';
-import firebaseConfig from '../config/firebaseConfig.json';
+import { firebaseConfig } from '../config/firebaseConfig';
 
 let _app: firebase.app.App | null = null;
 
@@ -17,4 +17,3 @@ export function getApp() {
 export function getAuth() {
   return getApp().auth();
 }
-

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth } from '../helper/firebaseAuthHelper';
-import { User } from '../types/api/user';
+import { CurrentUser } from '../types/frontend/currentUser';
 
 type Props = {
   children: ReactNode;
@@ -10,15 +10,17 @@ type Props = {
 
 export const CurrentUserContext = createContext(
   {} as {
-    currentUser: User | null;
-    setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
+    currentUser: CurrentUser;
+    setCurrentUser: React.Dispatch<React.SetStateAction<CurrentUser>>;
     loadingCurrentUser: boolean;
   },
 );
 
 export const UserProvider: React.FC<Props> = (props) => {
   const { children } = props;
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUser, setCurrentUser] = useState<CurrentUser>(
+    {} as CurrentUser,
+  );
   const [loadingCurrentUser, setLoadingCurrentUser] = useState(false);
   const [user, loading] = useAuthState(getAuth());
 

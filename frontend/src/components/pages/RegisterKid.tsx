@@ -14,7 +14,7 @@ type Props = {
 export const RegisterKid: React.FC<Props> = () => {
   const [user] = useAuthState(getAuth());
   const { currentUser } = useContext(CurrentUserContext);
-  const parentName = currentUser.last_name + currentUser.first_name;
+  const parentName = currentUser.lastName;
   const history = useHistory();
 
   const [age, setAge] = useState<number | null>(null);
@@ -91,7 +91,7 @@ export const RegisterKid: React.FC<Props> = () => {
     <>
       <RegisterKidPaper
         age={age}
-        userName={currentUser!.last_name + currentUser!.first_name!}
+        userName={currentUser.last_name + currentUser.first_name!}
         gender={gender}
         lastName={lastName}
         daycareId={daycareId}
