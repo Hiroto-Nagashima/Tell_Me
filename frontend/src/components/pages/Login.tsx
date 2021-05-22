@@ -71,7 +71,7 @@ export const Login: React.FC<Props> = () => {
                 history.push('/kids');
               } else {
                 history.push(
-                  `daycares/${res.data.daycare_id}/teachers/${res.data.id}`,
+                  `daycares/${res.data.user.daycareId}/teachers/${res.data.user.id}`,
                 );
               }
             })

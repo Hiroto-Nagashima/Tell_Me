@@ -91,14 +91,14 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
   };
   const onClickHome = () => {
     history.push(
-      `/daycares/${currentUser?.id}/teachers/${currentUser?.daycareId}`,
+      `/daycares/${currentUser.daycareId}/teachers/${currentUser.id}`,
     );
     setTitle('Home');
   };
 
   const onClickAnnouncement = () => {
     history.push(
-      `/daycares/${currentUser?.daycareId}/teachers/${currentUser?.id}/announcement`,
+      `/daycares/${currentUser.daycareId}/teachers/${currentUser.id}/announcement`,
     );
     setTitle('Announcement');
   };
