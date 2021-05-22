@@ -24,6 +24,7 @@ const BackgroundImage = styled.div`
 
 export const Login: React.FC<Props> = () => {
   const history = useHistory();
+
   const { setCurrentUser } = useContext(CurrentUserContext);
 
   const [email, setEmail] = useState('');

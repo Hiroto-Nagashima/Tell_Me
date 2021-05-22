@@ -55,9 +55,9 @@ export const Notebook: React.FC = () => {
     setHasBathed(!hasBathed);
   }, []);
 
-  const handleDateChange = (date: Date | null) => {
+  const handleDateChange = useCallback((date: Date | null) => {
     setSelectedDate(date);
-  };
+  }, []);
 
   const fetchKid = async () =>
     await axios
@@ -68,19 +68,19 @@ export const Notebook: React.FC = () => {
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
 
-  const handleSnackbarClose = (
-    event?: React.SyntheticEvent,
-    reason?: string,
-  ) => {
-    if (reason === 'clickaway') {
+  const handleSnackbarClose = useCallback(
+    (event?: React.SyntheticEvent, reason?: string) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setIsSnackbarOpen(false);
+
       return;
-    }
-    setIsSnackbarOpen(false);
+    },
+    [],
+  );
 
-    return;
-  };
-
-  const onClickCheck = () => {
+  const onClickCheck = useCallback(() => {
     setLoading(true);
     axios
       .get(
@@ -112,9 +112,9 @@ export const Notebook: React.FC = () => {
       })
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
-  };
+  }, []);
 
-  const handleClickRegister = () => {
+  const handleClickRegister = useCallback(() => {
     if (isUpdate) {
       axios
         .put(
@@ -164,7 +164,7 @@ export const Notebook: React.FC = () => {
           setMassage('登録に失敗しました');
           setIsSnackbarOpen(true);
         });
-  };
+  }, []);
 
   useEffect(() => {
     fetchKid();
