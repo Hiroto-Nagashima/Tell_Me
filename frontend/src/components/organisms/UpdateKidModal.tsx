@@ -1,15 +1,15 @@
 import React, { ChangeEvent, createRef, memo, useState } from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import axios from 'axios';
+import styled from 'styled-components';
+import Resizer from 'react-image-file-resizer';
+import Fade from '@material-ui/core/Fade';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import axios from 'axios';
-import { useParams } from 'react-router';
-import { FlexibleButton, SingleLineTextField } from '../atoms/index';
-import { RadioButtonGroup } from '../molecules/RadioButtonGroup';
-import Resizer from 'react-image-file-resizer';
-import styled from 'styled-components';
 import { Box } from '@material-ui/core';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { useParams } from 'react-router';
+import { RadioButtonGroup } from '../molecules/RadioButtonGroup';
+import { FlexibleButton, SingleLineTextField } from '../atoms/index';
 
 const Flexbox = styled.div`
   display: flex;
@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
+
 export type Props = {
   age: number | null;
   open: boolean;
@@ -39,13 +40,13 @@ export type Props = {
   favoriteFood: string | null;
   favoritePlay: string | null;
   onClose: () => void;
+  onSubmit: () => void;
   onChangeAge: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeFirstName: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeLastName: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeGender: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeFavoriteFood: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeFavoritePlay: (e: ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: () => void;
 };
 
 export const UpdateKidModal: React.FC<Props> = memo((props) => {
@@ -53,21 +54,24 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
     age,
     open,
     gender,
-    firstName,
     lastName,
+    firstName,
     favoriteFood,
     favoritePlay,
     onClose,
     onChangeAge,
     onChangeGender,
-    onChangeFirstName,
     onChangeLastName,
+    onChangeFirstName,
     onChangeFavoriteFood,
     onChangeFavoritePlay,
     onSubmit,
   } = props;
+
   const classes = useStyles();
+
   const { id } = useParams<{ id: string }>();
+
   const [image, setImage] = useState<any>('');
 
   const resizeFile = (file: File) =>
