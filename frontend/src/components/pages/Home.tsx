@@ -14,6 +14,7 @@ import { useParams } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { CurrentUserContext } from '../../providers/UserProvider';
 import { KidProfile, UpdateKidModal, ParentProfile } from '../organisms/index';
+import { CustomizedSnackbar } from '../atoms';
 
 export const Home: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -26,12 +27,16 @@ export const Home: React.FC = () => {
   const [kid, setKid] = useState<Kid>({} as Kid);
   const [error, setError] = useState(false);
   const [gender, setGender] = useState(0);
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [message, setMassage] = useState('');
   const [lastName, setLastName] = useState<string>('');
   const [firstName, setFirstName] = useState<string>('');
   const [favoriteFood, setFavoriteFood] = useState<string>('');
   const [favoritePlay, setFavoritePlay] = useState<string>('');
   const [kidUpdateOpen, setKidUpdateOpen] = useState(false);
+  const [severity, setSeverity] =
+    useState<'error' | 'warning' | 'info' | 'success'>('error');
 
   const onChangeAge = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
@@ -80,9 +85,17 @@ export const Home: React.FC = () => {
         },
       })
       .then((res) => {
-        console.log(res.data.kid);
+        setKid(res.data.kid);
+        setMassage(res.data.message);
+        setKidUpdateOpen(false);
+        setSeverity('success');
+        setIsSnackbarOpen(true);
       })
-      .catch((e) => console.log(e))
+      .catch((e) => {
+        setMassage(e);
+        setSeverity('error');
+        setIsSnackbarOpen(true);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -93,6 +106,18 @@ export const Home: React.FC = () => {
   const onClickUpdateKid = useCallback(() => {
     setKidUpdateOpen(true);
   }, []);
+
+  const handleSnackbarClose = useCallback(
+    (event?: React.SyntheticEvent, reason?: string) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setIsSnackbarOpen(false);
+
+      return;
+    },
+    [],
+  );
 
   const fetchKid = async () => {
     setLoading(true);
@@ -156,6 +181,13 @@ export const Home: React.FC = () => {
             onSubmit={handleUpdateKidSubmit}
           />
           <button onClick={() => console.log(favoriteFood)} />
+          <CustomizedSnackbar
+            open={isSnackbarOpen}
+            onClose={handleSnackbarClose}
+            severity={severity}
+          >
+            {message}
+          </CustomizedSnackbar>
         </>
       )}
     </>

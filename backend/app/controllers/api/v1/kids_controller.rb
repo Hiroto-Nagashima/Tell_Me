@@ -23,6 +23,16 @@ module Api
         if kid.update(kid_params)
           render json: {
             status: "ok",
+            message: "更新が完了しました",
+            kid:{
+            age: kid.age,
+            gender: kid.gender,
+            lastName: kid.last_name,
+            firstName: kid.first_name,
+            daycareId: kid.daycare_id,
+            favoritePlay: kid.favorite_play,
+            favoriteFood: kid.favorite_food,
+            }
           }
         else
           render json: {
