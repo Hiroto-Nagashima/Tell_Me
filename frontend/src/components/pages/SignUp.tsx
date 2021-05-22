@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 import { SignUpPaper } from '../organisms/SignUpPaper/SignUpPaper';
 import { CustomizedSnackbar } from '../atoms/CustomizedSnackbar/CustomizedSnackbar';
 import { CurrentUserContext } from '../../providers/UserProvider';
+import { Spinner } from '../atoms';
 
 export const SignUp: React.FC = () => {
   const history = useHistory();
@@ -20,6 +21,7 @@ export const SignUp: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const [gender, setGender] = useState<number | null>(null);
   const [password, setPassword] = useState('');
   const [lastName, setLastName] = useState('');
@@ -74,24 +76,31 @@ export const SignUp: React.FC = () => {
     return;
   };
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = () => {
+    setLoading(true);
     if (telephoneNumber.match(telephoneNumberRegex) == null) {
       setError('電話番号が無効です');
+      setLoading(false);
       setOpen(true);
     } else if (lastName == lastNameError) {
       setError('姓が無効です');
+      setLoading(false);
       setOpen(true);
     } else if (firstName == firstNameError) {
       setError('名が無効です');
+      setLoading(false);
       setOpen(true);
     } else if (role == '保護者' && gender == null) {
       setError('お父様かお母様か選択してください');
+      setLoading(false);
       setOpen(true);
     } else if (role == '先生' && daycareId == null) {
       setError('保育園のIDを入力してください');
+      setLoading(false);
       setOpen(true);
     } else if (daycareId != null && gender != null) {
       setError('保育園のIDと「父か母か」を同時に選択しないでください.');
+      setLoading(false);
       setOpen(true);
     } else {
       const request = async () => {
@@ -134,47 +143,61 @@ export const SignUp: React.FC = () => {
                   })
                   .catch((error) => {
                     setError(error?.message);
+                    setLoading(false);
                     setOpen(true);
                   });
               } catch (error) {
                 setError(error);
+                setLoading(false);
               }
             }
           })
           .catch((error) => {
             const errorMessage = error.message;
             setError(errorMessage);
+            setLoading(false);
             setOpen(true);
-          });
+          })
+          .finally(() => setLoading(false));
       };
       request();
     }
-  }, []);
+  };
 
   return (
     <>
-      <SignUpPaper
-        email={email}
-        role={role}
-        daycareId={daycareId}
-        password={password}
-        firstName={firstName}
-        lastName={lastName}
-        gender={gender}
-        telephoneNumber={telephoneNumber}
-        onClick={handleSubmit}
-        onChangeDaycareId={onChangeDaycareId}
-        onChangeRole={onChangeRole}
-        onChangeEmail={onChangeEmail}
-        onChangePassword={onChangePassword}
-        onChangeFirstName={onChangeFirstName}
-        onChangeLastName={onChangeLastName}
-        onChangeGender={onChangeGender}
-        onChangeTelephoneNumber={onChangeTelephoneNumber}
-      />
-      <CustomizedSnackbar open={open} onClose={handleClose} severity="error">
-        {error}
-      </CustomizedSnackbar>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <SignUpPaper
+            email={email}
+            role={role}
+            daycareId={daycareId}
+            password={password}
+            firstName={firstName}
+            lastName={lastName}
+            gender={gender}
+            telephoneNumber={telephoneNumber}
+            onClick={handleSubmit}
+            onChangeDaycareId={onChangeDaycareId}
+            onChangeRole={onChangeRole}
+            onChangeEmail={onChangeEmail}
+            onChangePassword={onChangePassword}
+            onChangeFirstName={onChangeFirstName}
+            onChangeLastName={onChangeLastName}
+            onChangeGender={onChangeGender}
+            onChangeTelephoneNumber={onChangeTelephoneNumber}
+          />
+          <CustomizedSnackbar
+            open={open}
+            onClose={handleClose}
+            severity="error"
+          >
+            {error}
+          </CustomizedSnackbar>
+        </>
+      )}
     </>
   );
 };
