@@ -8,23 +8,24 @@ import { CustomizedSnackbar } from '../atoms/CustomizedSnackbar/CustomizedSnackb
 import { CurrentUserContext } from '../../providers/UserProvider';
 
 export const SignUp: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
-  const [open, setOpen] = useState(false);
-  const [gender, setGender] = useState<number | null>(null);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [telephoneNumber, setTelephoneNumber] = useState('');
-  const [password, setPassword] = useState('');
-  const [daycareId, setDaycareId] = useState<number | null>(null);
-  const [role, setRole] = useState<string | null>(null);
+  const history = useHistory();
+
+  const lastNameError = '';
+  const firstNameError = '';
+  const telephoneNumberRegex = /^(0{1}\d{10,11})$/;
+
   const { setCurrentUser } = useContext(CurrentUserContext);
 
-  const telephoneNumberRegex = /^(0{1}\d{10,11})$/;
-  const firstNameError = '';
-  const lastNameError = '';
-
-  const history = useHistory();
+  const [role, setRole] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [gender, setGender] = useState<number | null>(null);
+  const [password, setPassword] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [daycareId, setDaycareId] = useState<number | null>(null);
+  const [telephoneNumber, setTelephoneNumber] = useState('');
 
   const onChangeRole = (e: React.ChangeEvent<HTMLInputElement>) => {
     return setRole(e.target.value);
@@ -68,7 +69,6 @@ export const SignUp: React.FC = () => {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
 
     return;
@@ -133,12 +133,11 @@ export const SignUp: React.FC = () => {
                     }
                   })
                   .catch((error) => {
-                    console.log(error);
                     setError(error?.message);
                     setOpen(true);
                   });
-              } catch {
-                console.log('error');
+              } catch (error) {
+                setError(error);
               }
             }
           })

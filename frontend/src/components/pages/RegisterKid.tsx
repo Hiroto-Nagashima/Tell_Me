@@ -26,6 +26,14 @@ export const RegisterKid: React.FC<Props> = () => {
   const [favoriteFood, setFavoriteFood] = useState<string | null>('');
   const [favoritePlay, setFavoritePlay] = useState<string | null>('');
 
+  const onChangeFirstName = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    return setFirstName(e.target.value);
+  }, []);
+
+  const onChangeLastName = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    return setLastName(e.target.value);
+  }, []);
+
   const onChangeAge = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
 
@@ -36,14 +44,6 @@ export const RegisterKid: React.FC<Props> = () => {
     const value = Number(e.target.value);
 
     return setDaycareId(value);
-  }, []);
-
-  const onChangeFirstName = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    return setFirstName(e.target.value);
-  }, []);
-
-  const onChangeLastName = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    return setLastName(e.target.value);
   }, []);
 
   const onChangeGender = useCallback((e: ChangeEvent<HTMLInputElement>) => {
