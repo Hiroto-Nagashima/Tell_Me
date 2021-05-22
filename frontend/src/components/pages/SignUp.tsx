@@ -124,11 +124,11 @@ export const SignUp: React.FC = () => {
                   )
                   .then((res) => {
                     setCurrentUser(res.data.user);
-                    if (res.data.role == '保護者') {
+                    if (res.data.user.role == '保護者') {
                       history.push('/kids/register');
                     } else {
                       history.push(
-                        `daycares/${res.data.daycare_id}/teachers/${res.data.id}`,
+                        `daycares/${res.data.user.daycareId}/teachers/${res.data.user.id}`,
                       );
                     }
                   })

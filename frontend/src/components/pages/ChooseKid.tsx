@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Kid } from '../../types/api/kid';
 import { Spinner } from '../atoms/Spinner/Spinner';
@@ -6,13 +6,11 @@ import { KidCard } from '../molecules/KidCard/KidCard';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { CurrentUserContext } from '../../providers/UserProvider';
 
 export const ChooseKid: React.FC = () => {
   const history = useHistory();
 
   const [user] = useAuthState(getAuth());
-  const { currentUser } = useContext(CurrentUserContext);
 
   const [kids, setKids] = useState<Array<Kid>>();
   const [error, setError] = useState(false);
@@ -62,7 +60,6 @@ export const ChooseKid: React.FC = () => {
                   age={kid.age}
                   onClick={() => onClickButton(kid.id)}
                 />
-                <button onClick={() => console.log(currentUser)} />
               </div>
             );
           })}
