@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
@@ -44,7 +44,7 @@ export type Props = {
   onChangeFavoritePlay: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const RegisterKidPaper: React.FC<Props> = (props) => {
+export const RegisterKidPaper: React.FC<Props> = memo((props) => {
   const {
     age,
     gender,
@@ -176,4 +176,6 @@ export const RegisterKidPaper: React.FC<Props> = (props) => {
       </Paper>
     </div>
   );
-};
+});
+
+RegisterKidPaper.displayName = 'RegisterKidPaper';
