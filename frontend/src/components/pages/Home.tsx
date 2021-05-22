@@ -25,12 +25,12 @@ export const Home: React.FC = () => {
   const [age, setAge] = useState<number | null>(null);
   const [kid, setKid] = useState<Kid>({} as Kid);
   const [error, setError] = useState(false);
-  const [gender, setGender] = useState(kid.gender);
+  const [gender, setGender] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [lastName, setLastName] = useState<string>(kid.lastName);
-  const [firstName, setFirstName] = useState<string>(kid.firstName);
-  const [favoriteFood, setFavoriteFood] = useState<string>(kid.favoriteFood);
-  const [favoritePlay, setFavoritePlay] = useState<string>(kid.favoritePlay);
+  const [lastName, setLastName] = useState<string>('');
+  const [firstName, setFirstName] = useState<string>('');
+  const [favoriteFood, setFavoriteFood] = useState<string>('');
+  const [favoritePlay, setFavoritePlay] = useState<string>('');
   const [kidUpdateOpen, setKidUpdateOpen] = useState(false);
 
   const onChangeAge = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -65,9 +65,10 @@ export const Home: React.FC = () => {
     },
     [],
   );
-  const handleUpdateKidSubmit = useCallback(() => {
+  const handleUpdateKidSubmit = () => {
+    setLoading(true);
     axios
-      .post(`http://localhost:5000/api/v1/kids`, {
+      .put(`http://localhost:5000/api/v1/kids/${id}`, {
         params: {
           age: age,
           first_name: firstName,
@@ -81,8 +82,9 @@ export const Home: React.FC = () => {
       .then((res) => {
         console.log(res.data.kid);
       })
-      .catch((e) => console.log(e));
-  }, []);
+      .catch((e) => console.log(e))
+      .finally(() => setLoading(false));
+  };
 
   const onCloseUpdateKid = useCallback(() => {
     setKidUpdateOpen(false);
@@ -137,14 +139,14 @@ export const Home: React.FC = () => {
             </div>
           </Box>
           <UpdateKidModal
-            open={kidUpdateOpen}
-            onClose={onCloseUpdateKid}
             age={age}
             gender={gender}
             firstName={firstName}
             lastName={lastName}
             favoriteFood={favoriteFood}
             favoritePlay={favoritePlay}
+            open={kidUpdateOpen}
+            onClose={onCloseUpdateKid}
             onChangeAge={onChangeAge}
             onChangeGender={onChangeGender}
             onChangeFirstName={onChangeFirstName}
@@ -153,7 +155,7 @@ export const Home: React.FC = () => {
             onChangeFavoritePlay={onChangeFavoritePlay}
             onSubmit={handleUpdateKidSubmit}
           />
-          {/* <button onClick={() => console.log(kid)} /> */}
+          <button onClick={() => console.log(favoriteFood)} />
         </>
       )}
     </>

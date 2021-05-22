@@ -18,6 +18,18 @@ module Api
           }
         end
       end
+      def update
+        kid = Kid.find(params[:id])
+        if kid.update(kid_params)
+          render json: {
+            status: "ok",
+          }
+        else
+          render json: {
+            status: 400,
+          }
+        end
+      end
 
       def index
         user = User.find_by(uid: params[:uid])
