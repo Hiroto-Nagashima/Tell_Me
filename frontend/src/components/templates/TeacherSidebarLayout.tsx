@@ -1,31 +1,31 @@
 import React, { ReactNode, useContext, useState } from 'react';
-import HomeIcon from '@material-ui/icons/Home';
-import AnnouncementIcon from '@material-ui/icons/Announcement';
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
+import firebase from 'firebase';
 import List from '@material-ui/core/List';
+import AppBar from '@material-ui/core/AppBar';
+import Hidden from '@material-ui/core/Hidden';
+import Drawer from '@material-ui/core/Drawer';
+import Divider from '@material-ui/core/Divider';
+import Toolbar from '@material-ui/core/Toolbar';
 import ListItem from '@material-ui/core/ListItem';
+import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AnnouncementIcon from '@material-ui/icons/Announcement';
+import { Box } from '@material-ui/core';
+import { useHistory } from 'react-router';
+import { DraggableDialog } from '../molecules';
+import { CurrentUserContext } from '../../providers/UserProvider';
 import {
   makeStyles,
   useTheme,
   Theme,
   createStyles,
 } from '@material-ui/core/styles';
-import { useHistory } from 'react-router';
-import firebase from 'firebase';
-import { DraggableDialog } from '../molecules';
-import { Box } from '@material-ui/core';
-import { CurrentUserContext } from '../../providers/UserProvider';
 
 const drawerWidth = 240;
 
@@ -52,7 +52,6 @@ const useStyles = makeStyles((theme: Theme) =>
         display: 'none',
       },
     },
-    // necessary for content to be below app bar
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
       width: drawerWidth,
@@ -79,9 +78,18 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
   const [isOpen, setOpen] = useState(false);
   const { currentUser } = useContext(CurrentUserContext);
 
+  const logout = async () => {
+    await firebase
+      .auth()
+      .signOut()
+      .then(() => history.push('/'))
+      .catch((e) => alert(e));
+  };
+
   const onClickOpen = () => {
     setOpen(true);
   };
+
   const onClickClose = () => {
     setOpen(false);
   };
@@ -89,6 +97,7 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
   const onClickHome = () => {
     history.push(
       `/daycares/${currentUser.daycareId}/teachers/${currentUser.id}`,
@@ -101,14 +110,6 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
       `/daycares/${currentUser.daycareId}/teachers/${currentUser.id}/announcement`,
     );
     setTitle('Announcement');
-  };
-
-  const logout = async () => {
-    await firebase
-      .auth()
-      .signOut()
-      .then(() => history.push('/'))
-      .catch((e) => alert(e));
   };
 
   const drawer = (
@@ -166,8 +167,7 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+      <nav className={classes.drawer}>
         <Hidden smUp implementation="css">
           <Drawer
             container={container}
@@ -179,7 +179,7 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
               paper: classes.drawerPaper,
             }}
             ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
+              keepMounted: true,
             }}
           >
             {drawer}
