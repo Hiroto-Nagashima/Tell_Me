@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
@@ -43,7 +43,7 @@ export type Props = {
   onChangeTelephoneNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClick: () => void;
 };
-export const SignUpPaper: React.FC<Props> = (props) => {
+export const SignUpPaper: React.FC<Props> = memo((props) => {
   const {
     role,
     email,
@@ -149,4 +149,6 @@ export const SignUpPaper: React.FC<Props> = (props) => {
       </Paper>
     </div>
   );
-};
+});
+
+SignUpPaper.displayName = 'SignUpPaper';
