@@ -32,7 +32,7 @@ typings/
 
 # Optional Firebase directory
 .firebase
-
+frontend/config/firebaseConfig.json
 # Optional eslint cache
 .eslintcache
 
@@ -91,3 +91,4 @@ yarn-error.log*
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+

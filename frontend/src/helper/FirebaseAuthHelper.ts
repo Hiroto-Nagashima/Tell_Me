@@ -18,10 +18,3 @@ export function getAuth() {
   return getApp().auth();
 }
 
-export async function logout() {
-  try {
-    await firebase.auth().signOut();
-  } catch (error) {
-    console.error('login failed', error);
-  }
-}
