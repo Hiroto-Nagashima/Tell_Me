@@ -27,9 +27,9 @@ export const SignUp: React.FC = () => {
   const [daycareId, setDaycareId] = useState<number | null>(null);
   const [telephoneNumber, setTelephoneNumber] = useState('');
 
-  const onChangeRole = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeRole = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     return setRole(e.target.value);
-  };
+  }, []);
 
   const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     return setEmail(e.target.value);
@@ -74,7 +74,7 @@ export const SignUp: React.FC = () => {
     return;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = useCallback(() => {
     if (telephoneNumber.match(telephoneNumberRegex) == null) {
       setError('電話番号が無効です');
       setOpen(true);
@@ -149,7 +149,7 @@ export const SignUp: React.FC = () => {
       };
       request();
     }
-  };
+  }, []);
 
   return (
     <>
