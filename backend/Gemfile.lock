@@ -89,15 +89,6 @@ GEM
     erubi (1.10.0)
     excon (0.81.0)
     ffi (1.15.0)
-    firebase-auth-rails (0.1.2)
-      firebase_id_token (~> 2.3, >= 2.3.0)
-      jwt (~> 2.1, >= 2.1.0)
-      rails
-    firebase_id_token (2.4.0)
-      httparty (~> 0.16, >= 0.16.2)
-      jwt (~> 2.1, >= 2.1.0)
-      redis (~> 4.0, >= 4.0.1)
-      redis-namespace (~> 1.6, >= 1.6.0)
     fog-aws (3.10.0)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
@@ -117,9 +108,6 @@ GEM
     formatador (0.2.5)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    httparty (0.18.1)
-      mime-types (~> 3.0)
-      multi_xml (>= 0.5.2)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.1)
@@ -145,7 +133,6 @@ GEM
     minitest (5.14.4)
     msgpack (1.4.2)
     multi_json (1.15.0)
-    multi_xml (0.6.0)
     mysql2 (0.5.3)
     nio4r (2.5.7)
     nokogiri (1.11.3-x86_64-darwin)
@@ -195,9 +182,6 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    redis (4.2.5)
-    redis-namespace (1.8.1)
-      redis (>= 3.0.4)
     regexp_parser (2.1.1)
     rexml (3.2.5)
     rspec-core (3.10.1)
@@ -269,7 +253,6 @@ DEPENDENCIES
   carrierwave
   carrierwave-base64
   dotenv-rails
-  firebase-auth-rails
   fog-aws
   jwt
   listen (~> 3.3)
