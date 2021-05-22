@@ -1,4 +1,4 @@
-import React, { ChangeEvent, createRef, useState } from 'react';
+import React, { ChangeEvent, createRef, memo, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
@@ -58,7 +58,7 @@ export type Props = {
   onSubmit: () => void;
 };
 
-export const UpdateKidModal: React.FC<Props> = (props) => {
+export const UpdateKidModal: React.FC<Props> = memo((props) => {
   const {
     isOpen,
     onClose,
@@ -231,4 +231,5 @@ export const UpdateKidModal: React.FC<Props> = (props) => {
       </Modal>
     </div>
   );
-};
+});
+UpdateKidModal.displayName = 'UpdateKidModal';
