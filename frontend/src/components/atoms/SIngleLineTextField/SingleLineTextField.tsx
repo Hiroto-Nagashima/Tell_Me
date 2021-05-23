@@ -12,14 +12,23 @@ export type Props = {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: number | string | null;
   type?: string;
+  disabled?: boolean;
 };
 const SFormControl = styled(FormControl)`
     display: grid
     step: "0.1"
   `;
 export const SingleLineTextField: VFC<Props> = (props) => {
-  const { isFullWidth, textName, placeholder, onChange, value, id, type } =
-    props;
+  const {
+    isFullWidth,
+    textName,
+    placeholder,
+    onChange,
+    value,
+    id,
+    type,
+    disabled,
+  } = props;
 
   return (
     <SFormControl variant="outlined" fullWidth={isFullWidth}>
@@ -32,6 +41,7 @@ export const SingleLineTextField: VFC<Props> = (props) => {
         label={textName}
         placeholder={placeholder}
         type={type}
+        disabled={disabled}
       />
     </SFormControl>
   );

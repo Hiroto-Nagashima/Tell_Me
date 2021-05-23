@@ -17,8 +17,9 @@ const useStyles = makeStyles((theme: Theme) =>
     paper: {
       backgroundColor: theme.palette.background.paper,
       boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
+      padding: theme.spacing(2, 2, 3),
       borderRadius: 10,
+      width: 350,
     },
   }),
 );
@@ -58,9 +59,10 @@ export const NotebookModal: React.FC = () => {
               {/* {selectedDate}の連絡帳 */}
               4月4日の連絡帳
             </Box>
-            <Box textAlign="center" mx={4}>
+            <Box mx={4}>
               <SingleLineTextField
                 id="体温"
+                disabled
                 textName="体温"
                 type="number"
                 isFullWidth={false}
@@ -76,18 +78,33 @@ export const NotebookModal: React.FC = () => {
                 secondValue={false}
                 firstLabel="有"
                 secondLabel="無"
-                disabled={true}
+                disabled
                 formLabel="入浴"
               />
             </Box>
             <Box textAlign="center" mx={4} my={2}>
-              <MultipleLinesTextField label="夕飯" row={2} value="ラーメン" />
+              <MultipleLinesTextField
+                label="夕飯"
+                row={2}
+                value="ラーメン"
+                disabled
+              />
             </Box>
             <Box textAlign="center" mx={4} my={2}>
-              <MultipleLinesTextField label="朝食" row={2} value="パン" />
+              <MultipleLinesTextField
+                label="朝食"
+                row={2}
+                value="パン"
+                disabled
+              />
             </Box>
             <Box textAlign="center" mx={4} my={2}>
-              <MultipleLinesTextField label="連絡事項" row={4} value="元気" />
+              <MultipleLinesTextField
+                label="連絡事項"
+                row={4}
+                value="元気"
+                disabled
+              />
             </Box>
           </div>
         </Fade>
