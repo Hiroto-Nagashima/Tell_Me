@@ -5,7 +5,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { Box, Button } from '@material-ui/core';
 import { MultipleLinesTextField, SingleLineTextField } from '../../atoms';
-// import { RadioButtonGroup } from '../../molecules';
+import { RadioButtonGroup } from '../../molecules';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -69,18 +69,17 @@ export const NotebookModal: React.FC = () => {
                 value={36}
               />
             </Box>
-            <Box component="h4" px={4}>
-              2. 昨晩の入浴の有無を入力してください
-            </Box>
-            {/* <Box textAlign="center" mx={4}>
+            <Box mx={4} my={2}>
               <RadioButtonGroup
-                value={hasBathed}
+                value={true}
                 firstValue={true}
                 secondValue={false}
                 firstLabel="有"
                 secondLabel="無"
+                disabled={true}
+                formLabel="入浴"
               />
-            </Box> */}
+            </Box>
             <Box textAlign="center" mx={4} my={2}>
               <MultipleLinesTextField label="夕飯" row={2} value="ラーメン" />
             </Box>
