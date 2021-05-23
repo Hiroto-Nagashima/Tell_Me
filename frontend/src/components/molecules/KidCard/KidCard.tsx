@@ -1,19 +1,22 @@
 import React from 'react';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-// import CardMedia from '@material-ui/core/CardMedia';
+import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import styled from 'styled-components';
-import { Box } from '@material-ui/core';
+// import styled from 'styled-components';
+// import { Box } from '@material-ui/core';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: 'flex',
       width: 450,
+      borderRadius: 20,
+      height: 160,
+      padding: 20,
     },
     details: {
       display: 'flex',
@@ -21,41 +24,28 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 280,
     },
     content: {
+      marginTop: 50,
       flex: '1 0 auto',
+      display: 'flex',
+      justifyContent: 'space-between',
     },
     cover: {
-      width: 150,
+      width: 160,
+      height: 160,
+      objectFit: 'cover',
+      borderRadius: 80,
+      marginRight: 5,
+      marginLeft: 5,
     },
     controls: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
-      paddingLeft: theme.spacing(1),
-      paddingBottom: theme.spacing(1),
+      paddingBottom: 5670,
     },
   }),
 );
 
-const ProfileImageBox = styled(Box)`
-  position: absolute;
-  top: 20px;
-  width: 150px;
-`;
-
-const ProfileImage = styled.img`
-  width: 140px;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 50%;
-  onerror: this.src= ${process.env.PUBLIC_URL} / noimage.jpeg;
-`;
-const Wrapper = styled(Box)`
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-`;
 export type Props = {
   kidName: string | null;
   age: number | null;
@@ -68,41 +58,34 @@ export const KidCard: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   return (
-    <Box display="flex" position="relative">
-      <Wrapper display="">
-        <Card className={classes.root}>
-          <ProfileImageBox>
-            <ProfileImage src={src} />
-          </ProfileImageBox>
-          {/* <CardMedia
+    <Card className={classes.root}>
+      <CardMedia
         className={classes.cover}
-        image={`${process.env.PUBLIC_URL}/noimage.jpeg`}
+        image={src}
         title="Live from space album cover"
-      /> */}
-          <div className={classes.details}>
-            <CardContent className={classes.content}>
-              <Typography component="h5" variant="h5">
-                {kidName}
-              </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
-                {age}さい
-              </Typography>
-            </CardContent>
-            <div className={classes.controls}>
-              <CardActions>
-                <Button
-                  size="large"
-                  color="primary"
-                  variant="contained"
-                  onClick={onClick}
-                >
-                  決定
-                </Button>
-              </CardActions>
-            </div>
-          </div>
-        </Card>
-      </Wrapper>
-    </Box>
+      />
+      <div className={classes.details}>
+        <CardContent className={classes.content}>
+          <Typography component="h4" variant="h4">
+            {kidName}
+          </Typography>
+          <Typography variant="h6" color="textSecondary">
+            {age}さい
+          </Typography>
+        </CardContent>
+        <div className={classes.controls}>
+          <CardActions>
+            <Button
+              size="large"
+              color="primary"
+              variant="contained"
+              onClick={onClick}
+            >
+              決定
+            </Button>
+          </CardActions>
+        </div>
+      </div>
+    </Card>
   );
 };

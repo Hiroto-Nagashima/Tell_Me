@@ -6,6 +6,19 @@ import { KidCard } from '../molecules/KidCard/KidCard';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Box } from '@material-ui/core';
+import styled from 'styled-components';
+
+const Wrapper = styled(Box)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+`;
+
+const Direction = styled.h2`
+  margin: 50px 0;
+`;
 
 export const ChooseKid: React.FC = () => {
   const history = useHistory();
@@ -51,19 +64,23 @@ export const ChooseKid: React.FC = () => {
         <h1>{error}</h1>
       ) : (
         <>
-          <p>お子様を選択してください</p>
-          {kids?.map((kid) => {
-            return (
-              <div key={kid.id}>
-                <KidCard
-                  kidName={kid.first_name}
-                  age={kid.age}
-                  src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/kid/image/${kid.id}/image.jpeg`}
-                  onClick={() => onClickButton(kid.id)}
-                />
-              </div>
-            );
-          })}
+          <Wrapper>
+            <Box>
+              <Direction>お子様を選択してください</Direction>
+              {kids?.map((kid) => {
+                return (
+                  <div key={kid.id}>
+                    <KidCard
+                      kidName={kid.first_name}
+                      age={kid.age}
+                      src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/kid/image/${kid.id}/image.jpeg`}
+                      onClick={() => onClickButton(kid.id)}
+                    />
+                  </div>
+                );
+              })}
+            </Box>
+          </Wrapper>
         </>
       )}
     </>
