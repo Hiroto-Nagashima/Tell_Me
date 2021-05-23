@@ -92,8 +92,6 @@ export const Login: React.FC<Props> = () => {
     <>
       {loading ? (
         <Spinner />
-      ) : error ? (
-        <div>エラー</div>
       ) : (
         <>
           <BackgroundImage>
