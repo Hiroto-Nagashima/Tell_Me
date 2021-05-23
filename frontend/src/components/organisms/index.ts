@@ -1,10 +1,10 @@
-import { Post } from './Post';
+import { Post } from './Post/Post';
 import { Header } from './Header/Header';
 import { KidProfile } from './KidProfile/KidProfile';
 import { LoginPaper } from './LoginPaper/LoginPaper';
 import { SignUpPaper } from './SignUpPaper/SignUpPaper';
 import { ParentProfile } from './ParentProfile/ParentProfile';
-import { UpdateKidModal } from './UpdateKidModal';
+import { UpdateKidModal } from './UpdateKidModal/UpdateKidModal';
 import { InputOfNotebook } from './InputOfNotebook/InputOfNotebook';
 import { RegisterKidPaper } from './RegisterKidPaper/RegisterKidPaper';
 

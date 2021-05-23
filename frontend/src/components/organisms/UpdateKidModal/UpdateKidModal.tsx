@@ -8,8 +8,8 @@ import Backdrop from '@material-ui/core/Backdrop';
 import { Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router';
-import { RadioButtonGroup } from '../molecules/RadioButtonGroup';
-import { FlexibleButton, SingleLineTextField } from '../atoms/index';
+import { RadioButtonGroup } from '../../molecules/RadioButtonGroup';
+import { FlexibleButton, SingleLineTextField } from '../../atoms/index';
 
 const Flexbox = styled.div`
   display: flex;
