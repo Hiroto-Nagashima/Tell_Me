@@ -2,7 +2,10 @@ import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
+import PhoneIcon from '@material-ui/icons/Phone';
 import Button from '@material-ui/core/Button';
+import MailIcon from '@material-ui/icons/Mail';
+import { Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -12,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const SimplePopover: React.FC = () => {
+export const ParentPopover: React.FC = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] =
     React.useState<HTMLButtonElement | null>(null);
@@ -32,8 +35,8 @@ export const SimplePopover: React.FC = () => {
     <div>
       <Button
         aria-describedby={id}
-        variant="contained"
-        color="primary"
+        variant="text"
+        color="inherit"
         onClick={handleClick}
       >
         Open Popover
@@ -52,9 +55,34 @@ export const SimplePopover: React.FC = () => {
           horizontal: 'left',
         }}
       >
-        <Typography className={classes.typography}>
-          The content of the Popover.
-        </Typography>
+        <div className={classes.typography}>
+          <Box mt={1} display="flex">
+            <Box mr={4} mb={2}>
+              <PhoneIcon />
+            </Box>
+            <Typography
+              variant="h6"
+              color="textSecondary"
+              component="h6"
+              align="center"
+            >
+              08012341234
+            </Typography>
+          </Box>
+          <Box mt={1} display="flex">
+            <Box mr={4}>
+              <MailIcon />
+            </Box>
+            <Typography
+              variant="h6"
+              color="textSecondary"
+              component="h6"
+              align="center"
+            >
+              hogehoge@gmail.com
+            </Typography>
+          </Box>
+        </div>
       </Popover>
     </div>
   );
