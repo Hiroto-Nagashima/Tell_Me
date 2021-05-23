@@ -20,7 +20,7 @@ module Api
       def update
         kid = Kid.find(params[:kid_id])
         notebook = kid.notebooks.find_by(id: params[:id])
-        if notebook.update(notebook_params)
+        if notebook.update!(notebook_params)
           render json: {
             status: "ok",
             message: "更新が完了しました"

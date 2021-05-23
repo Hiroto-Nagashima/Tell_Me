@@ -15,7 +15,7 @@ export const Notebook: React.FC = () => {
   const [message, setMassage] = useState('');
   const [isUpdate, setIsUpdate] = useState(false);
   const [breakfast, setBreakfast] = useState<string | null>(null);
-  const [hasBathed, setHasBathed] = useState<boolean | null>(null);
+  const [hasBathed, setHasBathed] = useState<boolean>(true);
   const [notebookId, setNotebookID] = useState<number | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
@@ -49,9 +49,11 @@ export const Notebook: React.FC = () => {
     [],
   );
 
-  const handleHasBathedChange = useCallback(() => {
+  const handleHasBathedChange = () => {
     setHasBathed(!hasBathed);
-  }, []);
+    console.log('hey');
+    console.log(hasBathed);
+  };
 
   const handleSnackbarClose = useCallback(
     (event?: React.SyntheticEvent, reason?: string) => {
@@ -76,17 +78,15 @@ export const Notebook: React.FC = () => {
       .then((res) => {
         if (res.data.id == null) {
           setIsUpdate(false);
-          setSelectedDate(date);
         } else {
           setIsUpdate(true);
           setNotebookID(res.data.id);
-          setSelectedDate(date);
         }
-        setDinner(res.data.dinner);
-        setBreakfast(res.data.breakfast);
         setMemo(res.data.memo);
-        setBodyTemperature(res.data.body_temperature);
+        setDinner(res.data.dinner);
         setHasBathed(res.data.has_bathed);
+        setBreakfast(res.data.breakfast);
+        setBodyTemperature(res.data.body_temperature);
         setSelectedDate(date);
         setIsNotebookOpen(true);
       })
@@ -95,51 +95,56 @@ export const Notebook: React.FC = () => {
   };
 
   const handleClickRegister = () => {
+    setLoading(true);
     if (isUpdate) {
       axios
         .put(
           `http://localhost:5000/api/v1/kids/${id}/notebooks/${notebookId}`,
           {
             notebook: {
-              body_temperature: bodyTemperature,
-              has_bathed: hasBathed,
-              breakfast: breakfast,
-              dinner: dinner,
-              memo: memo,
               date: selectedDate,
+              memo: memo,
+              dinner: dinner,
+              breakfast: breakfast,
+              has_bathed: hasBathed,
+              body_temperature: bodyTemperature,
             },
           },
         )
         .then((res) => {
           setSeverity('success');
           setMassage(res.data.message);
-          setIsSnackbarOpen(true);
         })
         .catch((e) => {
           setSeverity('error');
           setMassage(e.data.message);
+        })
+        .finally(() => {
+          setLoading(false);
           setIsSnackbarOpen(true);
         });
     } else
       axios
         .post(`http://localhost:5000/api/v1/kids/${id}/notebooks`, {
           notebook: {
-            body_temperature: bodyTemperature,
-            has_bathed: hasBathed,
-            breakfast: breakfast,
-            dinner: dinner,
-            memo: memo,
             date: selectedDate,
+            memo: memo,
+            dinner: dinner,
+            breakfast: breakfast,
+            has_bathed: hasBathed,
+            body_temperature: bodyTemperature,
           },
         })
         .then((res) => {
           setSeverity('success');
           setMassage(res.data.message);
-          setIsSnackbarOpen(true);
         })
         .catch(() => {
           setSeverity('error');
           setMassage('登録に失敗しました');
+        })
+        .finally(() => {
+          setLoading(false);
           setIsSnackbarOpen(true);
         });
   };
@@ -154,36 +159,35 @@ export const Notebook: React.FC = () => {
         <>
           <div>日付を選択してください</div>
           <DatePicker
-            onChangeDate={handleDateChange}
-            // onAccept={onClickCheck}
             selectedDate={selectedDate}
+            onChangeDate={handleDateChange}
           />
           {isNotebookOpen ? (
             <InputOfNotebook
+              selectedDate={newDate}
               memo={memo}
-              hasBathed={hasBathed}
               dinner={dinner}
+              hasBathed={hasBathed}
               breakfast={breakfast}
               bodyTemperature={bodyTemperature}
+              onClick={handleClickRegister}
               onChangeMemo={handleMemoChange}
-              onChangeHasBathed={handleHasBathedChange}
-              onChangeBodyTemperature={handleBodyTemperatureChange}
               onChangeDinner={handleDinnerChange}
               onChangeBreakfast={handleBreakfastChange}
-              selectedDate={newDate}
-              onClick={handleClickRegister}
+              onChangeHasBathed={handleHasBathedChange}
+              onChangeBodyTemperature={handleBodyTemperatureChange}
             />
           ) : (
             <div></div>
           )}
           <CustomizedSnackbar
             open={isSnackbarOpen}
-            onClose={handleSnackbarClose}
             severity={severity}
+            onClose={handleSnackbarClose}
           >
             {message}
           </CustomizedSnackbar>
-          <button onClick={() => console.log(id)} />
+          <button onClick={() => console.log(hasBathed)} />
         </>
       )}
     </>
