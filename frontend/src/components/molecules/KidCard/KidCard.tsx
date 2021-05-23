@@ -36,6 +36,7 @@ const useStyles = makeStyles(() =>
       borderRadius: 80,
       marginRight: 5,
       marginLeft: 5,
+      onerror: 'this.src=`${process.env.PUBLIC_URL}/noimage.jpeg`',
     },
     controls: {
       display: 'flex',

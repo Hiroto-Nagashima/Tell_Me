@@ -39,6 +39,7 @@ const ProfileImage = styled.img`
   height: 140px;
   object-fit: cover;
   border-radius: 50%;
+  // onerror: 'this.src= ' ${process.env.PUBLIC_URL} / noimage.jpeg '';
 `;
 
 const ButtonWrapper = styled(Box)`
