@@ -1,7 +1,6 @@
-import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import React, { ChangeEvent, useCallback, useState } from 'react';
 import axios from 'axios';
 import format from 'date-fns/format';
-import { Kid } from '../../types/api/kid';
 import { DatePicker } from '../molecules';
 import { useParams } from 'react-router-dom';
 import { InputOfNotebook } from '../organisms';
@@ -9,7 +8,6 @@ import { CustomizedSnackbar, Spinner } from '../atoms';
 
 export const Notebook: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [kid, setKid] = useState<Kid | null>(null);
   const [memo, setMemo] = useState<string | null>(null);
   const [error, setError] = useState('');
   const [dinner, setDinner] = useState<string | null>(null);
@@ -55,19 +53,6 @@ export const Notebook: React.FC = () => {
     setHasBathed(!hasBathed);
   }, []);
 
-  const handleDateChange = useCallback((date: Date | null) => {
-    setSelectedDate(date);
-  }, []);
-
-  const fetchKid = async () =>
-    await axios
-      .get(`http://localhost:5000/api/v1/kids/${id}`)
-      .then((res) => {
-        setKid(res.data);
-      })
-      .catch((e) => setError(e))
-      .finally(() => setLoading(false));
-
   const handleSnackbarClose = useCallback(
     (event?: React.SyntheticEvent, reason?: string) => {
       if (reason === 'clickaway') {
@@ -80,47 +65,40 @@ export const Notebook: React.FC = () => {
     [],
   );
 
-  const onClickCheck = useCallback(() => {
+  const handleDateChange = (date: Date | null) => {
     setLoading(true);
     axios
-      .get(
-        `http://localhost:5000/api/v1/kids/${kid!.id}/notebooks/fetchNotebook`,
-        {
-          params: {
-            date: selectedDate,
-          },
+      .get(`http://localhost:5000/api/v1/kids/${id}/notebooks/fetchNotebook`, {
+        params: {
+          date,
         },
-      )
+      })
       .then((res) => {
-        if (res.data.dinner == null) {
+        if (res.data.id == null) {
           setIsUpdate(false);
-          setDinner(res.data.dinner);
-          setBreakfast(res.data.breakfast);
-          setMemo(res.data.memo);
-          setBodyTemperature(res.data.body_temperature);
-          setHasBathed(res.data.has_bathed);
+          setSelectedDate(date);
         } else {
           setIsUpdate(true);
           setNotebookID(res.data.id);
-          setDinner(res.data.dinner);
-          setBreakfast(res.data.breakfast);
-          setMemo(res.data.memo);
-          setBodyTemperature(res.data.body_temperature);
-          setHasBathed(res.data.has_bathed);
+          setSelectedDate(date);
         }
+        setDinner(res.data.dinner);
+        setBreakfast(res.data.breakfast);
+        setMemo(res.data.memo);
+        setBodyTemperature(res.data.body_temperature);
+        setHasBathed(res.data.has_bathed);
+        setSelectedDate(date);
         setIsNotebookOpen(true);
       })
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
-  }, []);
+  };
 
-  const handleClickRegister = useCallback(() => {
+  const handleClickRegister = () => {
     if (isUpdate) {
       axios
         .put(
-          `http://localhost:5000/api/v1/kids/${
-            kid!.id
-          }/notebooks/${notebookId}`,
+          `http://localhost:5000/api/v1/kids/${id}/notebooks/${notebookId}`,
           {
             notebook: {
               body_temperature: bodyTemperature,
@@ -144,7 +122,7 @@ export const Notebook: React.FC = () => {
         });
     } else
       axios
-        .post(`http://localhost:5000/api/v1/kids/${kid!.id}/notebooks`, {
+        .post(`http://localhost:5000/api/v1/kids/${id}/notebooks`, {
           notebook: {
             body_temperature: bodyTemperature,
             has_bathed: hasBathed,
@@ -164,11 +142,7 @@ export const Notebook: React.FC = () => {
           setMassage('登録に失敗しました');
           setIsSnackbarOpen(true);
         });
-  }, []);
-
-  useEffect(() => {
-    fetchKid();
-  }, []);
+  };
 
   return (
     <>
@@ -181,7 +155,7 @@ export const Notebook: React.FC = () => {
           <div>日付を選択してください</div>
           <DatePicker
             onChangeDate={handleDateChange}
-            onAccept={onClickCheck}
+            // onAccept={onClickCheck}
             selectedDate={selectedDate}
           />
           {isNotebookOpen ? (
@@ -209,6 +183,7 @@ export const Notebook: React.FC = () => {
           >
             {message}
           </CustomizedSnackbar>
+          <button onClick={() => console.log(id)} />
         </>
       )}
     </>
