@@ -15,7 +15,14 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const ParentPopover: React.FC = () => {
+export type Props = {
+  email: string;
+  buttonLabel: string;
+  telephoneNumber: string;
+};
+
+export const ParentPopover: React.FC<Props> = (props) => {
+  const { email, telephoneNumber, buttonLabel } = props;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] =
     React.useState<HTMLButtonElement | null>(null);
@@ -39,7 +46,7 @@ export const ParentPopover: React.FC = () => {
         color="inherit"
         onClick={handleClick}
       >
-        Open Popover
+        {buttonLabel}
       </Button>
       <Popover
         id={id}
@@ -66,7 +73,7 @@ export const ParentPopover: React.FC = () => {
               component="h6"
               align="center"
             >
-              08012341234
+              {telephoneNumber}
             </Typography>
           </Box>
           <Box mt={1} display="flex">
@@ -79,7 +86,7 @@ export const ParentPopover: React.FC = () => {
               component="h6"
               align="center"
             >
-              hogehoge@gmail.com
+              {email}
             </Typography>
           </Box>
         </div>

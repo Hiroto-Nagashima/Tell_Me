@@ -1,5 +1,5 @@
 import { Story, Meta } from '@storybook/react';
-import { ParentPopover } from './ParentPopover';
+import { ParentPopover, Props } from './ParentPopover';
 
 export default {
   title: 'Molecules/ParentPopover',
@@ -13,7 +13,11 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = (args) => <ParentPopover {...args} />;
+const Template: Story<Props> = (args) => <ParentPopover {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  buttonLabel: '山田太郎',
+  email: 'hogehoge@gmail.com',
+  telephoneNumber: '08012341234',
+};
