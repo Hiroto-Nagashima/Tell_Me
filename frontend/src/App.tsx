@@ -33,7 +33,7 @@ const App: React.FC = () => {
             />
             <TeacherRoute
               exact
-              path="/daycares/:id/teachers/:id/announcement"
+              path="/daycares/:daycareId/teachers/:teacherId/announcement"
               component={TeacherAnnouncement}
             />
             <ParentHeaderLayoutRoute exact path="/kids" component={ChooseKid} />

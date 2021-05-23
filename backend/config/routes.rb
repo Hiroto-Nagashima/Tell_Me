@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace 'api' do
     namespace 'v1' do
       resources :daycares, only: [:show]
+      get '/daycares/:id/kids', to: 'daycares#index'
       post '/kids/:id/registerImage', to: 'kids#registerImage'
       resources :kids, only: [:index, :show, :create, :update] do
         get '/notebooks/doesExist', to: 'notebooks#doesExist'
