@@ -3,9 +3,12 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import { FormLabel } from '@material-ui/core';
 
 type Props = {
   value: boolean | number | null;
+  formLabel?: string;
+  disabled?: boolean;
   firstValue: boolean | number | null;
   secondValue: boolean | number | null;
   firstLabel: string;
@@ -14,11 +17,20 @@ type Props = {
 };
 
 export const RadioButtonGroup: React.FC<Props> = (props) => {
-  const { value, firstLabel, secondLabel, firstValue, secondValue, onChange } =
-    props;
+  const {
+    value,
+    disabled,
+    formLabel,
+    firstLabel,
+    secondLabel,
+    firstValue,
+    secondValue,
+    onChange,
+  } = props;
 
   return (
-    <FormControl component="fieldset">
+    <FormControl component="fieldset" disabled={disabled}>
+      <FormLabel component="legend">{formLabel}</FormLabel>
       <RadioGroup
         row
         aria-label="position"
