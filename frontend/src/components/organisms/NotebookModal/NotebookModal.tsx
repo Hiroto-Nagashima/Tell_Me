@@ -15,16 +15,26 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'center',
     },
     paper: {
-      backgroundColor: theme.palette.background.paper,
+      width: 400,
+      borderRadius: 10,
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 2, 3),
-      borderRadius: 10,
-      width: 350,
+      backgroundColor: theme.palette.background.paper,
     },
   }),
 );
 
-export const NotebookModal: React.FC = () => {
+export type Props = {
+  date: Date | string;
+  memo: string;
+  dinner: string;
+  breakfast: string;
+  hasBathed: boolean;
+  bodyTemperature: number | null;
+};
+
+export const NotebookModal: React.FC<Props> = (props) => {
+  const { date, memo, dinner, breakfast, hasBathed, bodyTemperature } = props;
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -56,8 +66,7 @@ export const NotebookModal: React.FC = () => {
         <Fade in={open}>
           <div className={classes.paper}>
             <Box component="h2" pt={2} textAlign="center">
-              {/* {selectedDate}の連絡帳 */}
-              4月4日の連絡帳
+              {date}の連絡帳
             </Box>
             <Box mx={4}>
               <SingleLineTextField
@@ -67,13 +76,12 @@ export const NotebookModal: React.FC = () => {
                 type="number"
                 isFullWidth={false}
                 placeholder="36.5"
-                // value={bodyTemperature}
-                value={36}
+                value={bodyTemperature}
               />
             </Box>
             <Box mx={4} my={2}>
               <RadioButtonGroup
-                value={true}
+                value={hasBathed}
                 firstValue={true}
                 secondValue={false}
                 firstLabel="有"
@@ -84,9 +92,9 @@ export const NotebookModal: React.FC = () => {
             </Box>
             <Box textAlign="center" mx={4} my={2}>
               <MultipleLinesTextField
-                label="夕飯"
+                label="夕食"
                 row={2}
-                value="ラーメン"
+                value={dinner}
                 disabled
               />
             </Box>
@@ -94,7 +102,7 @@ export const NotebookModal: React.FC = () => {
               <MultipleLinesTextField
                 label="朝食"
                 row={2}
-                value="パン"
+                value={breakfast}
                 disabled
               />
             </Box>
@@ -102,7 +110,7 @@ export const NotebookModal: React.FC = () => {
               <MultipleLinesTextField
                 label="連絡事項"
                 row={4}
-                value="元気"
+                value={memo}
                 disabled
               />
             </Box>
