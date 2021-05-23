@@ -84,7 +84,7 @@ export const Notebook: React.FC = () => {
         }
         setMemo(res.data.memo);
         setDinner(res.data.dinner);
-        setHasBathed(res.data.has_bathed);
+        setHasBathed(true);
         setBreakfast(res.data.breakfast);
         setBodyTemperature(res.data.body_temperature);
         setSelectedDate(date);
