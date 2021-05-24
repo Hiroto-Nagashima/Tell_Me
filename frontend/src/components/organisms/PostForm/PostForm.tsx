@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -43,11 +43,13 @@ const useStyles = makeStyles(() =>
 
 export type Props = {
   src: string;
-  onClick?: () => void;
+  value: string | null;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onClick: () => void;
 };
 
 export const PostForm: React.FC<Props> = (props) => {
-  const { src, onClick } = props;
+  const { src, value, onChange, onClick } = props;
   const classes = useStyles();
 
   return (
@@ -62,6 +64,8 @@ export const PostForm: React.FC<Props> = (props) => {
           <MultipleLinesTextField
             label="Announcement"
             variant="standard"
+            value={value}
+            onChange={onChange}
             row={5}
           />
         </CardContent>

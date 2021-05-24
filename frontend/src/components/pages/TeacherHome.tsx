@@ -125,7 +125,6 @@ export const TeacherHome: React.FC = () => {
             >
               {message}
             </CustomizedSnackbar>
-            <button onClick={() => console.log(currentUser)} />
           </div>
         </Wrapper>
       )}
