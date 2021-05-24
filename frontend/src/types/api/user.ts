@@ -8,4 +8,6 @@ export type User = {
   first_name: string | null;
   last_name: string | null;
   telephone_number: string | null;
+  self_introduction: string | null;
+  image: string | null;
 };

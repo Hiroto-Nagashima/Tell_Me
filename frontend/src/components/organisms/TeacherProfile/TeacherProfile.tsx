@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import styled from 'styled-components';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
+import { CurrentUserContext } from '../../../providers/UserProvider';
 const useStyles = makeStyles({
   root: {
     width: 600,
@@ -58,6 +59,7 @@ export type Props = {
 
 export const TeacherProfile: React.FC<Props> = memo((props) => {
   const { firstName, daycareName, lastName, selfIntroduction, onClick } = props;
+  // const { currentUser } = useContext(CurrentUserContext);
   const classes = useStyles();
 
   return (

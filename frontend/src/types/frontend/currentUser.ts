@@ -8,4 +8,6 @@ export type CurrentUser = {
   firstName: string | null;
   lastName: string | null;
   telephoneNumber: string | null;
+  selfIntroduction: string | null;
+  image: string | null;
 };
