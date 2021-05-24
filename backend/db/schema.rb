@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2021_05_16_133034) do
-=======
-ActiveRecord::Schema.define(version: 2021_05_19_153006) do
->>>>>>> develop
+ActiveRecord::Schema.define(version: 2021_05_24_100643) do
 
   create_table "daycares", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -87,6 +83,7 @@ ActiveRecord::Schema.define(version: 2021_05_19_153006) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "uid"
     t.integer "daycare_id"
+    t.text "self_introduction"
   end
 
 end
