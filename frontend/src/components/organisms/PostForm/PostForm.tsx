@@ -11,18 +11,16 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: 'flex',
-      width: 450,
+      width: 500,
       borderRadius: 20,
-      height: 160,
-      padding: 20,
+      height: 240,
     },
     details: {
       display: 'flex',
       flexDirection: 'column',
-      width: 280,
+      width: 350,
     },
     content: {
-      marginTop: 50,
       flex: '1 0 auto',
       display: 'flex',
       justifyContent: 'space-between',
@@ -32,15 +30,13 @@ const useStyles = makeStyles(() =>
       height: 80,
       objectFit: 'cover',
       borderRadius: 80,
-      marginRight: 5,
-      marginLeft: 5,
+      margin: 20,
       onerror: 'this.src=`${process.env.PUBLIC_URL}/noimage.jpeg`',
     },
     controls: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
-      paddingBottom: 5670,
     },
   }),
 );
@@ -66,7 +62,7 @@ export const PostForm: React.FC<Props> = (props) => {
           <MultipleLinesTextField
             label="Announcement"
             variant="standard"
-            row={3}
+            row={5}
           />
         </CardContent>
         <div className={classes.controls}>
