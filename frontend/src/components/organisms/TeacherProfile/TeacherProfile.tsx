@@ -50,12 +50,11 @@ const ButtonWrapper = styled(Box)`
 `;
 
 export type Props = {
-  selfIntroduction: string;
+  selfIntroduction: string | null;
   firstName: string | null | undefined;
   lastName: string | null | undefined;
   daycareName: string;
-
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export const TeacherProfile: React.FC<Props> = memo((props) => {
