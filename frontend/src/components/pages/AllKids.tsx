@@ -56,10 +56,7 @@ const useStyles = makeStyles({
 });
 
 const Wrapper = styled.div`
-  margin: auto;
-  max-width: 75%;
-  display: 'flex';
-  justify-content: 'center';
+  margin: 0 auto;
 `;
 
 type KidInfo = {
