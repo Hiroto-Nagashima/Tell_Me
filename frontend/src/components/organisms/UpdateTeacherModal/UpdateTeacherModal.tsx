@@ -18,33 +18,23 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     paper: {
       backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
+      borderRadius: 20,
     },
   }),
 );
 
 export type Props = {
-  age: number | null;
   open: boolean;
-  gender: number;
-  firstName: string | null;
-  lastName: string | null;
-  favoriteFood: string | null;
-  favoritePlay: string | null;
+  selfIntroduction: string | null;
   onClose: () => void;
   onSubmit: () => void;
-  onChangeAge: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeFirstName: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeLastName: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeGender: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeFavoriteFood: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeFavoritePlay: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
-  const { open, onClose, onSubmit } = props;
+  const { open, selfIntroduction, onChange, onClose, onSubmit } = props;
 
   const classes = useStyles();
 
@@ -133,13 +123,15 @@ export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
               />
             </Box>
             <Box component="h3" px={2} my={5} textAlign="center">
-              2.登録済み情報を更新してください
+              2.自己紹介を更新してください
             </Box>
             <Box textAlign="center" m={4}>
               <MultipleLinesTextField
-                label="Announcement"
+                label="自己紹介"
                 variant="standard"
                 row={5}
+                value={selfIntroduction}
+                onChange={onChange}
               />
             </Box>
             <Box textAlign="center" m={5}>
