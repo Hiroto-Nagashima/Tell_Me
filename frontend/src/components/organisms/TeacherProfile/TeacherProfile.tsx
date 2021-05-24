@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { CurrentUserContext } from '../../../providers/UserProvider';
+import { useParams } from 'react-router-dom';
 const useStyles = makeStyles({
   root: {
     width: 600,
@@ -59,7 +60,8 @@ export type Props = {
 
 export const TeacherProfile: React.FC<Props> = memo((props) => {
   const { firstName, daycareName, lastName, selfIntroduction, onClick } = props;
-  // const { currentUser } = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
+  const { teacherId } = useParams<{ teacherId: string }>();
   const classes = useStyles();
 
   return (
@@ -95,18 +97,24 @@ export const TeacherProfile: React.FC<Props> = memo((props) => {
           </Box>
           <Box mt={2}>
             <Typography variant="subtitle1" color="textPrimary" component="h2">
-              {selfIntroduction}
+              {currentUser.selfIntroduction
+                ? selfIntroduction
+                : '自己紹介が未登録です'}
             </Typography>
           </Box>
         </CardContent>
       </MyCardActionArea>
-      <MyCardActions>
-        <ButtonWrapper>
-          <Button size="small" color="primary" onClick={onClick}>
-            Update
-          </Button>
-        </ButtonWrapper>
-      </MyCardActions>
+      {String(currentUser.id) == teacherId ? (
+        <MyCardActions>
+          <ButtonWrapper>
+            <Button size="small" color="primary" onClick={onClick}>
+              Update
+            </Button>
+          </ButtonWrapper>
+        </MyCardActions>
+      ) : (
+        <div></div>
+      )}
     </Card>
   );
 });
