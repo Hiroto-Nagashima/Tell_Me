@@ -125,6 +125,12 @@ export const Home: React.FC = () => {
       .get(`http://localhost:5000/api/v1/kids/${id}`)
       .then((res) => {
         setKid(res.data.kid);
+        setAge(res.data.kid.age);
+        setFirstName(res.data.kid.firstName);
+        setLastName(res.data.kid.lastName);
+        setFavoriteFood(res.data.kid.favoriteFood);
+        setFavoritePlay(res.data.kid.favoritePlay);
+        console.log(res.data);
       })
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
