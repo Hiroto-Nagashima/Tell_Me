@@ -79,8 +79,8 @@ export const TeacherHome: React.FC<Props> = () => {
 
   useEffect(() => {
     const daycareId = currentUser.daycareId;
-    fetchAllKid(daycareId);
-  }, []);
+    daycareId && fetchAllKid(daycareId);
+  }, [currentUser.daycareId]);
 
   return (
     <>
