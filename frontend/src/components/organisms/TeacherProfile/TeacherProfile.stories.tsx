@@ -10,9 +10,8 @@ const Template: Story<Props> = (args) => <TeacherProfile {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  age: 1,
-  lastName: '鈴木',
-  firstName: '健斗',
-  favoritePlay: 'おままごと',
-  favoriteFood: 'カレー、焼肉',
+  daycareName: '東京保育園',
+  lastName: '高橋',
+  firstName: '先生',
+  selfIntroduction: 'こんにちは！！子供が大好きでこの仕事をはじめました。去年まで埼玉の保育園で働いていました。趣味は釣りと山登りです。よろしくお願いします！！',
 };

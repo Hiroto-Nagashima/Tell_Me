@@ -10,8 +10,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 const useStyles = makeStyles({
   root: {
-    width: 345,
-    height: 440,
+    width: 600,
+    minHeight: 360,
     position: 'relative',
   },
   media: {
@@ -31,12 +31,12 @@ const MyCardActions = styled(CardActions)`
 `;
 
 const MyCardActionArea = styled(Box)`
-  height: 390px;
+  min-height: 300px;
 `;
 
 const ProfileImage = styled.img`
-  width: 140px;
-  height: 140px;
+  width: 160px;
+  height: 160px;
   object-fit: cover;
   border-radius: 50%;
   // onerror: 'this.src= ' ${process.env.PUBLIC_URL} / noimage.jpeg '';
@@ -48,27 +48,16 @@ const ButtonWrapper = styled(Box)`
 `;
 
 export type Props = {
-  age: number | null | undefined;
-  kidId: string | null;
-  gender: number | undefined;
+  selfIntroduction: string;
   firstName: string | null | undefined;
   lastName: string | null | undefined;
-  favoritePlay: string | null | undefined;
-  favoriteFood: string | null | undefined;
+  daycareName: string;
+
   onClick: () => void;
 };
 
 export const TeacherProfile: React.FC<Props> = memo((props) => {
-  const {
-    firstName,
-    age,
-    kidId,
-    gender,
-    lastName,
-    favoriteFood,
-    favoritePlay,
-    onClick,
-  } = props;
+  const { firstName, daycareName, lastName, selfIntroduction, onClick } = props;
   const classes = useStyles();
 
   return (
@@ -79,68 +68,32 @@ export const TeacherProfile: React.FC<Props> = memo((props) => {
           <Box display="flex" justifyContent="center">
             <ProfileImageBox>
               <ProfileImage
-                src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/kid/image/${kidId}/image.jpeg`}
+                src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/kid/image/3/image.jpeg`}
                 alt=""
               />
             </ProfileImageBox>
           </Box>
-          <Box mt={5}>
-            <KidNameArea variant="subtitle1" color="inherit" align="center">
+          <Box mt={9} mb={1}>
+            <KidNameArea variant="h4" color="inherit" align="center">
               {lastName}
               {firstName}
             </KidNameArea>
           </Box>
           <Box display="flex" justifyContent="center">
-            <Box mr={2}>
+            <Box>
               <Typography
-                variant="subtitle2"
+                variant="h6"
                 color="textSecondary"
-                component="h3"
+                component="h6"
                 align="center"
               >
-                {gender === 0 ? '女の子' : '男の子'}
-              </Typography>
-            </Box>
-            <Box ml={2}>
-              <Typography
-                variant="subtitle2"
-                color="textSecondary"
-                component="h3"
-                align="center"
-              >
-                {age}才
+                {daycareName}
               </Typography>
             </Box>
           </Box>
-          <Box mt={2}>
-            <Typography variant="subtitle1" color="inherit" component="h2">
-              好きな遊び
-            </Typography>
-          </Box>
-          <Box mt={1}>
-            <Typography
-              variant="h6"
-              color="textSecondary"
-              component="h6"
-              align="center"
-            >
-              {favoritePlay}
-            </Typography>
-          </Box>
-
           <Box mt={2}>
             <Typography variant="subtitle1" color="textPrimary" component="h2">
-              好きな食べ物
-            </Typography>
-          </Box>
-          <Box mt={1}>
-            <Typography
-              variant="h6"
-              color="textSecondary"
-              component="h6"
-              align="center"
-            >
-              {favoriteFood}
+              {selfIntroduction}
             </Typography>
           </Box>
         </CardContent>
