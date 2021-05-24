@@ -17,6 +17,8 @@ import { Spinner } from '../atoms';
 import axios from 'axios';
 import { Kid } from '../../types/api/kid';
 import { CurrentUserContext } from '../../providers/UserProvider';
+import { User } from '../../types/api/user';
+import { Notebook } from '../../types/api/notebook';
 
 type Props = {
   history: H.History;
@@ -50,10 +52,17 @@ const useStyles = makeStyles({
   },
 });
 
+type KidInfo = {
+  kid: Kid;
+  mother: User | null;
+  father: User | null;
+  notebook: Notebook | null;
+};
+
 export const TeacherHome: React.FC<Props> = () => {
   const classes = useStyles();
   const { currentUser } = useContext(CurrentUserContext);
-  const [kids, setKids] = useState<Array<Kid>>([]);
+  const [kids, setKids] = useState<Array<KidInfo>>([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -93,16 +102,26 @@ export const TeacherHome: React.FC<Props> = () => {
               </TableHead>
               <TableBody>
                 {kids.map((kid) => (
-                  <StyledTableRow key={kid.id}>
+                  <StyledTableRow key={kid.kid.id}>
                     <StyledTableCell component="th" scope="row">
-                      {kid.last_name}
-                      {kid.first_name}
+                      {kid.kid.last_name}
+                      {kid.kid.first_name}
                     </StyledTableCell>
-                    <StyledTableCell align="right">{kid.age}</StyledTableCell>
                     <StyledTableCell align="right">
-                      {kid.gender}
+                      {kid.mother == null
+                        ? 'データがありません'
+                        : kid.mother.first_name}
                     </StyledTableCell>
-                    <StyledTableCell align="right">{kid.id}</StyledTableCell>
+                    <StyledTableCell align="right">
+                      {kid.father == null
+                        ? 'データがありません'
+                        : kid.father.first_name}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {kid.notebook == null
+                        ? 'データがありません'
+                        : kid.notebook.id}
+                    </StyledTableCell>
                   </StyledTableRow>
                 ))}
               </TableBody>
