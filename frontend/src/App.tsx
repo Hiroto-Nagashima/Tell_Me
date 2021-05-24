@@ -16,6 +16,7 @@ import { Home } from './components/pages/Home';
 import { TeacherHome } from './components/pages/TeacherHome';
 import { TeacherAnnouncement } from './components/pages/TeacherAnnouncement';
 import { UserProvider } from './providers/UserProvider';
+import { AllKids } from './components/pages/AllKids';
 
 const App: React.FC = () => {
   return (
@@ -30,6 +31,11 @@ const App: React.FC = () => {
               exact
               path="/daycares/:id/teachers/:id"
               component={TeacherHome}
+            />
+            <TeacherRoute
+              exact
+              path="/daycares/:id/all-kids"
+              component={AllKids}
             />
             <TeacherRoute
               exact

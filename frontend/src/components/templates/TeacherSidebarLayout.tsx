@@ -15,6 +15,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ChildCareIcon from '@material-ui/icons/ChildCare';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import { Box } from '@material-ui/core';
 import { useHistory } from 'react-router';
@@ -105,6 +106,11 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
     setTitle('Home');
   };
 
+  const onClickAllKids = () => {
+    history.push(`/daycares/${currentUser.daycareId}/all-kids`);
+    setTitle('All Kids');
+  };
+
   const onClickAnnouncement = () => {
     history.push(
       `/daycares/${currentUser.daycareId}/teachers/${currentUser.id}/announcement`,
@@ -123,6 +129,14 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
             <HomeIcon />
           </ListItemIcon>
           <ListItemText primary="Home" />
+        </ListItem>
+      </List>
+      <List>
+        <ListItem button onClick={onClickAllKids}>
+          <ListItemIcon>
+            <ChildCareIcon />
+          </ListItemIcon>
+          <ListItemText primary="All Kids" />
         </ListItem>
       </List>
       <List>
