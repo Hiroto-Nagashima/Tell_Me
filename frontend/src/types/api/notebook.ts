@@ -5,5 +5,5 @@ export type Notebook = {
   has_bathed: boolean | null;
   breakfast: string | null;
   date: Date | string | null;
-  body_temperature: number | string | null;
+  body_temperature: number | null;
 };

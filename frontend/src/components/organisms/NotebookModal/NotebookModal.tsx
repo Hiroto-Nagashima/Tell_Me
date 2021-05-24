@@ -25,11 +25,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export type Props = {
-  date: Date | string;
-  memo: string;
-  dinner: string;
-  breakfast: string;
-  hasBathed: boolean;
+  date: Date | string | null;
+  memo: string | null;
+  dinner: string | null;
+  breakfast: string | null;
+  hasBathed: boolean | null;
   bodyTemperature: number | null;
 };
 

@@ -16,9 +16,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export type Props = {
-  email: string;
-  buttonLabel: string;
-  telephoneNumber: string;
+  email: string | null;
+  buttonLabel: string | null;
+  telephoneNumber: string | null;
 };
 
 export const ParentPopover: React.FC<Props> = (props) => {

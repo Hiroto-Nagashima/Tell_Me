@@ -19,6 +19,8 @@ import { Kid } from '../../types/api/kid';
 import { CurrentUserContext } from '../../providers/UserProvider';
 import { User } from '../../types/api/user';
 import { Notebook } from '../../types/api/notebook';
+import { ParentPopover } from '../molecules/SimplePopover/ParentPopover';
+import { NotebookModal } from '../organisms/NotebookModal/NotebookModal';
 
 type Props = {
   history: H.History;
@@ -95,8 +97,8 @@ export const TeacherHome: React.FC<Props> = () => {
               <TableHead>
                 <TableRow>
                   <StyledTableCell>園児</StyledTableCell>
-                  <StyledTableCell align="right">父</StyledTableCell>
                   <StyledTableCell align="right">母</StyledTableCell>
+                  <StyledTableCell align="right">父</StyledTableCell>
                   <StyledTableCell align="right">最新の連絡帳</StyledTableCell>
                 </TableRow>
               </TableHead>
@@ -108,19 +110,40 @@ export const TeacherHome: React.FC<Props> = () => {
                       {kid.kid.first_name}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {kid.mother == null
-                        ? 'データがありません'
-                        : kid.mother.first_name}
+                      {kid.mother == null ? (
+                        '-'
+                      ) : (
+                        <ParentPopover
+                          email={kid.mother.email}
+                          buttonLabel={kid.mother.last_name}
+                          telephoneNumber={kid.mother.telephone_number}
+                        />
+                      )}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {kid.father == null
-                        ? 'データがありません'
-                        : kid.father.first_name}
+                      {kid.father == null ? (
+                        '-'
+                      ) : (
+                        <ParentPopover
+                          email={kid.father.email}
+                          buttonLabel={kid.father.last_name}
+                          telephoneNumber={kid.father.telephone_number}
+                        />
+                      )}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {kid.notebook == null
-                        ? 'データがありません'
-                        : kid.notebook.id}
+                      {kid.notebook == null ? (
+                        '-'
+                      ) : (
+                        <NotebookModal
+                          date={kid.notebook.date}
+                          memo={kid.notebook.memo}
+                          dinner={kid.notebook.dinner}
+                          hasBathed={kid.notebook.has_bathed}
+                          breakfast={kid.notebook.breakfast}
+                          bodyTemperature={kid.notebook.body_temperature}
+                        />
+                      )}
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
