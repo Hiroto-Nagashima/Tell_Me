@@ -21,6 +21,7 @@ import { User } from '../../types/api/user';
 import { Notebook } from '../../types/api/notebook';
 import { ParentPopover } from '../molecules/SimplePopover/ParentPopover';
 import { NotebookModal } from '../organisms/NotebookModal/NotebookModal';
+import styled from 'styled-components';
 
 type Props = {
   history: H.History;
@@ -50,9 +51,16 @@ const StyledTableRow = withStyles((theme: Theme) =>
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 700,
+    minWidth: '70%',
   },
 });
+
+const Wrapper = styled.div`
+  margin: auto;
+  max-width: 75%;
+  display: 'flex';
+  justify-content: 'center';
+`;
 
 type KidInfo = {
   kid: Kid;
@@ -91,25 +99,25 @@ export const TeacherHome: React.FC<Props> = () => {
       ) : error ? (
         <div>エラー</div>
       ) : (
-        <>
+        <Wrapper>
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell>園児</StyledTableCell>
-                  <StyledTableCell align="right">母</StyledTableCell>
-                  <StyledTableCell align="right">父</StyledTableCell>
-                  <StyledTableCell align="right">最新の連絡帳</StyledTableCell>
+                  <StyledTableCell align="center">園児</StyledTableCell>
+                  <StyledTableCell align="center">母</StyledTableCell>
+                  <StyledTableCell align="center">父</StyledTableCell>
+                  <StyledTableCell align="center">最新の連絡帳</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {kids.map((kid) => (
                   <StyledTableRow key={kid.kid.id}>
-                    <StyledTableCell component="th" scope="row">
+                    <StyledTableCell align="center">
                       {kid.kid.last_name}
                       {kid.kid.first_name}
                     </StyledTableCell>
-                    <StyledTableCell align="right">
+                    <StyledTableCell align="center">
                       {kid.mother == null ? (
                         '-'
                       ) : (
@@ -120,7 +128,7 @@ export const TeacherHome: React.FC<Props> = () => {
                         />
                       )}
                     </StyledTableCell>
-                    <StyledTableCell align="right">
+                    <StyledTableCell align="center">
                       {kid.father == null ? (
                         '-'
                       ) : (
@@ -131,7 +139,7 @@ export const TeacherHome: React.FC<Props> = () => {
                         />
                       )}
                     </StyledTableCell>
-                    <StyledTableCell align="right">
+                    <StyledTableCell align="center">
                       {kid.notebook == null ? (
                         '-'
                       ) : (
@@ -150,7 +158,7 @@ export const TeacherHome: React.FC<Props> = () => {
               </TableBody>
             </Table>
           </TableContainer>
-        </>
+        </Wrapper>
       )}
     </>
   );
