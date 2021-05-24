@@ -15,6 +15,7 @@ const useStyles = makeStyles({
     width: 600,
     minHeight: 360,
     position: 'relative',
+    borderRadius: 20,
   },
   media: {
     height: 100,
