@@ -97,6 +97,7 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
             label="夕飯"
             row={2}
             value={dinner}
+            variant="outlined"
             onChange={onChangeDinner}
           />
         </Box>
@@ -108,6 +109,7 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
             label="朝食"
             row={2}
             value={breakfast}
+            variant="outlined"
             onChange={onChangeBreakfast}
           />
         </Box>
@@ -119,6 +121,7 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
             label="連絡事項"
             row={2}
             value={memo}
+            variant="outlined"
             onChange={onChangeMemo}
           />
         </Box>

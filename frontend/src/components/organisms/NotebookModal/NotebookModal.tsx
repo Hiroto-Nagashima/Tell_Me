@@ -96,6 +96,7 @@ export const NotebookModal: React.FC<Props> = (props) => {
                 row={2}
                 value={dinner}
                 disabled
+                variant="outlined"
               />
             </Box>
             <Box textAlign="center" mx={4} my={2}>
@@ -104,6 +105,7 @@ export const NotebookModal: React.FC<Props> = (props) => {
                 row={2}
                 value={breakfast}
                 disabled
+                variant="outlined"
               />
             </Box>
             <Box textAlign="center" mx={4} my={2}>
@@ -112,6 +114,7 @@ export const NotebookModal: React.FC<Props> = (props) => {
                 row={4}
                 value={memo}
                 disabled
+                variant="outlined"
               />
             </Box>
           </div>
