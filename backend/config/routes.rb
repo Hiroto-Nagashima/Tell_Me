@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       get '/parents/fetchParentName', to: 'parents#fetchParentName'
       get '/parents/fetchParentArray', to: 'parents#fetchParentArray'
       resources :parents, only: [:create, :update]
+      post '/users/:id/registerImage', to: 'users#registerImage'
       get '/users/fetchUserName', to: 'users#fetchUserName'
       get '/users/fetchUser', to: 'users#fetchUser'
       resources :users, only: [:create, :update]

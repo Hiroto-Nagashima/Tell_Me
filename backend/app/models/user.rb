@@ -10,4 +10,5 @@ class User < ApplicationRecord
 
   VALID_PHONE_REGEX = /\A\d{10}$|^\d{11}\z/
   validates :telephone_number, format: { with: VALID_PHONE_REGEX }
+  mount_base64_uploader :image, ImageUploader
 end

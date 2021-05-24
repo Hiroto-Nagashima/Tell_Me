@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import { CurrentUserContext } from '../../providers/UserProvider';
 import { Daycare } from '../../types/frontend/daycare';
-import { Spinner } from '../atoms';
+import { CustomizedSnackbar, Spinner } from '../atoms';
 import { TeacherProfile } from '../organisms/TeacherProfile/TeacherProfile';
 import { UpdateTeacherModal } from '../organisms/UpdateTeacherModal/UpdateTeacherModal';
 
@@ -18,12 +18,16 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 export const TeacherHome: React.FC = () => {
+  const { currentUser } = useContext(CurrentUserContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [message, setMassage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selfIntroduction, setSelfIntroduction] = useState('');
+  const [selfIntroduction, setSelfIntroduction] = useState<string | null>('');
   const [daycare, setDaycare] = useState<Daycare>({} as Daycare);
-  const { currentUser } = useContext(CurrentUserContext);
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const [severity, setSeverity] =
+    useState<'error' | 'warning' | 'info' | 'success'>('error');
 
   const onChangeSelfIntroduction = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,8 +45,39 @@ export const TeacherHome: React.FC = () => {
   }, []);
 
   const handleUpdateTeacher = () => {
-    console.log('hoge');
+    setLoading(true);
+    axios
+      .put(`http://localhost:5000/api/v1/users/${currentUser.id}`, {
+        params: {
+          self_introduction: selfIntroduction,
+        },
+      })
+      .then((res) => {
+        setSelfIntroduction(res.data.selfIntroduction);
+        setMassage(res.data.message);
+        setIsModalOpen(false);
+        setSeverity('success');
+        setIsSnackbarOpen(true);
+      })
+      .catch((e) => {
+        setMassage(e);
+        setSeverity('error');
+        setIsSnackbarOpen(true);
+      })
+      .finally(() => setLoading(false));
   };
+
+  const handleSnackbarClose = useCallback(
+    (event?: React.SyntheticEvent, reason?: string) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setIsSnackbarOpen(false);
+
+      return;
+    },
+    [],
+  );
 
   const fetchDaycare = (daycareId: number) => {
     setLoading(true);
@@ -55,7 +90,9 @@ export const TeacherHome: React.FC = () => {
 
   useEffect(() => {
     const daycareId = currentUser.daycareId;
-    currentUser.daycareId && fetchDaycare(daycareId);
+    currentUser.daycareId &&
+      (fetchDaycare(daycareId),
+      setSelfIntroduction(currentUser.selfIntroduction));
   }, [currentUser.daycareId]);
 
   return (
@@ -70,7 +107,7 @@ export const TeacherHome: React.FC = () => {
             <TeacherProfile
               firstName={currentUser.firstName}
               lastName={currentUser.lastName}
-              selfIntroduction={currentUser.selfIntroduction}
+              selfIntroduction={selfIntroduction}
               daycareName={daycare.name}
               onClick={onOpenModal}
             />
@@ -81,6 +118,14 @@ export const TeacherHome: React.FC = () => {
               onSubmit={handleUpdateTeacher}
               onChange={onChangeSelfIntroduction}
             />
+            <CustomizedSnackbar
+              open={isSnackbarOpen}
+              onClose={handleSnackbarClose}
+              severity={severity}
+            >
+              {message}
+            </CustomizedSnackbar>
+            <button onClick={() => console.log(currentUser)} />
           </div>
         </Wrapper>
       )}

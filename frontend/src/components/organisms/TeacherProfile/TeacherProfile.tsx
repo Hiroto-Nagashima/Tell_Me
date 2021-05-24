@@ -72,7 +72,7 @@ export const TeacherProfile: React.FC<Props> = memo((props) => {
           <Box display="flex" justifyContent="center">
             <ProfileImageBox>
               <ProfileImage
-                src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/kid/image/3/image.jpeg`}
+                src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/user/image/${teacherId}/image.jpeg`}
                 alt=""
               />
             </ProfileImageBox>
