@@ -47,7 +47,7 @@ export const Announcement: React.FC = () => {
               return (
                 <Box key={post.id} my={2}>
                   <PostCard
-                    poster={userName}
+                    poster={post.poster}
                     teacherId={post.user_id}
                     content={post.content}
                     createdAt={post.created_at}

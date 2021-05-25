@@ -36,7 +36,7 @@ module Api
       private
 
       def post_params
-        params.require(:params).permit(:content)
+        params.require(:params).permit(:content, :poster)
       end
     end
   end
