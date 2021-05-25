@@ -14,7 +14,7 @@ module Api
         }
       end
       def index
-        daycare = Daycare.find(params[:daycare_id])
+        daycare = Daycare.find(params[:id])
         kids = Kid.where(daycare_id: daycare.id)
         arr = []
         kids.each do |kid|
