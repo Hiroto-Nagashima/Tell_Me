@@ -141,9 +141,10 @@ export const TeacherHome: React.FC = () => {
             />
             {posts.map((post) => {
               return (
-                <Box key={post.id} my={1}>
+                <Box key={post.id} my={2}>
                   <PostCard
                     poster={userName}
+                    teacherId={post.user_id}
                     content={post.content}
                     createdAt={post.created_at}
                   />

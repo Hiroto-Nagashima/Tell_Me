@@ -12,8 +12,8 @@ import { CurrentUserContext } from '../../../providers/UserProvider';
 import { useParams } from 'react-router-dom';
 const useStyles = makeStyles({
   root: {
-    width: 600,
-    minHeight: 360,
+    maxWidth: 560,
+    minHeight: 300,
     position: 'relative',
     borderRadius: 20,
   },
