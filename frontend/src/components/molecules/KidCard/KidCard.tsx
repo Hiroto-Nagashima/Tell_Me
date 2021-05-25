@@ -42,7 +42,6 @@ const useStyles = makeStyles(() =>
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
-      paddingBottom: 5670,
     },
   }),
 );

@@ -51,15 +51,36 @@ export const TeacherAnnouncement: React.FC = () => {
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
   };
+
   const onClickPost = () => {
+    setLoading(true);
+    console.log(1);
     axios
       .post(
-        `http://localhost:5000/api/v1/daycares/${daycare.id}/users/${teacherId}/postAnnouncement`,
+        `http://localhost:5000/api/v1/daycares/${daycare.id}/users/${teacherId}/posts`,
+        {
+          params: {
+            content: postContent,
+          },
+        },
       )
       .then((res) => {
+        console.log(2);
         setMassage(res.data.message);
         setSeverity('success');
+        setIsSnackbarOpen(true);
+      })
+      .catch(() => {
+        console.log(3);
+        setMassage('投稿に失敗しました');
+        setSeverity('error');
+        setIsSnackbarOpen(true);
+      })
+      .finally(() => {
+        setLoading(false);
+        console.log(4);
       });
+    console.log(5);
   };
 
   useEffect(() => {

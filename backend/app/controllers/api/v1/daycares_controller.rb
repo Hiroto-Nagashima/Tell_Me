@@ -1,11 +1,6 @@
 module Api
   module V1
     class DaycaresController < ApplicationController
-      def postAnnouncement
-        daycare = Daycare.find(params[:daycare_id])
-        teacher = User.find(params[:user_id])
-      end
-
       def show
         daycare = Daycare.find(params[:id])
         render json: {
@@ -19,7 +14,7 @@ module Api
         }
       end
       def index
-        daycare = Daycare.find(params[:id])
+        daycare = Daycare.find(params[:daycare_id])
         kids = Kid.where(daycare_id: daycare.id)
         arr = []
         kids.each do |kid|
