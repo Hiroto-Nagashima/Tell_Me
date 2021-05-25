@@ -1,9 +1,8 @@
 import { Box } from '@material-ui/core';
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { CurrentUserContext } from '../../providers/UserProvider';
 import { Post } from '../../types/api/post';
 import { Spinner } from '../atoms';
 import { PostCard } from '../organisms';
@@ -14,9 +13,6 @@ const Wrapper = styled.div`
 `;
 
 export const Announcement: React.FC = () => {
-  const { currentUser } = useContext(CurrentUserContext);
-  const userNameArr = [currentUser.lastName, currentUser.firstName];
-  const userName = userNameArr.join('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [posts, setPosts] = useState<Array<Post>>([]);
