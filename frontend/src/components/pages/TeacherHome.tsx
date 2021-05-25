@@ -23,7 +23,7 @@ const Wrapper = styled.div`
 export const TeacherHome: React.FC = () => {
   const { currentUser } = useContext(CurrentUserContext);
   const userNameArr = [currentUser.lastName, currentUser.firstName];
-  const userName = userNameArr.join();
+  const userName = userNameArr.join('');
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState<Array<Post>>([]);
   const [error, setError] = useState(false);
