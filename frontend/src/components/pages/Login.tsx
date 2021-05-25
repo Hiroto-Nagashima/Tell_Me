@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
 import * as H from 'history';
 import axios from 'axios';
-// import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
 import firebase from 'firebase';
 import { ReactComponent as Logo } from '../../images/undraw_Notebook_re_id0r.svg';

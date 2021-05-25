@@ -4,6 +4,7 @@ import { Box } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { SingleLineTextField, FlexibleButton } from '../../atoms/index';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,6 +21,10 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+const MyLink = styled(Link)`
+  text-decoration: none;
+`;
+
 export type Props = {
   email: string;
   password: string;
@@ -35,9 +40,9 @@ export const LoginPaper: React.FC<Props> = memo((props) => {
 
   return (
     <div className={classes.root}>
-      <Paper elevation={3}>
+      <Paper elevation={0}>
         <Box component="h1" p={2} textAlign="center">
-          Tell Me
+          Tell Me Everything
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
@@ -61,24 +66,15 @@ export const LoginPaper: React.FC<Props> = memo((props) => {
           />
         </Box>
         <Box textAlign="center" mx={2}>
-          <FlexibleButton
-            onClick={onClickLogin}
-            variant="contained"
-            color="primary"
-            label="Login"
-          />
+          <FlexibleButton onClick={onClickLogin} label="Login" />
         </Box>
         <Box textAlign="center" m={3}>
           ------アカウントをお持ちでない方------
         </Box>
         <Box textAlign="center" mx={2}>
-          <Link to="/signup">
-            <FlexibleButton
-              variant="contained"
-              color="primary"
-              label="Sign Up"
-            />
-          </Link>
+          <MyLink to="/signup">
+            <FlexibleButton label="Sign Up" />
+          </MyLink>
         </Box>
       </Paper>
     </div>

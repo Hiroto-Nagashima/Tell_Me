@@ -11,6 +11,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth } from '../../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router';
+import styled from 'styled-components';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,6 +34,10 @@ export const Header: React.FC = () => {
   const [parent] = useAuthState(getAuth());
   const history = useHistory();
 
+  const MyAppBar = styled(AppBar)`
+    background: linear-gradient(45deg, #f25e5d 20%, #ff9463 90%);
+  `;
+
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -51,7 +56,7 @@ export const Header: React.FC = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="primary">
+      <MyAppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Tell Me
@@ -88,7 +93,7 @@ export const Header: React.FC = () => {
             </div>
           )}
         </Toolbar>
-      </AppBar>
+      </MyAppBar>
     </div>
   );
 };
