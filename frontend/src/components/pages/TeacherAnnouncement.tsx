@@ -18,7 +18,7 @@ export const TeacherAnnouncement: React.FC = () => {
   const { teacherId } = useParams<{ teacherId: string }>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [posts, setPosts] = useState<Array<Post> | null>(null);
+  const [posts, setPosts] = useState<Array<Post>>([]);
   const [postContent, setPostContent] = useState<string | null>('');
   const [message, setMassage] = useState('');
   const [daycare, setDaycare] = useState<Daycare>({} as Daycare);
@@ -116,6 +116,9 @@ export const TeacherAnnouncement: React.FC = () => {
             onClick={onClickPost}
             onChange={onChangePostContent}
           />
+          {posts.map(() => {
+            <Post />;
+          })}
           <CustomizedSnackbar
             open={isSnackbarOpen}
             onClose={handleSnackbarClose}

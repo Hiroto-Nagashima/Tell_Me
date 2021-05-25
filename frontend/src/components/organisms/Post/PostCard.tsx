@@ -26,7 +26,7 @@ export type Props = {
   onClickExpand: () => void;
 };
 
-export const Post: React.FC<Props> = (props) => {
+export const PostCard: React.FC<Props> = (props) => {
   const { title, content, created_at } = props;
   const classes = useStyles();
 

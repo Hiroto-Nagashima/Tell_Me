@@ -1,4 +1,4 @@
-import { Post } from './Post/Post';
+import { Post } from './Post/PostCard';
 import { Header } from './Header/Header';
 import { KidProfile } from './KidProfile/KidProfile';
 import { LoginPaper } from './LoginPaper/LoginPaper';
