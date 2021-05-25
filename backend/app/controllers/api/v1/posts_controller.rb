@@ -21,9 +21,16 @@ module Api
       end
 
       def all_posts
+        daycare = Daycare.find(params[:daycare_id])
+        posts = Post.where(daycare_id: daycare.id)
+        render json: posts
       end
 
       def user_posts
+        daycare = Daycare.find(params[:daycare_id])
+        user = User.find(params[:id])
+        posts = Post.where(daycare_id: daycare.id, user_id: user.id)
+        render json: posts
       end
 
       private

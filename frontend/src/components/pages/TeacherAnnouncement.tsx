@@ -52,6 +52,17 @@ export const TeacherAnnouncement: React.FC = () => {
       .finally(() => setLoading(false));
   };
 
+  const fetchAllAnnouncement = (daycareId: number) => {
+    setLoading(true);
+    axios
+      .get(
+        `http://localhost:5000/api/v1/daycares/${daycareId}/users/${teacherId}/user_posts`,
+      )
+      .then((res) => setDaycare(res.data.daycare))
+      .catch((e) => setError(e))
+      .finally(() => setLoading(false));
+  };
+
   const onClickPost = () => {
     setLoading(true);
     console.log(1);
