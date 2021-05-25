@@ -1,33 +1,57 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
-const useStyles = makeStyles({
-  root: {
-    width: 345,
-    height: 440,
-    position: 'relative',
-  },
-  media: {
-    height: 100,
-    backgroundColor: '#3f51b5',
-  },
-});
-const KidNameArea = styled(Typography)`
-  font-size: 25px;
+import { FlexibleButton } from '../../atoms';
+
+const MyCard = styled(Card)`
+  width: 580px;
+  height: 540px;
+  position: relative;
+  border-radius: 2px;
 `;
+
+const MyCardMedia = styled(CardMedia)`
+  height: 180px;
+  background-color: #f25e5d;
+`;
+
+const KidName = styled(Typography)`
+  height: 50px;
+  background-color: #f25e5d;
+  font: white;
+  display: flex;
+  justify-content: center;
+`;
+
+const LastName = styled(Typography)`
+  font-size: 25px;
+  margin-right: 20px;
+  color: white;
+`;
+
+const FirstName = styled(Typography)`
+  font-size: 25px;
+  color: white;
+`;
+
+const AgeAndGender = styled(Box)`
+  color: white;
+  height: 50px;
+  display: flex;
+  background-color: #f25e5d;
+  justify-content: center;
+`;
+
+const Content = styled(Box)`
+  padding: 3% 10%;
+`;
+
 const ProfileImageBox = styled(Box)`
   position: absolute;
-  top: 20px;
-`;
-const MyCardActions = styled(CardActions)`
-  display: flex;
+  top: 40px;
 `;
 
 const MyCardActionArea = styled(Box)`
@@ -35,16 +59,31 @@ const MyCardActionArea = styled(Box)`
 `;
 
 const ProfileImage = styled.img`
-  width: 140px;
-  height: 140px;
+  width: 130px;
+  height: 130px;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 35%;
   // onerror: 'this.src= ' ${process.env.PUBLIC_URL} / noimage.jpeg '';
 `;
 
+const ProfileImageWrapper = styled(Box)`
+  display: flex;
+  justify-content: center;
+`;
+
 const ButtonWrapper = styled(Box)`
-  width: 100px;
+  width: 250px;
   margin: 0 0 0 auto;
+`;
+
+const FavoritePlay = styled(Typography)`
+  background: linear-gradient(transparent 70%, #e4e3e1 70%);
+  width: 26%;
+`;
+
+const FavoriteFood = styled(Typography)`
+  background: linear-gradient(transparent 70%, #e4e3e1 70%);
+  width: 31%;
 `;
 
 export type Props = {
@@ -69,53 +108,54 @@ export const KidProfile: React.FC<Props> = memo((props) => {
     favoritePlay,
     onClick,
   } = props;
-  const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <MyCard>
       <MyCardActionArea>
-        <CardMedia className={classes.media} title="Contemplative Reptile" />
-        <CardContent>
-          <Box display="flex" justifyContent="center">
-            <ProfileImageBox>
-              <ProfileImage
-                src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/kid/image/${kidId}/image.jpeg`}
-                alt=""
-              />
-            </ProfileImageBox>
-          </Box>
-          <Box mt={5}>
-            <KidNameArea variant="subtitle1" color="inherit" align="center">
-              {lastName}
-              {firstName}
-            </KidNameArea>
-          </Box>
-          <Box display="flex" justifyContent="center">
-            <Box mr={2}>
-              <Typography
-                variant="subtitle2"
-                color="textSecondary"
-                component="h3"
-                align="center"
-              >
-                {gender === 0 ? '女の子' : '男の子'}
-              </Typography>
-            </Box>
-            <Box ml={2}>
-              <Typography
-                variant="subtitle2"
-                color="textSecondary"
-                component="h3"
-                align="center"
-              >
-                {age}才
-              </Typography>
-            </Box>
-          </Box>
-          <Box mt={2}>
-            <Typography variant="subtitle1" color="inherit" component="h2">
-              好きな遊び
+        <MyCardMedia />
+        <ProfileImageWrapper>
+          <ProfileImageBox>
+            <ProfileImage
+              src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/kid/image/${kidId}/image.jpeg`}
+              alt=""
+            />
+          </ProfileImageBox>
+        </ProfileImageWrapper>
+        <KidName>
+          <LastName variant="subtitle1" align="center">
+            {lastName}
+          </LastName>
+          <FirstName variant="subtitle1" align="center">
+            {firstName}
+          </FirstName>
+        </KidName>
+        <AgeAndGender>
+          <Box mr={2}>
+            <Typography
+              variant="h6"
+              color="inherit"
+              component="h3"
+              align="center"
+            >
+              {gender === 0 ? '女の子' : '男の子'}
             </Typography>
+          </Box>
+          <Box ml={2}>
+            <Typography
+              variant="h6"
+              color="inherit"
+              component="h3"
+              align="center"
+            >
+              {age}才
+            </Typography>
+          </Box>
+        </AgeAndGender>
+        <Content>
+          <Box mt={2}>
+            <FavoritePlay variant="subtitle1" color="inherit">
+              好きな遊び
+            </FavoritePlay>
           </Box>
           <Box mt={1}>
             <Typography
@@ -127,11 +167,10 @@ export const KidProfile: React.FC<Props> = memo((props) => {
               {favoritePlay}
             </Typography>
           </Box>
-
           <Box mt={2}>
-            <Typography variant="subtitle1" color="textPrimary" component="h2">
+            <FavoriteFood variant="subtitle1" color="textPrimary">
               好きな食べ物
-            </Typography>
+            </FavoriteFood>
           </Box>
           <Box mt={1}>
             <Typography
@@ -143,16 +182,16 @@ export const KidProfile: React.FC<Props> = memo((props) => {
               {favoriteFood}
             </Typography>
           </Box>
-        </CardContent>
-      </MyCardActionArea>
-      <MyCardActions>
+        </Content>
         <ButtonWrapper>
-          <Button size="small" color="primary" onClick={onClick}>
-            Update
-          </Button>
+          <FlexibleButton
+            variant="contained"
+            onClick={onClick}
+            label="Update"
+          />
         </ButtonWrapper>
-      </MyCardActions>
-    </Card>
+      </MyCardActionArea>
+    </MyCard>
   );
 });
 

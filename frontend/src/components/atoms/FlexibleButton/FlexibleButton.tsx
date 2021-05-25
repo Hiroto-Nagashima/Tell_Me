@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export type Props = {
   variant: 'text' | 'outlined' | 'contained';
-  color: 'inherit' | 'primary' | 'secondary' | 'default';
+  color?: 'inherit' | 'primary' | 'secondary' | 'default';
   label: string;
   url?: string;
   onClick?: (e: unknown) => void;
