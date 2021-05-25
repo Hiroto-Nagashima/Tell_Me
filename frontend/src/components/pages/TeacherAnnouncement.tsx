@@ -54,7 +54,7 @@ export const TeacherAnnouncement: React.FC = () => {
   const onClickPost = () => {
     axios
       .post(
-        `http://localhost:5000/api/v1/daycares/${daycare.id}/teachers/${teacherId}/postAnnouncement`,
+        `http://localhost:5000/api/v1/daycares/${daycare.id}/users/${teacherId}/postAnnouncement`,
       )
       .then((res) => {
         setMassage(res.data.message);

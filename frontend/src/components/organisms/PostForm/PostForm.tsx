@@ -6,6 +6,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import { MultipleLinesTextField } from '../../atoms';
+import styled from 'styled-components';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -41,6 +42,11 @@ const useStyles = makeStyles(() =>
   }),
 );
 
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export type Props = {
   src: string;
   value: string | null;
@@ -53,35 +59,39 @@ export const PostForm: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <CardMedia
-        className={classes.cover}
-        image={src}
-        title="post announcement"
-      />
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <MultipleLinesTextField
-            label="Announcement"
-            variant="standard"
-            value={value}
-            onChange={onChange}
-            row={5}
+    <Wrapper>
+      <div>
+        <Card className={classes.root}>
+          <CardMedia
+            className={classes.cover}
+            image={src}
+            title="post announcement"
           />
-        </CardContent>
-        <div className={classes.controls}>
-          <CardActions>
-            <Button
-              size="large"
-              color="primary"
-              variant="contained"
-              onClick={onClick}
-            >
-              投稿
-            </Button>
-          </CardActions>
-        </div>
+          <div className={classes.details}>
+            <CardContent className={classes.content}>
+              <MultipleLinesTextField
+                label="Announcement"
+                variant="standard"
+                value={value}
+                onChange={onChange}
+                row={5}
+              />
+            </CardContent>
+            <div className={classes.controls}>
+              <CardActions>
+                <Button
+                  size="large"
+                  color="primary"
+                  variant="contained"
+                  onClick={onClick}
+                >
+                  投稿
+                </Button>
+              </CardActions>
+            </div>
+          </div>
+        </Card>
       </div>
-    </Card>
+    </Wrapper>
   );
 };
