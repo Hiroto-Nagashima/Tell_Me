@@ -43,7 +43,6 @@ export const PostCard: React.FC<Props> = (props) => {
           />
         }
         titleTypographyProps={{ variant: 'h6' }}
-        // subheaderTypographyProps={{ variant: 'p' }}
         title={poster}
         subheader={createdAt}
       />
