@@ -8,6 +8,7 @@ import React, {
 } from 'react';
 import { useParams } from 'react-router-dom';
 import { CurrentUserContext } from '../../providers/UserProvider';
+import { Post } from '../../types/api/post';
 import { Daycare } from '../../types/frontend/daycare';
 import { CustomizedSnackbar, Spinner } from '../atoms';
 import { PostForm } from '../organisms/PostForm/PostForm';
@@ -17,6 +18,7 @@ export const TeacherAnnouncement: React.FC = () => {
   const { teacherId } = useParams<{ teacherId: string }>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [posts, setPosts] = useState<Array<Post> | null>(null);
   const [postContent, setPostContent] = useState<string | null>('');
   const [message, setMassage] = useState('');
   const [daycare, setDaycare] = useState<Daycare>({} as Daycare);
@@ -52,13 +54,13 @@ export const TeacherAnnouncement: React.FC = () => {
       .finally(() => setLoading(false));
   };
 
-  const fetchAllAnnouncement = (daycareId: number) => {
+  const fetchAllUserPosts = (daycareId: number) => {
     setLoading(true);
     axios
       .get(
         `http://localhost:5000/api/v1/daycares/${daycareId}/users/${teacherId}/user_posts`,
       )
-      .then((res) => setDaycare(res.data.daycare))
+      .then((res) => setPosts(res.data))
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
   };
@@ -96,7 +98,8 @@ export const TeacherAnnouncement: React.FC = () => {
 
   useEffect(() => {
     const daycareId = currentUser.daycareId;
-    currentUser.daycareId && fetchDaycare(daycareId);
+    currentUser.daycareId &&
+      (fetchDaycare(daycareId), fetchAllUserPosts(daycareId));
   }, [currentUser.daycareId]);
 
   return (
