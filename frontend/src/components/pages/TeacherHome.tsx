@@ -8,10 +8,13 @@ import React, {
   useState,
 } from 'react';
 import { CurrentUserContext } from '../../providers/UserProvider';
+import { Post } from '../../types/api/post';
+import { PostCard } from '../organisms/Post/PostCard';
 import { Daycare } from '../../types/frontend/daycare';
 import { CustomizedSnackbar, Spinner } from '../atoms';
 import { TeacherProfile } from '../organisms/TeacherProfile/TeacherProfile';
 import { UpdateTeacherModal } from '../organisms/UpdateTeacherModal/UpdateTeacherModal';
+import { Box } from '@material-ui/core';
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,7 +22,10 @@ const Wrapper = styled.div`
 `;
 export const TeacherHome: React.FC = () => {
   const { currentUser } = useContext(CurrentUserContext);
+  const userNameArr = [currentUser.lastName, currentUser.firstName];
+  const userName = userNameArr.join();
   const [loading, setLoading] = useState(false);
+  const [posts, setPosts] = useState<Array<Post>>([]);
   const [error, setError] = useState(false);
   const [message, setMassage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -79,6 +85,20 @@ export const TeacherHome: React.FC = () => {
     [],
   );
 
+  const fetchAllUserPosts = (daycareId: number) => {
+    setLoading(true);
+    axios
+      .get(
+        `http://localhost:5000/api/v1/daycares/${daycareId}/users/${currentUser.id}/user_posts`,
+      )
+      .then((res) => {
+        setPosts(res.data);
+        console.log(res.data);
+      })
+      .catch((e) => setError(e))
+      .finally(() => setLoading(false));
+  };
+
   const fetchDaycare = (daycareId: number) => {
     setLoading(true);
     axios
@@ -92,6 +112,7 @@ export const TeacherHome: React.FC = () => {
     const daycareId = currentUser.daycareId;
     currentUser.daycareId &&
       (fetchDaycare(daycareId),
+      fetchAllUserPosts(daycareId),
       setSelfIntroduction(currentUser.selfIntroduction));
   }, [currentUser.daycareId]);
 
@@ -118,6 +139,17 @@ export const TeacherHome: React.FC = () => {
               onSubmit={handleUpdateTeacher}
               onChange={onChangeSelfIntroduction}
             />
+            {posts.map((post) => {
+              return (
+                <Box key={post.id} my={1}>
+                  <PostCard
+                    poster={userName}
+                    content={post.content}
+                    createdAt={post.created_at}
+                  />
+                </Box>
+              );
+            })}
             <CustomizedSnackbar
               open={isSnackbarOpen}
               onClose={handleSnackbarClose}

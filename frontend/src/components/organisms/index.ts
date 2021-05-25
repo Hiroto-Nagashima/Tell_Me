@@ -1,4 +1,4 @@
-import { Post } from './Post/PostCard';
+import { PostCard } from './Post/PostCard';
 import { Header } from './Header/Header';
 import { KidProfile } from './KidProfile/KidProfile';
 import { LoginPaper } from './LoginPaper/LoginPaper';
@@ -9,8 +9,8 @@ import { InputOfNotebook } from './InputOfNotebook/InputOfNotebook';
 import { RegisterKidPaper } from './RegisterKidPaper/RegisterKidPaper';
 
 export {
-  Post,
   Header,
+  PostCard,
   KidProfile,
   LoginPaper,
   SignUpPaper,

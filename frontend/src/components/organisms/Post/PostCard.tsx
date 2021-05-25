@@ -19,15 +19,13 @@ const useStyles = makeStyles(() =>
 );
 
 export type Props = {
-  title: string;
+  poster: string;
   content: string;
-  created_at: string;
-  IsExpanded: boolean;
-  onClickExpand: () => void;
+  createdAt: Date;
 };
 
 export const PostCard: React.FC<Props> = (props) => {
-  const { title, content, created_at } = props;
+  const { poster, content, createdAt } = props;
   const classes = useStyles();
 
   return (
@@ -38,8 +36,8 @@ export const PostCard: React.FC<Props> = (props) => {
             R
           </Avatar>
         }
-        title={title}
-        subheader={created_at}
+        title={poster}
+        subheader={createdAt}
       />
 
       <CardContent>
