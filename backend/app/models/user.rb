@@ -3,6 +3,7 @@ class User < ApplicationRecord
   belongs_to :daycare, optional: true
   has_many :kids, through: :kid_users
   has_many :kid_users
+  has_many :posts
   validates :first_name, :last_name, :telephone_number, :uid, :email, :password, presence: true
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
