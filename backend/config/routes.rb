@@ -3,7 +3,6 @@
 Rails.application.routes.draw do
   namespace 'api' do
     namespace 'v1' do
-      # post 'daycares/:daycare_id/users/:user_id/postAnnouncement', to: 'daycares#postAnnouncement'
       resources :daycares, only: [:show, :index]
       post '/kids/:id/registerImage', to: 'kids#registerImage'
       resources :kids, only: [:index, :show, :create, :update] do
@@ -18,6 +17,7 @@ Rails.application.routes.draw do
       get '/users/fetchUserName', to: 'users#fetchUserName'
       get '/users/fetchUser', to: 'users#fetchUser'
       resources :users, only: [:create, :update]
+      post 'daycares/:daycare_id/users/:user_id/posts', to: 'pasts#create'
     end
   end
 end
