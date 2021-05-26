@@ -13,6 +13,7 @@ module Api
             }
         }
       end
+
       def index
         daycare = Daycare.find(params[:id])
         kids = Kid.where(daycare_id: daycare.id)
