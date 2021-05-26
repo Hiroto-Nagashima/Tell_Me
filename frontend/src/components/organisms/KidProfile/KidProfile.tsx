@@ -1,21 +1,42 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
+
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Box } from '@material-ui/core';
 import { FlexibleButton } from '../../atoms';
 
-const MyCard = styled(Card)`
-  width: 580px;
-  height: 540px;
-  position: relative;
-  border-radius: 2px;
+const AgeAndGender = styled(Box)`
+  color: white;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  background-color: #f25e5d;
 `;
 
-const MyCardMedia = styled(CardMedia)`
-  height: 180px;
-  background-color: #f25e5d;
+const ButtonWrapper = styled(Box)`
+  width: 250px;
+  margin: 0 0 0 auto;
+`;
+
+const Content = styled(Box)`
+  padding: 3% 10%;
+`;
+
+const FavoriteFood = styled(Typography)`
+  width: 31%;
+  background: linear-gradient(transparent 70%, #e4e3e1 70%);
+`;
+
+const FavoritePlay = styled(Typography)`
+  width: 26%;
+  background: linear-gradient(transparent 70%, #e4e3e1 70%);
+`;
+
+const FirstName = styled(Typography)`
+  font-size: 25px;
+  color: white;
 `;
 
 const KidName = styled(Typography)`
@@ -26,32 +47,21 @@ const KidName = styled(Typography)`
   justify-content: center;
 `;
 
+const MyCard = styled(Card)`
+  width: 580px;
+  height: 540px;
+  position: relative;
+  border-radius: 2px;
+`;
+
 const LastName = styled(Typography)`
   font-size: 25px;
   margin-right: 20px;
   color: white;
 `;
-
-const FirstName = styled(Typography)`
-  font-size: 25px;
-  color: white;
-`;
-
-const AgeAndGender = styled(Box)`
-  color: white;
-  height: 50px;
-  display: flex;
+const MyCardMedia = styled(CardMedia)`
+  height: 180px;
   background-color: #f25e5d;
-  justify-content: center;
-`;
-
-const Content = styled(Box)`
-  padding: 3% 10%;
-`;
-
-const ProfileImageBox = styled(Box)`
-  position: absolute;
-  top: 40px;
 `;
 
 const MyCardActionArea = styled(Box)`
@@ -71,39 +81,29 @@ const ProfileImageWrapper = styled(Box)`
   justify-content: center;
 `;
 
-const ButtonWrapper = styled(Box)`
-  width: 250px;
-  margin: 0 0 0 auto;
-`;
-
-const FavoritePlay = styled(Typography)`
-  background: linear-gradient(transparent 70%, #e4e3e1 70%);
-  width: 26%;
-`;
-
-const FavoriteFood = styled(Typography)`
-  background: linear-gradient(transparent 70%, #e4e3e1 70%);
-  width: 31%;
+const ProfileImageBox = styled(Box)`
+  top: 40px;
+  position: absolute;
 `;
 
 export type Props = {
-  age: number | null | undefined;
+  age: number | null;
   kidId: string | null;
-  gender: number | undefined;
-  firstName: string | null | undefined;
-  lastName: string | null | undefined;
-  favoritePlay: string | null | undefined;
-  favoriteFood: string | null | undefined;
+  gender: number;
+  firstName: string | null;
+  lastName: string | null;
+  favoritePlay: string | null;
+  favoriteFood: string | null;
   onClick: () => void;
 };
 
 export const KidProfile: React.FC<Props> = memo((props) => {
   const {
-    firstName,
     age,
     kidId,
     gender,
     lastName,
+    firstName,
     favoriteFood,
     favoritePlay,
     onClick,

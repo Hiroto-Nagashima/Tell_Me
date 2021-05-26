@@ -1,7 +1,8 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import styled from 'styled-components';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -13,9 +14,11 @@ const useStyles = makeStyles(() =>
     },
   }),
 );
+
 export type Props = {
   color?: 'inherit' | 'primary' | 'secondary';
 };
+
 const MyCircularProgress = styled(CircularProgress)`
   margin: 0;
   position: absolute;
@@ -23,6 +26,7 @@ const MyCircularProgress = styled(CircularProgress)`
   left: 50%;
   margin-right: -50%;
 `;
+
 export const Spinner: React.FC<Props> = (props) => {
   const { color } = props;
   const classes = useStyles();
