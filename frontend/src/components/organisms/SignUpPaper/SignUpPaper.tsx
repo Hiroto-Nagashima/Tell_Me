@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
+
 import Paper from '@material-ui/core/Paper';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { SingleLineTextField, FlexibleButton } from '../../atoms/index';
 import { ChooseRole } from '../../molecules/ChooseRole/ChooseRole';
 
@@ -20,7 +21,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-const Flexbox = styled.div`
+
+const FlexBox = styled.div`
   display: flex;
 `;
 
@@ -33,35 +35,35 @@ export type Props = {
   gender: number | null;
   daycareId: number | null;
   telephoneNumber: string;
-  onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClickSignUp: () => void;
   onChangeRole: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeDaycareId: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeFirstName: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeLastName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeGender: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeDaycareId: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeLastName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeFirstName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeTelephoneNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onClick: () => void;
 };
 export const SignUpPaper: React.FC<Props> = memo((props) => {
   const {
     role,
     email,
-    password,
-    daycareId,
+    gender,
     lastName,
     firstName,
-    gender,
+    password,
+    daycareId,
     telephoneNumber,
-    onChangeEmail,
+    onClickSignUp,
     onChangeRole,
-    onChangeDaycareId,
-    onChangePassword,
-    onChangeFirstName,
-    onChangeLastName,
+    onChangeEmail,
     onChangeGender,
+    onChangePassword,
+    onChangeLastName,
+    onChangeFirstName,
+    onChangeDaycareId,
     onChangeTelephoneNumber,
-    onClick,
   } = props;
 
   const classes = useStyles();
@@ -75,7 +77,7 @@ export const SignUpPaper: React.FC<Props> = memo((props) => {
         <Box component="p" pt={2} textAlign="center">
           以下のフォームを入力してください
         </Box>
-        <Flexbox>
+        <FlexBox>
           <Box textAlign="center" ml={4} mr={1}>
             <SingleLineTextField
               id="姓"
@@ -96,7 +98,7 @@ export const SignUpPaper: React.FC<Props> = memo((props) => {
               onChange={onChangeFirstName}
             />
           </Box>
-        </Flexbox>
+        </FlexBox>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
             id="電話番号"
@@ -123,9 +125,9 @@ export const SignUpPaper: React.FC<Props> = memo((props) => {
             textName="パスワード"
             isFullWidth={true}
             placeholder="6文字以上"
-            type="password"
             value={password}
             onChange={onChangePassword}
+            type="password"
           />
         </Box>
         <Box m={4}>
@@ -133,14 +135,14 @@ export const SignUpPaper: React.FC<Props> = memo((props) => {
             role={role}
             gender={gender}
             daycareId={daycareId}
+            onChangeRole={onChangeRole}
             onChangeGender={onChangeGender}
             onChangeDaycareId={onChangeDaycareId}
-            onChangeRole={onChangeRole}
           />
         </Box>
         <Box textAlign="center" mx={2}>
           <FlexibleButton
-            onClick={onClick}
+            onClick={onClickSignUp}
             variant="contained"
             color="primary"
             label="登録"

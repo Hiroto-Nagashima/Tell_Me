@@ -182,7 +182,7 @@ export const SignUp: React.FC = () => {
             lastName={lastName}
             gender={gender}
             telephoneNumber={telephoneNumber}
-            onClick={trySignUp}
+            onClickSignUp={trySignUp}
             onChangeDaycareId={onChangeDaycareId}
             onChangeRole={onChangeRole}
             onChangeEmail={onChangeEmail}
