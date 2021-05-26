@@ -1,22 +1,27 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { SignUp } from './components/pages/SignUp';
-import { Page404 } from './components/pages/Page404';
+
 import GlobalStyle from './theme/globalStyle';
-import { HeaderLayoutRoute } from './router/HeaderLayoutRoute';
-import { ParentRoute } from './router/ParentRoute';
-import { RegisterKid } from './components/pages/RegisterKid';
-import { ParentHeaderLayoutRoute } from './router/ParentHeaderLayoutRoute';
-import { TeacherRoute } from './router/TeacherRoute';
-import { ChooseKid } from './components/pages/ChooseKid';
-import { Notebook } from './components/pages/Notebook';
-import { Announcement } from './components/pages/Announcement';
-import { Login } from './components/pages/Login';
-import { Home } from './components/pages/Home';
-import { TeacherHome } from './components/pages/TeacherHome';
-import { TeacherAnnouncement } from './components/pages/TeacherAnnouncement';
+
 import { UserProvider } from './providers/UserProvider';
+
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+import { ParentRoute } from './router/ParentRoute';
+import { TeacherRoute } from './router/TeacherRoute';
+import { HeaderLayoutRoute } from './router/HeaderLayoutRoute';
+import { ParentHeaderLayoutRoute } from './router/ParentHeaderLayoutRoute';
+
+import { Home } from './components/pages/Home';
+import { Login } from './components/pages/Login';
+import { SignUp } from './components/pages/SignUp';
 import { AllKids } from './components/pages/AllKids';
+import { Page404 } from './components/pages/Page404';
+import { Notebook } from './components/pages/Notebook';
+import { ChooseKid } from './components/pages/ChooseKid';
+import { RegisterKid } from './components/pages/RegisterKid';
+import { TeacherHome } from './components/pages/TeacherHome';
+import { Announcement } from './components/pages/Announcement';
+import { TeacherAnnouncement } from './components/pages/TeacherAnnouncement';
 
 const App: React.FC = () => {
   return (
