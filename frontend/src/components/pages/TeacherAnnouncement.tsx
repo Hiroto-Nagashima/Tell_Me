@@ -1,5 +1,6 @@
 import { Box } from '@material-ui/core';
 import axios from 'axios';
+import styled from 'styled-components';
 import React, {
   ChangeEvent,
   useCallback,
@@ -7,31 +8,33 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import { CurrentUserContext } from '../../providers/UserProvider';
 import { Post } from '../../types/api/post';
 import { Daycare } from '../../types/frontend/daycare';
-import { CustomizedSnackbar, Spinner } from '../atoms';
-import { PostCard } from '../organisms';
-import { PostForm } from '../organisms/PostForm/PostForm';
+import { useParams } from 'react-router-dom';
+import { CurrentUserContext } from '../../providers/UserProvider';
 
-const Wrapper = styled.div`
+import { CustomizedSnackbar, Spinner } from '../atoms';
+import { PostCard, PostForm } from '../organisms';
+
+const FlexBox = styled.div`
   display: flex;
   justify-content: center;
 `;
 
 export const TeacherAnnouncement: React.FC = () => {
+  const { teacherId } = useParams<{ teacherId: string }>();
+
   const { currentUser } = useContext(CurrentUserContext);
+
   const userNameArr = [currentUser.lastName, currentUser.firstName];
   const userName = userNameArr.join('');
-  const { teacherId } = useParams<{ teacherId: string }>();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+
   const [posts, setPosts] = useState<Array<Post>>([]);
-  const [postContent, setPostContent] = useState<string | null>('');
+  const [error, setError] = useState(false);
   const [message, setMassage] = useState('');
   const [daycare, setDaycare] = useState<Daycare>({} as Daycare);
+  const [loading, setLoading] = useState(false);
+  const [postContent, setPostContent] = useState<string | null>('');
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [severity, setSeverity] =
     useState<'error' | 'warning' | 'info' | 'success'>('error');
@@ -43,7 +46,7 @@ export const TeacherAnnouncement: React.FC = () => {
     [],
   );
 
-  const handleSnackbarClose = useCallback(
+  const onCloseSnackbar = useCallback(
     (event?: React.SyntheticEvent, reason?: string) => {
       if (reason === 'clickaway') {
         return;
@@ -73,36 +76,30 @@ export const TeacherAnnouncement: React.FC = () => {
       .finally(() => setLoading(false));
   };
 
-  const onClickPost = () => {
+  const tryPost = () => {
     setLoading(true);
-    console.log(1);
     axios
       .post(
         `http://localhost:5000/api/v1/daycares/${daycare.id}/users/${teacherId}/posts`,
         {
           params: {
-            content: postContent,
             poster: userName,
+            content: postContent,
           },
         },
       )
       .then((res) => {
-        console.log(2);
         setMassage(res.data.message);
         setSeverity('success');
-        setIsSnackbarOpen(true);
       })
       .catch(() => {
-        console.log(3);
         setMassage('投稿に失敗しました');
         setSeverity('error');
-        setIsSnackbarOpen(true);
       })
       .finally(() => {
         setLoading(false);
-        console.log(4);
+        setIsSnackbarOpen(true);
       });
-    console.log(5);
   };
 
   useEffect(() => {
@@ -118,12 +115,12 @@ export const TeacherAnnouncement: React.FC = () => {
       ) : error ? (
         <div>エラーです</div>
       ) : (
-        <Wrapper>
+        <FlexBox>
           <div>
             <PostForm
               src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/user/image/${teacherId}/image.jpeg`}
               value={postContent}
-              onClick={onClickPost}
+              onClick={tryPost}
               onChange={onChangePostContent}
             />
             {posts.map((post) => {
@@ -140,13 +137,13 @@ export const TeacherAnnouncement: React.FC = () => {
             })}
             <CustomizedSnackbar
               open={isSnackbarOpen}
-              onClose={handleSnackbarClose}
+              onClose={onCloseSnackbar}
               severity={severity}
             >
               {message}
             </CustomizedSnackbar>
           </div>
-        </Wrapper>
+        </FlexBox>
       )}
     </>
   );

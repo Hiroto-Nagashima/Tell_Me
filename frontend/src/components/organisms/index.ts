@@ -1,5 +1,6 @@
 import { PostCard } from './PostCard/PostCard';
 import { Header } from './Header/Header';
+import { PostForm } from './PostForm/PostForm';
 import { KidProfile } from './KidProfile/KidProfile';
 import { LoginPaper } from './LoginPaper/LoginPaper';
 import { SignUpPaper } from './SignUpPaper/SignUpPaper';
@@ -11,6 +12,7 @@ import { RegisterKidPaper } from './RegisterKidPaper/RegisterKidPaper';
 export {
   Header,
   PostCard,
+  PostForm,
   KidProfile,
   LoginPaper,
   SignUpPaper,
