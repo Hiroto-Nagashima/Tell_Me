@@ -15,6 +15,8 @@ const SButton = styled(Button)`
   background: #ff9463;
   color: white;
   height: 48px;
+  font-size: 18px;
+  border-radius: 20px;
   &:hover {
     background: #f25e5d;
   }
