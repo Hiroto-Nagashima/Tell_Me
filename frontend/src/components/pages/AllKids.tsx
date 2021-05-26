@@ -2,6 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import * as H from 'history';
 import axios from 'axios';
 import styled from 'styled-components';
+import { Kid } from '../../types/api/kid';
+import { User } from '../../types/api/user';
+import { Notebook } from '../../types/api/notebook';
+import { CurrentUserContext } from '../../providers/UserProvider';
 
 import {
   withStyles,
@@ -17,13 +21,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 
-import { Kid } from '../../types/api/kid';
-import { User } from '../../types/api/user';
 import { Spinner } from '../atoms';
-import { Notebook } from '../../types/api/notebook';
 import { ParentPopover } from '../molecules/SimplePopover/ParentPopover';
 import { NotebookModal } from '../organisms/NotebookModal/NotebookModal';
-import { CurrentUserContext } from '../../providers/UserProvider';
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({

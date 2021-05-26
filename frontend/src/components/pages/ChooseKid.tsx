@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import { Kid } from '../../types/api/kid';
-import { Spinner } from '../atoms/Spinner/Spinner';
-import { KidCard } from '../molecules/KidCard/KidCard';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router';
 import { useAuthState } from 'react-firebase-hooks/auth';
+
 import { Box } from '@material-ui/core';
-import styled from 'styled-components';
+import { Spinner } from '../atoms/Spinner/Spinner';
+import { KidCard } from '../molecules/KidCard/KidCard';
 
 const Wrapper = styled(Box)`
   display: flex;
