@@ -165,7 +165,7 @@ export const Notebook: React.FC = () => {
               hasBathed={hasBathed}
               breakfast={breakfast}
               bodyTemperature={bodyTemperature}
-              onClick={onClickRegister}
+              onClickRegister={onClickRegister}
               onChangeMemo={onChangeMemo}
               onChangeDinner={onChangeDinner}
               onChangeBreakfast={onChangeBreakfast}

@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
@@ -31,7 +32,7 @@ export type Props = {
   breakfast: string | null;
   selectedDate: Date | string | null;
   bodyTemperature: number | string | null;
-  onClick: () => void;
+  onClickRegister: () => void;
   onChangeMemo: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeDinner: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeHasBathed: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -47,13 +48,14 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
     breakfast,
     selectedDate,
     bodyTemperature,
-    onClick,
+    onClickRegister,
     onChangeMemo,
     onChangeDinner,
     onChangeBreakfast,
     onChangeHasBathed,
     onChangeBodyTemperature,
   } = props;
+
   const classes = useStyles();
 
   return (
@@ -127,7 +129,7 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
         </Box>
         <Box textAlign="center" m={2}>
           <FlexibleButton
-            onClick={onClick}
+            onClick={onClickRegister}
             variant="contained"
             color="primary"
             label="登録"
