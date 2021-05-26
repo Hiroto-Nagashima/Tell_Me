@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { SignUp } from './components/pages/SignUp';
 import { Page404 } from './components/pages/Page404';
 import GlobalStyle from './theme/globalStyle';
-import HeaderLayoutRoute from './router/HeaderLayoutRoute';
+import { HeaderLayoutRoute } from './router/HeaderLayoutRoute';
 import { ParentRoute } from './router/ParentRoute';
 import { RegisterKid } from './components/pages/RegisterKid';
 import { ParentHeaderLayoutRoute } from './router/ParentHeaderLayoutRoute';

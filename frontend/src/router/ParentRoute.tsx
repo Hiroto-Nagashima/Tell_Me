@@ -1,10 +1,11 @@
 import React, { ComponentType } from 'react';
+import { getAuth } from '../helper/firebaseAuthHelper';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Route, RouteComponentProps } from 'react-router-dom';
+
 import { Login } from '../components/pages/Login';
 import { HeaderLayout } from '../components/templates/HeaderLayout';
 import { ParentSidebarLayout } from '../components/templates/ParentSidebarLayout';
-import { getAuth } from '../helper/firebaseAuthHelper';
 
 type Props = {
   component: ComponentType<RouteComponentProps>;

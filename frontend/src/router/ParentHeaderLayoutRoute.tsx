@@ -1,9 +1,10 @@
 import React, { ComponentType } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Route, RouteComponentProps } from 'react-router-dom';
+import { getAuth } from '../helper/firebaseAuthHelper';
+
 import { Login } from '../components/pages/Login';
 import { HeaderLayout } from '../components/templates/HeaderLayout';
-import { getAuth } from '../helper/firebaseAuthHelper';
 
 type Props = {
   component: ComponentType<RouteComponentProps>;
