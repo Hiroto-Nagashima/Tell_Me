@@ -1,9 +1,9 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { Box, Button } from '@material-ui/core';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { MultipleLinesTextField, SingleLineTextField } from '../../atoms';
 import { RadioButtonGroup } from '../../molecules';
 
@@ -35,7 +35,9 @@ export type Props = {
 
 export const NotebookModal: React.FC<Props> = (props) => {
   const { date, memo, dinner, breakfast, hasBathed, bodyTemperature } = props;
+
   const classes = useStyles();
+
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -52,8 +54,6 @@ export const NotebookModal: React.FC<Props> = (props) => {
         確認
       </Button>
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
         className={classes.modal}
         open={open}
         onClose={handleClose}
