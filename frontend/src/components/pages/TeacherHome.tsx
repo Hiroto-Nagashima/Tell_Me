@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import { CurrentUserContext } from '../../providers/UserProvider';
 import { Post } from '../../types/api/post';
-import { PostCard } from '../organisms/Post/PostCard';
+import { PostCard } from '../organisms/PostCard/PostCard';
 import { Daycare } from '../../types/frontend/daycare';
 import { CustomizedSnackbar, Spinner } from '../atoms';
 import { TeacherProfile } from '../organisms/TeacherProfile/TeacherProfile';

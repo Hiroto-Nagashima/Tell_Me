@@ -1,10 +1,11 @@
 import React from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,6 +32,7 @@ export type Props = {
 
 export const PostCard: React.FC<Props> = (props) => {
   const { poster, teacherId, content, createdAt } = props;
+
   const classes = useStyles();
 
   return (
@@ -46,11 +48,8 @@ export const PostCard: React.FC<Props> = (props) => {
         title={poster}
         subheader={createdAt}
       />
-
       <CardContent>
-        <Typography variant="body1" component="p">
-          {content}
-        </Typography>
+        <Typography variant="body1">{content}</Typography>
       </CardContent>
     </Card>
   );

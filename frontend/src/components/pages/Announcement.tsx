@@ -1,9 +1,10 @@
-import { Box } from '@material-ui/core';
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import styled from 'styled-components';
 import { Post } from '../../types/api/post';
+import { useParams } from 'react-router-dom';
+
+import { Box } from '@material-ui/core';
 import { Spinner } from '../atoms';
 import { PostCard } from '../organisms';
 
@@ -13,10 +14,12 @@ const Wrapper = styled.div`
 `;
 
 export const Announcement: React.FC = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [posts, setPosts] = useState<Array<Post>>([]);
   const { id } = useParams<{ id: string }>();
+
+  const [posts, setPosts] = useState<Array<Post>>([]);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const fetchPosts = () => {
     setLoading(true);
     axios
