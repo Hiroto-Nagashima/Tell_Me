@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
+
 import Paper from '@material-ui/core/Paper';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { SingleLineTextField, FlexibleButton } from '../../atoms/index';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup';
 
@@ -20,10 +21,12 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-const Flexbox = styled.div`
+
+const FlexBox = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 export type Props = {
   age: number | null;
   gender: number;
@@ -34,7 +37,7 @@ export type Props = {
   daycareId: number | null;
   favoriteFood: string | null;
   favoritePlay: string | null;
-  onClick: () => void;
+  onClickRegister: () => void;
   onChangeFirstName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeLastName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeGender: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -51,18 +54,18 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
     firstName,
     lastName,
     daycareId,
+    favoritePlay,
+    favoriteFood,
     parentLastName,
     parentFirstName,
-    favoriteFood,
-    favoritePlay,
-    onClick,
-    onChangeFirstName,
-    onChangeLastName,
     onChangeAge,
     onChangeGender,
+    onChangeLastName,
+    onChangeFirstName,
     onChangeDaycareId,
     onChangeFavoriteFood,
     onChangeFavoritePlay,
+    onClickRegister,
   } = props;
   const classes = useStyles();
 
@@ -104,7 +107,7 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
         <Box component="h3" px={2} my={5} textAlign="center">
           3. お子様のお名前を入力してください
         </Box>
-        <Flexbox>
+        <FlexBox>
           <Box textAlign="center" ml={4} mr={1}>
             <SingleLineTextField
               id="姓"
@@ -125,7 +128,7 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
               onChange={onChangeFirstName}
             />
           </Box>
-        </Flexbox>
+        </FlexBox>
         <Box component="h3" px={2} my={5} textAlign="center">
           4. お子様のご年齢を入力してください
         </Box>
@@ -167,7 +170,7 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
         </Box>
         <Box textAlign="center" m={5}>
           <FlexibleButton
-            onClick={onClick}
+            onClick={onClickRegister}
             variant="contained"
             color="primary"
             label="登録"

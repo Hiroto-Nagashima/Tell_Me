@@ -112,7 +112,7 @@ export const RegisterKid: React.FC<Props> = () => {
             firstName={firstName}
             favoriteFood={favoriteFood}
             favoritePlay={favoritePlay}
-            onClick={onClickRegister}
+            onClickRegister={onClickRegister}
             onChangeAge={onChangeAge}
             onChangeDaycareId={onChangeDaycareId}
             onChangeFirstName={onChangeFirstName}
