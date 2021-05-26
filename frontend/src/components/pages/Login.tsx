@@ -3,14 +3,14 @@ import * as H from 'history';
 import axios from 'axios';
 import styled from 'styled-components';
 import firebase from 'firebase';
-import { ReactComponent as Logo } from '../../images/undraw_Notebook_re_id0r.svg';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router-dom';
-import { CustomizedSnackbar } from '../atoms/CustomizedSnackbar/CustomizedSnackbar';
-import { LoginPaper } from '../organisms/LoginPaper/LoginPaper';
 import { CurrentUserContext } from '../../providers/UserProvider';
-import { Spinner } from '../atoms';
+
 import { Box } from '@material-ui/core';
+import { LoginPaper } from '../organisms/LoginPaper/LoginPaper';
+import { Spinner, CustomizedSnackbar } from '../atoms';
+import { ReactComponent as Logo } from '../../images/undraw_Notebook_re_id0r.svg';
 
 type Props = {
   history: H.History;
@@ -20,14 +20,14 @@ const HomeImage = styled(Logo)`
   width: 800px;
 `;
 
+const MyLoginPaper = styled(LoginPaper)`
+  margin: 60px;
+`;
+
 const Wrapper = styled(Box)`
   display: flex;
   justify-content: space-between;
   padding: 8% 5% 5% 5%;
-`;
-
-const MyLoginPaper = styled(LoginPaper)`
-  margin: 60px;
 `;
 
 export const Login: React.FC<Props> = () => {
@@ -49,7 +49,7 @@ export const Login: React.FC<Props> = () => {
     return setPassword(e.target.value);
   }, []);
 
-  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+  const onCloseSnackbar = (event?: React.SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -58,18 +58,18 @@ export const Login: React.FC<Props> = () => {
     return;
   };
 
-  const handleSubmit = () => {
+  const tryLogin = () => {
     setLoading(true);
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(async () => {
-        const loginUser = getAuth().currentUser;
+        const user = getAuth().currentUser;
         try {
           await axios
             .get(`http://localhost:5000/api/v1/users/fetch_user`, {
               params: {
-                uid: loginUser!.uid,
+                uid: user!.uid,
               },
             })
             .then((res) => {
@@ -108,12 +108,12 @@ export const Login: React.FC<Props> = () => {
               onChangeEmail={onChangeEmail}
               password={password}
               onChangePassword={onChangePassword}
-              onClickLogin={handleSubmit}
+              onClickLogin={tryLogin}
             />
           </Wrapper>
           <CustomizedSnackbar
             open={open}
-            onClose={handleClose}
+            onClose={onCloseSnackbar}
             severity="error"
           >
             {error}
