@@ -97,16 +97,16 @@ export const SignUp: React.FC = () => {
 
   const trySignUp = () => {
     setLoading(true);
-    if (telephoneNumber.match(telephoneNumberRegex) == null) {
-      setError('電話番号が無効です');
-      setLoading(false);
-      setIsSnackbarOpen(true);
-    } else if (lastName == lastNameError) {
+    if (lastName == lastNameError) {
       setError('姓が無効です');
       setLoading(false);
       setIsSnackbarOpen(true);
     } else if (firstName == firstNameError) {
       setError('名が無効です');
+      setLoading(false);
+      setIsSnackbarOpen(true);
+    } else if (telephoneNumber.match(telephoneNumberRegex) == null) {
+      setError('電話番号が無効です');
       setLoading(false);
       setIsSnackbarOpen(true);
     } else if (role == '保護者' && gender == null) {
