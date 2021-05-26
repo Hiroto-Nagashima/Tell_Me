@@ -6,10 +6,10 @@ class User < ApplicationRecord
   has_many :kid_users
   has_many :posts
 
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   VALID_PHONE_REGEX = /\A\d{10}$|^\d{11}\z/
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :telephone_number, format: { with: VALID_PHONE_REGEX }
+  validates :email, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   validates :first_name, :last_name, :telephone_number, :uid, :email, :password, presence: true
 
   mount_base64_uploader :image, ImageUploader
