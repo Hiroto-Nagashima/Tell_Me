@@ -1,31 +1,32 @@
 import React, { ReactNode, useState } from 'react';
-import HomeIcon from '@material-ui/icons/Home';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
-import AnnouncementIcon from '@material-ui/icons/Announcement';
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
+import firebase from 'firebase';
+import { useHistory, useParams } from 'react-router';
+
+import { Box } from '@material-ui/core';
 import List from '@material-ui/core/List';
+import AppBar from '@material-ui/core/AppBar';
+import Drawer from '@material-ui/core/Drawer';
+import Hidden from '@material-ui/core/Hidden';
+import Divider from '@material-ui/core/Divider';
+import Toolbar from '@material-ui/core/Toolbar';
+import HomeIcon from '@material-ui/icons/Home';
 import ListItem from '@material-ui/core/ListItem';
+import MenuIcon from '@material-ui/icons/Menu';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AnnouncementIcon from '@material-ui/icons/Announcement';
 import {
   makeStyles,
   useTheme,
   Theme,
   createStyles,
 } from '@material-ui/core/styles';
-import { useHistory, useParams } from 'react-router';
-import firebase from 'firebase';
 import { DraggableDialog } from '../molecules';
-import { Box } from '@material-ui/core';
 
 const drawerWidth = 240;
 
@@ -52,7 +53,6 @@ const useStyles = makeStyles((theme: Theme) =>
         display: 'none',
       },
     },
-    // necessary for content to be below app bar
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
       width: drawerWidth,
@@ -71,32 +71,42 @@ type Props = {
 
 export const ParentSidebarLayout: React.FC<Props> = (props) => {
   const { window, children } = props;
-  const classes = useStyles();
-  const theme = useTheme();
+
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
+
   const history = useHistory();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const { id } = useParams<{ id: string }>();
+
+  const theme = useTheme();
+  const classes = useStyles();
+
   const [title, setTitle] = useState('Home');
   const [isOpen, setOpen] = useState(false);
-  const { id } = useParams<{ id: string }>();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const onClickOpen = () => {
     setOpen(true);
   };
+
   const onClickClose = () => {
     setOpen(false);
   };
 
-  const handleDrawerToggle = () => {
+  const onToggleDrawer = () => {
     setMobileOpen(!mobileOpen);
   };
+
   const onClickHome = () => {
     history.push(`/kids/${id}`);
     setTitle('Home');
   };
+
   const onClickNotebook = () => {
     history.push(`/kids/${id}/notebook`);
     setTitle('Notebook');
   };
+
   const onClickAnnouncement = () => {
     history.push(`/kids/${id}/announcement`);
     setTitle('Announcement');
@@ -151,9 +161,6 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
     </>
   );
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -161,9 +168,8 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
         <Toolbar>
           <IconButton
             color="inherit"
-            aria-label="open drawer"
             edge="start"
-            onClick={handleDrawerToggle}
+            onClick={onToggleDrawer}
             className={classes.menuButton}
           >
             <MenuIcon />
@@ -173,20 +179,19 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+      <nav className={classes.drawer}>
         <Hidden smUp implementation="css">
           <Drawer
             container={container}
             variant="temporary"
             anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={mobileOpen}
-            onClose={handleDrawerToggle}
+            onClose={onToggleDrawer}
             classes={{
               paper: classes.drawerPaper,
             }}
             ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
+              keepMounted: true,
             }}
           >
             {drawer}
