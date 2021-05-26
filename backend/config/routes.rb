@@ -13,8 +13,7 @@ Rails.application.routes.draw do
       get '/kids/:id/fetch_posts', to: 'kids#fetch_posts'
       post '/kids/:id/register_image', to: 'kids#register_image'
       resources :kids, only: [:show, :create, :update] do
-        get '/notebooks/doesExist', to: 'notebooks#doesExist'
-        get '/notebooks/fetchNotebook', to: 'notebooks#fetchNotebook'
+        get '/notebooks/fetch_notebook', to: 'notebooks#fetch_notebook'
         resources :notebooks, only: [:index, :create, :update]
       end
 

@@ -39,7 +39,7 @@ module Api
         render json: notebooks
       end
 
-      def fetchNotebook
+      def fetch_notebook
         kid = Kid.find(params[:kid_id])
         date = params[:date]
         new_date = date.slice(0..9)

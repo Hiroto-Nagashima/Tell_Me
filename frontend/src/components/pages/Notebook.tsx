@@ -70,7 +70,7 @@ export const Notebook: React.FC = () => {
   const handleDateChange = (date: Date | null) => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/api/v1/kids/${id}/notebooks/fetchNotebook`, {
+      .get(`http://localhost:5000/api/v1/kids/${id}/notebooks/fetch_notebook`, {
         params: {
           date,
         },
