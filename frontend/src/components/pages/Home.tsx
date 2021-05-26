@@ -6,15 +6,15 @@ import React, {
   useState,
 } from 'react';
 import axios from 'axios';
-import { Box } from '@material-ui/core';
 import { Kid } from '../../types/frontend/kid';
-import { Spinner } from '../atoms/Spinner/Spinner';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useParams } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { CurrentUserContext } from '../../providers/UserProvider';
-import { KidProfile, UpdateKidModal, ParentProfile } from '../organisms/index';
-import { CustomizedSnackbar } from '../atoms';
+
+import { Box } from '@material-ui/core';
+import { Spinner, CustomizedSnackbar } from '../atoms';
+import { KidProfile, UpdateKidModal, ParentProfile } from '../organisms';
 
 export const Home: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -27,14 +27,14 @@ export const Home: React.FC = () => {
   const [kid, setKid] = useState<Kid>({} as Kid);
   const [error, setError] = useState(false);
   const [gender, setGender] = useState(0);
-  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMassage] = useState('');
   const [lastName, setLastName] = useState<string>('');
   const [firstName, setFirstName] = useState<string>('');
   const [favoriteFood, setFavoriteFood] = useState<string>('');
   const [favoritePlay, setFavoritePlay] = useState<string>('');
-  const [kidUpdateOpen, setKidUpdateOpen] = useState(false);
+  const [isKidModalOpen, setIsKidModalOpen] = useState(false);
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [severity, setSeverity] =
     useState<'error' | 'warning' | 'info' | 'success'>('error');
 
@@ -70,7 +70,28 @@ export const Home: React.FC = () => {
     },
     [],
   );
-  const handleUpdateKidSubmit = () => {
+
+  const onCloseKidModal = useCallback(() => {
+    setIsKidModalOpen(false);
+  }, []);
+
+  const onClickKidModal = useCallback(() => {
+    setIsKidModalOpen(true);
+  }, []);
+
+  const onCloseSnackbar = useCallback(
+    (event?: React.SyntheticEvent, reason?: string) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setIsSnackbarOpen(false);
+
+      return;
+    },
+    [],
+  );
+
+  const tryUpdateKid = () => {
     setLoading(true);
     axios
       .put(`http://localhost:5000/api/v1/kids/${id}`, {
@@ -87,37 +108,18 @@ export const Home: React.FC = () => {
       .then((res) => {
         setKid(res.data.kid);
         setMassage(res.data.message);
-        setKidUpdateOpen(false);
+        setIsKidModalOpen(false);
         setSeverity('success');
-        setIsSnackbarOpen(true);
       })
-      .catch((e) => {
-        setMassage(e);
+      .catch(() => {
+        setMassage('更新失敗しました');
         setSeverity('error');
-        setIsSnackbarOpen(true);
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+        setIsSnackbarOpen(true);
+      });
   };
-
-  const onCloseUpdateKid = useCallback(() => {
-    setKidUpdateOpen(false);
-  }, []);
-
-  const onClickUpdateKid = useCallback(() => {
-    setKidUpdateOpen(true);
-  }, []);
-
-  const handleSnackbarClose = useCallback(
-    (event?: React.SyntheticEvent, reason?: string) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-      setIsSnackbarOpen(false);
-
-      return;
-    },
-    [],
-  );
 
   const fetchKid = async () => {
     setLoading(true);
@@ -126,11 +128,10 @@ export const Home: React.FC = () => {
       .then((res) => {
         setKid(res.data.kid);
         setAge(res.data.kid.age);
-        setFirstName(res.data.kid.firstName);
         setLastName(res.data.kid.lastName);
+        setFirstName(res.data.kid.firstName);
         setFavoriteFood(res.data.kid.favoriteFood);
         setFavoritePlay(res.data.kid.favoritePlay);
-        console.log(res.data);
       })
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
@@ -157,12 +158,12 @@ export const Home: React.FC = () => {
               lastName={kid.lastName}
               favoriteFood={kid.favoriteFood}
               favoritePlay={kid.favoritePlay}
-              onClick={onClickUpdateKid}
+              onClick={onClickKidModal}
             />
-            <div key={currentUser?.id}>
+            <div key={currentUser.id}>
               <ParentProfile
-                email={currentUser?.email}
-                gender={currentUser?.gender}
+                email={currentUser.email}
+                gender={currentUser.gender}
                 telephoneNumber={currentUser.telephoneNumber}
                 firstName={currentUser.firstName}
                 lastName={currentUser.lastName}
@@ -176,20 +177,19 @@ export const Home: React.FC = () => {
             lastName={lastName}
             favoriteFood={favoriteFood}
             favoritePlay={favoritePlay}
-            open={kidUpdateOpen}
-            onClose={onCloseUpdateKid}
+            open={isKidModalOpen}
+            onClose={onCloseKidModal}
             onChangeAge={onChangeAge}
             onChangeGender={onChangeGender}
             onChangeFirstName={onChangeFirstName}
             onChangeLastName={onChangeLastName}
             onChangeFavoriteFood={onChangeFavoriteFood}
             onChangeFavoritePlay={onChangeFavoritePlay}
-            onSubmit={handleUpdateKidSubmit}
+            onSubmit={tryUpdateKid}
           />
-          <button onClick={() => console.log(favoriteFood)} />
           <CustomizedSnackbar
             open={isSnackbarOpen}
-            onClose={handleSnackbarClose}
+            onClose={onCloseSnackbar}
             severity={severity}
           >
             {message}
