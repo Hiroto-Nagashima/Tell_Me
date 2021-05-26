@@ -12,7 +12,10 @@ const AgeAndGender = styled(Box)`
   height: 50px;
   display: flex;
   justify-content: center;
-  background-color: #f25e5d;
+`;
+
+const BackgroundImage = styled(Box)`
+  background: radial-gradient(#ff9463, #f25e5d);
 `;
 
 const ButtonWrapper = styled(Box)`
@@ -37,11 +40,12 @@ const FavoritePlay = styled(Typography)`
 const FirstName = styled(Typography)`
   font-size: 25px;
   color: white;
+  margin-left: 10px;
 `;
 
 const KidName = styled(Typography)`
+  margin-top: 10px;
   height: 50px;
-  background-color: #f25e5d;
   font: white;
   display: flex;
   justify-content: center;
@@ -49,19 +53,18 @@ const KidName = styled(Typography)`
 
 const MyCard = styled(Card)`
   width: 580px;
-  height: 540px;
+  height: 580px;
   position: relative;
   border-radius: 2px;
 `;
 
 const LastName = styled(Typography)`
   font-size: 25px;
-  margin-right: 20px;
+  margin-right: 10px;
   color: white;
 `;
 const MyCardMedia = styled(CardMedia)`
   height: 180px;
-  background-color: #f25e5d;
 `;
 
 const MyCardActionArea = styled(Box)`
@@ -69,10 +72,10 @@ const MyCardActionArea = styled(Box)`
 `;
 
 const ProfileImage = styled.img`
-  width: 130px;
-  height: 130px;
+  width: 140px;
+  height: 140px;
   object-fit: cover;
-  border-radius: 35%;
+  border-radius: 70%;
   // onerror: 'this.src= ' ${process.env.PUBLIC_URL} / noimage.jpeg '';
 `;
 
@@ -112,45 +115,47 @@ export const KidProfile: React.FC<Props> = memo((props) => {
   return (
     <MyCard>
       <MyCardActionArea>
-        <MyCardMedia />
-        <ProfileImageWrapper>
-          <ProfileImageBox>
-            <ProfileImage
-              src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/kid/image/${kidId}/image.jpeg`}
-              alt=""
-            />
-          </ProfileImageBox>
-        </ProfileImageWrapper>
-        <KidName>
-          <LastName variant="subtitle1" align="center">
-            {lastName}
-          </LastName>
-          <FirstName variant="subtitle1" align="center">
-            {firstName}
-          </FirstName>
-        </KidName>
-        <AgeAndGender>
-          <Box mr={2}>
-            <Typography
-              variant="h6"
-              color="inherit"
-              component="h3"
-              align="center"
-            >
-              {gender === 0 ? '女の子' : '男の子'}
-            </Typography>
-          </Box>
-          <Box ml={2}>
-            <Typography
-              variant="h6"
-              color="inherit"
-              component="h3"
-              align="center"
-            >
-              {age}才
-            </Typography>
-          </Box>
-        </AgeAndGender>
+        <BackgroundImage>
+          <MyCardMedia />
+          <ProfileImageWrapper>
+            <ProfileImageBox>
+              <ProfileImage
+                src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/kid/image/${kidId}/image.jpeg`}
+                alt=""
+              />
+            </ProfileImageBox>
+          </ProfileImageWrapper>
+          <KidName>
+            <LastName variant="subtitle1" align="center">
+              {lastName}
+            </LastName>
+            <FirstName variant="subtitle1" align="center">
+              {firstName}
+            </FirstName>
+          </KidName>
+          <AgeAndGender>
+            <Box mr={2}>
+              <Typography
+                variant="h6"
+                color="inherit"
+                component="h3"
+                align="center"
+              >
+                {gender === 0 ? '女の子' : '男の子'}
+              </Typography>
+            </Box>
+            <Box ml={2}>
+              <Typography
+                variant="h6"
+                color="inherit"
+                component="h3"
+                align="center"
+              >
+                {age}才
+              </Typography>
+            </Box>
+          </AgeAndGender>
+        </BackgroundImage>
         <Content>
           <Box mt={2}>
             <FavoritePlay variant="subtitle1" color="inherit">
