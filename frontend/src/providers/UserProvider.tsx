@@ -29,7 +29,7 @@ export const UserProvider: React.FC<Props> = (props) => {
     setLoadingCurrentUser(true);
     if (user) {
       axios
-        .get(`http://localhost:5000/api/v1/users/fetchUser`, {
+        .get(`http://localhost:5000/api/v1/users/fetch_user`, {
           params: {
             uid: user.uid,
           },

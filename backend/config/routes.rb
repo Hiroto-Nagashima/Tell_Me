@@ -17,9 +17,8 @@ Rails.application.routes.draw do
         resources :notebooks, only: [:index, :create, :update]
       end
 
-      post '/users/:id/registerImage', to: 'users#registerImage'
-      get '/users/fetchUserName', to: 'users#fetchUserName'
-      get '/users/fetchUser', to: 'users#fetchUser'
+      post '/users/:id/register_image', to: 'users#register_image'
+      get '/users/fetch_user', to: 'users#fetch_user'
       resources :users, only: [:create, :update]
     end
   end

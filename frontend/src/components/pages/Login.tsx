@@ -67,7 +67,7 @@ export const Login: React.FC<Props> = () => {
         const loginUser = getAuth().currentUser;
         try {
           await axios
-            .get(`http://localhost:5000/api/v1/users/fetchUser`, {
+            .get(`http://localhost:5000/api/v1/users/fetch_user`, {
               params: {
                 uid: loginUser!.uid,
               },

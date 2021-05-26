@@ -5,17 +5,27 @@ module Api
       before_action :set_auth, only: %i[create update]
 
       include CreateUserConcern
+
       def create
         create_user(@auth)
       end
 
-      def fetchUserName
-        user = User.find_by(uid: params[:uid])
-        @user_name = user.last_name + user.first_name
-        render json: @user_name, status: 200
+      def update
+        user = User.find(params[:id])
+        if user.update(user_params)
+          render json: {
+            status: "ok",
+            message: "更新が完了しました",
+            selfIntroduction: user.self_introduction
+          }
+        else
+          render json: {
+            status: 400,
+          }
+        end
       end
 
-      def fetchUser
+      def fetch_user
         @user = User.find_by(uid: params[:uid])
         render json: {
           user:{
@@ -34,7 +44,7 @@ module Api
         }, status: 200
       end
 
-      def registerImage
+      def register_image
         user = User.find(params[:id])
         user.image = params[:image]
         if user.save!
@@ -47,20 +57,7 @@ module Api
           }
         end
       end
-      def update
-        user = User.find(params[:id])
-        if user.update(user_params)
-          render json: {
-            status: "ok",
-            message: "更新が完了しました",
-            selfIntroduction: user.self_introduction
-          }
-        else
-          render json: {
-            status: 400,
-          }
-        end
-      end
+
       private
       def user_params
         params.require(:params).permit(:email, :password, :role, :first_name, :last_name, :gender, :daycare_id, :telephone_number, :self_introduction)

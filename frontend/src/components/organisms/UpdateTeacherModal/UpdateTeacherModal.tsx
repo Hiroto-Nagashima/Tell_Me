@@ -79,7 +79,7 @@ export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
     submitData.append('image', image);
     console.log(submitData);
     await axios.post(
-      `http://localhost:5000/api/v1/users/${teacherId}/registerImage`,
+      `http://localhost:5000/api/v1/users/${teacherId}/register_image`,
       submitData,
       {
         headers: {
