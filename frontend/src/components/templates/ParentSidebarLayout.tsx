@@ -4,16 +4,11 @@ import { useHistory, useParams } from 'react-router';
 
 import { Box } from '@material-ui/core';
 import List from '@material-ui/core/List';
-import AppBar from '@material-ui/core/AppBar';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
-import Toolbar from '@material-ui/core/Toolbar';
 import HomeIcon from '@material-ui/icons/Home';
 import ListItem from '@material-ui/core/ListItem';
-import MenuIcon from '@material-ui/icons/Menu';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -27,6 +22,7 @@ import {
   createStyles,
 } from '@material-ui/core/styles';
 import { DraggableDialog } from '../molecules';
+import { Header } from '../organisms';
 
 const drawerWidth = 240;
 
@@ -164,21 +160,7 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            edge="start"
-            onClick={onToggleDrawer}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            {title}
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <Header title={title} className={classes.appBar} />
       <nav className={classes.drawer}>
         <Hidden smUp implementation="css">
           <Drawer

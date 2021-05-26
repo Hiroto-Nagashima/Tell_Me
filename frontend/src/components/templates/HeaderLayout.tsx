@@ -11,7 +11,7 @@ export const HeaderLayout: React.FC<Props> = memo((props) => {
 
   return (
     <>
-      <Header />
+      <Header title="Tell Me" />
       {children}
     </>
   );

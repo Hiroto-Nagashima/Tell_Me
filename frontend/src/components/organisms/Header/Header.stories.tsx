@@ -1,5 +1,5 @@
 import { Story, Meta } from '@storybook/react';
-import { Header } from './Header';
+import { Header, Props } from './Header';
 
 export default {
   title: 'organisms/Header',
@@ -12,10 +12,9 @@ export default {
   },
 } as Meta;
 
-const Template: Story = (args) => <Header {...args} />;
+const Template: Story<Props> = (args) => <Header {...args} />;
 
 export const LoggedIn = Template.bind({});
-LoggedIn.args = {};
-
-export const LoggedOut = Template.bind({});
-LoggedOut.args = {};
+LoggedIn.args = {
+  title: 'Tell Me',
+};
