@@ -111,7 +111,7 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
     submitData.append('image', image);
     console.log(submitData);
     await axios.post(
-      `http://localhost:5000/api/v1/kids/${id}/registerImage`,
+      `http://localhost:5000/api/v1/kids/${id}/register_image`,
       submitData,
       {
         headers: {

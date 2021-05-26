@@ -76,7 +76,9 @@ export const AllKids: React.FC<Props> = () => {
   const fetchAllKid = async (daycareId: number) => {
     setLoading(true);
     await axios
-      .get(`http://localhost:5000/api/v1/daycares/${daycareId}/kids`)
+      .get(
+        `http://localhost:5000/api/v1/daycares/${daycareId}/kids/fetch_kids_in_daycare`,
+      )
       .then((res) => {
         setKids(res.data);
       })

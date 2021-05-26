@@ -36,7 +36,7 @@ export const ChooseKid: React.FC = () => {
   const fetchKid = () => {
     setLoading(true);
     axios
-      .get('http://localhost:5000/api/v1/kids', {
+      .get('http://localhost:5000/api/v1/kids/fetch_kids_of_parent', {
         params: {
           uid: user!.uid,
         },
