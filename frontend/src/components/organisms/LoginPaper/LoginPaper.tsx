@@ -1,10 +1,11 @@
 import React, { memo } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { SingleLineTextField, FlexibleButton } from '../../atoms/index';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,6 +37,7 @@ export type Props = {
 export const LoginPaper: React.FC<Props> = memo((props) => {
   const { email, password, onChangeEmail, onChangePassword, onClickLogin } =
     props;
+
   const classes = useStyles();
 
   return (
