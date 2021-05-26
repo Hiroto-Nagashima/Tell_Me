@@ -4,8 +4,9 @@ import axios from 'axios';
 import { useHistory } from 'react-router';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { RegisterKidPaper } from '../organisms/RegisterKidPaper/RegisterKidPaper';
 import { CurrentUserContext } from '../../providers/UserProvider';
+
+import { RegisterKidPaper } from '../organisms/RegisterKidPaper/RegisterKidPaper';
 import { Spinner } from '../atoms';
 
 type Props = {
@@ -68,7 +69,7 @@ export const RegisterKid: React.FC<Props> = () => {
     [],
   );
 
-  const handleSubmit = () => {
+  const onClickRegister = () => {
     setLoading(true);
     axios
       .post(`http://localhost:5000/api/v1/kids`, {
@@ -111,7 +112,7 @@ export const RegisterKid: React.FC<Props> = () => {
             firstName={firstName}
             favoriteFood={favoriteFood}
             favoritePlay={favoritePlay}
-            onClick={handleSubmit}
+            onClick={onClickRegister}
             onChangeAge={onChangeAge}
             onChangeDaycareId={onChangeDaycareId}
             onChangeFirstName={onChangeFirstName}
