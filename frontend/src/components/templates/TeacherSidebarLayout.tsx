@@ -5,16 +5,11 @@ import { CurrentUserContext } from '../../providers/UserProvider';
 
 import { Box } from '@material-ui/core';
 import List from '@material-ui/core/List';
-import AppBar from '@material-ui/core/AppBar';
 import Hidden from '@material-ui/core/Hidden';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
-import Toolbar from '@material-ui/core/Toolbar';
 import ListItem from '@material-ui/core/ListItem';
-import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -28,6 +23,7 @@ import {
   Theme,
   createStyles,
 } from '@material-ui/core/styles';
+import { Header } from '../organisms';
 
 const drawerWidth = 240;
 
@@ -46,12 +42,6 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up('sm')]: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
-      },
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-      [theme.breakpoints.up('sm')]: {
-        display: 'none',
       },
     },
     toolbar: theme.mixins.toolbar,
@@ -170,21 +160,7 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            edge="start"
-            onClick={onToggleDrawer}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            {title}
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <Header title={title} className={classes.appBar} />
       <nav className={classes.drawer}>
         <Hidden smUp implementation="css">
           <Drawer

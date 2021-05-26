@@ -21,8 +21,8 @@ import {
   Theme,
   createStyles,
 } from '@material-ui/core/styles';
-import { DraggableDialog } from '../molecules';
 import { Header } from '../organisms';
+import { DraggableDialog } from '../molecules';
 
 const drawerWidth = 240;
 
@@ -41,12 +41,6 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up('sm')]: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
-      },
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-      [theme.breakpoints.up('sm')]: {
-        display: 'none',
       },
     },
     toolbar: theme.mixins.toolbar,
