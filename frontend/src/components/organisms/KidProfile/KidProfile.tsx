@@ -28,13 +28,33 @@ const Content = styled(Box)`
 `;
 
 const FavoriteFood = styled(Typography)`
-  width: 31%;
-  background: linear-gradient(transparent 70%, #e4e3e1 70%);
+  color: white;
+  padding: 0.5em;
+  display: inline-block;
+  line-height: 1.3;
+  background: #f25e5d;
+  vertical-align: middle;
+  border-radius: 25px 0px 0px 25px;
+  &::before {
+    content: '●';
+    color: white;
+    margin-right: 8px;
+  }
 `;
 
 const FavoritePlay = styled(Typography)`
-  width: 26%;
-  background: linear-gradient(transparent 70%, #e4e3e1 70%);
+  color: white;
+  padding: 0.5em;
+  display: inline-block;
+  line-height: 1.3;
+  background: #f25e5d;
+  vertical-align: middle;
+  border-radius: 25px 0px 0px 25px;
+  &::before {
+    content: '●';
+    color: white;
+    margin-right: 8px;
+  }
 `;
 
 const FirstName = styled(Typography)`

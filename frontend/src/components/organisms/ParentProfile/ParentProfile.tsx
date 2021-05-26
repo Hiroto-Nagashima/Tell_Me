@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import MailIcon from '@material-ui/icons/Mail';
@@ -21,9 +20,13 @@ const useStyles = makeStyles({
   },
   media: {
     height: 100,
-    backgroundColor: '#3f51b5',
   },
 });
+
+const BackgroundImage = styled(Box)`
+  background: radial-gradient(#ff9463, #f25e5d);
+`;
+
 const ParentNameArea = styled(Typography)`
   font-size: 25px;
 `;
@@ -59,8 +62,9 @@ export const ParentProfile: React.FC<Props> = memo((props) => {
   return (
     <Card className={classes.root}>
       <MyCardActionArea>
-        <CardMedia className={classes.media} title="Contemplative Reptile" />
-        <CardContent>
+        <BackgroundImage>
+          <CardMedia className={classes.media} />
+
           <Box display="flex" justifyContent="center">
             <ProfileImageBox>
               <ProfileImage />
@@ -82,33 +86,33 @@ export const ParentProfile: React.FC<Props> = memo((props) => {
               {gender === 0 ? 'お母さん' : 'お父さん'}
             </Typography>
           </Box>
-          <Box mt={1} display="flex" justifyContent="center">
-            <Box mr={4} mb={2}>
-              <PhoneIcon />
-            </Box>
-            <Typography
-              variant="h6"
-              color="textSecondary"
-              component="h6"
-              align="center"
-            >
-              {telephoneNumber}
-            </Typography>
+        </BackgroundImage>
+        <Box mt={1} display="flex" justifyContent="center">
+          <Box mr={4} mb={2}>
+            <PhoneIcon />
           </Box>
-          <Box mt={1} display="flex" justifyContent="center">
-            <Box mr={4}>
-              <MailIcon />
-            </Box>
-            <Typography
-              variant="h6"
-              color="textSecondary"
-              component="h6"
-              align="center"
-            >
-              {email}
-            </Typography>
+          <Typography
+            variant="h6"
+            color="textSecondary"
+            component="h6"
+            align="center"
+          >
+            {telephoneNumber}
+          </Typography>
+        </Box>
+        <Box mt={1} display="flex" justifyContent="center">
+          <Box mr={4}>
+            <MailIcon />
           </Box>
-        </CardContent>
+          <Typography
+            variant="h6"
+            color="textSecondary"
+            component="h6"
+            align="center"
+          >
+            {email}
+          </Typography>
+        </Box>
       </MyCardActionArea>
       <MyCardActions>
         <ButtonWrapper>

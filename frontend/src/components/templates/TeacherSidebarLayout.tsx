@@ -160,7 +160,7 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Header title={title} className={classes.appBar} />
+      <Header title={title} appBarClassName={classes.appBar} />
       <nav className={classes.drawer}>
         <Hidden smUp implementation="css">
           <Drawer
