@@ -2,9 +2,9 @@ module Api
   module V1
     class NotebooksController < ApplicationController
       def create
-        @kid = Kid.find(params[:kid_id])
-        @notebook = @kid.notebooks.build(notebook_params)
-        if @notebook.save!
+        kid = Kid.find(params[:kid_id])
+        notebook = kid.notebooks.build(notebook_params)
+        if notebook.save!
           render json: {
             status: "ok",
             message: "登録が完了しました"
