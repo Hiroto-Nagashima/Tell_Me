@@ -1,12 +1,13 @@
 import React, { ChangeEvent, createRef, memo, useState } from 'react';
 import axios from 'axios';
 import Resizer from 'react-image-file-resizer';
+import { useParams } from 'react-router';
+
 import Fade from '@material-ui/core/Fade';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import { Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { useParams } from 'react-router';
 import { FlexibleButton, MultipleLinesTextField } from '../../atoms/index';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -28,13 +29,14 @@ const useStyles = makeStyles((theme: Theme) =>
 export type Props = {
   open: boolean;
   selfIntroduction: string | null;
-  onClose: () => void;
-  onSubmit: () => void;
+  onCloseModal: () => void;
+  onClickSubmit: () => void;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
-  const { open, selfIntroduction, onChange, onClose, onSubmit } = props;
+  const { open, selfIntroduction, onChange, onCloseModal, onClickSubmit } =
+    props;
 
   const classes = useStyles();
 
@@ -96,7 +98,7 @@ export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
         aria-describedby="transition-modal-description"
         className={classes.modal}
         open={open}
-        onClose={onClose}
+        onClose={onCloseModal}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -136,7 +138,7 @@ export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
             </Box>
             <Box textAlign="center" m={5}>
               <FlexibleButton
-                onClick={onSubmit}
+                onClick={onClickSubmit}
                 variant="contained"
                 color="primary"
                 label="登録"

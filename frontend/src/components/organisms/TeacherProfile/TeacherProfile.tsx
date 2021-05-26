@@ -1,15 +1,17 @@
 import React, { memo, useContext } from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+import { CurrentUserContext } from '../../../providers/UserProvider';
+
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
-import { CurrentUserContext } from '../../../providers/UserProvider';
-import { useParams } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 560,
@@ -22,13 +24,16 @@ const useStyles = makeStyles({
     backgroundColor: '#3f51b5',
   },
 });
+
+const ButtonWrapper = styled(Box)`
+  width: 100px;
+  margin: 0 0 0 auto;
+`;
+
 const KidNameArea = styled(Typography)`
   font-size: 25px;
 `;
-const ProfileImageBox = styled(Box)`
-  position: absolute;
-  top: 20px;
-`;
+
 const MyCardActions = styled(CardActions)`
   display: flex;
 `;
@@ -45,29 +50,32 @@ const ProfileImage = styled.img`
   // onerror: 'this.src= ' ${process.env.PUBLIC_URL} / noimage.jpeg '';
 `;
 
-const ButtonWrapper = styled(Box)`
-  width: 100px;
-  margin: 0 0 0 auto;
+const ProfileImageBox = styled(Box)`
+  position: absolute;
+  top: 20px;
 `;
 
 export type Props = {
-  selfIntroduction: string | null;
-  firstName: string | null | undefined;
-  lastName: string | null | undefined;
   daycareName: string;
+  firstName: string;
+  lastName: string;
+  selfIntroduction: string | null;
   onClick?: () => void;
 };
 
 export const TeacherProfile: React.FC<Props> = memo((props) => {
   const { firstName, daycareName, lastName, selfIntroduction, onClick } = props;
+
   const { currentUser } = useContext(CurrentUserContext);
+
   const { teacherId } = useParams<{ teacherId: string }>();
+
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
       <MyCardActionArea>
-        <CardMedia className={classes.media} title="Contemplative Reptile" />
+        <CardMedia className={classes.media} />
         <CardContent>
           <Box display="flex" justifyContent="center">
             <ProfileImageBox>

@@ -36,7 +36,7 @@ export const TeacherHome: React.FC = () => {
 
   const onChangeSelfIntroduction = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      return setSelfIntroduction(e.target.value);
+      setSelfIntroduction(e.target.value);
     },
     [],
   );
@@ -48,6 +48,18 @@ export const TeacherHome: React.FC = () => {
   const onOpenModal = useCallback(() => {
     setIsModalOpen(true);
   }, []);
+
+  const onCloseSnackbar = useCallback(
+    (event?: React.SyntheticEvent, reason?: string) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setIsSnackbarOpen(false);
+
+      return;
+    },
+    [],
+  );
 
   const tryUpdateTeacher = () => {
     setLoading(true);
@@ -73,19 +85,7 @@ export const TeacherHome: React.FC = () => {
       });
   };
 
-  const onCloseSnackbar = useCallback(
-    (event?: React.SyntheticEvent, reason?: string) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-      setIsSnackbarOpen(false);
-
-      return;
-    },
-    [],
-  );
-
-  const fetchAllUserPosts = (daycareId: number) => {
+  const fetchAllUserPosts = (daycareId: number | null) => {
     setLoading(true);
     axios
       .get(
@@ -93,13 +93,12 @@ export const TeacherHome: React.FC = () => {
       )
       .then((res) => {
         setPosts(res.data);
-        console.log(res.data);
       })
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
   };
 
-  const fetchDaycare = (daycareId: number) => {
+  const fetchDaycare = (daycareId: number | null) => {
     setLoading(true);
     axios
       .get(`http://localhost:5000/api/v1/daycares/${daycareId}`)
@@ -135,8 +134,8 @@ export const TeacherHome: React.FC = () => {
             <UpdateTeacherModal
               open={isModalOpen}
               selfIntroduction={selfIntroduction}
-              onClose={onCloseModal}
-              onSubmit={tryUpdateTeacher}
+              onCloseModal={onCloseModal}
+              onClickSubmit={tryUpdateTeacher}
               onChange={onChangeSelfIntroduction}
             />
             {posts.map((post) => {
