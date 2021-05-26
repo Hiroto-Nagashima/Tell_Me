@@ -10,9 +10,6 @@ import { ChooseRole } from '../../molecules/ChooseRole/ChooseRole';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
       '& > *': {
         margin: theme.spacing(1),
         width: theme.spacing(50),
@@ -70,7 +67,7 @@ export const SignUpPaper: React.FC<Props> = memo((props) => {
 
   return (
     <div className={classes.root}>
-      <Paper elevation={3}>
+      <Paper elevation={0}>
         <Box component="h1" pt={2} textAlign="center">
           Sign UP
         </Box>

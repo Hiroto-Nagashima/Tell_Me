@@ -1,12 +1,29 @@
 import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import firebase from 'firebase';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router';
 import { CurrentUserContext } from '../../providers/UserProvider';
 
+import { Box } from '@material-ui/core';
 import { SignUpPaper } from '../organisms/SignUpPaper/SignUpPaper';
 import { Spinner, CustomizedSnackbar } from '../atoms';
+import { ReactComponent as Logo } from '../../images/undraw_children_4rtb.svg';
+
+const MySignUpPaper = styled(SignUpPaper)`
+  margin: 1px;
+`;
+
+const SignUpImage = styled(Logo)`
+  width: 800px;
+`;
+
+const Wrapper = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  padding: 1% 5% 5% 5%;
+`;
 
 export const SignUp: React.FC = () => {
   const history = useHistory();
@@ -173,25 +190,28 @@ export const SignUp: React.FC = () => {
         <Spinner />
       ) : (
         <>
-          <SignUpPaper
-            email={email}
-            role={role}
-            daycareId={daycareId}
-            password={password}
-            firstName={firstName}
-            lastName={lastName}
-            gender={gender}
-            telephoneNumber={telephoneNumber}
-            onClickSignUp={trySignUp}
-            onChangeDaycareId={onChangeDaycareId}
-            onChangeRole={onChangeRole}
-            onChangeEmail={onChangeEmail}
-            onChangePassword={onChangePassword}
-            onChangeFirstName={onChangeFirstName}
-            onChangeLastName={onChangeLastName}
-            onChangeGender={onChangeGender}
-            onChangeTelephoneNumber={onChangeTelephoneNumber}
-          />
+          <Wrapper>
+            <SignUpImage />
+            <MySignUpPaper
+              email={email}
+              role={role}
+              daycareId={daycareId}
+              password={password}
+              firstName={firstName}
+              lastName={lastName}
+              gender={gender}
+              telephoneNumber={telephoneNumber}
+              onClickSignUp={trySignUp}
+              onChangeDaycareId={onChangeDaycareId}
+              onChangeRole={onChangeRole}
+              onChangeEmail={onChangeEmail}
+              onChangePassword={onChangePassword}
+              onChangeFirstName={onChangeFirstName}
+              onChangeLastName={onChangeLastName}
+              onChangeGender={onChangeGender}
+              onChangeTelephoneNumber={onChangeTelephoneNumber}
+            />
+          </Wrapper>
           <CustomizedSnackbar
             open={isSnackbarOpen}
             onClose={onCloseSnackbar}
