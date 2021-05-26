@@ -123,8 +123,6 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
   return (
     <div>
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
         className={classes.modal}
         open={open}
         onClose={onCloseModal}

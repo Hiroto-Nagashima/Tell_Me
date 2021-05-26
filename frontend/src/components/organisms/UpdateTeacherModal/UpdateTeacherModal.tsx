@@ -31,12 +31,17 @@ export type Props = {
   selfIntroduction: string | null;
   onCloseModal: () => void;
   onClickSubmit: () => void;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeSelfIntroduction: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
-  const { open, selfIntroduction, onChange, onCloseModal, onClickSubmit } =
-    props;
+  const {
+    open,
+    selfIntroduction,
+    onChangeSelfIntroduction,
+    onCloseModal,
+    onClickSubmit,
+  } = props;
 
   const classes = useStyles();
 
@@ -62,12 +67,11 @@ export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
 
   const fileInput = createRef<HTMLInputElement>();
 
-  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
+  const tryResizeFile = async (event: ChangeEvent<HTMLInputElement>) => {
     try {
       const file = event.target.files![0];
       const image = await resizeFile(file);
       setImage(image);
-      console.log(image);
 
       return image;
     } catch (err) {
@@ -75,11 +79,9 @@ export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
     }
   };
 
-  const handleSubmit = async () => {
+  const onClickSubmitFile = async () => {
     const submitData = new FormData();
-
     submitData.append('image', image);
-    console.log(submitData);
     await axios.post(
       `http://localhost:5000/api/v1/users/${teacherId}/register_image`,
       submitData,
@@ -94,8 +96,6 @@ export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
   return (
     <div>
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
         className={classes.modal}
         open={open}
         onClose={onCloseModal}
@@ -114,14 +114,14 @@ export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
               <input
                 type="file"
                 name="image"
-                onChange={handleFileChange}
+                onChange={tryResizeFile}
                 accept="image/*"
               />
               <input
                 type="button"
                 value="Submit"
                 ref={fileInput}
-                onClick={handleSubmit}
+                onClick={onClickSubmitFile}
               />
             </Box>
             <Box component="h3" px={2} my={5} textAlign="center">
@@ -133,7 +133,7 @@ export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
                 variant="standard"
                 row={5}
                 value={selfIntroduction}
-                onChange={onChange}
+                onChange={onChangeSelfIntroduction}
               />
             </Box>
             <Box textAlign="center" m={5}>
@@ -150,4 +150,5 @@ export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
     </div>
   );
 });
+
 UpdateTeacherModal.displayName = 'UpdateTeacherModal';
