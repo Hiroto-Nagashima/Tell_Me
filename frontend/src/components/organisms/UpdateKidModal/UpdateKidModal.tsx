@@ -2,19 +2,21 @@ import React, { ChangeEvent, createRef, memo, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Resizer from 'react-image-file-resizer';
+import { useParams } from 'react-router';
+
 import Fade from '@material-ui/core/Fade';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import { Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { useParams } from 'react-router';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup';
 import { FlexibleButton, SingleLineTextField } from '../../atoms/index';
 
-const Flexbox = styled.div`
+const FlexBox = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     modal: {
@@ -39,8 +41,8 @@ export type Props = {
   lastName: string | null;
   favoriteFood: string | null;
   favoritePlay: string | null;
-  onClose: () => void;
-  onSubmit: () => void;
+  onCloseModal: () => void;
+  onClickSubmit: () => void;
   onChangeAge: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeFirstName: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeLastName: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -58,14 +60,14 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
     firstName,
     favoriteFood,
     favoritePlay,
-    onClose,
+    onCloseModal,
+    onClickSubmit,
     onChangeAge,
     onChangeGender,
     onChangeLastName,
     onChangeFirstName,
     onChangeFavoriteFood,
     onChangeFavoritePlay,
-    onSubmit,
   } = props;
 
   const classes = useStyles();
@@ -92,12 +94,11 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
 
   const fileInput = createRef<HTMLInputElement>();
 
-  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
+  const tryResizeFile = async (event: ChangeEvent<HTMLInputElement>) => {
     try {
       const file = event.target.files![0];
       const image = await resizeFile(file);
       setImage(image);
-      console.log(image);
 
       return image;
     } catch (err) {
@@ -105,11 +106,9 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
     }
   };
 
-  const handleSubmit = async () => {
+  const onClickSubmitFile = async () => {
     const submitData = new FormData();
-
     submitData.append('image', image);
-    console.log(submitData);
     await axios.post(
       `http://localhost:5000/api/v1/kids/${id}/register_image`,
       submitData,
@@ -128,7 +127,7 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
         aria-describedby="transition-modal-description"
         className={classes.modal}
         open={open}
-        onClose={onClose}
+        onClose={onCloseModal}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -144,14 +143,14 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
               <input
                 type="file"
                 name="image"
-                onChange={handleFileChange}
+                onChange={tryResizeFile}
                 accept="image/*"
               />
               <input
                 type="button"
                 value="Submit"
                 ref={fileInput}
-                onClick={handleSubmit}
+                onClick={onClickSubmitFile}
               />
             </Box>
             <Box component="h3" px={2} my={5} textAlign="center">
@@ -167,7 +166,7 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
                 secondLabel="男の子"
               />
             </Box>
-            <Flexbox>
+            <FlexBox>
               <Box textAlign="center" mr={1} mb={2}>
                 <SingleLineTextField
                   id="姓"
@@ -188,7 +187,7 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
                   onChange={onChangeFirstName}
                 />
               </Box>
-            </Flexbox>
+            </FlexBox>
             <Box mb={2}>
               <SingleLineTextField
                 id="ご年齢"
@@ -221,7 +220,7 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
             </Box>
             <Box textAlign="center" m={5}>
               <FlexibleButton
-                onClick={onSubmit}
+                onClick={onClickSubmit}
                 variant="contained"
                 color="primary"
                 label="登録"

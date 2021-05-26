@@ -178,14 +178,14 @@ export const Home: React.FC = () => {
             favoriteFood={favoriteFood}
             favoritePlay={favoritePlay}
             open={isKidModalOpen}
-            onClose={onCloseKidModal}
+            onCloseModal={onCloseKidModal}
             onChangeAge={onChangeAge}
+            onClickSubmit={tryUpdateKid}
             onChangeGender={onChangeGender}
-            onChangeFirstName={onChangeFirstName}
             onChangeLastName={onChangeLastName}
+            onChangeFirstName={onChangeFirstName}
             onChangeFavoriteFood={onChangeFavoriteFood}
             onChangeFavoritePlay={onChangeFavoritePlay}
-            onSubmit={tryUpdateKid}
           />
           <CustomizedSnackbar
             open={isSnackbarOpen}
