@@ -16,13 +16,15 @@ const MySignUpPaper = styled(SignUpPaper)`
 `;
 
 const SignUpImage = styled(Logo)`
-  width: 800px;
+  width: 730px;
+  height: 730px;
+  padding-bottom: 5%;
 `;
 
 const Wrapper = styled(Box)`
   display: flex;
   justify-content: space-between;
-  padding: 1% 5% 5% 5%;
+  padding: 0 6%;
 `;
 
 export const SignUp: React.FC = () => {

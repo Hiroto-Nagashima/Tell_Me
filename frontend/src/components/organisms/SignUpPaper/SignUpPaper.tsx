@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       '& > *': {
-        margin: theme.spacing(1),
+        margin: theme.spacing(2),
         width: theme.spacing(50),
         height: theme.spacing(100),
       },
@@ -68,11 +68,8 @@ export const SignUpPaper: React.FC<Props> = memo((props) => {
   return (
     <div className={classes.root}>
       <Paper elevation={0}>
-        <Box component="h1" pt={2} textAlign="center">
+        <Box component="h1" pt={5} textAlign="center">
           Sign UP
-        </Box>
-        <Box component="p" pt={2} textAlign="center">
-          以下のフォームを入力してください
         </Box>
         <FlexBox>
           <Box textAlign="center" ml={4} mr={1}>

@@ -30,6 +30,7 @@ export const ChooseRole: React.FC<Props> = (props) => {
     <>
       <FormControl component="fieldset">
         <RadioGroup
+          row
           aria-label="gender"
           name="gender1"
           value={role}
