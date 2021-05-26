@@ -3,10 +3,10 @@ import axios from 'axios';
 import firebase from 'firebase';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router';
-import { SignUpPaper } from '../organisms/SignUpPaper/SignUpPaper';
-import { CustomizedSnackbar } from '../atoms/CustomizedSnackbar/CustomizedSnackbar';
 import { CurrentUserContext } from '../../providers/UserProvider';
-import { Spinner } from '../atoms';
+
+import { SignUpPaper } from '../organisms/SignUpPaper/SignUpPaper';
+import { Spinner, CustomizedSnackbar } from '../atoms';
 
 export const SignUp: React.FC = () => {
   const history = useHistory();
@@ -18,7 +18,7 @@ export const SignUp: React.FC = () => {
   const { setCurrentUser } = useContext(CurrentUserContext);
 
   const [role, setRole] = useState<string | null>(null);
-  const [open, setOpen] = useState(false);
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -67,41 +67,41 @@ export const SignUp: React.FC = () => {
     },
     [],
   );
-  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+  const onCloseSnackbar = (event?: React.SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return;
     }
-    setOpen(false);
+    setIsSnackbarOpen(false);
 
     return;
   };
 
-  const handleSubmit = () => {
+  const trySignUp = () => {
     setLoading(true);
     if (telephoneNumber.match(telephoneNumberRegex) == null) {
       setError('電話番号が無効です');
       setLoading(false);
-      setOpen(true);
+      setIsSnackbarOpen(true);
     } else if (lastName == lastNameError) {
       setError('姓が無効です');
       setLoading(false);
-      setOpen(true);
+      setIsSnackbarOpen(true);
     } else if (firstName == firstNameError) {
       setError('名が無効です');
       setLoading(false);
-      setOpen(true);
+      setIsSnackbarOpen(true);
     } else if (role == '保護者' && gender == null) {
       setError('お父様かお母様か選択してください');
       setLoading(false);
-      setOpen(true);
+      setIsSnackbarOpen(true);
     } else if (role == '先生' && daycareId == null) {
       setError('保育園のIDを入力してください');
       setLoading(false);
-      setOpen(true);
+      setIsSnackbarOpen(true);
     } else if (daycareId != null && gender != null) {
       setError('保育園のIDと「父か母か」を同時に選択しないでください.');
       setLoading(false);
-      setOpen(true);
+      setIsSnackbarOpen(true);
     } else {
       const request = async () => {
         firebase
@@ -144,7 +144,7 @@ export const SignUp: React.FC = () => {
                   .catch((error) => {
                     setError(error?.message);
                     setLoading(false);
-                    setOpen(true);
+                    setIsSnackbarOpen(true);
                   });
               } catch (error) {
                 setError(error);
@@ -156,9 +156,12 @@ export const SignUp: React.FC = () => {
             const errorMessage = error.message;
             setError(errorMessage);
             setLoading(false);
-            setOpen(true);
+            setIsSnackbarOpen(true);
           })
-          .finally(() => setLoading(false));
+          .finally(() => {
+            setLoading(false);
+            setIsSnackbarOpen(true);
+          });
       };
       request();
     }
@@ -179,7 +182,7 @@ export const SignUp: React.FC = () => {
             lastName={lastName}
             gender={gender}
             telephoneNumber={telephoneNumber}
-            onClick={handleSubmit}
+            onClick={trySignUp}
             onChangeDaycareId={onChangeDaycareId}
             onChangeRole={onChangeRole}
             onChangeEmail={onChangeEmail}
@@ -190,8 +193,8 @@ export const SignUp: React.FC = () => {
             onChangeTelephoneNumber={onChangeTelephoneNumber}
           />
           <CustomizedSnackbar
-            open={open}
-            onClose={handleClose}
+            open={isSnackbarOpen}
+            onClose={onCloseSnackbar}
             severity="error"
           >
             {error}
