@@ -10,19 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_25_132455) do
+ActiveRecord::Schema.define(version: 2021_05_26_020806) do
 
   create_table "daycares", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.string "telephone_number"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "kid_parents", charset: "utf8mb4", force: :cascade do |t|
-    t.integer "kid_id"
-    t.integer "parent_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -57,18 +50,6 @@ ActiveRecord::Schema.define(version: 2021_05_25_132455) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.date "date"
-  end
-
-  create_table "parents", charset: "utf8mb4", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.integer "gender"
-    t.string "telephone_number"
-    t.string "uid"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "password"
-    t.string "email"
   end
 
   create_table "posts", charset: "utf8mb4", force: :cascade do |t|
