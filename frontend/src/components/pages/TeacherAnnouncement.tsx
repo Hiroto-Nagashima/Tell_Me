@@ -58,7 +58,7 @@ export const TeacherAnnouncement: React.FC = () => {
     [],
   );
 
-  const fetchDaycare = (daycareId: number) => {
+  const fetchDaycare = (daycareId: number | null) => {
     setLoading(true);
     axios
       .get(`http://localhost:5000/api/v1/daycares/${daycareId}`)
@@ -67,7 +67,7 @@ export const TeacherAnnouncement: React.FC = () => {
       .finally(() => setLoading(false));
   };
 
-  const fetchAllUserPosts = (daycareId: number) => {
+  const fetchAllUserPosts = (daycareId: number | null) => {
     setLoading(true);
     axios
       .get(`http://localhost:5000/api/v1/daycares/${daycareId}/posts/all_posts`)

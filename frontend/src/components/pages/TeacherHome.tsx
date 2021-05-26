@@ -136,7 +136,7 @@ export const TeacherHome: React.FC = () => {
               selfIntroduction={selfIntroduction}
               onCloseModal={onCloseModal}
               onClickSubmit={tryUpdateTeacher}
-              onChange={onChangeSelfIntroduction}
+              onChangeSelfIntroduction={onChangeSelfIntroduction}
             />
             {posts.map((post) => {
               return (
