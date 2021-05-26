@@ -104,7 +104,7 @@ export const AllKids: React.FC<Props> = () => {
       ) : (
         <Wrapper>
           <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="customized table">
+            <Table className={classes.table}>
               <TableHead>
                 <TableRow>
                   <StyledTableCell align="center">園児</StyledTableCell>

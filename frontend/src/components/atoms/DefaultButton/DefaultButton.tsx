@@ -11,12 +11,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
+
 export type Props = {
-  variant: 'text' | 'outlined' | 'contained';
-  color: 'default' | 'inherit' | 'primary' | 'secondary';
   onClick?: () => void;
   label: string;
   size: 'small' | 'medium' | 'large';
+  variant: 'text' | 'outlined' | 'contained';
+  color: 'default' | 'inherit' | 'primary' | 'secondary';
 };
 
 export const DefaultButton: React.FC<Props> = (props) => {

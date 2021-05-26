@@ -34,7 +34,7 @@ export const ChooseKid: React.FC = () => {
     history.push(`/kids/${kidId}`);
   };
 
-  const fetchKid = () => {
+  const fetchKids = () => {
     setLoading(true);
     axios
       .get('http://localhost:5000/api/v1/kids/fetch_kids_of_parent', {
@@ -54,7 +54,7 @@ export const ChooseKid: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchKid();
+    fetchKids();
   }, []);
 
   return (

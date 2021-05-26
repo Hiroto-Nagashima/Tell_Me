@@ -23,36 +23,34 @@ export type Props = {
 
 export const ParentPopover: React.FC<Props> = (props) => {
   const { email, telephoneNumber, buttonLabel } = props;
+
   const classes = useStyles();
+
   const [anchorEl, setAnchorEl] =
     React.useState<HTMLButtonElement | null>(null);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const open = Boolean(anchorEl);
+
+  const id = open ? 'simple-popover' : undefined;
+
+  const onClickButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const onCloseAnchor = () => {
     setAnchorEl(null);
   };
 
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
-
   return (
     <div>
-      <Button
-        aria-describedby={id}
-        variant="text"
-        color="inherit"
-        onClick={handleClick}
-      >
+      <Button variant="text" color="inherit" onClick={onClickButton}>
         {buttonLabel}
       </Button>
       <Popover
         id={id}
         open={open}
         anchorEl={anchorEl}
-        onClose={handleClose}
+        onClose={onCloseAnchor}
         anchorOrigin={{
           vertical: 'center',
           horizontal: 'center',
