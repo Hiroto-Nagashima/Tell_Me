@@ -7,31 +7,30 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { CurrentUserContext } from '../../providers/UserProvider';
 import { Post } from '../../types/api/post';
-import { PostCard } from '../organisms/PostCard/PostCard';
 import { Daycare } from '../../types/frontend/daycare';
-import { CustomizedSnackbar, Spinner } from '../atoms';
-import { TeacherProfile } from '../organisms/TeacherProfile/TeacherProfile';
-import { UpdateTeacherModal } from '../organisms/UpdateTeacherModal/UpdateTeacherModal';
-import { Box } from '@material-ui/core';
+import { CurrentUserContext } from '../../providers/UserProvider';
 
-const Wrapper = styled.div`
+import { Box } from '@material-ui/core';
+import { CustomizedSnackbar, Spinner } from '../atoms';
+import { PostCard, TeacherProfile, UpdateTeacherModal } from '../organisms';
+
+const FlexBox = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 export const TeacherHome: React.FC = () => {
   const { currentUser } = useContext(CurrentUserContext);
-  const userNameArr = [currentUser.lastName, currentUser.firstName];
-  const userName = userNameArr.join('');
-  const [loading, setLoading] = useState(false);
+
   const [posts, setPosts] = useState<Array<Post>>([]);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [message, setMassage] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selfIntroduction, setSelfIntroduction] = useState<string | null>('');
   const [daycare, setDaycare] = useState<Daycare>({} as Daycare);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const [selfIntroduction, setSelfIntroduction] = useState<string | null>('');
   const [severity, setSeverity] =
     useState<'error' | 'warning' | 'info' | 'success'>('error');
 
@@ -50,7 +49,7 @@ export const TeacherHome: React.FC = () => {
     setIsModalOpen(true);
   }, []);
 
-  const handleUpdateTeacher = () => {
+  const tryUpdateTeacher = () => {
     setLoading(true);
     axios
       .put(`http://localhost:5000/api/v1/users/${currentUser.id}`, {
@@ -63,17 +62,18 @@ export const TeacherHome: React.FC = () => {
         setMassage(res.data.message);
         setIsModalOpen(false);
         setSeverity('success');
-        setIsSnackbarOpen(true);
       })
-      .catch((e) => {
-        setMassage(e);
+      .catch(() => {
+        setMassage('登録に失敗しました');
         setSeverity('error');
-        setIsSnackbarOpen(true);
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+        setIsSnackbarOpen(true);
+      });
   };
 
-  const handleSnackbarClose = useCallback(
+  const onCloseSnackbar = useCallback(
     (event?: React.SyntheticEvent, reason?: string) => {
       if (reason === 'clickaway') {
         return;
@@ -123,7 +123,7 @@ export const TeacherHome: React.FC = () => {
       ) : error ? (
         <div>エラーです</div>
       ) : (
-        <Wrapper>
+        <FlexBox>
           <div>
             <TeacherProfile
               firstName={currentUser.firstName}
@@ -136,14 +136,14 @@ export const TeacherHome: React.FC = () => {
               open={isModalOpen}
               selfIntroduction={selfIntroduction}
               onClose={onCloseModal}
-              onSubmit={handleUpdateTeacher}
+              onSubmit={tryUpdateTeacher}
               onChange={onChangeSelfIntroduction}
             />
             {posts.map((post) => {
               return (
                 <Box key={post.id} my={2}>
                   <PostCard
-                    poster={userName}
+                    poster={post.poster}
                     teacherId={post.user_id}
                     content={post.content}
                     createdAt={post.created_at}
@@ -153,13 +153,13 @@ export const TeacherHome: React.FC = () => {
             })}
             <CustomizedSnackbar
               open={isSnackbarOpen}
-              onClose={handleSnackbarClose}
+              onClose={onCloseSnackbar}
               severity={severity}
             >
               {message}
             </CustomizedSnackbar>
           </div>
-        </Wrapper>
+        </FlexBox>
       )}
     </>
   );
