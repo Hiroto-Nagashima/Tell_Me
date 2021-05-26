@@ -1,12 +1,13 @@
 import React, { ChangeEvent } from 'react';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import styled from 'styled-components';
+
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { MultipleLinesTextField } from '../../atoms';
-import styled from 'styled-components';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -42,7 +43,7 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-const Wrapper = styled.div`
+const FlexBox = styled.div`
   display: flex;
   justify-content: center;
 `;
@@ -50,16 +51,17 @@ const Wrapper = styled.div`
 export type Props = {
   src: string;
   value: string | null;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onClick: () => void;
+  onClickPost: () => void;
+  onChangePostContent: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const PostForm: React.FC<Props> = (props) => {
-  const { src, value, onChange, onClick } = props;
+  const { src, value, onChangePostContent, onClickPost } = props;
+
   const classes = useStyles();
 
   return (
-    <Wrapper>
+    <FlexBox>
       <div>
         <Card className={classes.root}>
           <CardMedia
@@ -73,7 +75,7 @@ export const PostForm: React.FC<Props> = (props) => {
                 label="Announcement"
                 variant="standard"
                 value={value}
-                onChange={onChange}
+                onChange={onChangePostContent}
                 row={5}
               />
             </CardContent>
@@ -83,7 +85,7 @@ export const PostForm: React.FC<Props> = (props) => {
                   size="large"
                   color="primary"
                   variant="contained"
-                  onClick={onClick}
+                  onClick={onClickPost}
                 >
                   投稿
                 </Button>
@@ -92,6 +94,6 @@ export const PostForm: React.FC<Props> = (props) => {
           </div>
         </Card>
       </div>
-    </Wrapper>
+    </FlexBox>
   );
 };

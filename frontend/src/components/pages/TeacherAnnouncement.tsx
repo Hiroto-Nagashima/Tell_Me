@@ -120,8 +120,8 @@ export const TeacherAnnouncement: React.FC = () => {
             <PostForm
               src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/user/image/${teacherId}/image.jpeg`}
               value={postContent}
-              onClick={tryPost}
-              onChange={onChangePostContent}
+              onClickPost={tryPost}
+              onChangePostContent={onChangePostContent}
             />
             {posts.map((post) => {
               return (
