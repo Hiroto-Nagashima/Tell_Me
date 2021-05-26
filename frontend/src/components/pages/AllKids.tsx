@@ -1,31 +1,29 @@
 import React, { useContext, useEffect, useState } from 'react';
+import * as H from 'history';
+import axios from 'axios';
+import styled from 'styled-components';
+
 import {
   withStyles,
   Theme,
   createStyles,
   makeStyles,
 } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
+import TableRow from '@material-ui/core/TableRow';
+import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import * as H from 'history';
-import { Spinner } from '../atoms';
-import axios from 'axios';
+
 import { Kid } from '../../types/api/kid';
-import { CurrentUserContext } from '../../providers/UserProvider';
 import { User } from '../../types/api/user';
+import { Spinner } from '../atoms';
 import { Notebook } from '../../types/api/notebook';
 import { ParentPopover } from '../molecules/SimplePopover/ParentPopover';
 import { NotebookModal } from '../organisms/NotebookModal/NotebookModal';
-import styled from 'styled-components';
-
-type Props = {
-  history: H.History;
-};
+import { CurrentUserContext } from '../../providers/UserProvider';
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -66,14 +64,20 @@ type KidInfo = {
   notebook: Notebook | null;
 };
 
+type Props = {
+  history: H.History;
+};
+
 export const AllKids: React.FC<Props> = () => {
   const classes = useStyles();
-  const { currentUser } = useContext(CurrentUserContext);
+
   const [kids, setKids] = useState<Array<KidInfo>>([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const fetchAllKid = async (daycareId: number) => {
+  const { currentUser } = useContext(CurrentUserContext);
+
+  const fetchAllKids = async (daycareId: number) => {
     setLoading(true);
     await axios
       .get(
@@ -88,7 +92,7 @@ export const AllKids: React.FC<Props> = () => {
 
   useEffect(() => {
     const daycareId = currentUser.daycareId;
-    daycareId && fetchAllKid(daycareId);
+    daycareId && fetchAllKids(daycareId);
   }, [currentUser.daycareId]);
 
   return (
