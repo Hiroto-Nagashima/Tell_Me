@@ -85,11 +85,11 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
   const [isOpen, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const onClickOpen = () => {
+  const onClickLogoutModalOpen = () => {
     setOpen(true);
   };
 
-  const onClickClose = () => {
+  const onClickLogoutModalClose = () => {
     setOpen(false);
   };
 
@@ -151,7 +151,7 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
       </List>
       <Divider />
       <List>
-        <ListItem button onClick={onClickOpen}>
+        <ListItem button onClick={onClickLogoutModalOpen}>
           <ListItemIcon>
             <ExitToAppIcon />
           </ListItemIcon>
@@ -217,7 +217,7 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
         isOpen={isOpen}
         okLabel="ログアウト"
         content="本当にログアウトしますか？"
-        onClickClose={onClickClose}
+        onClickClose={onClickLogoutModalClose}
         onClickOK={() => logout()}
       />
     </div>

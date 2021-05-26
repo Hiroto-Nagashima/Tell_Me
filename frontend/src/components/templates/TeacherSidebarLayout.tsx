@@ -1,5 +1,9 @@
 import React, { ReactNode, useContext, useState } from 'react';
 import firebase from 'firebase';
+import { useHistory } from 'react-router';
+import { CurrentUserContext } from '../../providers/UserProvider';
+
+import { Box } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import AppBar from '@material-ui/core/AppBar';
 import Hidden from '@material-ui/core/Hidden';
@@ -17,10 +21,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ChildCareIcon from '@material-ui/icons/ChildCare';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
-import { Box } from '@material-ui/core';
-import { useHistory } from 'react-router';
 import { DraggableDialog } from '../molecules';
-import { CurrentUserContext } from '../../providers/UserProvider';
 import {
   makeStyles,
   useTheme,
@@ -71,31 +72,30 @@ type Props = {
 
 export const TeacherSidebarLayout: React.FC<Props> = (props) => {
   const { window, children } = props;
+
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
+
   const classes = useStyles();
+
   const theme = useTheme();
   const history = useHistory();
-  const [mobileOpen, setMobileOpen] = useState(false);
+
   const [title, setTitle] = useState('Home');
   const [isOpen, setOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   const { currentUser } = useContext(CurrentUserContext);
 
-  const logout = async () => {
-    await firebase
-      .auth()
-      .signOut()
-      .then(() => history.push('/'))
-      .catch((e) => alert(e));
-  };
-
-  const onClickOpen = () => {
+  const onClickLogoutModalOpen = () => {
     setOpen(true);
   };
 
-  const onClickClose = () => {
+  const onClickLogoutModalClose = () => {
     setOpen(false);
   };
 
-  const handleDrawerToggle = () => {
+  const onToggleDrawer = () => {
     setMobileOpen(!mobileOpen);
   };
 
@@ -116,6 +116,14 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
       `/daycares/${currentUser.daycareId}/teachers/${currentUser.id}/announcement`,
     );
     setTitle('Announcement');
+  };
+
+  const logout = async () => {
+    await firebase
+      .auth()
+      .signOut()
+      .then(() => history.push('/'))
+      .catch((e) => alert(e));
   };
 
   const drawer = (
@@ -149,7 +157,7 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
       </List>
       <Divider />
       <List>
-        <ListItem button onClick={onClickOpen}>
+        <ListItem button onClick={onClickLogoutModalOpen}>
           <ListItemIcon>
             <ExitToAppIcon />
           </ListItemIcon>
@@ -159,9 +167,6 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
     </>
   );
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -169,9 +174,8 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
         <Toolbar>
           <IconButton
             color="inherit"
-            aria-label="open drawer"
             edge="start"
-            onClick={handleDrawerToggle}
+            onClick={onToggleDrawer}
             className={classes.menuButton}
           >
             <MenuIcon />
@@ -188,7 +192,7 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
             variant="temporary"
             anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={mobileOpen}
-            onClose={handleDrawerToggle}
+            onClose={onToggleDrawer}
             classes={{
               paper: classes.drawerPaper,
             }}
@@ -219,7 +223,7 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
         isOpen={isOpen}
         okLabel="ログアウト"
         content="本当にログアウトしますか？"
-        onClickClose={onClickClose}
+        onClickClose={onClickLogoutModalClose}
         onClickOK={() => logout()}
       />
     </div>
