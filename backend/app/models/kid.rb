@@ -7,5 +7,7 @@ class Kid < ApplicationRecord
   validates :age, :daycare_id, numericality: true
   validates :first_name, :last_name, :age, :gender, :daycare_id, :favorite_food, :favorite_play, presence: true
 
+  validates :favorite_food, :favorite_play, length: { maximum: 20 }
+
   mount_base64_uploader :image, ImageUploader
 end
