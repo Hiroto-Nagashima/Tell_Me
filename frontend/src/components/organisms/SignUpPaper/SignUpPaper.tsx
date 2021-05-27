@@ -11,9 +11,9 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       '& > *': {
-        margin: theme.spacing(2),
+        marginTop: theme.spacing(8),
         width: theme.spacing(50),
-        height: theme.spacing(80),
+        height: theme.spacing(85),
       },
     },
   }),
@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const FlexBox = styled.div`
   display: flex;
+`;
+
+const StyledPaper = styled(Paper)`
+  border-radius: 10px;
 `;
 
 export type Props = {
@@ -67,7 +71,7 @@ export const SignUpPaper: React.FC<Props> = memo((props) => {
 
   return (
     <div className={classes.root}>
-      <Paper elevation={0}>
+      <StyledPaper elevation={3}>
         <Box component="h1" pt={5} textAlign="center">
           Sign UP
         </Box>
@@ -139,9 +143,12 @@ export const SignUpPaper: React.FC<Props> = memo((props) => {
             onClick={onClickSignUp}
             variant="contained"
             label="登録"
+            fontSize={20}
+            width={90}
+            borderRadius={20}
           />
         </Box>
-      </Paper>
+      </StyledPaper>
     </div>
   );
 });

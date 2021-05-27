@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const MyLink = styled(Link)`
   text-decoration: none;
 `;
+
 const StyledPaper = styled(Paper)`
   border-radius: 10px;
 `;
