@@ -80,17 +80,18 @@ const MyCard = styled(Card)`
   border-radius: 2px;
 `;
 
-const LastName = styled(Typography)`
-  font-size: 25px;
-  margin-right: 10px;
-  color: white;
-`;
 const MyCardMedia = styled(CardMedia)`
   height: 180px;
 `;
 
 const MyCardActionArea = styled(Box)`
   height: 390px;
+`;
+
+const LastName = styled(Typography)`
+  font-size: 25px;
+  margin-right: 10px;
+  color: white;
 `;
 
 const ProfileImage = styled.img`
@@ -115,8 +116,8 @@ export type Props = {
   age: number | null;
   kidId: string | null;
   gender: number;
-  firstName: string | null;
   lastName: string | null;
+  firstName: string | null;
   favoritePlay: string | null;
   favoriteFood: string | null;
   onClick: () => void;
@@ -144,6 +145,10 @@ export const KidProfile: React.FC<Props> = memo((props) => {
               <ProfileImage
                 src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/kid/image/${kidId}/image.jpeg`}
                 alt=""
+                onError={(e) =>
+                  (e.currentTarget.src =
+                    'https://d2hmx91pr90hgc.cloudfront.net/noimage.jpeg')
+                }
               />
             </ProfileImageBox>
           </ProfileImageWrapper>
