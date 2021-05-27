@@ -68,14 +68,25 @@ export const LoginPaper: React.FC<Props> = memo((props) => {
           />
         </Box>
         <Box textAlign="center" mx={2}>
-          <StyledButton onClick={onClickLogin} label="Login" />
+          <StyledButton
+            onClick={onClickLogin}
+            label="Login"
+            fontSize={18}
+            width={90}
+            borderRadius={20}
+          />
         </Box>
         <Box textAlign="center" m={3}>
           ------アカウントをお持ちでない方------
         </Box>
         <Box textAlign="center" mx={2}>
           <MyLink to="/signup">
-            <StyledButton label="Sign Up" />
+            <StyledButton
+              label="Sign Up"
+              fontSize={18}
+              width={90}
+              borderRadius={20}
+            />
           </MyLink>
         </Box>
       </Paper>
