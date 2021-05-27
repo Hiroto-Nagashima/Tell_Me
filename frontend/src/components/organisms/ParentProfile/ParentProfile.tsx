@@ -21,7 +21,7 @@ const FirstName = styled(Typography)`
 `;
 
 const Email = styled(Box)`
-  margin: 15px 0;
+  margin: 15px 0 0 0;
   display: flex;
   justify-content: center;
 `;
@@ -55,7 +55,7 @@ const MyCardActions = styled(CardActions)`
 `;
 
 const MyCardActionArea = styled(Box)`
-  height: 400px;
+  height: 390px;
 `;
 
 const MyCardMedia = styled(CardMedia)`
@@ -67,9 +67,12 @@ const LastName = styled(Typography)`
   color: white;
 `;
 const ButtonWrapper = styled(Box)`
-  width: 100px;
+  width: 160px;
   margin: 0 0 0 auto;
+  display: flex;
+  justify-content: center;
 `;
+
 const FlexBox = styled(Box)`
   display: flex;
   justify-content: center;
@@ -149,7 +152,12 @@ export const ParentProfile: React.FC<Props> = memo((props) => {
       </MyCardActionArea>
       <MyCardActions>
         <ButtonWrapper>
-          <StyledButton label="Update"></StyledButton>
+          <StyledButton
+            label="Update"
+            fontSize={15}
+            width={80}
+            borderRadius={20}
+          ></StyledButton>
         </ButtonWrapper>
       </MyCardActions>
     </MyCard>

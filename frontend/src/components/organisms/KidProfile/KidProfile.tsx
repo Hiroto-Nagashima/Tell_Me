@@ -21,6 +21,8 @@ const BackgroundImage = styled(Box)`
 const ButtonWrapper = styled(Box)`
   width: 250px;
   margin: 0 0 0 auto;
+  display: flex;
+  justify-content: center;
 `;
 
 const Content = styled(Box)`
@@ -213,7 +215,9 @@ export const KidProfile: React.FC<Props> = memo((props) => {
             variant="contained"
             onClick={onClick}
             label="Update"
-            fontSize={25}
+            fontSize={15}
+            width={60}
+            borderRadius={20}
           />
         </ButtonWrapper>
       </MyCardActionArea>
