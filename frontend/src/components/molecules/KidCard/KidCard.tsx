@@ -61,8 +61,13 @@ export const KidCard: React.FC<Props> = (props) => {
     <Card className={classes.root}>
       <CardMedia
         className={classes.cover}
-        image={src}
+        src={src}
+        component="img"
         title="Live from space album cover"
+        onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) =>
+          (e.currentTarget.src =
+            'https://d2hmx91pr90hgc.cloudfront.net/noimage.jpeg')
+        }
       />
       <div className={classes.details}>
         <CardContent className={classes.content}>

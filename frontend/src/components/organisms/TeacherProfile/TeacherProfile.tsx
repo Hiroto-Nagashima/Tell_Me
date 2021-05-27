@@ -82,6 +82,10 @@ export const TeacherProfile: React.FC<Props> = memo((props) => {
               <ProfileImage
                 src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/user/image/${teacherId}/image.jpeg`}
                 alt=""
+                onError={(e) =>
+                  (e.currentTarget.src =
+                    'https://d2hmx91pr90hgc.cloudfront.net/noimage.jpeg')
+                }
               />
             </ProfileImageBox>
           </Box>
