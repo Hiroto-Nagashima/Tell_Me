@@ -8,7 +8,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import { Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { FlexibleButton, MultipleLinesTextField } from '../../atoms/index';
+import { StyledButton, MultipleLinesTextField } from '../../atoms/index';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -137,10 +137,9 @@ export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
               />
             </Box>
             <Box textAlign="center" m={5}>
-              <FlexibleButton
+              <StyledButton
                 onClick={onClickSubmit}
                 variant="contained"
-                color="primary"
                 label="登録"
               />
             </Box>

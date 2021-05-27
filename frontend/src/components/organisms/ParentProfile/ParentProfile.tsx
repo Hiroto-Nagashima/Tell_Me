@@ -4,47 +4,80 @@ import styled from 'styled-components';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import MailIcon from '@material-ui/icons/Mail';
 import Typography from '@material-ui/core/Typography';
 import PhoneIcon from '@material-ui/icons/Phone';
-import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { ProfileImage } from '../../atoms/ProfileImage/ProfileImage';
-
-const useStyles = makeStyles({
-  root: {
-    width: 345,
-    height: 385,
-    position: 'relative',
-  },
-  media: {
-    height: 100,
-  },
-});
+import { StyledButton } from '../../atoms';
 
 const BackgroundImage = styled(Box)`
   background: radial-gradient(#ff9463, #f25e5d);
 `;
-
-const ParentNameArea = styled(Typography)`
+const FirstName = styled(Typography)`
   font-size: 25px;
+  color: white;
+  margin-left: 10px;
 `;
+
+const Email = styled(Box)`
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+`;
+
+const Gender = styled(Box)`
+  color: white;
+  height: 50px;
+`;
+const ParentName = styled(Typography)`
+  font-size: 25px;
+  margin-top: 10px;
+  height: 50px;
+  font: white;
+  display: flex;
+  justify-content: center;
+`;
+
 const ProfileImageBox = styled(Box)`
   position: absolute;
-  top: 20px;
+  top: 100px;
 `;
+
+const MyCard = styled(Card)`
+  width: 345px;
+  height: 450px;
+  position: 'relative';
+`;
+
 const MyCardActions = styled(CardActions)`
   display: flex;
 `;
 
 const MyCardActionArea = styled(Box)`
-  height: 340px;
+  height: 400px;
 `;
 
+const MyCardMedia = styled(CardMedia)`
+  height: 140px;
+`;
+const LastName = styled(Typography)`
+  font-size: 25px;
+  margin-right: 10px;
+  color: white;
+`;
 const ButtonWrapper = styled(Box)`
   width: 100px;
   margin: 0 0 0 auto;
+`;
+const FlexBox = styled(Box)`
+  display: flex;
+  justify-content: center;
+`;
+const TelephoneNumber = styled(Box)`
+  margin: 25px 0 15px;
+  display: flex;
+  justify-content: center;
 `;
 
 export type Props = {
@@ -57,37 +90,37 @@ export type Props = {
 
 export const ParentProfile: React.FC<Props> = memo((props) => {
   const { firstName, lastName, telephoneNumber, email, gender } = props;
-  const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <MyCard>
       <MyCardActionArea>
         <BackgroundImage>
-          <CardMedia className={classes.media} />
-
-          <Box display="flex" justifyContent="center">
+          <MyCardMedia />
+          <FlexBox>
             <ProfileImageBox>
               <ProfileImage />
             </ProfileImageBox>
-          </Box>
-          <Box mt={5}>
-            <ParentNameArea variant="subtitle1" color="inherit" align="center">
+          </FlexBox>
+          <ParentName>
+            <LastName variant="subtitle1" align="center">
               {lastName}
+            </LastName>
+            <FirstName variant="subtitle1" align="center">
               {firstName}
-            </ParentNameArea>
-          </Box>
-          <Box mb={2}>
+            </FirstName>
+          </ParentName>
+          <Gender>
             <Typography
               variant="subtitle2"
-              color="textSecondary"
+              color="inherit"
               component="h3"
               align="center"
             >
               {gender === 0 ? 'お母さん' : 'お父さん'}
             </Typography>
-          </Box>
+          </Gender>
         </BackgroundImage>
-        <Box mt={1} display="flex" justifyContent="center">
+        <TelephoneNumber>
           <Box mr={4} mb={2}>
             <PhoneIcon />
           </Box>
@@ -99,8 +132,8 @@ export const ParentProfile: React.FC<Props> = memo((props) => {
           >
             {telephoneNumber}
           </Typography>
-        </Box>
-        <Box mt={1} display="flex" justifyContent="center">
+        </TelephoneNumber>
+        <Email>
           <Box mr={4}>
             <MailIcon />
           </Box>
@@ -112,16 +145,14 @@ export const ParentProfile: React.FC<Props> = memo((props) => {
           >
             {email}
           </Typography>
-        </Box>
+        </Email>
       </MyCardActionArea>
       <MyCardActions>
         <ButtonWrapper>
-          <Button size="small" color="primary">
-            Update
-          </Button>
+          <StyledButton label="Update"></StyledButton>
         </ButtonWrapper>
       </MyCardActions>
-    </Card>
+    </MyCard>
   );
 });
 

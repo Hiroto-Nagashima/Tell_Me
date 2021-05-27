@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import { SingleLineTextField, FlexibleButton } from '../../atoms/index';
+import { SingleLineTextField, StyledButton } from '../../atoms/index';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -169,10 +169,9 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
           />
         </Box>
         <Box textAlign="center" m={5}>
-          <FlexibleButton
+          <StyledButton
             onClick={onClickRegister}
             variant="contained"
-            color="primary"
             label="登録"
           />
         </Box>

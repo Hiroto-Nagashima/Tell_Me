@@ -10,7 +10,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import { Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup';
-import { FlexibleButton, SingleLineTextField } from '../../atoms/index';
+import { StyledButton, SingleLineTextField } from '../../atoms/index';
 
 const FlexBox = styled.div`
   display: flex;
@@ -217,10 +217,9 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
               />
             </Box>
             <Box textAlign="center" m={5}>
-              <FlexibleButton
+              <StyledButton
                 onClick={onClickSubmit}
                 variant="contained"
-                color="primary"
                 label="登録"
               />
             </Box>

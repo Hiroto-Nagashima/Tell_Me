@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import { SingleLineTextField, FlexibleButton } from '../../atoms/index';
+import { SingleLineTextField, StyledButton } from '../../atoms/index';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -68,14 +68,14 @@ export const LoginPaper: React.FC<Props> = memo((props) => {
           />
         </Box>
         <Box textAlign="center" mx={2}>
-          <FlexibleButton onClick={onClickLogin} label="Login" />
+          <StyledButton onClick={onClickLogin} label="Login" />
         </Box>
         <Box textAlign="center" m={3}>
           ------アカウントをお持ちでない方------
         </Box>
         <Box textAlign="center" mx={2}>
           <MyLink to="/signup">
-            <FlexibleButton label="Sign Up" />
+            <StyledButton label="Sign Up" />
           </MyLink>
         </Box>
       </Paper>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import { SingleLineTextField, FlexibleButton } from '../../atoms/index';
+import { SingleLineTextField, StyledButton } from '../../atoms/index';
 import { ChooseRole } from '../../molecules/ChooseRole/ChooseRole';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -135,10 +135,9 @@ export const SignUpPaper: React.FC<Props> = memo((props) => {
           />
         </Box>
         <Box textAlign="center" mx={2}>
-          <FlexibleButton
+          <StyledButton
             onClick={onClickSignUp}
             variant="contained"
-            color="primary"
             label="登録"
           />
         </Box>

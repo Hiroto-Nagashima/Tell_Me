@@ -2,7 +2,7 @@ import { Alert } from './Alert';
 import { Spinner } from './Spinner/Spinner';
 import { ProfileImage } from './ProfileImage/ProfileImage';
 import { DefaultButton } from './DefaultButton/DefaultButton';
-import { FlexibleButton } from './FlexibleButton/FlexibleButton';
+import { StyledButton } from './StyledButton/StyledButton';
 import { DraggablePaper } from './DraggablePaper';
 import { CustomizedSnackbar } from './CustomizedSnackbar/CustomizedSnackbar';
 import { SingleLineTextField } from './SingleLineTextField/SingleLineTextField';
@@ -12,8 +12,8 @@ export {
   Alert,
   Spinner,
   ProfileImage,
+  StyledButton,
   DefaultButton,
-  FlexibleButton,
   DraggablePaper,
   CustomizedSnackbar,
   SingleLineTextField,

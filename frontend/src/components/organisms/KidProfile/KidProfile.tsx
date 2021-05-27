@@ -5,7 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Box } from '@material-ui/core';
-import { FlexibleButton } from '../../atoms';
+import { StyledButton } from '../../atoms';
 
 const AgeAndGender = styled(Box)`
   color: white;
@@ -209,10 +209,11 @@ export const KidProfile: React.FC<Props> = memo((props) => {
           </Box>
         </Content>
         <ButtonWrapper>
-          <FlexibleButton
+          <StyledButton
             variant="contained"
             onClick={onClick}
             label="Update"
+            fontSize={25}
           />
         </ButtonWrapper>
       </MyCardActionArea>

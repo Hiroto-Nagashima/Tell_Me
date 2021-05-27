@@ -7,7 +7,7 @@ import { RadioButtonGroup } from '../../molecules/RadioButtonGroup';
 import {
   SingleLineTextField,
   MultipleLinesTextField,
-  FlexibleButton,
+  StyledButton,
 } from '../../atoms/index';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -128,10 +128,9 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
           />
         </Box>
         <Box textAlign="center" m={2}>
-          <FlexibleButton
+          <StyledButton
             onClick={onClickRegister}
             variant="contained"
-            color="primary"
             label="登録"
           />
         </Box>
