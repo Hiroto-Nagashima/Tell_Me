@@ -24,7 +24,7 @@ const SignUpImage = styled(Logo)`
 const Wrapper = styled(Box)`
   display: flex;
   justify-content: space-between;
-  padding: 0 6%;
+  padding: 6% 6% 0 6%;
 `;
 
 export const SignUp: React.FC = () => {
