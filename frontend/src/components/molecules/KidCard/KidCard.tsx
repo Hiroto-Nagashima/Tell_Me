@@ -1,13 +1,12 @@
 import React from 'react';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-// import styled from 'styled-components';
-// import { Box } from '@material-ui/core';
+import CardContent from '@material-ui/core/CardContent';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { StyledButton } from '../../atoms';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -36,7 +35,6 @@ const useStyles = makeStyles(() =>
       borderRadius: 80,
       marginRight: 5,
       marginLeft: 5,
-      onerror: 'this.src=`${process.env.PUBLIC_URL}/noimage.jpeg`',
     },
     controls: {
       display: 'flex',
@@ -63,7 +61,6 @@ export const KidCard: React.FC<Props> = (props) => {
         className={classes.cover}
         src={src}
         component="img"
-        title="Live from space album cover"
         onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) =>
           (e.currentTarget.src =
             'https://d2hmx91pr90hgc.cloudfront.net/noimage.jpeg')
@@ -80,14 +77,14 @@ export const KidCard: React.FC<Props> = (props) => {
         </CardContent>
         <div className={classes.controls}>
           <CardActions>
-            <Button
-              size="large"
-              color="primary"
+            <StyledButton
               variant="contained"
               onClick={onClick}
-            >
-              決定
-            </Button>
+              label="決定"
+              fontSize={18}
+              width={100}
+              borderRadius={20}
+            />
           </CardActions>
         </div>
       </div>

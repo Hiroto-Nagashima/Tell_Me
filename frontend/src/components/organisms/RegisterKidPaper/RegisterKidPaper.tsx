@@ -173,6 +173,9 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
             onClick={onClickRegister}
             variant="contained"
             label="登録"
+            fontSize={15}
+            width={60}
+            borderRadius={20}
           />
         </Box>
       </Paper>
