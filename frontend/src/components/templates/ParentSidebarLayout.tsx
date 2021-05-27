@@ -163,7 +163,7 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
       <Header
         title={title}
         appBarClassName={classes.appBar}
-        titleClassName={classes.menuButton}
+        iconButtonClassName={classes.menuButton}
         onClickTitle={onToggleDrawer}
       />
       <nav className={classes.drawer}>

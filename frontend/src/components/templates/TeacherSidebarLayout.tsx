@@ -44,6 +44,12 @@ const useStyles = makeStyles((theme: Theme) =>
         marginLeft: drawerWidth,
       },
     },
+    menuButton: {
+      marginRight: theme.spacing(2),
+      [theme.breakpoints.up('sm')]: {
+        display: 'none',
+      },
+    },
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
       width: drawerWidth,
@@ -160,7 +166,11 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Header title={title} appBarClassName={classes.appBar} />
+      <Header
+        title={title}
+        appBarClassName={classes.appBar}
+        iconButtonClassName={classes.menuButton}
+      />
       <nav className={classes.drawer}>
         <Hidden smUp implementation="css">
           <Drawer

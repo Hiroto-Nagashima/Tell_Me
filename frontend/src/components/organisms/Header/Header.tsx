@@ -14,12 +14,12 @@ const MyAppBar = styled(AppBar)`
 export type Props = {
   title: string;
   appBarClassName?: string;
-  titleClassName?: string;
+  iconButtonClassName?: string;
   onClickTitle?: () => void;
 };
 
 export const Header: React.FC<Props> = (props) => {
-  const { title, titleClassName, appBarClassName, onClickTitle } = props;
+  const { title, iconButtonClassName, appBarClassName, onClickTitle } = props;
 
   return (
     <MyAppBar position="fixed" className={appBarClassName}>
@@ -29,7 +29,7 @@ export const Header: React.FC<Props> = (props) => {
           aria-label="open drawer"
           edge="start"
           onClick={onClickTitle}
-          className={titleClassName}
+          className={iconButtonClassName}
         >
           <MenuIcon />
         </IconButton>
