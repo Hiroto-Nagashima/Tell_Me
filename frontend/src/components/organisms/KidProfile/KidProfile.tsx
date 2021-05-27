@@ -135,7 +135,7 @@ export const KidProfile: React.FC<Props> = memo((props) => {
   } = props;
 
   return (
-    <MyCard>
+    <MyCard elevation={6}>
       <MyCardActionArea>
         <BackgroundImage>
           <MyCardMedia />

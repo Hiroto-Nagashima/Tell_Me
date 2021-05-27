@@ -99,7 +99,7 @@ export const ParentProfile: React.FC<Props> = memo((props) => {
   const { firstName, lastName, telephoneNumber, email, gender } = props;
 
   return (
-    <MyCard>
+    <MyCard elevation={6}>
       <MyCardActionArea>
         <BackgroundImage>
           <MyCardMedia />
