@@ -27,7 +27,8 @@ const MyLoginPaper = styled(LoginPaper)`
 const Wrapper = styled(Box)`
   display: flex;
   justify-content: space-between;
-  padding: 8% 5% 5% 5%;
+  padding: 13% 5% 5% 5%;
+  margin
 `;
 
 export const Login: React.FC<Props> = () => {

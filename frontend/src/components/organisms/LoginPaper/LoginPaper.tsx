@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
       '& > *': {
         margin: theme.spacing(1),
         width: theme.spacing(50),
-        height: theme.spacing(60),
+        height: theme.spacing(62),
       },
     },
   }),
@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const MyLink = styled(Link)`
   text-decoration: none;
+`;
+const StyledPaper = styled(Paper)`
+  border-radius: 10px;
 `;
 
 export type Props = {
@@ -42,7 +45,7 @@ export const LoginPaper: React.FC<Props> = memo((props) => {
 
   return (
     <div className={classes.root}>
-      <Paper elevation={0}>
+      <StyledPaper elevation={3}>
         <Box component="h1" p={2} textAlign="center">
           Tell Me Everything
         </Box>
@@ -89,7 +92,7 @@ export const LoginPaper: React.FC<Props> = memo((props) => {
             />
           </MyLink>
         </Box>
-      </Paper>
+      </StyledPaper>
     </div>
   );
 });
