@@ -14,9 +14,11 @@ const useStyles = makeStyles((theme: Theme) =>
       flexWrap: 'wrap',
       justifyContent: 'center',
       '& > *': {
-        margin: theme.spacing(5),
-        width: theme.spacing(70),
-        height: theme.spacing(155),
+        marginTop: theme.spacing(10),
+        marginBottom: theme.spacing(3),
+        padding: theme.spacing(5),
+        width: theme.spacing(60),
+        height: theme.spacing(143),
       },
     },
   }),
@@ -25,6 +27,10 @@ const useStyles = makeStyles((theme: Theme) =>
 const FlexBox = styled.div`
   display: flex;
   justify-content: center;
+`;
+
+const StyledPaper = styled(Paper)`
+  border-radius: 20px;
 `;
 
 export type Props = {
@@ -71,14 +77,13 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
 
   return (
     <div className={classes.root}>
-      <Paper elevation={3}>
-        <Box component="h1" pt={2} my={4} textAlign="center">
-          ようこそ!
-          <br />
+      <StyledPaper elevation={3}>
+        <Box component="h2">ようこそ!</Box>
+        <Box component="h1" mb={4} textAlign="center">
           {parentLastName}
-          {parentFirstName}さん！
+          {parentFirstName}さん
         </Box>
-        <Box component="h3" px={2} my={5} textAlign="center">
+        <Box component="h3" px={2} my={5}>
           1. 保育園のIDを入力してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -91,7 +96,7 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
             onChange={onChangeDaycareId}
           />
         </Box>
-        <Box component="h3" px={2} textAlign="center">
+        <Box component="h3" px={2}>
           2. お子様のお名前を性別を選択してください
         </Box>
         <Box textAlign="center" m={4}>
@@ -104,7 +109,7 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
             secondLabel="男の子"
           />
         </Box>
-        <Box component="h3" px={2} my={5} textAlign="center">
+        <Box component="h3" px={2} my={5}>
           3. お子様のお名前を入力してください
         </Box>
         <FlexBox>
@@ -122,14 +127,14 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
             <SingleLineTextField
               id="名"
               isFullWidth={false}
-              textName="太郎"
+              textName="名"
               placeholder="空欄は入れないでください"
               value={firstName}
               onChange={onChangeFirstName}
             />
           </Box>
         </FlexBox>
-        <Box component="h3" px={2} my={5} textAlign="center">
+        <Box component="h3" px={2} my={5}>
           4. お子様のご年齢を入力してください
         </Box>
         <Box textAlign="center" mx={5}>
@@ -142,7 +147,7 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
             onChange={onChangeAge}
           />
         </Box>
-        <Box component="h3" px={2} my={5} textAlign="center">
+        <Box component="h3" px={2} my={5}>
           5. お子様の好きな食べ物を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -155,7 +160,7 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
             onChange={onChangeFavoriteFood}
           />
         </Box>
-        <Box component="h3" px={2} my={5} textAlign="center">
+        <Box component="h3" px={2} my={5}>
           6. お子様の好きな遊びを入力してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -173,12 +178,12 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
             onClick={onClickRegister}
             variant="contained"
             label="登録"
-            fontSize={15}
-            width={60}
+            fontSize={20}
+            width={80}
             borderRadius={20}
           />
         </Box>
-      </Paper>
+      </StyledPaper>
     </div>
   );
 });
