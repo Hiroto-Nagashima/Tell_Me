@@ -6,6 +6,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import { IconButton } from '@material-ui/core';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { getAuth } from '../../../helper/firebaseAuthHelper';
 
 const MyAppBar = styled(AppBar)`
   background: linear-gradient(45deg, #f25e5d 20%, #ff9463 90%);
@@ -20,19 +22,24 @@ export type Props = {
 
 export const Header: React.FC<Props> = (props) => {
   const { title, iconButtonClassName, appBarClassName, onClickTitle } = props;
+  const [user] = useAuthState(getAuth());
 
   return (
     <MyAppBar position="fixed" className={appBarClassName}>
       <Toolbar>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={onClickTitle}
-          className={iconButtonClassName}
-        >
-          <MenuIcon />
-        </IconButton>
+        {user ? (
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={onClickTitle}
+            className={iconButtonClassName}
+          >
+            <MenuIcon />
+          </IconButton>
+        ) : (
+          <div></div>
+        )}
         <Typography variant="h6">{title}</Typography>
       </Toolbar>
     </MyAppBar>
