@@ -123,18 +123,21 @@ export const TeacherAnnouncement: React.FC = () => {
               onClickPost={tryPost}
               onChangePostContent={onChangePostContent}
             />
-            {posts.map((post) => {
-              return (
-                <Box key={post.id} my={2}>
-                  <PostCard
-                    poster={post.poster}
-                    teacherId={post.user_id}
-                    content={post.content}
-                    createdAt={post.created_at}
-                  />
-                </Box>
-              );
-            })}
+            {posts
+              .slice(0)
+              .reverse()
+              .map((post) => {
+                return (
+                  <Box key={post.id} my={2}>
+                    <PostCard
+                      poster={post.poster}
+                      teacherId={post.user_id}
+                      content={post.content}
+                      createdAt={post.created_at}
+                    />
+                  </Box>
+                );
+              })}
             <CustomizedSnackbar
               open={isSnackbarOpen}
               onClose={onCloseSnackbar}
