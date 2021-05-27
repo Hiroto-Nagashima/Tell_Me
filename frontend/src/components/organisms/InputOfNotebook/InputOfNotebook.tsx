@@ -9,6 +9,7 @@ import {
   MultipleLinesTextField,
   StyledButton,
 } from '../../atoms/index';
+import styled from 'styled-components';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,12 +19,17 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'center',
       '& > *': {
         margin: theme.spacing(1),
-        width: theme.spacing(50),
-        height: theme.spacing(100),
+        padding: theme.spacing(2),
+        width: theme.spacing(70),
+        height: theme.spacing(122),
       },
     },
   }),
 );
+
+const StyledPaper = styled(Paper)`
+  border-radius: 20px;
+`;
 
 export type Props = {
   memo: string | null;
@@ -60,11 +66,11 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
 
   return (
     <div className={classes.root}>
-      <Paper elevation={3}>
-        <Box component="h2" pt={2} textAlign="center">
+      <StyledPaper elevation={5}>
+        <Box component="h1" pt={2} textAlign="center">
           {selectedDate}の連絡帳
         </Box>
-        <Box component="h4" px={4}>
+        <Box component="h3" px={4} my={4}>
           1. 朝に測った体温を記入してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -78,7 +84,7 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
             onChange={onChangeBodyTemperature}
           />
         </Box>
-        <Box component="h4" px={4}>
+        <Box component="h3" px={4} my={4}>
           2. 昨晩の入浴の有無を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -91,7 +97,7 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
             secondLabel="無"
           />
         </Box>
-        <Box component="h4" px={4}>
+        <Box component="h3" px={4} my={4}>
           3. 昨日の夕飯を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -103,7 +109,7 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
             onChange={onChangeDinner}
           />
         </Box>
-        <Box component="h4" px={4}>
+        <Box component="h3" px={4} my={4}>
           4. 今朝の朝食を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -115,7 +121,7 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
             onChange={onChangeBreakfast}
           />
         </Box>
-        <Box component="h4" px={4}>
+        <Box component="h3" px={4} my={4}>
           5. 連絡事項を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -127,14 +133,17 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
             onChange={onChangeMemo}
           />
         </Box>
-        <Box textAlign="center" m={2}>
+        <Box textAlign="center" m={4}>
           <StyledButton
             onClick={onClickRegister}
             variant="contained"
             label="登録"
+            fontSize={20}
+            width={90}
+            borderRadius={20}
           />
         </Box>
-      </Paper>
+      </StyledPaper>
     </div>
   );
 });
