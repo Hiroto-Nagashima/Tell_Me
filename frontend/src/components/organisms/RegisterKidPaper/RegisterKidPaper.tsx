@@ -34,7 +34,7 @@ const StyledPaper = styled(Paper)`
 `;
 
 export type Props = {
-  age: number | null;
+  age: string | null;
   gender: number;
   parentFirstName: string | null;
   parentLastName: string | null;
