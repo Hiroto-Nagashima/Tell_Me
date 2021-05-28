@@ -28,11 +28,12 @@ import { NotebookModal } from '../organisms/NotebookModal/NotebookModal';
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     head: {
-      backgroundColor: theme.palette.common.black,
+      backgroundColor: theme.palette.error.light,
       color: theme.palette.common.white,
+      fontSize: 20,
     },
     body: {
-      fontSize: 14,
+      fontSize: 16,
     },
   }),
 )(TableCell);
@@ -55,6 +56,7 @@ const useStyles = makeStyles({
 
 const Wrapper = styled.div`
   margin: 0 auto;
+  max-width: 85%;
 `;
 
 type KidInfo = {
@@ -126,7 +128,7 @@ export const AllKids: React.FC<Props> = () => {
                       ) : (
                         <ParentPopover
                           email={kid.mother.email}
-                          buttonLabel={kid.mother.last_name}
+                          buttonLabel={`${kid.mother.last_name}${kid.mother.first_name}`}
                           telephoneNumber={kid.mother.telephone_number}
                         />
                       )}
@@ -137,7 +139,7 @@ export const AllKids: React.FC<Props> = () => {
                       ) : (
                         <ParentPopover
                           email={kid.father.email}
-                          buttonLabel={kid.father.last_name}
+                          buttonLabel={`${kid.father.last_name}${kid.father.first_name}`}
                           telephoneNumber={kid.father.telephone_number}
                         />
                       )}
