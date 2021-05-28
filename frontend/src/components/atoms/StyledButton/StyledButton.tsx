@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
 
@@ -11,6 +11,7 @@ export type Props = {
   borderRadius?: number;
   variant?: 'text' | 'outlined' | 'contained';
   onClick?: (e: unknown) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const StyledButton: React.FC<Props> = (props) => {

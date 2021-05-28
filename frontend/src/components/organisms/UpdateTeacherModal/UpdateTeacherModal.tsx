@@ -67,9 +67,9 @@ export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
 
   const fileInput = createRef<HTMLInputElement>();
 
-  const tryResizeFile = async (event: ChangeEvent<HTMLInputElement>) => {
+  const tryResizeFile = async (e: ChangeEvent<HTMLInputElement>) => {
     try {
-      const file = event.target.files![0];
+      const file = e.target.files![0];
       const image = await resizeFile(file);
       setImage(image);
 
@@ -139,8 +139,12 @@ export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
             <Box textAlign="center" m={5}>
               <StyledButton
                 onClick={onClickSubmit}
+                onChange={tryResizeFile}
                 variant="contained"
                 label="登録"
+                fontSize={20}
+                width={60}
+                borderRadius={20}
               />
             </Box>
           </div>

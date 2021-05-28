@@ -43,7 +43,7 @@ const MyCard = styled(Card)`
   width: 560px;
   height: 500px;
   position: relative;
-  border-radius: 2px;
+  border-radius: 6px;
 `;
 
 const MyCardMedia = styled(CardMedia)`
