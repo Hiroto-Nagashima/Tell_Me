@@ -189,12 +189,7 @@ export const KidProfile: React.FC<Props> = memo((props) => {
             </FavoritePlay>
           </Box>
           <Box mt={1}>
-            <Typography
-              variant="h6"
-              color="textSecondary"
-              component="h6"
-              align="center"
-            >
+            <Typography variant="h6" component="h6" align="center">
               {favoritePlay}
             </Typography>
           </Box>

@@ -3,43 +3,55 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { CurrentUserContext } from '../../../providers/UserProvider';
 
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Box } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 560,
-    minHeight: 300,
-    position: 'relative',
-    borderRadius: 20,
-  },
-  media: {
-    height: 100,
-    backgroundColor: '#3f51b5',
-  },
-});
+import { StyledButton } from '../../atoms';
 
 const ButtonWrapper = styled(Box)`
-  width: 100px;
+  width: 250px;
   margin: 0 0 0 auto;
-`;
-
-const KidNameArea = styled(Typography)`
-  font-size: 25px;
-`;
-
-const MyCardActions = styled(CardActions)`
   display: flex;
+  justify-content: center;
+`;
+
+const BackgroundImage = styled(Box)`
+  background: radial-gradient(#ff9463, #f25e5d);
+`;
+
+const Daycare = styled(Box)`
+  color: white;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+`;
+
+const FirstName = styled(Typography)`
+  font-size: 25px;
+  color: white;
+  margin-left: 10px;
+`;
+
+const LastName = styled(Typography)`
+  font-size: 25px;
+  margin-right: 10px;
+  color: white;
+`;
+
+const MyCard = styled(Card)`
+  width: 560px;
+  height: 500px;
+  position: relative;
+  border-radius: 2px;
+`;
+
+const MyCardMedia = styled(CardMedia)`
+  height: 180px;
 `;
 
 const MyCardActionArea = styled(Box)`
-  min-height: 300px;
+  height: 440px;
 `;
 
 const ProfileImage = styled.img`
@@ -47,12 +59,28 @@ const ProfileImage = styled.img`
   height: 160px;
   object-fit: cover;
   border-radius: 50%;
-  // onerror: 'this.src= ' ${process.env.PUBLIC_URL} / noimage.jpeg '';
 `;
 
 const ProfileImageBox = styled(Box)`
   position: absolute;
   top: 20px;
+`;
+
+const ProfileImageWrapper = styled(Box)`
+  display: flex;
+  justify-content: center;
+`;
+
+const SelfIntroduction = styled(Box)`
+  padding: 3% 10%;
+`;
+
+const TeacherName = styled(Typography)`
+  margin-top: 10px;
+  height: 50px;
+  font: white;
+  display: flex;
+  justify-content: center;
 `;
 
 export type Props = {
@@ -70,64 +98,63 @@ export const TeacherProfile: React.FC<Props> = memo((props) => {
 
   const { teacherId } = useParams<{ teacherId: string }>();
 
-  const classes = useStyles();
-
   return (
-    <Card className={classes.root}>
+    <MyCard elevation={6}>
       <MyCardActionArea>
-        <CardMedia className={classes.media} />
-        <CardContent>
+        <BackgroundImage>
+          <MyCardMedia />
           <Box display="flex" justifyContent="center">
-            <ProfileImageBox>
-              <ProfileImage
-                src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/user/image/${teacherId}/image.jpeg`}
-                alt=""
-                onError={(e) =>
-                  (e.currentTarget.src =
-                    'https://d2hmx91pr90hgc.cloudfront.net/noimage.jpeg')
-                }
-              />
-            </ProfileImageBox>
+            <ProfileImageWrapper>
+              <ProfileImageBox>
+                <ProfileImage
+                  src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/user/image/${teacherId}/image.jpeg`}
+                  alt=""
+                  onError={(e) =>
+                    (e.currentTarget.src =
+                      'https://d2hmx91pr90hgc.cloudfront.net/noimage.jpeg')
+                  }
+                />
+              </ProfileImageBox>
+            </ProfileImageWrapper>
           </Box>
-          <Box mt={9} mb={1}>
-            <KidNameArea variant="h4" color="inherit" align="center">
+          <TeacherName>
+            <LastName variant="subtitle1" align="center">
               {lastName}
+            </LastName>
+            <FirstName variant="subtitle1" align="center">
               {firstName}
-            </KidNameArea>
-          </Box>
-          <Box display="flex" justifyContent="center">
+            </FirstName>
+          </TeacherName>
+          <Daycare>
             <Box>
-              <Typography
-                variant="h6"
-                color="textSecondary"
-                component="h6"
-                align="center"
-              >
+              <Typography variant="h6" component="h6" align="center">
                 {daycareName}
               </Typography>
             </Box>
-          </Box>
-          <Box mt={2}>
-            <Typography variant="subtitle1" color="textPrimary" component="h2">
-              {currentUser.selfIntroduction
-                ? selfIntroduction
-                : '自己紹介が未登録です'}
-            </Typography>
-          </Box>
-        </CardContent>
+          </Daycare>
+        </BackgroundImage>
+        <SelfIntroduction>
+          <Typography variant="subtitle1" color="textPrimary" component="h2">
+            {currentUser.selfIntroduction
+              ? selfIntroduction
+              : '自己紹介が未登録です'}
+          </Typography>
+        </SelfIntroduction>
       </MyCardActionArea>
       {String(currentUser.id) == teacherId ? (
-        <MyCardActions>
-          <ButtonWrapper>
-            <Button size="small" color="primary" onClick={onClick}>
-              Update
-            </Button>
-          </ButtonWrapper>
-        </MyCardActions>
+        <ButtonWrapper>
+          <StyledButton
+            onClick={onClick}
+            label="Update"
+            fontSize={15}
+            width={60}
+            borderRadius={20}
+          />
+        </ButtonWrapper>
       ) : (
         <div></div>
       )}
-    </Card>
+    </MyCard>
   );
 });
 
