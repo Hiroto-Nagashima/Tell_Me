@@ -4,5 +4,4 @@ FactoryBot.define do
     sequence(:address) { |i| "address#{i}" }
     sequence(:telephone_number) { |i| i }
   end
-
 end
