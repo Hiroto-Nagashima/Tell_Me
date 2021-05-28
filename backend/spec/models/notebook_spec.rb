@@ -9,12 +9,36 @@ RSpec.describe Notebook, type: :model do
       end
     end
 
-    # context 'error' do
-    #   it '姓が空欄の場合保存に失敗するか' do
-    #     kid = build_stubbed(:Ken, first_name: nil)
-    #     kid.valid?
-    #     expect(kid.errors.messages[:first_name]).to include("can't be blank")
-    #   end
-    # end
+    context 'error' do
+      it '体温が空欄の場合保存に失敗するか' do
+        notebook = build_stubbed(:notebook, body_temperature: nil)
+        notebook.valid?
+        expect(notebook.errors.messages[:body_temperature]).to include("can't be blank")
+      end
+
+      it '朝食が空欄の場合保存に失敗するか' do
+        notebook= build_stubbed(:notebook, breakfast: nil)
+        notebook.valid?
+        expect(notebook.errors.messages[:breakfast]).to include("can't be blank")
+      end
+
+      it '夕食が空欄の場合保存に失敗するか' do
+        notebook = build_stubbed(:notebook, dinner: nil)
+        notebook.valid?
+        expect(notebook.errors.messages[:dinner]).to include("can't be blank")
+      end
+
+      it '日付が選択されていない場合保存に失敗するか' do
+        notebook = build_stubbed(:notebook, date: nil)
+        notebook.valid?
+        expect(notebook.errors.messages[:date]).to include("can't be blank")
+      end
+
+      it '入浴の有無が選択されていない場合保存に失敗するか' do
+        notebook = build_stubbed(:notebook, has_bathed: nil)
+        notebook.valid?
+        expect(notebook.errors.messages[:has_bathed]).to include("can't be blank")
+      end
+    end
   end
 end
