@@ -82,7 +82,7 @@ export const KidCard: React.FC<Props> = (props) => {
               onClick={onClick}
               label="決定"
               fontSize={18}
-              width={100}
+              width={90}
               borderRadius={20}
             />
           </CardActions>

@@ -4,23 +4,23 @@ import styled from 'styled-components';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
+
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { MultipleLinesTextField } from '../../atoms';
+import { MultipleLinesTextField, StyledButton } from '../../atoms';
 
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: 'flex',
-      width: 500,
+      width: 560,
       borderRadius: 20,
       height: 240,
+      padding: 20,
     },
     details: {
       display: 'flex',
       flexDirection: 'column',
-      width: 350,
+      width: 400,
     },
     content: {
       flex: '1 0 auto',
@@ -33,11 +33,11 @@ const useStyles = makeStyles(() =>
       objectFit: 'cover',
       borderRadius: 80,
       margin: 20,
-      onerror: 'this.src=`${process.env.PUBLIC_URL}/noimage.jpeg`',
     },
     controls: {
       display: 'flex',
       alignItems: 'center',
+      width: 380,
       justifyContent: 'flex-end',
     },
   }),
@@ -67,7 +67,11 @@ export const PostForm: React.FC<Props> = (props) => {
           <CardMedia
             className={classes.cover}
             image={src}
-            title="post announcement"
+            component="img"
+            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) =>
+              (e.currentTarget.src =
+                'https://d2hmx91pr90hgc.cloudfront.net/noimage.jpeg')
+            }
           />
           <div className={classes.details}>
             <CardContent className={classes.content}>
@@ -80,16 +84,16 @@ export const PostForm: React.FC<Props> = (props) => {
               />
             </CardContent>
             <div className={classes.controls}>
-              <CardActions>
-                <Button
-                  size="large"
-                  color="primary"
+              <div>
+                <StyledButton
                   variant="contained"
                   onClick={onClickPost}
-                >
-                  投稿
-                </Button>
-              </CardActions>
+                  label="登録"
+                  fontSize={17}
+                  width={100}
+                  borderRadius={20}
+                />
+              </div>
             </div>
           </div>
         </Card>
