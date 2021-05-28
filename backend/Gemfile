@@ -27,6 +27,8 @@ gem 'fog-aws'
 
 gem 'dotenv-rails'
 
+gem 'faker'
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec-rails'
