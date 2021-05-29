@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_26_020806) do
+ActiveRecord::Schema.define(version: 2021_05_29_111658) do
 
   create_table "daycares", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2021_05_26_020806) do
 
   create_table "notebooks", charset: "utf8mb4", force: :cascade do |t|
     t.integer "kid_id"
-    t.integer "body_temperature"
+    t.decimal "body_temperature", precision: 3, scale: 1
     t.boolean "has_bathed"
     t.text "dinner"
     t.text "breakfast"
