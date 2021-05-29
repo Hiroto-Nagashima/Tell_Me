@@ -111,11 +111,9 @@ export const Notebook: React.FC = () => {
         )
         .then((res) => {
           if (res.data.status == '422') {
-            console.log(res.data);
             setSeverity('error');
             setMassage(res.data.message);
           } else {
-            console.log(res.data);
             setSeverity('success');
             setMassage(res.data.message);
           }
@@ -187,7 +185,7 @@ export const Notebook: React.FC = () => {
           ) : (
             <div></div>
           )}
-          <button onClick={() => console.log(bodyTemperature)} />
+          <button onClick={() => console.log(hasBathed)} />
           <CustomizedSnackbar
             open={isSnackbarOpen}
             severity={severity}
