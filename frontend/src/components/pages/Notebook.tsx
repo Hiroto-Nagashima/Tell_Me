@@ -110,8 +110,15 @@ export const Notebook: React.FC = () => {
           },
         )
         .then((res) => {
-          setSeverity('success');
-          setMassage(res.data.message);
+          if (res.data.status == '422') {
+            console.log(res.data);
+            setSeverity('error');
+            setMassage(res.data.message);
+          } else {
+            console.log(res.data);
+            setSeverity('success');
+            setMassage(res.data.message);
+          }
         })
         .catch(() => {
           setSeverity('error');
@@ -134,8 +141,13 @@ export const Notebook: React.FC = () => {
           },
         })
         .then((res) => {
-          setSeverity('success');
-          setMassage(res.data.message);
+          if (res.data.status == '422') {
+            setSeverity('error');
+            setMassage(res.data.message);
+          } else {
+            setSeverity('success');
+            setMassage(res.data.message);
+          }
         })
         .catch(() => {
           setSeverity('error');

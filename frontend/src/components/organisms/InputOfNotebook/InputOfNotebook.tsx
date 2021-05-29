@@ -71,15 +71,15 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
           {selectedDate}の連絡帳
         </Box>
         <Box component="h3" px={4} my={4}>
-          1. 朝に測った体温を記入してください
+          1. 朝に測った体温を記入してください(※入力必須)
         </Box>
         <Box px={4}>
           <Grid container xs={3}>
             <SingleLineTextField
               id="体温"
-              isFullWidth={false}
-              textName="体温"
               type="number"
+              textName="体温"
+              isFullWidth={false}
               inputProps={{
                 min: '36.0',
                 step: '0.1',
@@ -104,7 +104,7 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
           />
         </Box>
         <Box component="h3" px={4} my={4}>
-          3. 昨日の夕飯を入力してください
+          3. 昨日の夕飯を入力してください(※入力必須)
         </Box>
         <Box textAlign="center" mx={4}>
           <MultipleLinesTextField
@@ -116,7 +116,7 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
           />
         </Box>
         <Box component="h3" px={4} my={4}>
-          4. 今朝の朝食を入力してください
+          4. 今朝の朝食を入力してください (※入力必須)
         </Box>
         <Box textAlign="center" mx={4}>
           <MultipleLinesTextField
