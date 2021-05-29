@@ -3,10 +3,12 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import styled from 'styled-components';
+import { InputBaseComponentProps } from '@material-ui/core';
 
 export type Props = {
   id: string;
   textName: string;
+  inputProps?: InputBaseComponentProps;
   placeholder: string;
   isFullWidth: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -15,33 +17,34 @@ export type Props = {
   disabled?: boolean;
 };
 const SFormControl = styled(FormControl)`
-    display: grid
-    step: "0.1"
-  `;
+  display: grid;
+`;
 export const SingleLineTextField: VFC<Props> = (props) => {
   const {
-    isFullWidth,
-    textName,
-    placeholder,
-    onChange,
-    value,
     id,
     type,
+    value,
     disabled,
+    textName,
+    inputProps,
+    placeholder,
+    isFullWidth,
+    onChange,
   } = props;
 
   return (
     <SFormControl variant="outlined" fullWidth={isFullWidth}>
       <InputLabel htmlFor="component-outlined">{textName}</InputLabel>
       <OutlinedInput
-        style={{ width: '100%' }}
         id={id}
-        value={value}
-        onChange={onChange}
-        label={textName}
-        placeholder={placeholder}
         type={type}
+        label={textName}
+        value={value}
+        style={{ width: '100%' }}
         disabled={disabled}
+        inputProps={inputProps}
+        placeholder={placeholder}
+        onChange={onChange}
       />
     </SFormControl>
   );

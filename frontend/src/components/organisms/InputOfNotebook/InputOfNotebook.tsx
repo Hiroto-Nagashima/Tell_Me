@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
 import Paper from '@material-ui/core/Paper';
-import { Box } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup';
 import {
@@ -73,21 +73,27 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
         <Box component="h3" px={4} my={4}>
           1. 朝に測った体温を記入してください
         </Box>
-        <Box textAlign="center" mx={4}>
-          <SingleLineTextField
-            id="体温"
-            textName="体温"
-            type="number"
-            isFullWidth={false}
-            placeholder="36.5"
-            value={bodyTemperature}
-            onChange={onChangeBodyTemperature}
-          />
+        <Box px={4}>
+          <Grid container xs={3}>
+            <SingleLineTextField
+              id="体温"
+              isFullWidth={false}
+              textName="体温"
+              type="number"
+              inputProps={{
+                min: '36.0',
+                step: '0.1',
+              }}
+              placeholder="36.5"
+              value={bodyTemperature}
+              onChange={onChangeBodyTemperature}
+            />
+          </Grid>
         </Box>
         <Box component="h3" px={4} my={4}>
           2. 昨晩の入浴の有無を入力してください
         </Box>
-        <Box textAlign="center" mx={4}>
+        <Box mx={4}>
           <RadioButtonGroup
             value={hasBathed}
             firstValue={true}
