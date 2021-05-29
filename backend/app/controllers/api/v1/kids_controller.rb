@@ -13,8 +13,8 @@ module Api
           }
         else
           render json: {
-            status: 400,
-            message: "入力箇所に誤りがあります"
+            status: "422",
+            message: kid.errors.full_messages
           }
         end
       end

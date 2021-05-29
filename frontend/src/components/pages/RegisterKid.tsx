@@ -7,7 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { CurrentUserContext } from '../../providers/UserProvider';
 
 import { RegisterKidPaper } from '../organisms/RegisterKidPaper/RegisterKidPaper';
-import { Spinner } from '../atoms';
+import { CustomizedSnackbar, Spinner } from '../atoms';
 
 type Props = {
   history: H.History;
@@ -21,6 +21,7 @@ export const RegisterKid: React.FC<Props> = () => {
   const { currentUser } = useContext(CurrentUserContext);
 
   const [age, setAge] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
   const [error, setError] = useState('');
   const [gender, setGender] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -67,15 +68,24 @@ export const RegisterKid: React.FC<Props> = () => {
     [],
   );
 
+  const onCloseSnackbar = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+
+    return;
+  };
+
   const onClickRegister = () => {
     setLoading(true);
     axios
       .post(`http://localhost:5000/api/v1/kids`, {
         params: {
           age: age,
+          gender: gender,
           first_name: firstName,
           last_name: lastName,
-          gender: gender,
           daycare_id: daycareId,
           favorite_food: favoriteFood,
           favorite_play: favoritePlay,
@@ -83,14 +93,19 @@ export const RegisterKid: React.FC<Props> = () => {
         },
       })
       .then((res) => {
-        history.push({
-          pathname: `/kids/${res.data.kid.id}`,
-          state: res.data.kid,
-        });
+        if (res.data.status == '422') {
+          setError(res.data.message);
+          setOpen(true);
+        } else {
+          history.push({
+            pathname: `/kids/${res.data.kid.id}`,
+            state: res.data.kid,
+          });
+        }
       })
       .catch((e) => {
         setError(e);
-        console.log(e);
+        setOpen(true);
       })
       .finally(() => setLoading(false));
   };
@@ -99,29 +114,37 @@ export const RegisterKid: React.FC<Props> = () => {
     <>
       {loading ? (
         <Spinner />
-      ) : error ? (
-        <div>{error}</div>
       ) : (
         <>
           <RegisterKidPaper
             age={age}
-            parentLastName={currentUser.lastName}
-            parentFirstName={currentUser.firstName}
+            error={error}
             gender={gender}
             lastName={lastName}
             daycareId={daycareId}
             firstName={firstName}
             favoriteFood={favoriteFood}
             favoritePlay={favoritePlay}
-            onClickRegister={onClickRegister}
+            isSnackbarOpen={open}
+            parentLastName={currentUser.lastName}
+            parentFirstName={currentUser.firstName}
             onChangeAge={onChangeAge}
+            onChangeGender={onChangeGender}
+            onCloseSnackbar={onCloseSnackbar}
+            onClickRegister={onClickRegister}
             onChangeDaycareId={onChangeDaycareId}
             onChangeFirstName={onChangeFirstName}
             onChangeLastName={onChangeLastName}
-            onChangeGender={onChangeGender}
             onChangeFavoriteFood={onChangeFavoriteFood}
             onChangeFavoritePlay={onChangeFavoritePlay}
           />
+          <CustomizedSnackbar
+            open={open}
+            onClose={onCloseSnackbar}
+            severity="error"
+          >
+            {error}
+          </CustomizedSnackbar>
         </>
       )}
     </>
