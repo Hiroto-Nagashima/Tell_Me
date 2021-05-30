@@ -1,5 +1,6 @@
 import axios from 'axios';
 import styled from 'styled-components';
+import Resizer from 'react-image-file-resizer';
 import React, {
   ChangeEvent,
   useCallback,
@@ -23,8 +24,10 @@ const FlexBox = styled.div`
 export const TeacherHome: React.FC = () => {
   const { currentUser } = useContext(CurrentUserContext);
 
+  const [image, setImage] = useState<any>(null);
   const [posts, setPosts] = useState<Array<Post>>([]);
   const [error, setError] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
   const [message, setMassage] = useState('');
   const [daycare, setDaycare] = useState<Daycare>({} as Daycare);
@@ -60,6 +63,49 @@ export const TeacherHome: React.FC = () => {
     },
     [],
   );
+
+  const resizeFile = (file: File) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        300,
+        300,
+        'JPEG',
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        'base64',
+      );
+    });
+
+  const tryResizeFile = async (e: ChangeEvent<HTMLInputElement>) => {
+    try {
+      const file = e.target.files![0];
+      const image = await resizeFile(file);
+      setImage(image);
+      setDisabled(false);
+
+      return image;
+    } catch (err) {
+      alert(err);
+    }
+  };
+
+  const onClickSubmitFile = async () => {
+    const submitData = new FormData();
+    submitData.append('image', image);
+    await axios.post(
+      `http://localhost:5000/api/v1/users/${currentUser.id}/register_image`,
+      submitData,
+      {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      },
+    );
+  };
 
   const tryUpdateTeacher = () => {
     setLoading(true);
@@ -133,9 +179,12 @@ export const TeacherHome: React.FC = () => {
             />
             <UpdateTeacherModal
               open={isModalOpen}
+              disabled={disabled}
               selfIntroduction={selfIntroduction}
               onCloseModal={onCloseModal}
-              onClickSubmit={tryUpdateTeacher}
+              onClickSubmitFile={onClickSubmitFile}
+              onChangeFile={tryResizeFile}
+              onClickSubmitProfile={tryUpdateTeacher}
               onChangeSelfIntroduction={onChangeSelfIntroduction}
             />
             {posts

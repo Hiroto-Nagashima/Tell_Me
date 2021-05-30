@@ -1,7 +1,4 @@
-import React, { ChangeEvent, createRef, memo, useState } from 'react';
-import axios from 'axios';
-import Resizer from 'react-image-file-resizer';
-import { useParams } from 'react-router';
+import React, { ChangeEvent, memo } from 'react';
 
 import Fade from '@material-ui/core/Fade';
 import Modal from '@material-ui/core/Modal';
@@ -28,70 +25,28 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export type Props = {
   open: boolean;
+  disabled: boolean;
   selfIntroduction: string | null;
   onCloseModal: () => void;
-  onClickSubmit: () => void;
+  onChangeFile: (et: ChangeEvent<HTMLInputElement>) => void;
+  onClickSubmitFile: () => void;
+  onClickSubmitProfile: () => void;
   onChangeSelfIntroduction: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
   const {
     open,
+    disabled,
     selfIntroduction,
-    onChangeSelfIntroduction,
     onCloseModal,
-    onClickSubmit,
+    onChangeFile,
+    onClickSubmitFile,
+    onClickSubmitProfile,
+    onChangeSelfIntroduction,
   } = props;
 
   const classes = useStyles();
-
-  const { teacherId } = useParams<{ teacherId: string }>();
-
-  const [image, setImage] = useState<any>('');
-
-  const resizeFile = (file: File) =>
-    new Promise((resolve) => {
-      Resizer.imageFileResizer(
-        file,
-        300,
-        300,
-        'JPEG',
-        100,
-        0,
-        (uri) => {
-          resolve(uri);
-        },
-        'base64',
-      );
-    });
-
-  const fileInput = createRef<HTMLInputElement>();
-
-  const tryResizeFile = async (e: ChangeEvent<HTMLInputElement>) => {
-    try {
-      const file = e.target.files![0];
-      const image = await resizeFile(file);
-      setImage(image);
-
-      return image;
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const onClickSubmitFile = async () => {
-    const submitData = new FormData();
-    submitData.append('image', image);
-    await axios.post(
-      `http://localhost:5000/api/v1/users/${teacherId}/register_image`,
-      submitData,
-      {
-        headers: {
-          'content-type': 'multipart/form-data',
-        },
-      },
-    );
-  };
 
   return (
     <div>
@@ -108,24 +63,26 @@ export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
         <Fade in={open}>
           <div className={classes.paper}>
             <Box component="h3" px={2} my={5} textAlign="center">
-              1.写真をアップロードしてください
+              プロフィール画像のアップロード
             </Box>
             <Box textAlign="center" mx={4}>
               <input
                 type="file"
                 name="image"
-                onChange={tryResizeFile}
+                onChange={onChangeFile}
                 accept="image/*"
               />
-              <input
-                type="button"
-                value="Submit"
-                ref={fileInput}
-                onClick={onClickSubmitFile}
-              />
             </Box>
-            <Box component="h3" px={2} my={5} textAlign="center">
-              2.自己紹介を更新してください
+            <Box textAlign="right" m={3}>
+              <StyledButton
+                variant="contained"
+                label="登録"
+                onClick={onClickSubmitFile}
+                fontSize={15}
+                borderRadius={20}
+                disabled={disabled}
+                width={30}
+              />
             </Box>
             <Box textAlign="center" m={4}>
               <MultipleLinesTextField
@@ -136,14 +93,13 @@ export const UpdateTeacherModal: React.FC<Props> = memo((props) => {
                 onChange={onChangeSelfIntroduction}
               />
             </Box>
-            <Box textAlign="center" m={5}>
+            <Box textAlign="right" m={3}>
               <StyledButton
-                onClick={onClickSubmit}
-                onChange={tryResizeFile}
+                onClick={onClickSubmitProfile}
                 variant="contained"
                 label="登録"
-                fontSize={20}
-                width={60}
+                width={30}
+                fontSize={15}
                 borderRadius={20}
               />
             </Box>

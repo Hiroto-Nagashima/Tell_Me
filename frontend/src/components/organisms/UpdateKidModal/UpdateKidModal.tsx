@@ -75,8 +75,6 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
 
   const classes = useStyles();
 
-  // const { id } = useParams<{ id: string }>();
-
   return (
     <div>
       <Modal
