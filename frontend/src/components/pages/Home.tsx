@@ -132,20 +132,20 @@ export const Home: React.FC = () => {
     axios
       .put(`http://localhost:5000/api/v1/kids/${id}`, {
         params: {
+          uid: parent!.uid,
           age: age,
-          first_name: KidFirstName,
-          last_name: KidLastName,
           gender: gender,
+          last_name: KidLastName,
+          first_name: KidFirstName,
           favorite_food: favoriteFood,
           favorite_play: favoritePlay,
-          uid: parent!.uid,
         },
       })
       .then((res) => {
         setKid(res.data.kid);
         setMassage(res.data.message);
-        setIsKidModalOpen(false);
         setSeverity('success');
+        setIsKidModalOpen(false);
       })
       .catch(() => {
         setMassage('更新失敗しました');
@@ -204,8 +204,8 @@ export const Home: React.FC = () => {
       )
       .then((res) => {
         setMassage(res.data.message);
-        setIsParentModalOpen(false);
         setSeverity(res.data.severity);
+        setIsParentModalOpen(false);
       })
       .catch(() => {
         setMassage('更新失敗しました');
@@ -227,8 +227,8 @@ export const Home: React.FC = () => {
           .put(`http://localhost:5000/api/v1/users/${currentUser.id}`, {
             params: {
               email: email,
-              first_name: parentFirstName,
               last_name: parentLastName,
+              first_name: parentFirstName,
               telephone_number: telephoneNumber,
             },
           })
@@ -238,8 +238,8 @@ export const Home: React.FC = () => {
             setParentFirstName(res.data.firstName);
             setTelephoneNumber(res.data.telephoneNumber);
             setMassage(res.data.message);
-            setIsParentModalOpen(false);
             setSeverity('success');
+            setIsParentModalOpen(false);
           })
           .catch(() => {
             setMassage('登録に失敗しました');
@@ -317,9 +317,9 @@ export const Home: React.FC = () => {
   };
 
   const setCurrentUser = () => {
-    setParentFirstName(currentUser.firstName);
-    setParentLastName(currentUser.lastName);
     setEmail(currentUser.email);
+    setParentLastName(currentUser.lastName);
+    setParentFirstName(currentUser.firstName);
     setTelephoneNumber(currentUser.telephoneNumber);
   };
 
@@ -340,8 +340,8 @@ export const Home: React.FC = () => {
               age={kid.age}
               kidId={id}
               gender={kid.gender}
-              firstName={kid.firstName}
               lastName={kid.lastName}
+              firstName={kid.firstName}
               favoriteFood={kid.favoriteFood}
               favoritePlay={kid.favoritePlay}
               onClick={onClickKidModal}
@@ -349,55 +349,55 @@ export const Home: React.FC = () => {
             <div key={currentUser.id}>
               <ParentProfile
                 id={currentUser.id}
-                onClick={onClickParentModal}
                 email={currentUser.email}
                 gender={currentUser.gender}
-                telephoneNumber={currentUser.telephoneNumber}
-                firstName={currentUser.firstName}
                 lastName={currentUser.lastName}
+                firstName={currentUser.firstName}
+                telephoneNumber={currentUser.telephoneNumber}
+                onClick={onClickParentModal}
               />
             </div>
           </Box>
           <UpdateKidModal
             age={age}
-            disabled={disabled}
+            open={isKidModalOpen}
             gender={gender}
-            firstName={KidFirstName}
+            disabled={disabled}
             lastName={KidLastName}
+            firstName={KidFirstName}
             favoriteFood={favoriteFood}
             favoritePlay={favoritePlay}
-            open={isKidModalOpen}
+            onChangeAge={onChangeAge}
             onChangeFile={tryResizeFile}
             onCloseModal={onCloseKidModal}
-            onChangeAge={onChangeAge}
             onChangeGender={onChangeGender}
-            onClickSubmitFile={onClickSubmitKidImage}
-            onClickSubmitProfile={tryUpdateKid}
             onChangeLastName={onChangeKidLastName}
             onChangeFirstName={onChangeKidFirstName}
+            onClickSubmitFile={onClickSubmitKidImage}
+            onClickSubmitProfile={tryUpdateKid}
             onChangeFavoriteFood={onChangeFavoriteFood}
             onChangeFavoritePlay={onChangeFavoritePlay}
           />
           <UpdateParentModal
-            disabled={disabled}
-            firstName={parentFirstName}
-            lastName={parentLastName}
-            telephoneNumber={telephoneNumber}
             email={email}
             open={isPatentModalOpen}
-            onChangeEmail={onChangeEmail}
-            onChangeTelephoneNumber={onChangeTelephoneNumber}
+            disabled={disabled}
+            lastName={parentLastName}
+            firstName={parentFirstName}
+            telephoneNumber={telephoneNumber}
             onChangeFile={tryResizeFile}
             onCloseModal={onCloseParentModal}
+            onChangeEmail={onChangeEmail}
+            onChangeLastName={onChangeParentLastName}
+            onChangeFirstName={onChangeParentFirstName}
             onClickSubmitFile={onClickSubmitParentImage}
             onClickSubmitProfile={tryUpdateParent}
-            onChangeFirstName={onChangeParentFirstName}
-            onChangeLastName={onChangeParentLastName}
+            onChangeTelephoneNumber={onChangeTelephoneNumber}
           />
           <CustomizedSnackbar
             open={isSnackbarOpen}
-            onClose={onCloseSnackbar}
             severity={severity}
+            onClose={onCloseSnackbar}
           >
             {message}
           </CustomizedSnackbar>
