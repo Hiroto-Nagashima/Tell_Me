@@ -243,25 +243,36 @@ export const Home: React.FC = () => {
 
   const tryUpdateParent = () => {
     setLoading(true);
-    axios
-      .put(`http://localhost:5000/api/v1/users/${currentUser.id}`, {
-        params: {
-          email: email,
-          telephone_number: telephoneNumber,
-        },
-      })
-      .then((res) => {
-        setEmail(res.data.email);
-        setTelephoneNumber(res.data.telephoneNumber);
-        setMassage(res.data.message);
-        setIsParentModalOpen(false);
-        setSeverity('success');
+    const user = getAuth().currentUser;
+    user!
+      .updateEmail(email)
+      .then(() => {
+        axios
+          .put(`http://localhost:5000/api/v1/users/${currentUser.id}`, {
+            params: {
+              email: email,
+              telephone_number: telephoneNumber,
+            },
+          })
+          .then((res) => {
+            setEmail(res.data.email);
+            setTelephoneNumber(res.data.telephoneNumber);
+            setMassage(res.data.message);
+            setIsParentModalOpen(false);
+            setSeverity('success');
+          })
+          .catch(() => {
+            setMassage('登録に失敗しました');
+            setSeverity('error');
+          })
+          .finally(() => {
+            setLoading(false);
+            setIsSnackbarOpen(true);
+          });
       })
       .catch(() => {
-        setMassage('登録に失敗しました');
-        setSeverity('error');
-      })
-      .finally(() => {
+        setMassage('メールアドレスの更新に失敗しました');
+        setSeverity('success');
         setLoading(false);
         setIsSnackbarOpen(true);
       });
