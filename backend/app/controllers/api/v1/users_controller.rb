@@ -54,10 +54,14 @@ module Api
         if user.save!
           render json: {
             status: "ok",
+            message: "画像を登録しました",
+            severity: "success"
           }
         else
           render json: {
             status: 400,
+            message: "画像を登録に失敗しました",
+            severity: "error"
           }
         end
       end

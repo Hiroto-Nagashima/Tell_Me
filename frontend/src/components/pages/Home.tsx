@@ -60,7 +60,7 @@ export const Home: React.FC = () => {
     [],
   );
 
-  const onChangeparentFirstName = useCallback(
+  const onChangeParentFirstName = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       return setParentFirstName(e.target.value);
     },
@@ -74,7 +74,7 @@ export const Home: React.FC = () => {
     [],
   );
 
-  const onChangeparentLastName = useCallback(
+  const onChangeParentLastName = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       return setParentLastName(e.target.value);
     },
@@ -162,6 +162,7 @@ export const Home: React.FC = () => {
       const image = await resizeFile(file);
       setImage(image);
       setDisabled(false);
+      console.log(image);
 
       return image;
     } catch (err) {
@@ -230,15 +231,29 @@ export const Home: React.FC = () => {
   const onClickSubmitParentImage = async () => {
     const submitData = new FormData();
     submitData.append('image', image);
-    await axios.post(
-      `http://localhost:5000/api/v1/users/${currentUser.id}/register_image`,
-      submitData,
-      {
-        headers: {
-          'content-type': 'multipart/form-data',
+    await axios
+      .post(
+        `http://localhost:5000/api/v1/users/${currentUser.id}/register_image`,
+        submitData,
+        {
+          headers: {
+            'content-type': 'multipart/form-data',
+          },
         },
-      },
-    );
+      )
+      .then((res) => {
+        setMassage(res.data.message);
+        setIsParentModalOpen(false);
+        setSeverity(res.data.severity);
+      })
+      .catch(() => {
+        setMassage('更新失敗しました');
+        setSeverity('error');
+      })
+      .finally(() => {
+        setLoading(false);
+        setIsSnackbarOpen(true);
+      });
   };
 
   const tryUpdateParent = () => {
@@ -368,8 +383,8 @@ export const Home: React.FC = () => {
             onCloseModal={onCloseParentModal}
             onClickSubmitFile={onClickSubmitParentImage}
             onClickSubmitProfile={tryUpdateParent}
-            onChangeFirstName={onChangeparentFirstName}
-            onChangeLastName={onChangeparentLastName}
+            onChangeFirstName={onChangeParentFirstName}
+            onChangeLastName={onChangeParentLastName}
           />
           <CustomizedSnackbar
             open={isSnackbarOpen}

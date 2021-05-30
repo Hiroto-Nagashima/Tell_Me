@@ -115,7 +115,7 @@ export const ParentProfile: React.FC<Props> = memo((props) => {
           <ProfileImageWrapper>
             <ProfileImageBox>
               <ProfileImage
-                src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/kid/image/${id}/image.jpeg`}
+                src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/user/image/${id}/image.jpeg`}
                 alt=""
                 onError={(e) =>
                   (e.currentTarget.src =
