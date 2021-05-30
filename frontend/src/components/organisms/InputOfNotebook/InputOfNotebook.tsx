@@ -37,7 +37,7 @@ export type Props = {
   hasBathed: boolean | null;
   breakfast: string | null;
   selectedDate: Date | string | null;
-  bodyTemperature: number | string | null;
+  bodyTemperature: number | null;
   onClickRegister: () => void;
   onChangeMemo: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeDinner: (e: React.ChangeEvent<HTMLInputElement>) => void;

@@ -6,6 +6,7 @@ import React, {
   useState,
 } from 'react';
 import axios from 'axios';
+import Resizer from 'react-image-file-resizer';
 import { Kid } from '../../types/frontend/kid';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useParams } from 'react-router-dom';
@@ -26,6 +27,7 @@ export const Home: React.FC = () => {
   const [age, setAge] = useState<number | null>(null);
   const [kid, setKid] = useState<Kid>({} as Kid);
   const [error, setError] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const [gender, setGender] = useState(0);
   const [loading, setLoading] = useState(false);
   const [message, setMassage] = useState('');
@@ -90,6 +92,68 @@ export const Home: React.FC = () => {
     },
     [],
   );
+
+  const [image, setImage] = useState<any>(null);
+
+  const resizeFile = (file: File) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        300,
+        300,
+        'JPEG',
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        'base64',
+      );
+    });
+
+  const tryResizeFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    try {
+      const file = event.target.files![0];
+      const image = await resizeFile(file);
+      setImage(image);
+      setDisabled(false);
+
+      return image;
+    } catch (err) {
+      alert(err);
+    }
+  };
+
+  const onClickSubmitFile = async () => {
+    const submitData = new FormData();
+    submitData.append('image', image);
+    await axios
+      .post(
+        `http://localhost:5000/api/v1/kids/${id}/register_image`,
+        submitData,
+        {
+          headers: {
+            'content-type': 'multipart/form-data',
+          },
+        },
+      )
+      .then((res) => {
+        console.log(res.data);
+        setMassage(res.data.message);
+        setIsKidModalOpen(false);
+        setSeverity(res.data.severity);
+      })
+      .catch((e) => {
+        console.log(e);
+        setMassage('更新失敗しました');
+        setSeverity('error');
+      })
+      .finally(() => {
+        console.log('hoge');
+        setLoading(false);
+        setIsSnackbarOpen(true);
+      });
+  };
 
   const tryUpdateKid = () => {
     setLoading(true);
@@ -172,15 +236,18 @@ export const Home: React.FC = () => {
           </Box>
           <UpdateKidModal
             age={age}
+            disabled={disabled}
             gender={gender}
             firstName={firstName}
             lastName={lastName}
             favoriteFood={favoriteFood}
             favoritePlay={favoritePlay}
             open={isKidModalOpen}
+            onChangeFile={tryResizeFile}
             onCloseModal={onCloseKidModal}
             onChangeAge={onChangeAge}
             onClickSubmit={tryUpdateKid}
+            onClickSubmitFile={onClickSubmitFile}
             onChangeGender={onChangeGender}
             onChangeLastName={onChangeLastName}
             onChangeFirstName={onChangeFirstName}

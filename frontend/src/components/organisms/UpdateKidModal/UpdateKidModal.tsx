@@ -1,8 +1,6 @@
-import React, { ChangeEvent, createRef, memo, useState } from 'react';
-import axios from 'axios';
+import React, { ChangeEvent, memo } from 'react';
+
 import styled from 'styled-components';
-import Resizer from 'react-image-file-resizer';
-import { useParams } from 'react-router';
 
 import Fade from '@material-ui/core/Fade';
 import Modal from '@material-ui/core/Modal';
@@ -26,9 +24,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     paper: {
       backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
+      borderRadius: 20,
     },
   }),
 );
@@ -37,12 +35,15 @@ export type Props = {
   age: number | null;
   open: boolean;
   gender: number;
+  disabled: boolean;
   firstName: string | null;
   lastName: string | null;
   favoriteFood: string | null;
   favoritePlay: string | null;
   onCloseModal: () => void;
   onClickSubmit: () => void;
+  onClickSubmitFile: () => void;
+  onChangeFile: (et: ChangeEvent<HTMLInputElement>) => void;
   onChangeAge: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeFirstName: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeLastName: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -56,13 +57,16 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
     age,
     open,
     gender,
+    disabled,
     lastName,
     firstName,
     favoriteFood,
     favoritePlay,
     onCloseModal,
     onClickSubmit,
+    onClickSubmitFile,
     onChangeAge,
+    onChangeFile,
     onChangeGender,
     onChangeLastName,
     onChangeFirstName,
@@ -72,53 +76,7 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
 
   const classes = useStyles();
 
-  const { id } = useParams<{ id: string }>();
-
-  const [image, setImage] = useState<any>('');
-
-  const resizeFile = (file: File) =>
-    new Promise((resolve) => {
-      Resizer.imageFileResizer(
-        file,
-        300,
-        300,
-        'JPEG',
-        100,
-        0,
-        (uri) => {
-          resolve(uri);
-        },
-        'base64',
-      );
-    });
-
-  const fileInput = createRef<HTMLInputElement>();
-
-  const tryResizeFile = async (event: ChangeEvent<HTMLInputElement>) => {
-    try {
-      const file = event.target.files![0];
-      const image = await resizeFile(file);
-      setImage(image);
-
-      return image;
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const onClickSubmitFile = async () => {
-    const submitData = new FormData();
-    submitData.append('image', image);
-    await axios.post(
-      `http://localhost:5000/api/v1/kids/${id}/register_image`,
-      submitData,
-      {
-        headers: {
-          'content-type': 'multipart/form-data',
-        },
-      },
-    );
-  };
+  // const { id } = useParams<{ id: string }>();
 
   return (
     <div>
@@ -135,26 +93,28 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
         <Fade in={open}>
           <div className={classes.paper}>
             <Box component="h3" px={2} my={5} textAlign="center">
-              1.写真をアップロードしてください
+              プロフィール画像のアップロード
             </Box>
             <Box textAlign="center" mx={4}>
               <input
                 type="file"
                 name="image"
-                onChange={tryResizeFile}
+                onChange={onChangeFile}
                 accept="image/*"
               />
-              <input
-                type="button"
-                value="Submit"
-                ref={fileInput}
+            </Box>
+            <Box textAlign="right" m={3}>
+              <StyledButton
+                variant="contained"
+                label="登録"
                 onClick={onClickSubmitFile}
+                fontSize={15}
+                width={30}
+                disabled={disabled}
+                borderRadius={20}
               />
             </Box>
-            <Box component="h3" px={2} my={5} textAlign="center">
-              2.登録済み情報を更新してください
-            </Box>
-            <Box textAlign="center" m={4}>
+            <Box m={4}>
               <RadioButtonGroup
                 value={gender}
                 firstValue={0}
@@ -216,11 +176,14 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
                 onChange={onChangeFavoritePlay}
               />
             </Box>
-            <Box textAlign="center" m={5}>
+            <Box textAlign="right" m={3}>
               <StyledButton
                 onClick={onClickSubmit}
                 variant="contained"
                 label="登録"
+                fontSize={15}
+                width={30}
+                borderRadius={20}
               />
             </Box>
           </div>

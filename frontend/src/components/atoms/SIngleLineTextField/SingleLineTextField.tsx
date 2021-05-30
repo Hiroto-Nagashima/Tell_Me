@@ -38,13 +38,14 @@ export const SingleLineTextField: VFC<Props> = (props) => {
       <OutlinedInput
         id={id}
         type={type}
-        label={textName}
-        value={value}
         style={{ width: '100%' }}
-        disabled={disabled}
+        value={value}
         inputProps={inputProps}
-        placeholder={placeholder}
+        fullWidth={isFullWidth}
         onChange={onChange}
+        label={textName}
+        placeholder={placeholder}
+        disabled={disabled}
       />
     </SFormControl>
   );

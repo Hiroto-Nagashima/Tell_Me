@@ -103,13 +103,16 @@ module Api
       def register_image
         kid = Kid.find(params[:id])
         kid.image = params[:image]
-        if kid.save!
+      if kid.save!
           render json: {
             status: "ok",
+            message: "画像を登録しました",
+            severity: "success"
           }
         else
           render json: {
             status: 400,
+            severity: "error"
           }
         end
       end
