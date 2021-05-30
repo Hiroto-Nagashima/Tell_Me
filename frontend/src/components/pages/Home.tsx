@@ -36,8 +36,8 @@ export const Home: React.FC = () => {
   const [disabled, setDisabled] = useState(true);
   const [KidLastName, setKidLastName] = useState<string>('');
   const [KidFirstName, setKidFirstName] = useState<string>('');
-  const [ParentLastName, setParentLastName] = useState<string>('');
-  const [ParentFirstName, setParentFirstName] = useState<string>('');
+  const [parentLastName, setParentLastName] = useState<string>('');
+  const [parentFirstName, setParentFirstName] = useState<string>('');
   const [telephoneNumber, setTelephoneNumber] = useState('');
   const [favoriteFood, setFavoriteFood] = useState<string>('');
   const [favoritePlay, setFavoritePlay] = useState<string>('');
@@ -60,7 +60,7 @@ export const Home: React.FC = () => {
     [],
   );
 
-  const onChangeParentFirstName = useCallback(
+  const onChangeparentFirstName = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       return setParentFirstName(e.target.value);
     },
@@ -74,7 +74,7 @@ export const Home: React.FC = () => {
     [],
   );
 
-  const onChangeParentLastName = useCallback(
+  const onChangeparentLastName = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       return setParentLastName(e.target.value);
     },
@@ -251,11 +251,15 @@ export const Home: React.FC = () => {
           .put(`http://localhost:5000/api/v1/users/${currentUser.id}`, {
             params: {
               email: email,
+              first_name: parentFirstName,
+              last_name: parentLastName,
               telephone_number: telephoneNumber,
             },
           })
           .then((res) => {
             setEmail(res.data.email);
+            setParentLastName(res.data.lastName);
+            setParentFirstName(res.data.firstName);
             setTelephoneNumber(res.data.telephoneNumber);
             setMassage(res.data.message);
             setIsParentModalOpen(false);
@@ -271,8 +275,10 @@ export const Home: React.FC = () => {
           });
       })
       .catch(() => {
-        setMassage('メールアドレスの更新に失敗しました');
-        setSeverity('success');
+        setMassage(
+          'メールアドレスの更新に失敗しました。ログアウトしてからもう一度試してください',
+        );
+        setSeverity('error');
         setLoading(false);
         setIsSnackbarOpen(true);
       });
@@ -350,8 +356,8 @@ export const Home: React.FC = () => {
           />
           <UpdateParentModal
             disabled={disabled}
-            firstName={ParentFirstName}
-            lastName={ParentLastName}
+            firstName={parentFirstName}
+            lastName={parentLastName}
             telephoneNumber={telephoneNumber}
             email={email}
             open={isPatentModalOpen}
@@ -361,8 +367,8 @@ export const Home: React.FC = () => {
             onCloseModal={onCloseParentModal}
             onClickSubmitFile={onClickSubmitParentImage}
             onClickSubmitProfile={tryUpdateParent}
-            onChangeFirstName={onChangeParentFirstName}
-            onChangeLastName={onChangeParentLastName}
+            onChangeFirstName={onChangeparentFirstName}
+            onChangeLastName={onChangeparentLastName}
           />
           <CustomizedSnackbar
             open={isSnackbarOpen}

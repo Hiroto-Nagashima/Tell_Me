@@ -16,8 +16,10 @@ module Api
           render json: {
             status: "ok",
             message: "更新が完了しました",
-            selfIntroduction: user.self_introduction
-            email: user.email
+            email: user.email,
+            firstName: user.first_name,
+            lastName: user.last_name,
+            selfIntroduction: user.self_introduction,
             telephoneNumber: user.telephone_number
           }
         else
