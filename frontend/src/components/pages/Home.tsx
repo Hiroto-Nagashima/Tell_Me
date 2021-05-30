@@ -26,11 +26,12 @@ export const Home: React.FC = () => {
 
   const [age, setAge] = useState<number | null>(null);
   const [kid, setKid] = useState<Kid>({} as Kid);
+  const [image, setImage] = useState<any>(null);
   const [error, setError] = useState(false);
-  const [disabled, setDisabled] = useState(true);
   const [gender, setGender] = useState(0);
   const [loading, setLoading] = useState(false);
   const [message, setMassage] = useState('');
+  const [disabled, setDisabled] = useState(true);
   const [lastName, setLastName] = useState<string>('');
   const [firstName, setFirstName] = useState<string>('');
   const [favoriteFood, setFavoriteFood] = useState<string>('');
@@ -66,6 +67,7 @@ export const Home: React.FC = () => {
     },
     [],
   );
+
   const onChangeFavoritePlay = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       return setFavoritePlay(e.target.value);
@@ -92,8 +94,6 @@ export const Home: React.FC = () => {
     },
     [],
   );
-
-  const [image, setImage] = useState<any>(null);
 
   const resizeFile = (file: File) =>
     new Promise((resolve) => {
@@ -138,18 +138,15 @@ export const Home: React.FC = () => {
         },
       )
       .then((res) => {
-        console.log(res.data);
         setMassage(res.data.message);
         setIsKidModalOpen(false);
         setSeverity(res.data.severity);
       })
-      .catch((e) => {
-        console.log(e);
+      .catch(() => {
         setMassage('更新失敗しました');
         setSeverity('error');
       })
       .finally(() => {
-        console.log('hoge');
         setLoading(false);
         setIsSnackbarOpen(true);
       });
@@ -246,9 +243,9 @@ export const Home: React.FC = () => {
             onChangeFile={tryResizeFile}
             onCloseModal={onCloseKidModal}
             onChangeAge={onChangeAge}
-            onClickSubmit={tryUpdateKid}
-            onClickSubmitFile={onClickSubmitFile}
             onChangeGender={onChangeGender}
+            onClickSubmitFile={onClickSubmitFile}
+            onClickSubmitProfile={tryUpdateKid}
             onChangeLastName={onChangeLastName}
             onChangeFirstName={onChangeFirstName}
             onChangeFavoriteFood={onChangeFavoriteFood}

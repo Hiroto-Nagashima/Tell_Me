@@ -1,5 +1,4 @@
 import React, { ChangeEvent, memo } from 'react';
-
 import styled from 'styled-components';
 
 import Fade from '@material-ui/core/Fade';
@@ -41,13 +40,13 @@ export type Props = {
   favoriteFood: string | null;
   favoritePlay: string | null;
   onCloseModal: () => void;
-  onClickSubmit: () => void;
   onClickSubmitFile: () => void;
-  onChangeFile: (et: ChangeEvent<HTMLInputElement>) => void;
+  onClickSubmitProfile: () => void;
   onChangeAge: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeFile: (et: ChangeEvent<HTMLInputElement>) => void;
+  onChangeGender: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeFirstName: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeLastName: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeGender: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeFavoriteFood: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeFavoritePlay: (e: ChangeEvent<HTMLInputElement>) => void;
 };
@@ -63,7 +62,6 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
     favoriteFood,
     favoritePlay,
     onCloseModal,
-    onClickSubmit,
     onClickSubmitFile,
     onChangeAge,
     onChangeFile,
@@ -72,6 +70,7 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
     onChangeFirstName,
     onChangeFavoriteFood,
     onChangeFavoritePlay,
+    onClickSubmitProfile,
   } = props;
 
   const classes = useStyles();
@@ -178,7 +177,7 @@ export const UpdateKidModal: React.FC<Props> = memo((props) => {
             </Box>
             <Box textAlign="right" m={3}>
               <StyledButton
-                onClick={onClickSubmit}
+                onClick={onClickSubmitProfile}
                 variant="contained"
                 label="登録"
                 fontSize={15}
