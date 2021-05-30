@@ -73,7 +73,7 @@ module Api
         end
       end
 
-      def fetch_kids_in_daycare
+      def kids_in_daycare
         daycare = Daycare.find(params[:id])
         kids = Kid.where(daycare_id: daycare.id)
         arr = []

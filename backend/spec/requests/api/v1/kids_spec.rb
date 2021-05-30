@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "Api::V1::Kids", type: :request do
-  describe "GET /api/v1/daycares/:id/kids/fetch_kids_in_daycare" do
+  describe "GET /api/v1/daycares/:id/kids" do
     it 'ある保育園に所属する子供を全て取得' do
       daycare = create(:daycare)
       kids = create_list(:kid, 10, daycare_id:daycare.id)
-      get "/api/v1/daycares/#{daycare.id}/kids/fetch_kids_in_daycare"
+      get "/api/v1/daycares/#{daycare.id}/kids"
       json = JSON.parse(response.body)
       expect(response.status).to eq(200)
       expect(json.size).to eq 10
