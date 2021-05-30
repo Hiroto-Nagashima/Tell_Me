@@ -8,7 +8,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
 import PhoneIcon from '@material-ui/icons/Phone';
 import Typography from '@material-ui/core/Typography';
-import { ProfileImage } from '../../atoms/ProfileImage/ProfileImage';
 import { StyledButton } from '../../atoms';
 
 const BackgroundImage = styled(Box)`
@@ -32,11 +31,6 @@ const FirstName = styled(Typography)`
   font-size: 25px;
   color: white;
   margin-left: 10px;
-`;
-
-const FlexBox = styled(Box)`
-  display: flex;
-  justify-content: center;
 `;
 
 const Gender = styled(Box)`
@@ -76,9 +70,21 @@ const ParentName = styled(Typography)`
   justify-content: center;
 `;
 
+const ProfileImage = styled.img`
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+`;
+
 const ProfileImageBox = styled(Box)`
   position: absolute;
-  top: 100px;
+  top: 110px;
+`;
+
+const ProfileImageWrapper = styled(Box)`
+  display: flex;
+  justify-content: center;
 `;
 
 const TelephoneNumber = styled(Box)`
@@ -89,6 +95,7 @@ const TelephoneNumber = styled(Box)`
 
 export type Props = {
   onClick: () => void;
+  id: number;
   email: string | null;
   gender: number | null;
   lastName: string | null;
@@ -97,7 +104,7 @@ export type Props = {
 };
 
 export const ParentProfile: React.FC<Props> = memo((props) => {
-  const { firstName, lastName, telephoneNumber, email, gender, onClick } =
+  const { id, firstName, lastName, telephoneNumber, email, gender, onClick } =
     props;
 
   return (
@@ -105,11 +112,18 @@ export const ParentProfile: React.FC<Props> = memo((props) => {
       <MyCardActionArea>
         <BackgroundImage>
           <MyCardMedia />
-          <FlexBox>
+          <ProfileImageWrapper>
             <ProfileImageBox>
-              <ProfileImage />
+              <ProfileImage
+                src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/kid/image/${id}/image.jpeg`}
+                alt=""
+                onError={(e) =>
+                  (e.currentTarget.src =
+                    'https://d2hmx91pr90hgc.cloudfront.net/noimage.jpeg')
+                }
+              />
             </ProfileImageBox>
-          </FlexBox>
+          </ProfileImageWrapper>
           <ParentName>
             <LastName variant="subtitle1" align="center">
               {lastName}

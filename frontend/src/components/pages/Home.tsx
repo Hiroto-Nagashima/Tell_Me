@@ -325,6 +325,7 @@ export const Home: React.FC = () => {
             />
             <div key={currentUser.id}>
               <ParentProfile
+                id={currentUser.id}
                 onClick={onClickParentModal}
                 email={currentUser.email}
                 gender={currentUser.gender}
