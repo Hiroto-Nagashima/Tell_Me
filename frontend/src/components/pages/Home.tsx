@@ -15,34 +15,38 @@ import { CurrentUserContext } from '../../providers/UserProvider';
 
 import { Box } from '@material-ui/core';
 import { Spinner, CustomizedSnackbar } from '../atoms';
-import { KidProfile, UpdateKidModal, ParentProfile } from '../organisms';
-import { UpdateParentModal } from '../organisms/UpdateParentModal/UpdateParentModal';
+import {
+  KidProfile,
+  ParentProfile,
+  UpdateKidModal,
+  UpdateParentModal,
+} from '../organisms';
 
 export const Home: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-
   const [parent] = useAuthState(getAuth());
-
   const { currentUser } = useContext(CurrentUserContext);
 
-  const [age, setAge] = useState<number | null>(null);
   const [kid, setKid] = useState<Kid>({} as Kid);
-  const [image, setImage] = useState<any>(null);
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState(false);
+  const [age, setAge] = useState<number | null>(null);
   const [gender, setGender] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [message, setMassage] = useState('');
-  const [disabled, setDisabled] = useState(true);
   const [KidLastName, setKidLastName] = useState<string>('');
   const [KidFirstName, setKidFirstName] = useState<string>('');
-  const [parentLastName, setParentLastName] = useState<string>('');
-  const [parentFirstName, setParentFirstName] = useState<string>('');
-  const [telephoneNumber, setTelephoneNumber] = useState('');
   const [favoriteFood, setFavoriteFood] = useState<string>('');
   const [favoritePlay, setFavoritePlay] = useState<string>('');
   const [isKidModalOpen, setIsKidModalOpen] = useState(false);
+
+  const [email, setEmail] = useState('');
+  const [parentLastName, setParentLastName] = useState<string>('');
+  const [parentFirstName, setParentFirstName] = useState<string>('');
+  const [telephoneNumber, setTelephoneNumber] = useState('');
   const [isPatentModalOpen, setIsParentModalOpen] = useState(false);
+
+  const [image, setImage] = useState<any>(null);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [message, setMassage] = useState('');
+  const [disabled, setDisabled] = useState(true);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [severity, setSeverity] =
     useState<'error' | 'warning' | 'info' | 'success'>('error');
@@ -60,23 +64,9 @@ export const Home: React.FC = () => {
     [],
   );
 
-  const onChangeParentFirstName = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      return setParentFirstName(e.target.value);
-    },
-    [],
-  );
-
   const onChangeKidLastName = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       return setKidLastName(e.target.value);
-    },
-    [],
-  );
-
-  const onChangeParentLastName = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      return setParentLastName(e.target.value);
     },
     [],
   );
@@ -101,17 +91,6 @@ export const Home: React.FC = () => {
     [],
   );
 
-  const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    return setEmail(e.target.value);
-  }, []);
-
-  const onChangeTelephoneNumber = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      return setTelephoneNumber(e.target.value);
-    },
-    [],
-  );
-
   const onCloseKidModal = useCallback(() => {
     setIsKidModalOpen(false);
   }, []);
@@ -119,56 +98,6 @@ export const Home: React.FC = () => {
   const onClickKidModal = useCallback(() => {
     setIsKidModalOpen(true);
   }, []);
-
-  const onClickParentModal = useCallback(() => {
-    setIsParentModalOpen(true);
-  }, []);
-
-  const onCloseParentModal = useCallback(() => {
-    setIsKidModalOpen(false);
-  }, []);
-
-  const onCloseSnackbar = useCallback(
-    (event?: React.SyntheticEvent, reason?: string) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-      setIsSnackbarOpen(false);
-
-      return;
-    },
-    [],
-  );
-
-  const resizeFile = (file: File) =>
-    new Promise((resolve) => {
-      Resizer.imageFileResizer(
-        file,
-        300,
-        300,
-        'JPEG',
-        100,
-        0,
-        (uri) => {
-          resolve(uri);
-        },
-        'base64',
-      );
-    });
-
-  const tryResizeFile = async (event: ChangeEvent<HTMLInputElement>) => {
-    try {
-      const file = event.target.files![0];
-      const image = await resizeFile(file);
-      setImage(image);
-      setDisabled(false);
-      console.log(image);
-
-      return image;
-    } catch (err) {
-      alert(err);
-    }
-  };
 
   const onClickSubmitKidImage = async () => {
     const submitData = new FormData();
@@ -227,6 +156,38 @@ export const Home: React.FC = () => {
         setIsSnackbarOpen(true);
       });
   };
+  const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    return setEmail(e.target.value);
+  }, []);
+
+  const onChangeParentFirstName = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      return setParentFirstName(e.target.value);
+    },
+    [],
+  );
+
+  const onChangeParentLastName = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      return setParentLastName(e.target.value);
+    },
+    [],
+  );
+
+  const onChangeTelephoneNumber = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      return setTelephoneNumber(e.target.value);
+    },
+    [],
+  );
+
+  const onClickParentModal = useCallback(() => {
+    setIsParentModalOpen(true);
+  }, []);
+
+  const onCloseParentModal = useCallback(() => {
+    setIsKidModalOpen(false);
+  }, []);
 
   const onClickSubmitParentImage = async () => {
     const submitData = new FormData();
@@ -298,6 +259,47 @@ export const Home: React.FC = () => {
         setIsSnackbarOpen(true);
       });
   };
+  const onCloseSnackbar = useCallback(
+    (event?: React.SyntheticEvent, reason?: string) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setIsSnackbarOpen(false);
+
+      return;
+    },
+    [],
+  );
+
+  const resizeFile = (file: File) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        300,
+        300,
+        'JPEG',
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        'base64',
+      );
+    });
+
+  const tryResizeFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    try {
+      const file = event.target.files![0];
+      const image = await resizeFile(file);
+      setImage(image);
+      setDisabled(false);
+      console.log(image);
+
+      return image;
+    } catch (err) {
+      alert(err);
+    }
+  };
 
   const fetchKid = async () => {
     setLoading(true);
@@ -315,9 +317,16 @@ export const Home: React.FC = () => {
       .finally(() => setLoading(false));
   };
 
+  const setCurrentUser = () => {
+    setParentFirstName(currentUser.firstName);
+    setParentLastName(currentUser.lastName);
+    setEmail(currentUser.email);
+    setTelephoneNumber(currentUser.telephoneNumber);
+  };
+
   useEffect(() => {
-    fetchKid();
-  }, []);
+    currentUser && (fetchKid(), setCurrentUser());
+  }, [currentUser]);
 
   return (
     <>

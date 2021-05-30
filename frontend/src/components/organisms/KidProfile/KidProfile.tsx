@@ -101,14 +101,14 @@ const ProfileImage = styled.img`
   border-radius: 70%;
 `;
 
-const ProfileImageWrapper = styled(Box)`
-  display: flex;
-  justify-content: center;
-`;
-
 const ProfileImageBox = styled(Box)`
   top: 40px;
   position: absolute;
+`;
+
+const ProfileImageWrapper = styled(Box)`
+  display: flex;
+  justify-content: center;
 `;
 
 export type Props = {

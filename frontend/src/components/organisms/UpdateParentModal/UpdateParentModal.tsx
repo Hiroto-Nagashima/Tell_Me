@@ -117,8 +117,8 @@ export const UpdateParentModal: React.FC<Props> = memo((props) => {
                 <SingleLineTextField
                   id="名"
                   isFullWidth={false}
-                  textName="太郎"
-                  placeholder="空欄は入れないでください"
+                  textName="名"
+                  placeholder="太郎"
                   value={firstName}
                   onChange={onChangeFirstName}
                 />

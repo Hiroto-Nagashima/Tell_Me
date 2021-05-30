@@ -10,6 +10,7 @@ import { TeacherProfile } from './TeacherProfile/TeacherProfile';
 import { InputOfNotebook } from './InputOfNotebook/InputOfNotebook';
 import { RegisterKidPaper } from './RegisterKidPaper/RegisterKidPaper';
 import { UpdateTeacherModal } from './UpdateTeacherModal/UpdateTeacherModal';
+import { UpdateParentModal } from './UpdateParentModal/UpdateParentModal';
 
 export {
   Header,
@@ -23,5 +24,6 @@ export {
   UpdateKidModal,
   InputOfNotebook,
   RegisterKidPaper,
+  UpdateParentModal,
   UpdateTeacherModal,
 };
