@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { Kid } from '../../types/api/kid';
-import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { CurrentUserContext } from '../../providers/UserProvider';
 
 import { Box } from '@material-ui/core';
 import { Spinner } from '../atoms/Spinner/Spinner';
@@ -23,8 +22,7 @@ const Direction = styled.h2`
 
 export const ChooseKid: React.FC = () => {
   const history = useHistory();
-
-  const [user] = useAuthState(getAuth());
+  const { currentUser } = useContext(CurrentUserContext);
 
   const [kids, setKids] = useState<Array<Kid>>();
   const [error, setError] = useState(false);
@@ -37,11 +35,7 @@ export const ChooseKid: React.FC = () => {
   const fetchKids = () => {
     setLoading(true);
     axios
-      .get('http://localhost:5000/api/v1/kids/fetch_kids_of_parent', {
-        params: {
-          uid: user!.uid,
-        },
-      })
+      .get(`http://localhost:5000/api/v1/users/${currentUser.id}/kids`)
       .then((res) => {
         if (res.data.message === '子供が未登録です') {
           history.push('/kids/register');
@@ -54,8 +48,8 @@ export const ChooseKid: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchKids();
-  }, []);
+    currentUser && fetchKids();
+  }, [currentUser]);
 
   return (
     <>

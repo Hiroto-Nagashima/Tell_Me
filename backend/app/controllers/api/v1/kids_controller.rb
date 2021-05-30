@@ -57,8 +57,8 @@ module Api
         }, status: 200
       end
 
-      def fetch_kids_of_parent
-        user = User.find_by(uid: params[:uid])
+      def kids_of_parent
+        user = User.find_by(params[:id])
         if user.kid_users.present?
           kids_box = []
           kid_users = user.kid_users

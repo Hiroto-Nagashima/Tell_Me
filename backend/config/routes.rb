@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       post 'daycares/:daycare_id/users/:id/posts', to: 'posts#create'
       resources :daycares, only: [:show]
 
-      get '/kids/fetch_kids_of_parent', to: 'kids#fetch_kids_of_parent'
+      get '/users/:id/kids', to: 'kids#kids_of_parent'
       get '/kids/:id/fetch_posts', to: 'kids#fetch_posts'
       post '/kids/:id/register_image', to: 'kids#register_image'
       resources :kids, only: [:show, :create, :update] do
