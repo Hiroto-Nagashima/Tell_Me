@@ -34,11 +34,6 @@ RSpec.describe Notebook, type: :model do
         expect(notebook.errors.messages[:date]).to include("can't be blank")
       end
 
-      it '入浴の有無が選択されていない場合保存に失敗するか' do
-        notebook = build_stubbed(:notebook, has_bathed: nil)
-        notebook.valid?
-        expect(notebook.errors.messages[:has_bathed]).to include("can't be blank")
-      end
     end
   end
 end
