@@ -36,7 +36,6 @@ export type Props = {
   telephoneNumber: string;
   firstName: string | null;
   lastName: string | null;
-  selfIntroduction: string | null;
   onCloseModal: () => void;
   onChangeEmail: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeTelephoneNumber: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -45,7 +44,6 @@ export type Props = {
   onChangeFile: (et: ChangeEvent<HTMLInputElement>) => void;
   onClickSubmitFile: () => void;
   onClickSubmitProfile: () => void;
-  onChangeSelfIntroduction: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const UpdateParentModal: React.FC<Props> = memo((props) => {

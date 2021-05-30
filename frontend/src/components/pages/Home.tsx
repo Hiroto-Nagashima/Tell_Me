@@ -16,6 +16,7 @@ import { CurrentUserContext } from '../../providers/UserProvider';
 import { Box } from '@material-ui/core';
 import { Spinner, CustomizedSnackbar } from '../atoms';
 import { KidProfile, UpdateKidModal, ParentProfile } from '../organisms';
+import { UpdateParentModal } from '../organisms/UpdateParentModal/UpdateParentModal';
 
 export const Home: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -27,16 +28,21 @@ export const Home: React.FC = () => {
   const [age, setAge] = useState<number | null>(null);
   const [kid, setKid] = useState<Kid>({} as Kid);
   const [image, setImage] = useState<any>(null);
+  const [email, setEmail] = useState('');
   const [error, setError] = useState(false);
   const [gender, setGender] = useState(0);
   const [loading, setLoading] = useState(false);
   const [message, setMassage] = useState('');
   const [disabled, setDisabled] = useState(true);
-  const [lastName, setLastName] = useState<string>('');
-  const [firstName, setFirstName] = useState<string>('');
+  const [KidLastName, setKidLastName] = useState<string>('');
+  const [KidFirstName, setKidFirstName] = useState<string>('');
+  const [ParentLastName, setParentLastName] = useState<string>('');
+  const [ParentFirstName, setParentFirstName] = useState<string>('');
+  const [telephoneNumber, setTelephoneNumber] = useState('');
   const [favoriteFood, setFavoriteFood] = useState<string>('');
   const [favoritePlay, setFavoritePlay] = useState<string>('');
   const [isKidModalOpen, setIsKidModalOpen] = useState(false);
+  const [isPatentModalOpen, setIsParentModalOpen] = useState(false);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [severity, setSeverity] =
     useState<'error' | 'warning' | 'info' | 'success'>('error');
@@ -47,13 +53,33 @@ export const Home: React.FC = () => {
     return setAge(value);
   }, []);
 
-  const onChangeFirstName = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    return setFirstName(e.target.value);
-  }, []);
+  const onChangeKidFirstName = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      return setKidFirstName(e.target.value);
+    },
+    [],
+  );
 
-  const onChangeLastName = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    return setLastName(e.target.value);
-  }, []);
+  const onChangeParentFirstName = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      return setParentFirstName(e.target.value);
+    },
+    [],
+  );
+
+  const onChangeKidLastName = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      return setKidLastName(e.target.value);
+    },
+    [],
+  );
+
+  const onChangeParentLastName = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      return setParentLastName(e.target.value);
+    },
+    [],
+  );
 
   const onChangeGender = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
@@ -75,12 +101,31 @@ export const Home: React.FC = () => {
     [],
   );
 
+  const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    return setEmail(e.target.value);
+  }, []);
+
+  const onChangeTelephoneNumber = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      return setTelephoneNumber(e.target.value);
+    },
+    [],
+  );
+
   const onCloseKidModal = useCallback(() => {
     setIsKidModalOpen(false);
   }, []);
 
   const onClickKidModal = useCallback(() => {
     setIsKidModalOpen(true);
+  }, []);
+
+  const onClickParentModal = useCallback(() => {
+    setIsParentModalOpen(true);
+  }, []);
+
+  const onCloseParentModal = useCallback(() => {
+    setIsKidModalOpen(false);
   }, []);
 
   const onCloseSnackbar = useCallback(
@@ -124,7 +169,7 @@ export const Home: React.FC = () => {
     }
   };
 
-  const onClickSubmitFile = async () => {
+  const onClickSubmitKidImage = async () => {
     const submitData = new FormData();
     submitData.append('image', image);
     await axios
@@ -158,8 +203,8 @@ export const Home: React.FC = () => {
       .put(`http://localhost:5000/api/v1/kids/${id}`, {
         params: {
           age: age,
-          first_name: firstName,
-          last_name: lastName,
+          first_name: KidFirstName,
+          last_name: KidLastName,
           gender: gender,
           favorite_food: favoriteFood,
           favorite_play: favoritePlay,
@@ -182,6 +227,46 @@ export const Home: React.FC = () => {
       });
   };
 
+  const onClickSubmitParentImage = async () => {
+    const submitData = new FormData();
+    submitData.append('image', image);
+    await axios.post(
+      `http://localhost:5000/api/v1/users/${currentUser.id}/register_image`,
+      submitData,
+      {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      },
+    );
+  };
+
+  const tryUpdateParent = () => {
+    setLoading(true);
+    axios
+      .put(`http://localhost:5000/api/v1/users/${currentUser.id}`, {
+        params: {
+          email: email,
+          telephone_number: telephoneNumber,
+        },
+      })
+      .then((res) => {
+        setEmail(res.data.email);
+        setTelephoneNumber(res.data.telephoneNumber);
+        setMassage(res.data.message);
+        setIsParentModalOpen(false);
+        setSeverity('success');
+      })
+      .catch(() => {
+        setMassage('登録に失敗しました');
+        setSeverity('error');
+      })
+      .finally(() => {
+        setLoading(false);
+        setIsSnackbarOpen(true);
+      });
+  };
+
   const fetchKid = async () => {
     setLoading(true);
     await axios
@@ -189,8 +274,8 @@ export const Home: React.FC = () => {
       .then((res) => {
         setKid(res.data.kid);
         setAge(res.data.kid.age);
-        setLastName(res.data.kid.lastName);
-        setFirstName(res.data.kid.firstName);
+        setKidLastName(res.data.kid.lastName);
+        setKidFirstName(res.data.kid.firstName);
         setFavoriteFood(res.data.kid.favoriteFood);
         setFavoritePlay(res.data.kid.favoritePlay);
       })
@@ -223,6 +308,7 @@ export const Home: React.FC = () => {
             />
             <div key={currentUser.id}>
               <ParentProfile
+                onClick={onClickParentModal}
                 email={currentUser.email}
                 gender={currentUser.gender}
                 telephoneNumber={currentUser.telephoneNumber}
@@ -235,8 +321,8 @@ export const Home: React.FC = () => {
             age={age}
             disabled={disabled}
             gender={gender}
-            firstName={firstName}
-            lastName={lastName}
+            firstName={KidFirstName}
+            lastName={KidLastName}
             favoriteFood={favoriteFood}
             favoritePlay={favoritePlay}
             open={isKidModalOpen}
@@ -244,12 +330,28 @@ export const Home: React.FC = () => {
             onCloseModal={onCloseKidModal}
             onChangeAge={onChangeAge}
             onChangeGender={onChangeGender}
-            onClickSubmitFile={onClickSubmitFile}
+            onClickSubmitFile={onClickSubmitKidImage}
             onClickSubmitProfile={tryUpdateKid}
-            onChangeLastName={onChangeLastName}
-            onChangeFirstName={onChangeFirstName}
+            onChangeLastName={onChangeKidLastName}
+            onChangeFirstName={onChangeKidFirstName}
             onChangeFavoriteFood={onChangeFavoriteFood}
             onChangeFavoritePlay={onChangeFavoritePlay}
+          />
+          <UpdateParentModal
+            disabled={disabled}
+            firstName={ParentFirstName}
+            lastName={ParentLastName}
+            telephoneNumber={telephoneNumber}
+            email={email}
+            open={isPatentModalOpen}
+            onChangeEmail={onChangeEmail}
+            onChangeTelephoneNumber={onChangeTelephoneNumber}
+            onChangeFile={tryResizeFile}
+            onCloseModal={onCloseParentModal}
+            onClickSubmitFile={onClickSubmitParentImage}
+            onClickSubmitProfile={tryUpdateParent}
+            onChangeFirstName={onChangeParentFirstName}
+            onChangeLastName={onChangeParentLastName}
           />
           <CustomizedSnackbar
             open={isSnackbarOpen}

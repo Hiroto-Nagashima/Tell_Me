@@ -88,6 +88,7 @@ const TelephoneNumber = styled(Box)`
 `;
 
 export type Props = {
+  onClick: () => void;
   email: string | null;
   gender: number | null;
   lastName: string | null;
@@ -96,7 +97,8 @@ export type Props = {
 };
 
 export const ParentProfile: React.FC<Props> = memo((props) => {
-  const { firstName, lastName, telephoneNumber, email, gender } = props;
+  const { firstName, lastName, telephoneNumber, email, gender, onClick } =
+    props;
 
   return (
     <MyCard elevation={6}>
@@ -157,6 +159,8 @@ export const ParentProfile: React.FC<Props> = memo((props) => {
       <MyCardActions>
         <ButtonWrapper>
           <StyledButton
+            variant="contained"
+            onClick={onClick}
             label="Update"
             fontSize={15}
             width={80}
