@@ -186,7 +186,7 @@ export const Home: React.FC = () => {
   }, []);
 
   const onCloseParentModal = useCallback(() => {
-    setIsKidModalOpen(false);
+    setIsParentModalOpen(false);
   }, []);
 
   const onClickSubmitParentImage = async () => {
@@ -293,7 +293,6 @@ export const Home: React.FC = () => {
       const image = await resizeFile(file);
       setImage(image);
       setDisabled(false);
-      console.log(image);
 
       return image;
     } catch (err) {
