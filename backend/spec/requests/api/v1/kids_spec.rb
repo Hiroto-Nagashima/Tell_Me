@@ -29,4 +29,17 @@ RSpec.describe "Api::V1::Kids", type: :request do
       expect(json.size).to eq 2
     end
   end
+
+  describe "GET /kids/:id/fetch_posts" do
+    it 'ある子供の保育園の投稿を全て取得' do
+      daycare = create(:daycare)
+      kid = create(:kid, daycare_id: daycare.id)
+      posts = create_list(:post, 10 , daycare_id: daycare.id)
+
+      get "/api/v1/kids/#{kid.id}/fetch_posts"
+      json = JSON.parse(response.body)
+      expect(response.status).to eq(200)
+      expect(json.size).to eq 10
+    end
+  end
 end
