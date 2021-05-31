@@ -1,10 +1,12 @@
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
+import firebase from 'firebase';
 import axios from 'axios';
 import { getAuth } from '../helper/firebaseAuthHelper';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { CurrentUser } from '../types/frontend/currentUser';
 
 import { Spinner } from '../components/atoms';
+import { useHistory } from 'react-router';
 
 type Props = {
   children: ReactNode;
@@ -20,6 +22,8 @@ export const CurrentUserContext = createContext(
 export const UserProvider: React.FC<Props> = (props) => {
   const { children } = props;
 
+  const history = useHistory();
+
   const [user, loading] = useAuthState(getAuth());
 
   const [error, setError] = useState(false);
@@ -27,6 +31,14 @@ export const UserProvider: React.FC<Props> = (props) => {
   const [currentUser, setCurrentUser] = useState<CurrentUser>(
     {} as CurrentUser,
   );
+
+  const logout = async () => {
+    await firebase
+      .auth()
+      .signOut()
+      .then(() => history.push('/'))
+      .catch((e) => alert(e));
+  };
 
   const fetchUser = async () => {
     if (user) {
@@ -54,7 +66,7 @@ export const UserProvider: React.FC<Props> = (props) => {
   }
 
   if (error) {
-    return <div>エラーです</div>;
+    return <button onClick={() => logout()}>ログアウト</button>;
   }
 
   return (

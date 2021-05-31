@@ -170,7 +170,7 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
           />
         </Box>
         <Box component="h3" px={2} my={5}>
-          6. お子様の好きな遊びを入力してください(20字以内)
+          6. お子様の好きな遊びを入力してください
         </Box>
         <Box textAlign="center" mx={4}>
           <SingleLineTextField
