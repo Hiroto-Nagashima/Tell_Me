@@ -12,4 +12,14 @@ RSpec.describe "Api::V1::Users", type: :request do
     end
   end
 
+  describe "GET /users/fetch_user" do
+    it 'uidを参照してユーザーを取得' do
+      user = create(:user, first_name: "太郎")
+      get "/api/v1/users/fetch_user", params:{uid: user.uid }
+      json = JSON.parse(response.body)
+      expect(json['user']['firstName']).to eq('太郎')
+      expect(response).to have_http_status(200)
+    end
+  end
+
 end
