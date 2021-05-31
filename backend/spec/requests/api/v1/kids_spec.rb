@@ -52,4 +52,12 @@ RSpec.describe "Api::V1::Kids", type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe "POST /kids" do
+    it '子供を新規登録' do
+      valid_params= attributes_for(:kid)
+      expect{ post "/api/v1/kids", params:{params: valid_params }}.to change(Kid, :count).by(+1)
+      expect(response).to have_http_status(200)
+    end
+  end
 end
