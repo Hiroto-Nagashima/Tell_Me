@@ -13,4 +13,15 @@ RSpec.describe "Api::V1::Posts", type: :request do
     end
   end
 
+  describe "GET /daycares/:id/posts/all_posts" do
+    it 'ある保育園の投稿を全て取得' do
+      daycare = create(:daycare)
+      posts = create_list(:post, 20, daycare_id:daycare.id)
+      get "/api/v1/daycares/#{daycare.id}/posts/all_posts"
+      json = JSON.parse(response.body)
+      expect(response.status).to eq(200)
+      expect(json.size).to eq 20
+    end
+  end
+
 end
