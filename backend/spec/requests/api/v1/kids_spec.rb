@@ -72,6 +72,25 @@ RSpec.describe "Api::V1::Kids", type: :request do
     end
   end
 
+  describe "PUT /kids/:id" do
+    it '子供の情報更新' do
+      daycare = create(:daycare)
+      kid = create(:kid)
+      put "/api/v1/kids/#{kid.id}", params:{params:{
+                first_name: "太郎",
+                last_name: "山田",
+                favorite_food: "たこ焼き",
+                favorite_play: "球投げ",
+                age: 1,
+                daycare_id: daycare.id,
+                gender: 1
+      }}
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json['kid']['firstName']).to eq('太郎')
+    end
+  end
+
   describe "GET /kids/:id" do
     it 'IDに紐づいた子供のレコードを一件取得' do
       kid = create(:kid, first_name: "Takeshi")
