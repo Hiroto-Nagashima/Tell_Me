@@ -3,7 +3,7 @@ module Api
     class KidsController < ApplicationController
       def create
         kid = Kid.new(kid_params)
-        if kid.save
+        if kid.save!
           user = User.find_by(uid: params[:params][:uid])
           kid_user = user.kid_users.build
           kid_user.kid_id = kid.id
