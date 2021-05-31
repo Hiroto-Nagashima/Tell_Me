@@ -42,4 +42,14 @@ RSpec.describe "Api::V1::Kids", type: :request do
       expect(json.size).to eq 10
     end
   end
+
+  describe "POST /kids/:id/register_image" do
+    let(:params) { { image: 'image.jpeg' } }
+    it 'ある子供のプロフィール画像を登録' do
+      kid = create(:kid)
+      post "/api/v1/kids/#{kid.id}/register_image", params:{image: params }
+      expect(kid.image).not_to eq(nil)
+      expect(response).to have_http_status(200)
+    end
+  end
 end
