@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       post '/kids/:id/register_image', to: 'kids#register_image'
       resources :kids, only: [:show, :create, :update] do
         get '/notebooks/fetch_notebook', to: 'notebooks#fetch_notebook'
-        resources :notebooks, only: [:index, :create, :update]
+        resources :notebooks, only: [:create, :update]
       end
 
       post '/users/:id/register_image', to: 'users#register_image'

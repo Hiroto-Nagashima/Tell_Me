@@ -58,14 +58,14 @@ RSpec.describe "Api::V1::Kids", type: :request do
       daycare = create(:daycare)
       user = create(:parent)
       expect{post "/api/v1/kids", params:{params:{
-                first_name: "太郎",
-                last_name: "山田",
-                favorite_food: "たこ焼き",
-                favorite_play: "球投げ",
-                age: 1,
-                daycare_id: user.daycare_id,
-                gender: 1,
-                uid: user.uid
+        first_name: "太郎",
+        last_name: "山田",
+        favorite_food: "たこ焼き",
+        favorite_play: "球投げ",
+        age: 1,
+        daycare_id: user.daycare_id,
+        gender: 1,
+        uid: user.uid
       }
       }}.to change(Kid, :count).by(+1)
       expect(response).to have_http_status(200)
@@ -77,13 +77,13 @@ RSpec.describe "Api::V1::Kids", type: :request do
       daycare = create(:daycare)
       kid = create(:kid)
       put "/api/v1/kids/#{kid.id}", params:{params:{
-                first_name: "太郎",
-                last_name: "山田",
-                favorite_food: "たこ焼き",
-                favorite_play: "球投げ",
-                age: 1,
-                daycare_id: daycare.id,
-                gender: 1
+        first_name: "太郎",
+        last_name: "山田",
+        favorite_food: "たこ焼き",
+        favorite_play: "球投げ",
+        age: 1,
+        daycare_id: daycare.id,
+        gender: 1
       }}
       expect(response).to have_http_status(200)
       json = JSON.parse(response.body)

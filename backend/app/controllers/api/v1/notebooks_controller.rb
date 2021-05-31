@@ -33,12 +33,6 @@ module Api
         end
       end
 
-      def index
-        kid = Kid.find(params[:kid_id])
-        notebooks = kid.notebooks
-        render json: notebooks
-      end
-
       def fetch_notebook
         kid = Kid.find(params[:kid_id])
         date = params[:date]
