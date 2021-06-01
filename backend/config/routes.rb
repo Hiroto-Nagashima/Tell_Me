@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       post '/users/:id/register_image', to: 'users#register_image'
       get '/users/fetch_user', to: 'users#fetch_user'
       resources :users, only: [:create, :update]
+      get :health_check, to: 'health_check#index'
     end
   end
 end

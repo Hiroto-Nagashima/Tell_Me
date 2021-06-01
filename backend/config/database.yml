@@ -13,3 +13,8 @@ test:
   <<: *default
   host: <%= ENV['DB_HOST'] || 'db' %>
   database: app_test
+
+production:
+  <<: *default
+  database: app_production
+  url: <%= ENV['DATABASE_URL'] %>
