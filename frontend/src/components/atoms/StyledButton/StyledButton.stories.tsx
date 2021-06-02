@@ -12,6 +12,7 @@ export default {
         options: ['text', 'outlined', 'contained'],
       },
     },
+    onClick: { action: 'clicked' },
   },
   decorators: [
     (Story) => (

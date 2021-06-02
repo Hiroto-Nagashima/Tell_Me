@@ -4,6 +4,10 @@ import { Props, DraggableDialog } from './DraggableDialog';
 export default {
   title: 'Molecules/DraggableDialog',
   component: DraggableDialog,
+  argTypes: {
+    onClickOK: { action: 'clicked' },
+    onClickClose: { action: 'clicked' },
+  },
   decorators: [
     (Story) => (
       <div style={{ margin: '3em' }}>
@@ -15,8 +19,10 @@ export default {
 
 const Template: Story<Props> = (args) => <DraggableDialog {...args} />;
 
-export const Closed = Template.bind({});
-Closed.args = {};
-
-export const Opened = Template.bind({});
-Opened.args = {};
+export const Default = Template.bind({});
+Default.args = {
+  title: 'ログアウト',
+  content: '本当にログアウトしますか？',
+  isOpen: true,
+  okLabel: 'OK',
+};

@@ -1,10 +1,10 @@
 import { Story, Meta } from '@storybook/react';
 import { DatePicker, Props } from './DatePicker';
-import { useState } from 'react';
 
 export default {
   title: 'molecules/DatePickers',
   component: DatePicker,
+  argTypes: { onChangeDate: { action: 'clicked' } },
   decorators: [
     (Story) => {
       return (
@@ -16,13 +16,7 @@ export default {
   ],
 } as Meta;
 
-export const ActualMovement: Story<Props> = () => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const handleDateChange = (date: Date | null) => {
-    setSelectedDate(date);
-  };
+const Template: Story<Props> = (args) => <DatePicker {...args} />;
 
-  return (
-    <DatePicker onChangeDate={handleDateChange} selectedDate={selectedDate} />
-  );
-};
+export const Default = Template.bind({});
+Default.args = {};
