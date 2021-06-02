@@ -36,7 +36,7 @@ Logout.args = {
 export const Login = Template.bind({});
 Login.args = {
   label: 'Login',
-  variant: 'outlined',
+  variant: 'contained',
   height: 50,
   fontSize: 25,
   width: 20,
