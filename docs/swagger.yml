@@ -8,12 +8,12 @@ paths:
   /daycares/:id:
     get:
       tags:
-      - "daycare"
-      summary: "ある保育園に在籍する全ての子供、保育園の電話番号、名前、住所取得"
+      - "daycares"
+      summary: "IDに紐づいた保育園のレコード取得"
       description: ""
       parameters:
         -
-          name: kid_id
+          name: daycare_id
           in: path
           description: 特定の子供の名前と年齢を取得
           required: true
@@ -23,26 +23,30 @@ paths:
         200:
           description: 成功時のレスポンス
           schema:
-            title: 子供の年齢と名前を返す
+            title: 保育園のレコード返却
             type: object
             properties:
+              id:
+                type: integer
               name:
                 type: string
-              age:
-                type: integer
+              address:
+                type: string
+              telephone_number:
+                type: string
         404:
-          description: "該当する子供が見つからない"
+          description: "該当する保育園が見つからない"
           schema:
             $ref: '#/definitions/404Error'
-  /daycares/:id/kids/:id:
+  /daycares/:id/kids:
     get:
       tags:
       - "kids"
-      summary: "ある保育園の子供の名前、年齢取得"
+      summary: "ある保育園の子供のデータを全て取得"
       description: ""
       parameters:
         -
-          name: kid_id
+          name: daycare_id
           in: path
           description: 特定の子供の名前と年齢を取得
           required: true
@@ -50,15 +54,10 @@ paths:
           format: int64
       responses:
         200:
-          description: 成功時のレスポンス
+          description: "成功時のレスポンス"
           schema:
-            title: 子供の年齢と名前を返す
-            type: object
-            properties:
-              name:
-                type: string
-              age:
-                type: integer
+            type: array
+            $ref: '#/definitions/Kid'
         404:
           description: "該当する子供が見つからない"
           schema:
@@ -66,7 +65,7 @@ paths:
   /daycares/:id/communication_notebooks:
     get:
       tags:
-      - "communication_notebooks"
+      - "notebooks"
       summary: "ある子供の全ての連絡帳表示"
       description: ""
       parameters:
@@ -198,26 +197,108 @@ paths:
           schema:
             $ref: '#/definitions/404Error'
 definitions:
-  Communication_notebook:
+  Notebook:
     type: object
     properties:
       id:
-        type: string
-      daycare_id:
+        type: integer
+      kid_id:
         type: integer
       date:
         type: string
       body_temperature:
         type: integer
-      bath:
+      has_bathed:
         type: boolean
-      mood:
-        type: number
       breakfast:
         type: string
       dinner:
         type: string
       memo:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+  Kid:
+    type: object
+    properties:
+      id:
+        type: integer
+      first_name:
+        type: string
+      last_name:
+        type: string
+      age:
+        type: integer
+      gender:
+        type: integer
+      favorite_food:
+        type: string
+      favorite_play:
+        type: string
+      image:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+      first_name:
+        type: string
+      last_name:
+        type: string
+      email:
+        type: string
+      gender:
+        type: integer
+      telephone_number:
+        type: string
+      password:
+        type: string
+      role:
+        type: string
+      image:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+  Daycare:
+    type: object
+    properties:
+      id:
+        type: integer
+      address:
+        type: string
+      telephone_number:
+        type: string
+      name:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+  Post:
+    type: object
+    properties:
+      id:
+        type: integer
+      daycare_id:
+        type: integer
+      user_id:
+        type: integer
+      content:
+        type: string
+      poster:
+        type: string
+      created_at:
+        type: string
+      updated_at:
         type: string
   404Error:
     type: "object"
