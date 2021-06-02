@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 
 info:
   description: Tell MeのAPI仕様です。
@@ -8,12 +8,11 @@ paths:
   /daycares/:id:
     get:
       tags:
-      - "daycares"
+        - "daycares"
       summary: "IDに紐づいた保育園のレコード取得"
       description: ""
       parameters:
-        -
-          name: daycare_id
+        - name: daycare_id
           in: path
           description: 特定の子供の名前と年齢を取得
           required: true
@@ -37,16 +36,67 @@ paths:
         404:
           description: "該当する保育園が見つからない"
           schema:
-            $ref: '#/definitions/404Error'
+            $ref: "#/definitions/404Error"
+  /daycares/:daycare_id/users/:id/posts/user_posts:
+    get:
+      tags:
+        - "posts"
+      summary: "ある保育園の先生の投稿を全て取得"
+      description: ""
+      parameters:
+        - name: daycare_id
+          in: path
+          description: 保育園のID
+          required: true
+          type: integer
+          format: int64
+        - name: id
+          in: path
+          description: ユーザーのID
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
+            type: array
+            $ref: "#/definitions/Post"
+        404:
+          description: "該当する投稿が見つからない"
+          schema:
+            $ref: "#/definitions/404Error"
+  /daycares/:daycare_id/posts/all_posts:
+    get:
+      tags:
+        - "posts"
+      summary: "ある保育園の全て取得"
+      description: ""
+      parameters:
+        - name: daycare_id
+          in: path
+          description: 保育園のID
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
+            type: array
+            $ref: "#/definitions/Post"
+        404:
+          description: "該当する投稿が見つからない"
+          schema:
+            $ref: "#/definitions/404Error"
   /daycares/:id/kids:
     get:
       tags:
-      - "kids"
+        - "kids"
       summary: "ある保育園の子供のデータを全て取得"
       description: ""
       parameters:
-        -
-          name: daycare_id
+        - name: daycare_id
           in: path
           description: 特定の子供の名前と年齢を取得
           required: true
@@ -57,145 +107,11 @@ paths:
           description: "成功時のレスポンス"
           schema:
             type: array
-            $ref: '#/definitions/Kid'
+            $ref: "#/definitions/Kid"
         404:
           description: "該当する子供が見つからない"
           schema:
-            $ref: '#/definitions/404Error'
-  /daycares/:id/communication_notebooks:
-    get:
-      tags:
-      - "notebooks"
-      summary: "ある子供の全ての連絡帳表示"
-      description: ""
-      parameters:
-        - name: kid_id
-          in: path
-          description: 子供のID
-          required: true
-          type: integer
-          format: int32
-      responses:
-        200:
-          description: "成功時のレスポンス"
-          schema:
-            type: array
-            $ref: '#/definitions/Communication_notebook'
-        404:
-          description: "該当する連絡帳が見つからない"
-          schema:
-            $ref: '#/definitions/404Error'
-    post:
-      tags:
-      - "communication_notebooks"
-      summary: "ある日付の連絡帳を登録"
-      description: ""
-      parameters:
-        - name: kid_id
-          in: path
-          description: 子供のID
-          required: true
-          type: integer
-          format: int32
-        - name: "notebook"
-          in: body
-          description: フォームに入力された値
-          required: true
-          schema:
-            $ref: '#/definitions/Communication_notebook'
-      responses:
-        400:
-          description: "未入力箇所がある場合無効"
-          schema:
-            $ref: '#/definitions/400NoInputError'
-        200:
-          description: "OK"
-  /kid/:id/communication_notebooks/:id:
-    put:
-      tags:
-      - "communication_notebooks"
-      summary: "ある日付の連絡帳を更新"
-      description: ""
-      parameters:
-        - name: kid_id
-          in: path
-          description: 子供のID
-          required: true
-          type: integer
-          format: int32
-        - name: communication_notebook_id
-          in: path
-          description: 連絡帳のID
-          required: true
-          type: integer
-          format: int32
-      responses:
-        400:
-          description: "未入力箇所がある場合無効"
-          schema:
-            $ref: '#/definitions/400NoInputError'
-        200:
-          description: "OK"
-  /kid/:id/communication_notebooks/doesExist:
-    get:
-      tags:
-      - "communication_notebooks"
-      summary: "ある日付の連絡帳が存在しているかどうかチェック"
-      description: ""
-      parameters:
-        - name: kid_id
-          in: path
-          description: 子供のID
-          required: true
-          type: integer
-          format: int32
-        - name: target_date
-          in: query
-          type: string
-          description: Datepickerにて選択された日付
-          required: true
-      responses:
-        200:
-          description: 連絡帳の有無
-          schema:
-            type: object
-            properties:
-              status:
-                type: string
-                description: 存在している場合
-                example: "already exist"
-        404:
-          description: "該当する連絡帳が見つからない"
-          schema:
-            $ref: '#/definitions/404Error'
-
-  /kid/:id/communication_notebooks/findByDate:
-    get:
-      tags:
-      - "communication_notebooks"
-      summary: "ある日付の連絡帳が存在していれば該当する過去の連絡帳を、存在しなければ新しい連絡帳を取得"
-      description: ""
-      parameters:
-        - name: kid_id
-          in: path
-          description: 子供のID
-          required: true
-          type: integer
-          format: int32
-        - name: target_date
-          in: query
-          type: string
-          description: Top.tsxから渡された日付
-          required: true
-      responses:
-        200:
-          description: "過去の連絡帳か新しい連絡帳取得"
-          schema:
-            $ref: '#/definitions/Communication_notebook'
-        404:
-          description: "該当する連絡帳が見つからない"
-          schema:
-            $ref: '#/definitions/404Error'
+            $ref: "#/definitions/404Error"
 definitions:
   Notebook:
     type: object
