@@ -4,6 +4,7 @@ import { Props, KidCard } from './KidCard';
 export default {
   title: 'Molecules/KidCard',
   component: KidCard,
+  argTypes: { onClick: { action: 'clicked' } },
   decorators: [
     (Story) => (
       <div style={{ margin: '3em' }}>

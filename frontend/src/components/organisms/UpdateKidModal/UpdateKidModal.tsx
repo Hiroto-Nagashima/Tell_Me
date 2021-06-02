@@ -6,7 +6,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import { Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { RadioButtonGroup } from '../../molecules/RadioButtonGroup';
+import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
 import { StyledButton, SingleLineTextField } from '../../atoms/index';
 
 const FlexBox = styled.div`

@@ -23,7 +23,6 @@ class ExtendedUtils extends DateFnsUtils {
 export type Props = {
   onChangeDate: (date: Date | null) => void;
   selectedDate: string | Date | null;
-  onAccept?: () => void;
 };
 
 const StyledKeyboardDatePicker = styled(KeyboardDatePicker)`
@@ -41,14 +40,13 @@ const theme = createMuiTheme({
 });
 
 export const DatePicker: React.FC<Props> = memo((props) => {
-  const { onChangeDate, selectedDate, onAccept } = props;
+  const { onChangeDate, selectedDate } = props;
 
   return (
     <ThemeProvider theme={theme}>
       <MuiPickersUtilsProvider locale={ja} utils={ExtendedUtils}>
         <StyledKeyboardDatePicker
           margin="normal"
-          onAccept={onAccept}
           id="date"
           label="日付選択"
           okLabel="決定"

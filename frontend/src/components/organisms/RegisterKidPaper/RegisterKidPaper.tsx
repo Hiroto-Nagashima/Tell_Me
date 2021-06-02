@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import { Box, Grid } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { SingleLineTextField, StyledButton } from '../../atoms/index';
-import { RadioButtonGroup } from '../../molecules/RadioButtonGroup';
+import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

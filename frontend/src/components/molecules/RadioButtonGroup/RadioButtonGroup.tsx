@@ -5,7 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { FormLabel } from '@material-ui/core';
 
-type Props = {
+export type Props = {
   value: boolean | number | null;
   formLabel?: string;
   disabled?: boolean;
@@ -13,7 +13,7 @@ type Props = {
   secondValue: boolean | number | null;
   firstLabel: string;
   secondLabel: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const RadioButtonGroup: React.FC<Props> = (props) => {
