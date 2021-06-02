@@ -4,8 +4,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { DefaultButton } from '../../atoms/DefaultButton/DefaultButton';
-import { DraggablePaper } from '../../atoms/DraggablePaper';
+import { DraggablePaper, StyledButton } from '../../atoms';
 export type Props = {
   isOpen: boolean;
   okLabel: string;
@@ -33,19 +32,15 @@ export const DraggableDialog: React.FC<Props> = (props) => {
           <DialogContentText>{content}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <DefaultButton
+          <StyledButton
             variant="outlined"
-            color="primary"
             onClick={onClickOK}
             label={okLabel}
-            size="medium"
           />
-          <DefaultButton
+          <StyledButton
             variant="outlined"
-            color="primary"
             onClick={onClickClose}
             label="戻る"
-            size="medium"
           />
         </DialogActions>
       </Dialog>

@@ -31,12 +31,12 @@ export const StyledButton: React.FC<Props> = (props) => {
   } = props;
 
   const SButton = styled(Button)`
+    font-size: ${fontSize}px;
+    border-radius: ${borderRadius}px;
     width: ${width}%;
     background: #ff9463;
     color: white;
     height: ${height}px;
-    font-size: ${fontSize}px;
-    border-radius: ${borderRadius}px;
     &:hover {
       background: #f25e5d;
     }

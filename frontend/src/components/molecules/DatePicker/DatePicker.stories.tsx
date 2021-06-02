@@ -3,7 +3,7 @@ import { DatePicker, Props } from './DatePicker';
 import { useState } from 'react';
 
 export default {
-  title: 'atoms/DatePickers',
+  title: 'molecules/DatePickers',
   component: DatePicker,
   decorators: [
     (Story) => {

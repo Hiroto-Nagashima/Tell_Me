@@ -8,13 +8,13 @@ import { InputBaseComponentProps } from '@material-ui/core';
 export type Props = {
   id: string;
   textName: string;
-  inputProps?: InputBaseComponentProps;
   placeholder: string;
   isFullWidth: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value?: number | string | null;
   type?: string;
+  value?: number | string | null;
   disabled?: boolean;
+  inputProps?: InputBaseComponentProps;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 const SFormControl = styled(FormControl)`
   display: grid;

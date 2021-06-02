@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react';
 import { Props, CustomizedSnackbar } from './CustomizedSnackbar';
-import { DefaultButton } from '../DefaultButton/DefaultButton';
+import { StyledButton } from '../StyledButton/StyledButton';
 
 export default {
   title: 'atoms/Snackbar',
@@ -33,13 +33,7 @@ export const ActualMovement: Story = () => {
 
   return (
     <>
-      <DefaultButton
-        variant="contained"
-        color="primary"
-        onClick={handleClick}
-        label="ボタン"
-        size= "medium"
-      />
+      <StyledButton variant="contained" onClick={handleClick} label="ボタン" />
       <CustomizedSnackbar onClose={handleClose} open={open} severity="error">
         エラーです
       </CustomizedSnackbar>

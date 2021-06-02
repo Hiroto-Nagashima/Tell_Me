@@ -9,26 +9,30 @@ export default {
 
 const Template: Story<Props> = (args) => <MultipleLinesTextField {...args} />;
 
-export const Memo = (args: Props) => (
-  <Grid container>
-    <Grid item xs={6}>
-      <MultipleLinesTextField label="連絡事項" row={4} variant="standard"/>
-    </Grid>
-  </Grid>
-);
+export const Memo = Template.bind({});
+Memo.args = {
+  label: '連絡',
+  row: 4,
+  variant: 'outlined',
+};
 
-export const Breakfast = (args: Props) => (
-  <Grid container>
-    <Grid item xs={6}>
-      <MultipleLinesTextField label="朝食" row={4} variant="filled"/>
-    </Grid>
-  </Grid>
-);
+export const Dinner = Template.bind({});
+Dinner.args = {
+  label: '夕食',
+  row: 4,
+  variant: 'outlined',
+};
 
-export const Dinner = (args: Props) => (
-  <Grid container>
-    <Grid item xs={6}>
-      <MultipleLinesTextField label="夕食" row={4} variant="outlined"/>
-    </Grid>
-  </Grid>
-);
+export const Breakfast = Template.bind({});
+Breakfast.args = {
+  label: '朝食',
+  row: 4,
+  variant: 'outlined',
+};
+
+export const Post = Template.bind({});
+Post.args = {
+  label: '投稿',
+  row: 4,
+  variant: 'standard',
+};

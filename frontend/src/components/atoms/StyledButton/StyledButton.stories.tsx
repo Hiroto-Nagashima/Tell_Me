@@ -6,12 +6,6 @@ export default {
   title: 'atoms/StyledButton',
   component: StyledButton,
   argTypes: {
-    color: {
-      control: {
-        type: 'radio',
-        options: ['inherit', 'primary', 'secondary', 'default'],
-      },
-    },
     variant: {
       control: {
         type: 'radio',
@@ -30,34 +24,21 @@ export default {
 
 const Template: Story<Props> = (args) => <StyledButton {...args} />;
 
-export const ButtonWithGrid3 = (args: Props) => (
-  <Grid container>
-    <Grid item xs={3}>
-      <StyledButton variant="contained" label="ログイン" />
-    </Grid>
-  </Grid>
-);
+export const Logout = Template.bind({});
+Logout.args = {
+  label: 'Logout',
+  variant: 'outlined',
+  height: 30,
+  fontSize: 15,
+  width: 20,
+};
 
-export const ButtonWithGrid4 = (args: Props) => (
-  <Grid container>
-    <Grid item xs={4}>
-      <StyledButton variant="contained" label="ログイン" />
-    </Grid>
-  </Grid>
-);
-
-export const ButtonWithGrid5 = (args: Props) => (
-  <Grid container>
-    <Grid item xs={5}>
-      <StyledButton variant="contained" label="ログイン" />
-    </Grid>
-  </Grid>
-);
-
-export const ButtonWithGrid6 = (args: Props) => (
-  <Grid container>
-    <Grid item xs={6}>
-      <StyledButton variant="contained" label="ログイン" />
-    </Grid>
-  </Grid>
-);
+export const Login = Template.bind({});
+Login.args = {
+  label: 'Login',
+  variant: 'outlined',
+  height: 50,
+  fontSize: 25,
+  width: 20,
+  borderRadius: 20,
+};

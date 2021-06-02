@@ -1,6 +1,5 @@
 import { Story, Meta } from '@storybook/react';
 import { Props, SingleLineTextField } from './SingleLineTextField';
-import { Grid } from '@material-ui/core';
 
 export default {
   title: 'atoms/SingleLineTextField',
@@ -9,41 +8,37 @@ export default {
 
 const Template: Story<Props> = (args) => <SingleLineTextField {...args} />;
 
-export const Email = (args: Props) => (
-  <Grid container>
-    <Grid item xs={6}>
-      <SingleLineTextField
-        id="email"
-        isFullWidth={true}
-        textName="Email"
-        placeholder="xxxxx@xxx.ne.jp"
-      />
-    </Grid>
-  </Grid>
-);
+export const Email = Template.bind({});
+Email.args = {
+  id: 'email',
+  textName: 'メールアドレス',
+  placeholder: 'xxx@gmail.com',
+  isFullWidth: true,
+};
 
-export const Password = (args: Props) => (
-  <Grid container>
-    <Grid item xs={6}>
-      <SingleLineTextField
-        id="password"
-        textName="Password"
-        placeholder="xxxxx"
-        isFullWidth={true}
-      />
-    </Grid>
-  </Grid>
-);
+export const Password = Template.bind({});
+Password.args = {
+  id: 'password',
+  textName: 'パスワード',
+  placeholder: '六文字以上',
+  isFullWidth: false,
+};
 
-export const BodyTemperature = (args: Props) => (
-  <Grid container>
-    <Grid item xs={6}>
-      <SingleLineTextField
-        id="体温"
-        textName="体温"
-        placeholder="36.x"
-        isFullWidth={true}
-      />
-    </Grid>
-  </Grid>
-);
+export const BodyTemperature = Template.bind({});
+BodyTemperature.args = {
+  id: 'bodyTemperature',
+  type: 'number',
+  textName: '体温',
+  placeholder: '36.x',
+  isFullWidth: false,
+  inputProps: { min: 36.0, step: '0.1' },
+};
+
+export const Age = Template.bind({});
+Age.args = {
+  id: 'age',
+  type: 'number',
+  textName: '年齢',
+  placeholder: 'x才',
+  isFullWidth: false,
+};
