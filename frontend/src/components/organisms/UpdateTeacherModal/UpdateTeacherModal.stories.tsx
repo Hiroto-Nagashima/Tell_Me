@@ -2,7 +2,7 @@ import { Story, Meta } from '@storybook/react';
 import { Props, UpdateTeacherModal } from './UpdateTeacherModal';
 
 export default {
-  title: 'organisms/UpdateTeacherModal',
+  title: 'pending/UpdateTeacherModal',
   component: UpdateTeacherModal,
 } as Meta;
 
