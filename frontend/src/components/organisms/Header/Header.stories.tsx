@@ -4,12 +4,6 @@ import { Header, Props } from './Header';
 export default {
   title: 'organisms/Header',
   component: Header,
-  args: {
-    kid: {
-      name: '太郎',
-      nursery_name: '第一保育園',
-    },
-  },
 } as Meta;
 
 const Template: Story<Props> = (args) => <Header {...args} />;
