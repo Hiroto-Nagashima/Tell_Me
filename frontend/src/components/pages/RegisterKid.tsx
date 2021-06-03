@@ -20,7 +20,7 @@ export const RegisterKid: React.FC<Props> = () => {
 
   const { currentUser } = useContext(CurrentUserContext);
 
-  const [age, setAge] = useState<string | null>(null);
+  const [age, setAge] = useState<number | null>(null);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState('');
   const [gender, setGender] = useState(0);
@@ -40,7 +40,9 @@ export const RegisterKid: React.FC<Props> = () => {
   }, []);
 
   const onChangeAge = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    return setAge(e.target.value);
+    const value = Number(e.target.value);
+
+    return setAge(value);
   }, []);
 
   const onChangeDaycareId = useCallback((e: ChangeEvent<HTMLInputElement>) => {

@@ -4,6 +4,14 @@ import { ParentProfile, Props } from './ParentProfile';
 export default {
   title: 'organisms/ParentProfile',
   component: ParentProfile,
+  argTypes: { onClick: { action: 'clicked' } },
+  decorators: [
+    (Story) => (
+      <div style={{ margin: '5em' }}>
+        <Story />
+      </div>
+    ),
+  ],
 } as Meta;
 
 const Template: Story<Props> = (args) => <ParentProfile {...args} />;

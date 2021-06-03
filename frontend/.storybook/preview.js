@@ -15,7 +15,6 @@ export const parameters = {
 const withThemeProvider = (Story, context) => {
   return (
     <StylesProvider injectFirst>
-      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
       <CssBaseline />
       <Story {...context} />
     </StylesProvider>
