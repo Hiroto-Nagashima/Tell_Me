@@ -12,6 +12,7 @@ export const Default = Template.bind({});
 Default.args = {
   firstName: '道夫',
   lastName: '鈴木',
+  gender: 1,
   email: 'suzukimichio@gmail.com',
   telephoneNumber: '08012345678',
 };

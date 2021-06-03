@@ -13,7 +13,7 @@ export type Props = {
   secondValue: boolean | number | null;
   firstLabel: string;
   secondLabel: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const RadioButtonGroup: React.FC<Props> = (props) => {

@@ -185,7 +185,6 @@ export const Notebook: React.FC = () => {
           ) : (
             <div></div>
           )}
-          <button onClick={() => console.log(hasBathed)} />
           <CustomizedSnackbar
             open={isSnackbarOpen}
             severity={severity}

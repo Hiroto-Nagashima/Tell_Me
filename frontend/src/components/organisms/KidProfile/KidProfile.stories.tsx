@@ -3,6 +3,7 @@ import { KidProfile, Props } from './KidProfile';
 
 export default {
   title: 'organisms/KidProfile',
+  argTypes: { onClick: { action: 'clicked' } },
   component: KidProfile,
 } as Meta;
 
