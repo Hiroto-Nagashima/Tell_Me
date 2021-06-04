@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 import axios from 'axios';
 import Resizer from 'react-image-file-resizer';
-import { Kid } from '../../types/frontend/kid';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useParams } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -21,13 +20,14 @@ import {
   UpdateKidModal,
   UpdateParentModal,
 } from '../organisms';
+import { CurrentKidContext } from '../../providers/KidProvider';
 
 export const Home: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [parent] = useAuthState(getAuth());
   const { currentUser } = useContext(CurrentUserContext);
+  const { currentKid, setCurrentKid } = useContext(CurrentKidContext);
 
-  const [kid, setKid] = useState<Kid>({} as Kid);
   const [age, setAge] = useState<number | null>(null);
   const [gender, setGender] = useState(0);
   const [KidLastName, setKidLastName] = useState<string>('');
@@ -142,7 +142,7 @@ export const Home: React.FC = () => {
         },
       })
       .then((res) => {
-        setKid(res.data.kid);
+        setCurrentKid(res.data.kid);
         setMassage(res.data.message);
         setSeverity('success');
         setIsKidModalOpen(false);
@@ -302,10 +302,11 @@ export const Home: React.FC = () => {
 
   const fetchKid = async () => {
     setLoading(true);
+    console.log('hogehoge');
     await axios
       .get(`http://localhost:5000/api/v1/kids/${id}`)
       .then((res) => {
-        setKid(res.data.kid);
+        setCurrentKid(res.data.kid);
         setAge(res.data.kid.age);
         setKidLastName(res.data.kid.lastName);
         setKidFirstName(res.data.kid.firstName);
@@ -337,13 +338,13 @@ export const Home: React.FC = () => {
         <>
           <Box display="flex" justifyContent="space-around">
             <KidProfile
-              age={kid.age}
+              age={currentKid.age}
               kidId={id}
-              gender={kid.gender}
-              lastName={kid.lastName}
-              firstName={kid.firstName}
-              favoriteFood={kid.favoriteFood}
-              favoritePlay={kid.favoritePlay}
+              gender={currentKid.gender}
+              lastName={currentKid.lastName}
+              firstName={currentKid.firstName}
+              favoriteFood={currentKid.favoriteFood}
+              favoritePlay={currentKid.favoritePlay}
               onClick={onClickKidModal}
             />
             <div key={currentUser.id}>

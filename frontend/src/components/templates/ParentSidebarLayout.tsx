@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useContext, useState } from 'react';
 import firebase from 'firebase';
 import { useHistory, useParams } from 'react-router';
 
@@ -23,6 +23,7 @@ import {
 } from '@material-ui/core/styles';
 import { Header } from '../organisms';
 import { DraggableDialog } from '../molecules';
+import { CurrentKidContext } from '../../providers/KidProvider';
 
 const drawerWidth = 240;
 
@@ -81,6 +82,8 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
   const [isOpen, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const { currentKid } = useContext(CurrentKidContext);
+
   const onClickLogoutModalOpen = () => {
     setOpen(true);
   };
@@ -104,7 +107,7 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
   };
 
   const onClickAnnouncement = () => {
-    history.push(`/kids/${id}/announcement`);
+    history.push(`/daycares/${currentKid.daycareId}/announcement`);
     setTitle('Announcement');
   };
 

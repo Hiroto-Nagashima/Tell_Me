@@ -4,13 +4,12 @@ Rails.application.routes.draw do
   namespace 'api' do
     namespace 'v1' do
       get 'daycares/:id/kids', to: 'kids#kids_in_daycare'
-      get 'daycares/:daycare_id/users/:id/posts/user_posts', to: 'posts#user_posts'
-      get 'daycares/:id/posts/all_posts', to: 'posts#all_posts'
+      get 'daycares/:id/posts', to: 'posts#all_posts'
+      get 'daycares/:daycare_id/users/:id/posts', to: 'posts#user_posts'
       post 'daycares/:daycare_id/users/:id/posts', to: 'posts#create'
       resources :daycares, only: [:show]
 
       get '/users/:id/kids', to: 'kids#kids_of_parent'
-      get '/kids/:id/fetch_posts', to: 'kids#fetch_posts'
       post '/kids/:id/register_image', to: 'kids#register_image'
       resources :kids, only: [:show, :create, :update] do
         get '/notebooks/fetch_notebook', to: 'notebooks#fetch_notebook'

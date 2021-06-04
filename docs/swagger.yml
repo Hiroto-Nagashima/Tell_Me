@@ -37,7 +37,7 @@ paths:
           description: "該当する保育園が見つからない"
           schema:
             $ref: "#/definitions/404Error"
-  /daycares/:daycare_id/users/:id/posts/user_posts:
+  /daycares/:daycare_id/users/:id/posts:
     get:
       tags:
         - "posts"
@@ -66,11 +66,51 @@ paths:
           description: "該当する投稿が見つからない"
           schema:
             $ref: "#/definitions/404Error"
-  /daycares/:daycare_id/posts/all_posts:
+    post:
+      tags:
+        - "posts"
+      summary: "ある保育園の先生の投稿を作成"
+      description: ""
+      parameters:
+        - name: daycare_id
+          in: path
+          description: 保育園のID
+          required: true
+          type: integer
+          format: int64
+        - name: id
+          in: path
+          description: 子供のID
+          required: true
+          type: integer
+          format: int64
+        - in: "body"
+          name: "body"
+          description: "投稿者と投稿内容"
+          required: true
+          schema:
+            title: 投稿
+            type: object
+            properties:
+              poster:
+                type: string
+              content:
+                type: string
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
+            type: array
+            $ref: "#/definitions/Post"
+        400:
+          description: "投稿内容に不備"
+          schema:
+            $ref: "#/definitions/404Error"
+  /daycares/:daycare_id/posts:
     get:
       tags:
         - "posts"
-      summary: "ある保育園の全て取得"
+      summary: "ある保育園の全ての投稿取得"
       description: ""
       parameters:
         - name: daycare_id
@@ -98,7 +138,7 @@ paths:
       parameters:
         - name: daycare_id
           in: path
-          description: 特定の子供の名前と年齢を取得
+          description: 保育園のID
           required: true
           type: integer
           format: int64
@@ -107,6 +147,51 @@ paths:
           description: "成功時のレスポンス"
           schema:
             type: array
+            $ref: "#/definitions/Kid"
+        404:
+          description: "該当する子供が見つからない"
+          schema:
+            $ref: "#/definitions/404Error"
+
+  /users/:id/kids:
+    post:
+      tags:
+        - "kids"
+      summary: "ある親の子供を全て取得"
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          description: ユーザーのID
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
+            $ref: "#/definitions/Kid"
+        404:
+          description: "該当する子供が見つからない"
+          schema:
+            $ref: "#/definitions/404Error"
+  /kids/:id/fetch_posts:
+    post:
+      tags:
+        - "kids"
+      summary: "ある子供が通っている保育園の投稿を全て取得"
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          description: ユーザーのID
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
             $ref: "#/definitions/Kid"
         404:
           description: "該当する子供が見つからない"

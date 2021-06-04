@@ -135,7 +135,7 @@ export const TeacherHome: React.FC = () => {
     setLoading(true);
     axios
       .get(
-        `http://localhost:5000/api/v1/daycares/${daycareId}/users/${currentUser.id}/posts/user_posts`,
+        `http://localhost:5000/api/v1/daycares/${daycareId}/users/${currentUser.id}/posts`,
       )
       .then((res) => {
         setPosts(res.data);
