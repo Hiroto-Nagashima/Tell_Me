@@ -11,7 +11,7 @@ import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useParams } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { CurrentUserContext } from '../../providers/UserProvider';
-import { useFetchUser } from '../../hooks/useFetchKid';
+import { useFetchKid } from '../../hooks/useFetchKid';
 
 import { Box } from '@material-ui/core';
 import { Spinner, CustomizedSnackbar } from '../atoms';
@@ -46,7 +46,7 @@ export const Home: React.FC = () => {
     setKidFirstName,
     setFavoriteFood,
     setFavoritePlay,
-  } = useFetchUser();
+  } = useFetchKid();
 
   const [isKidModalOpen, setIsKidModalOpen] = useState(false);
   const [email, setEmail] = useState('');

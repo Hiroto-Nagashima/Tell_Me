@@ -103,7 +103,7 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
   };
 
   const onClickAllKids = () => {
-    history.push(`/daycares/${currentUser.daycareId}/all-kids`);
+    history.push(`/daycares/${currentUser.daycareId}/kids`);
     setTitle('All Kids');
   };
 

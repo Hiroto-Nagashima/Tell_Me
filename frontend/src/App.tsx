@@ -38,11 +38,7 @@ const App: React.FC = () => {
               path="/daycares/:daycareId/teachers/:teacherId"
               component={TeacherHome}
             />
-            <TeacherRoute
-              exact
-              path="/daycares/:id/all-kids"
-              component={AllKids}
-            />
+            <TeacherRoute exact path="/daycares/:id/kids" component={AllKids} />
             <TeacherRoute
               exact
               path="/daycares/:daycareId/teachers/:teacherId/announcement"

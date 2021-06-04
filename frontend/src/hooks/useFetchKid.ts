@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CurrentKidContext } from '../providers/KidProvider';
 
-export const useFetchUser = () => {
+export const useFetchKid = () => {
   const { currentKid, setCurrentKid } = useContext(CurrentKidContext);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -18,7 +18,6 @@ export const useFetchUser = () => {
 
   const getKid = () => {
     setLoading(true);
-    console.log('hogehoge');
     axios
       .get(`http://localhost:5000/api/v1/kids/${id}`)
       .then((res) => {

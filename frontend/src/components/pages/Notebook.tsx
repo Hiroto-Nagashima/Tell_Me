@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import format from 'date-fns/format';
 import { useParams } from 'react-router-dom';
@@ -6,9 +6,12 @@ import { useParams } from 'react-router-dom';
 import { DatePicker } from '../molecules';
 import { InputOfNotebook } from '../organisms';
 import { CustomizedSnackbar, Spinner } from '../atoms';
+import { useFetchKid } from '../../hooks/useFetchKid';
 
 export const Notebook: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+
+  const { getKid } = useFetchKid();
 
   const [memo, setMemo] = useState<string | null>(null);
   const [error, setError] = useState('');
@@ -156,6 +159,10 @@ export const Notebook: React.FC = () => {
           setIsSnackbarOpen(true);
         });
   };
+
+  useEffect(() => {
+    getKid();
+  }, []);
 
   return (
     <>
