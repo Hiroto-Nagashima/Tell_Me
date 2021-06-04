@@ -11,6 +11,7 @@ import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useParams } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { CurrentUserContext } from '../../providers/UserProvider';
+import { useFetchUser } from '../../hooks/useFetchKid';
 
 import { Box } from '@material-ui/core';
 import { Spinner, CustomizedSnackbar } from '../atoms';
@@ -20,22 +21,34 @@ import {
   UpdateKidModal,
   UpdateParentModal,
 } from '../organisms';
-import { CurrentKidContext } from '../../providers/KidProvider';
 
 export const Home: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [parent] = useAuthState(getAuth());
   const { currentUser } = useContext(CurrentUserContext);
-  const { currentKid, setCurrentKid } = useContext(CurrentKidContext);
 
-  const [age, setAge] = useState<number | null>(null);
-  const [gender, setGender] = useState(0);
-  const [KidLastName, setKidLastName] = useState<string>('');
-  const [KidFirstName, setKidFirstName] = useState<string>('');
-  const [favoriteFood, setFavoriteFood] = useState<string>('');
-  const [favoritePlay, setFavoritePlay] = useState<string>('');
+  const {
+    error,
+    loading,
+    currentKid,
+    age,
+    gender,
+    kidLastName,
+    kidFirstName,
+    favoriteFood,
+    favoritePlay,
+    getKid,
+    setCurrentKid,
+    setAge,
+    setLoading,
+    setGender,
+    setKidLastName,
+    setKidFirstName,
+    setFavoriteFood,
+    setFavoritePlay,
+  } = useFetchUser();
+
   const [isKidModalOpen, setIsKidModalOpen] = useState(false);
-
   const [email, setEmail] = useState('');
   const [parentLastName, setParentLastName] = useState<string>('');
   const [parentFirstName, setParentFirstName] = useState<string>('');
@@ -43,8 +56,6 @@ export const Home: React.FC = () => {
   const [isPatentModalOpen, setIsParentModalOpen] = useState(false);
 
   const [image, setImage] = useState<any>(null);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [message, setMassage] = useState('');
   const [disabled, setDisabled] = useState(true);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
@@ -135,8 +146,8 @@ export const Home: React.FC = () => {
           uid: parent!.uid,
           age: age,
           gender: gender,
-          last_name: KidLastName,
-          first_name: KidFirstName,
+          last_name: kidLastName,
+          first_name: kidFirstName,
           favorite_food: favoriteFood,
           favorite_play: favoritePlay,
         },
@@ -300,23 +311,6 @@ export const Home: React.FC = () => {
     }
   };
 
-  const fetchKid = async () => {
-    setLoading(true);
-    console.log('hogehoge');
-    await axios
-      .get(`http://localhost:5000/api/v1/kids/${id}`)
-      .then((res) => {
-        setCurrentKid(res.data.kid);
-        setAge(res.data.kid.age);
-        setKidLastName(res.data.kid.lastName);
-        setKidFirstName(res.data.kid.firstName);
-        setFavoriteFood(res.data.kid.favoriteFood);
-        setFavoritePlay(res.data.kid.favoritePlay);
-      })
-      .catch((e) => setError(e))
-      .finally(() => setLoading(false));
-  };
-
   const setCurrentUser = () => {
     setEmail(currentUser.email);
     setParentLastName(currentUser.lastName);
@@ -325,7 +319,7 @@ export const Home: React.FC = () => {
   };
 
   useEffect(() => {
-    currentUser && (fetchKid(), setCurrentUser());
+    currentUser && (getKid(), setCurrentUser());
   }, [currentUser]);
 
   return (
@@ -364,8 +358,8 @@ export const Home: React.FC = () => {
             open={isKidModalOpen}
             gender={gender}
             disabled={disabled}
-            lastName={KidLastName}
-            firstName={KidFirstName}
+            lastName={kidLastName}
+            firstName={kidFirstName}
             favoriteFood={favoriteFood}
             favoritePlay={favoritePlay}
             onChangeAge={onChangeAge}
