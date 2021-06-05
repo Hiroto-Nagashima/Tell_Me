@@ -41,7 +41,7 @@ export type Props = {
   onClickSubmitProfile: () => void;
 };
 
-export const UpdateParentModal: React.FC<Props> = memo((props) => {
+export const UpdateModal: React.FC<Props> = memo((props) => {
   const {
     open,
     disabled,
@@ -108,4 +108,4 @@ export const UpdateParentModal: React.FC<Props> = memo((props) => {
   );
 });
 
-UpdateParentModal.displayName = 'UpdateParentModal';
+UpdateModal.displayName = 'UpdateModal';
