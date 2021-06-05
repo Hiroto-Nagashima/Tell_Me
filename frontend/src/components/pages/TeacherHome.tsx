@@ -14,7 +14,9 @@ import { CurrentUserContext } from '../../providers/UserProvider';
 
 import { Box } from '@material-ui/core';
 import { CustomizedSnackbar, Spinner } from '../atoms';
-import { PostCard, TeacherProfile, UpdateTeacherModal } from '../organisms';
+import { PostCard, TeacherProfile } from '../organisms';
+import { UpdateModal } from '../organisms/UpdateModal/UpdateModal';
+import { UpdateTeacher } from '../organisms/UpdateTeacherModal/UpdateTeacher';
 
 const FlexBox = styled.div`
   display: flex;
@@ -177,16 +179,19 @@ export const TeacherHome: React.FC = () => {
               daycareName={daycare.name}
               onClick={onOpenModal}
             />
-            <UpdateTeacherModal
+            <UpdateModal
               open={isModalOpen}
               disabled={disabled}
-              selfIntroduction={selfIntroduction}
+              onChangeFile={tryResizeFile}
               onCloseModal={onCloseModal}
               onClickSubmitFile={onClickSubmitFile}
-              onChangeFile={tryResizeFile}
               onClickSubmitProfile={tryUpdateTeacher}
-              onChangeSelfIntroduction={onChangeSelfIntroduction}
-            />
+            >
+              <UpdateTeacher
+                selfIntroduction={selfIntroduction}
+                onChangeSelfIntroduction={onChangeSelfIntroduction}
+              />
+            </UpdateModal>
             {posts
               .slice(0)
               .reverse()
