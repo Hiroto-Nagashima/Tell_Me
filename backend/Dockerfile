@@ -6,7 +6,8 @@ ENV TZ Asia/Tokyo
 RUN mkdir /app
 WORKDIR /app
 
-ADD Gemfile /app/Gemfile
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
 
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 
@@ -14,7 +15,7 @@ RUN gem install bundler:2.2.16
 
 RUN bundle install
 
-ADD . /app
+COPY . /app
 
 RUN groupadd nginx
 RUN useradd -g nginx nginx

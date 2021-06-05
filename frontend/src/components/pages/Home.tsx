@@ -23,10 +23,6 @@ import {
 } from '../organisms';
 
 export const Home: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const [parent] = useAuthState(getAuth());
-  const { currentUser } = useContext(CurrentUserContext);
-
   const {
     error,
     loading,
@@ -47,6 +43,10 @@ export const Home: React.FC = () => {
     setFavoriteFood,
     setFavoritePlay,
   } = useFetchKid();
+
+  const { id } = useParams<{ id: string }>();
+  const [parent] = useAuthState(getAuth());
+  const { currentUser } = useContext(CurrentUserContext);
 
   const [isKidModalOpen, setIsKidModalOpen] = useState(false);
   const [email, setEmail] = useState('');

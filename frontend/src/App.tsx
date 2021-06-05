@@ -3,6 +3,7 @@ import React from 'react';
 import GlobalStyle from './theme/globalStyle';
 
 import { UserProvider } from './providers/UserProvider';
+import { KidProvider } from './providers/KidProvider';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
@@ -22,7 +23,6 @@ import { RegisterKid } from './components/pages/RegisterKid';
 import { TeacherHome } from './components/pages/TeacherHome';
 import { Announcement } from './components/pages/Announcement';
 import { TeacherAnnouncement } from './components/pages/TeacherAnnouncement';
-import { KidProvider } from './providers/KidProvider';
 
 const App: React.FC = () => {
   return (

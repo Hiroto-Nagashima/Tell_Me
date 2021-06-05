@@ -2,14 +2,15 @@ version: "3"
 
 services:
   frontend:
+    container_name: frontend
     build:
       context: ./frontend/
       dockerfile: Dockerfile
     volumes:
-      - ./frontend:/usr/src/app
-    command: sh -c "yarn start"
+      - ./frontend:/app
     ports:
-      - "8000:3000"
+      - 3000:3000
+    command: sh -c "yarn start"
     stdin_open: true
     tty: true
 
@@ -22,7 +23,7 @@ services:
     stdin_open: true
     volumes:
       - ./backend:/app:cached
-      - bundle_data:/usr/local/bundle:cached
+      # - bundle_data:/usr/local/bundle:cached
       - /app/vendor
       - /app/tmp
       - /app/log
