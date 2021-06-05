@@ -1,13 +1,13 @@
 import React, { ChangeEvent, memo } from 'react';
 import styled from 'styled-components';
 
-import { Box } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
 import { SingleLineTextField } from '../../atoms/index';
 
-const FlexBox = styled.div`
+const FlexBox = styled(Box)`
   display: flex;
-  justify-content: center;
+  // justify-content: space-around;
 `;
 
 export type Props = {
@@ -43,16 +43,29 @@ export const UpdateKid: React.FC<Props> = memo((props) => {
 
   return (
     <>
-      <Box m={4}>
-        <RadioButtonGroup
-          value={gender}
-          firstValue={0}
-          secondValue={1}
-          onChange={onChangeGender}
-          firstLabel="女の子"
-          secondLabel="男の子"
-        />
-      </Box>
+      <FlexBox my={2}>
+        <Box mr={3}>
+          <RadioButtonGroup
+            value={gender}
+            firstValue={0}
+            secondValue={1}
+            onChange={onChangeGender}
+            firstLabel="女の子"
+            secondLabel="男の子"
+          />
+        </Box>
+        <Grid container xs={3}>
+          <SingleLineTextField
+            id="体温"
+            type="number"
+            isFullWidth={false}
+            textName="ご年齢"
+            placeholder="数字のみ"
+            value={age}
+            onChange={onChangeAge}
+          />
+        </Grid>
+      </FlexBox>
       <FlexBox>
         <Box textAlign="center" mr={1} mb={2}>
           <SingleLineTextField
@@ -68,23 +81,13 @@ export const UpdateKid: React.FC<Props> = memo((props) => {
           <SingleLineTextField
             id="名"
             isFullWidth={false}
-            textName="太郎"
+            textName="名"
             placeholder="空欄は入れないでください"
             value={firstName}
             onChange={onChangeFirstName}
           />
         </Box>
       </FlexBox>
-      <Box mb={2}>
-        <SingleLineTextField
-          id="ご年齢"
-          isFullWidth={false}
-          textName="ご年齢"
-          placeholder="数字のみ"
-          value={age}
-          onChange={onChangeAge}
-        />
-      </Box>
       <Box textAlign="center" mb={2}>
         <SingleLineTextField
           id="好きな食べ物"
