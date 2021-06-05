@@ -27,7 +27,7 @@ const Template: Story<Props> = (args) => {
     <RadioButtonGroup
       {...args}
       onChange={(e) => {
-        args.onChange(e);
+        args.onChange!(e);
         setValue(Number(e.target.value));
       }}
       value={value}
