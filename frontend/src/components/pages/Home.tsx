@@ -15,10 +15,13 @@ import { useFetchKid } from '../../hooks/useFetchKid';
 
 import { Box } from '@material-ui/core';
 import { Spinner, CustomizedSnackbar } from '../atoms';
-import { KidProfile, ParentProfile } from '../organisms';
-import { UpdateModal } from '../organisms/UpdateModal/UpdateModal';
-import { UpdateKid } from '../organisms/UpdateKidModal/UpdateKid';
-import { UpdateParent } from '../organisms/UpdateParentModal/UpdateParent';
+import {
+  KidProfile,
+  ParentProfile,
+  UpdateModal,
+  UpdateKid,
+  UpdateParent,
+} from '../organisms';
 
 export const Home: React.FC = () => {
   const {

@@ -14,9 +14,12 @@ import { CurrentUserContext } from '../../providers/UserProvider';
 
 import { Box } from '@material-ui/core';
 import { CustomizedSnackbar, Spinner } from '../atoms';
-import { PostCard, TeacherProfile } from '../organisms';
-import { UpdateModal } from '../organisms/UpdateModal/UpdateModal';
-import { UpdateTeacher } from '../organisms/UpdateTeacherModal/UpdateTeacher';
+import {
+  PostCard,
+  UpdateModal,
+  UpdateTeacher,
+  TeacherProfile,
+} from '../organisms';
 
 const FlexBox = styled.div`
   display: flex;

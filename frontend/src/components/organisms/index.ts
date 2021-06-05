@@ -3,14 +3,15 @@ import { PostCard } from './PostCard/PostCard';
 import { PostForm } from './PostForm/PostForm';
 import { KidProfile } from './KidProfile/KidProfile';
 import { LoginPaper } from './LoginPaper/LoginPaper';
+import { UpdateKid } from './UpdateModal/UpdateKid';
+import { UpdateModal } from './UpdateModal/UpdateModal';
+import { UpdateTeacher } from './UpdateModal/UpdateTeacher';
+import { UpdateParent } from './UpdateModal/UpdateParent';
 import { SignUpPaper } from './SignUpPaper/SignUpPaper';
 import { ParentProfile } from './ParentProfile/ParentProfile';
-import { UpdateKidModal } from './UpdateKidModal/UpdateKidModal';
 import { TeacherProfile } from './TeacherProfile/TeacherProfile';
 import { InputOfNotebook } from './InputOfNotebook/InputOfNotebook';
 import { RegisterKidPaper } from './RegisterKidPaper/RegisterKidPaper';
-import { UpdateTeacherModal } from './UpdateTeacherModal/UpdateTeacherModal';
-import { UpdateParentModal } from './UpdateParentModal/UpdateParentModal';
 
 export {
   Header,
@@ -19,11 +20,12 @@ export {
   KidProfile,
   LoginPaper,
   SignUpPaper,
+  UpdateKid,
+  UpdateModal,
+  UpdateParent,
+  UpdateTeacher,
   ParentProfile,
   TeacherProfile,
-  UpdateKidModal,
   InputOfNotebook,
   RegisterKidPaper,
-  UpdateParentModal,
-  UpdateTeacherModal,
 };
