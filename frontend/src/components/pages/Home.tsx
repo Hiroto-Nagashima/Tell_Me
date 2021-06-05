@@ -15,12 +15,9 @@ import { useFetchKid } from '../../hooks/useFetchKid';
 
 import { Box } from '@material-ui/core';
 import { Spinner, CustomizedSnackbar } from '../atoms';
-import {
-  KidProfile,
-  ParentProfile,
-  UpdateKidModal,
-  UpdateParentModal,
-} from '../organisms';
+import { KidProfile, ParentProfile, UpdateParentModal } from '../organisms';
+import { UpdateModal } from '../organisms/UpdateModal/UpdateModal';
+import { UpdateKid } from '../organisms/UpdateKidModal/UpdateKid';
 
 export const Home: React.FC = () => {
   const {
@@ -353,26 +350,29 @@ export const Home: React.FC = () => {
               />
             </div>
           </Box>
-          <UpdateKidModal
-            age={age}
+          <UpdateModal
             open={isKidModalOpen}
-            gender={gender}
             disabled={disabled}
-            lastName={kidLastName}
-            firstName={kidFirstName}
-            favoriteFood={favoriteFood}
-            favoritePlay={favoritePlay}
-            onChangeAge={onChangeAge}
             onChangeFile={tryResizeFile}
             onCloseModal={onCloseKidModal}
-            onChangeGender={onChangeGender}
-            onChangeLastName={onChangeKidLastName}
-            onChangeFirstName={onChangeKidFirstName}
             onClickSubmitFile={onClickSubmitKidImage}
             onClickSubmitProfile={tryUpdateKid}
-            onChangeFavoriteFood={onChangeFavoriteFood}
-            onChangeFavoritePlay={onChangeFavoritePlay}
-          />
+          >
+            <UpdateKid
+              age={age}
+              gender={gender}
+              lastName={kidLastName}
+              firstName={kidFirstName}
+              favoriteFood={favoriteFood}
+              favoritePlay={favoritePlay}
+              onChangeAge={onChangeAge}
+              onChangeGender={onChangeGender}
+              onChangeLastName={onChangeKidLastName}
+              onChangeFirstName={onChangeKidFirstName}
+              onChangeFavoriteFood={onChangeFavoriteFood}
+              onChangeFavoritePlay={onChangeFavoritePlay}
+            />
+          </UpdateModal>
           <UpdateParentModal
             email={email}
             open={isPatentModalOpen}

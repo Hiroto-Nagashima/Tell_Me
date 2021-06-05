@@ -12,18 +12,12 @@ const FlexBox = styled.div`
 
 export type Props = {
   age: number | null;
-  open: boolean;
   gender: number;
-  disabled: boolean;
   firstName: string | null;
   lastName: string | null;
   favoriteFood: string | null;
   favoritePlay: string | null;
-  onCloseModal: () => void;
-  onClickSubmitFile: () => void;
-  onClickSubmitProfile: () => void;
   onChangeAge: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeFile: (et: ChangeEvent<HTMLInputElement>) => void;
   onChangeGender: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeFirstName: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeLastName: (e: ChangeEvent<HTMLInputElement>) => void;

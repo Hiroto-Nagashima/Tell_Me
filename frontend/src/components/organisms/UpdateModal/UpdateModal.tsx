@@ -25,17 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export type Props = {
   open: boolean;
-  email: string;
   children: ReactNode;
   disabled: boolean;
-  telephoneNumber: string;
-  firstName: string | null;
-  lastName: string | null;
   onCloseModal: () => void;
-  onChangeEmail: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeTelephoneNumber: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeFirstName: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeLastName: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeFile: (et: ChangeEvent<HTMLInputElement>) => void;
   onClickSubmitFile: () => void;
   onClickSubmitProfile: () => void;
