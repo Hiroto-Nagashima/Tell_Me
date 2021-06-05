@@ -15,9 +15,10 @@ import { useFetchKid } from '../../hooks/useFetchKid';
 
 import { Box } from '@material-ui/core';
 import { Spinner, CustomizedSnackbar } from '../atoms';
-import { KidProfile, ParentProfile, UpdateParentModal } from '../organisms';
+import { KidProfile, ParentProfile } from '../organisms';
 import { UpdateModal } from '../organisms/UpdateModal/UpdateModal';
 import { UpdateKid } from '../organisms/UpdateKidModal/UpdateKid';
+import { UpdateParent } from '../organisms/UpdateParentModal/UpdateParent';
 
 export const Home: React.FC = () => {
   const {
@@ -50,7 +51,7 @@ export const Home: React.FC = () => {
   const [parentLastName, setParentLastName] = useState<string>('');
   const [parentFirstName, setParentFirstName] = useState<string>('');
   const [telephoneNumber, setTelephoneNumber] = useState('');
-  const [isPatentModalOpen, setIsParentModalOpen] = useState(false);
+  const [isParentModalOpen, setIsParentModalOpen] = useState(false);
 
   const [image, setImage] = useState<any>(null);
   const [message, setMassage] = useState('');
@@ -373,22 +374,25 @@ export const Home: React.FC = () => {
               onChangeFavoritePlay={onChangeFavoritePlay}
             />
           </UpdateModal>
-          <UpdateParentModal
-            email={email}
-            open={isPatentModalOpen}
+          <UpdateModal
+            open={isParentModalOpen}
             disabled={disabled}
-            lastName={parentLastName}
-            firstName={parentFirstName}
-            telephoneNumber={telephoneNumber}
             onChangeFile={tryResizeFile}
             onCloseModal={onCloseParentModal}
-            onChangeEmail={onChangeEmail}
-            onChangeLastName={onChangeParentLastName}
-            onChangeFirstName={onChangeParentFirstName}
             onClickSubmitFile={onClickSubmitParentImage}
             onClickSubmitProfile={tryUpdateParent}
-            onChangeTelephoneNumber={onChangeTelephoneNumber}
-          />
+          >
+            <UpdateParent
+              email={email}
+              lastName={parentLastName}
+              firstName={parentFirstName}
+              telephoneNumber={telephoneNumber}
+              onChangeEmail={onChangeEmail}
+              onChangeLastName={onChangeParentLastName}
+              onChangeFirstName={onChangeParentFirstName}
+              onChangeTelephoneNumber={onChangeTelephoneNumber}
+            />
+          </UpdateModal>
           <CustomizedSnackbar
             open={isSnackbarOpen}
             severity={severity}
