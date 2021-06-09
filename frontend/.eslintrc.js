@@ -61,7 +61,7 @@ module.exports = {
     'newline-before-return': 'error',
     'no-console': 'warn',
     'no-continue': 'off',
-    'prettier/prettier': ['error', { singleQuote: true }],
+    'prettier/prettier': 'warn',
     'require-yield': 'error',
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
