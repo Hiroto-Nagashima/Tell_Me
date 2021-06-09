@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.js": "/static/js/main.31d23b68.chunk.js",
+    "main.js.map": "/static/js/main.31d23b68.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.9955d6b1.js",
+    "runtime-main.js.map": "/static/js/runtime-main.9955d6b1.js.map",
+    "static/js/2.b4d73fcf.chunk.js": "/static/js/2.b4d73fcf.chunk.js",
+    "static/js/2.b4d73fcf.chunk.js.map": "/static/js/2.b4d73fcf.chunk.js.map",
+    "static/js/3.614d20c8.chunk.js": "/static/js/3.614d20c8.chunk.js",
+    "static/js/3.614d20c8.chunk.js.map": "/static/js/3.614d20c8.chunk.js.map",
+    "index.html": "/index.html",
+    "static/js/2.b4d73fcf.chunk.js.LICENSE.txt": "/static/js/2.b4d73fcf.chunk.js.LICENSE.txt",
+    "static/media/undraw_Notebook_re_id0r.ec504c45.svg": "/static/media/undraw_Notebook_re_id0r.ec504c45.svg",
+    "static/media/undraw_children_4rtb.48a11115.svg": "/static/media/undraw_children_4rtb.48a11115.svg",
+    "static/media/undraw_page_not_found_su7k.e322c7bd.svg": "/static/media/undraw_page_not_found_su7k.e322c7bd.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9955d6b1.js",
+    "static/js/2.b4d73fcf.chunk.js",
+    "static/js/main.31d23b68.chunk.js"
+  ]
+}

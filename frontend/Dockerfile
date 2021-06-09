@@ -1,10 +1,14 @@
 FROM node:12.18.0-alpine
-COPY . /app
+
 WORKDIR /app
 
 COPY ["package.json", "yarn.lock", "./"]
 
 RUN yarn install
+
+RUN yarn build
+
+COPY . .
 
 CMD ["yarn", "start"]
 
