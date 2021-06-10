@@ -2,5 +2,5 @@ node_modules/
 *.config.js
 /.eslintrc.js
 *.stories.tsx
-FirebaseAuthHelper.ts
-/build
+firebaseAuthHelper.ts
+build

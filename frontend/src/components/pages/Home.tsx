@@ -60,8 +60,9 @@ export const Home: React.FC = () => {
   const [message, setMassage] = useState('');
   const [disabled, setDisabled] = useState(true);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
-  const [severity, setSeverity] =
-    useState<'error' | 'warning' | 'info' | 'success'>('error');
+  const [severity, setSeverity] = useState<
+    'error' | 'warning' | 'info' | 'success'
+  >('error');
 
   const onChangeAge = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
