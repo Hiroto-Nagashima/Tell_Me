@@ -56,10 +56,10 @@ services:
     image: nginx
     container_name: nginx
     ports:
-      - 81:80
+      - 81:81
     volumes:
       - ./frontend/build:/var/www
-      - ./container/nginx/:/etc/nginx/conf.d/
+      - ./frontend/container/nginx/:/etc/nginx/conf.d/
     depends_on:
       - frontend
 
