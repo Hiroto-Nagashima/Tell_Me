@@ -13,16 +13,33 @@ import { Link } from 'react-router-dom';
 const FlexBox = styled(Box)`
   display: flex;
   justify-content: space-between;
-  width: 95%;
+  align-items: center;
+  width: 98%;
 `;
 
 const MyAppBar = styled(AppBar)`
   background: linear-gradient(45deg, #f25e5d 20%, #ff9463 90%);
 `;
 
-// const StyledBox = styled(Box)`
-//   text-align: right;
-// `;
+const LoginLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+  margin: 10px 10px 10px 10px;
+  padding-top: 10px;
+  height: 32px;
+  font-size: 16px;
+`;
+
+const SignUpLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  margin: 0 10px;
+  padding: 6px;
+  height: 32px;
+  font-size: 16px;
+  background-color: #f2ebea;
+  border-radius: 17px;
+`;
 
 export type Props = {
   title: string;
@@ -51,12 +68,12 @@ export const Header: React.FC<Props> = (props) => {
           <div></div>
         )}
         <FlexBox>
-          <Box>
-            <Typography variant="h6">{title}</Typography>
+          <Box ml={3}>
+            <Typography variant="h5">{title}</Typography>
           </Box>
           <Box>
-            <Link to="/">ログイン</Link>
-            <Link to="/signup">新規登録</Link>
+            <LoginLink to="/">ログイン</LoginLink>
+            <SignUpLink to="/signup">新規登録</SignUpLink>
           </Box>
         </FlexBox>
       </Toolbar>
