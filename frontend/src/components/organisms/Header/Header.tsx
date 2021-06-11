@@ -5,13 +5,24 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
-import { IconButton } from '@material-ui/core';
+import { Box, IconButton } from '@material-ui/core';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth } from '../../../helper/firebaseAuthHelper';
+import { Link } from 'react-router-dom';
+
+const FlexBox = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+`;
 
 const MyAppBar = styled(AppBar)`
   background: linear-gradient(45deg, #f25e5d 20%, #ff9463 90%);
 `;
+
+// const StyledBox = styled(Box)`
+//   text-align: right;
+// `;
 
 export type Props = {
   title: string;
@@ -30,7 +41,6 @@ export const Header: React.FC<Props> = (props) => {
         {user ? (
           <IconButton
             color="inherit"
-            aria-label="open drawer"
             edge="start"
             onClick={onClickTitle}
             className={iconButtonClassName}
@@ -40,7 +50,15 @@ export const Header: React.FC<Props> = (props) => {
         ) : (
           <div></div>
         )}
-        <Typography variant="h6">{title}</Typography>
+        <FlexBox>
+          <Box>
+            <Typography variant="h6">{title}</Typography>
+          </Box>
+          <Box>
+            <Link to="/">ログイン</Link>
+            <Link to="/signup">新規登録</Link>
+          </Box>
+        </FlexBox>
       </Toolbar>
     </MyAppBar>
   );
