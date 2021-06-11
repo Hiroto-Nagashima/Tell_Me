@@ -7,7 +7,7 @@ import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../providers/UserProvider';
 
-import { Box } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import { LoginPaper } from '../organisms/LoginPaper/LoginPaper';
 import { Spinner, CustomizedSnackbar } from '../atoms';
 import { ReactComponent as Logo } from '../../images/undraw_Notebook_re_id0r.svg';
@@ -15,6 +15,11 @@ import { ReactComponent as Logo } from '../../images/undraw_Notebook_re_id0r.svg
 type Props = {
   history: H.History;
 };
+const Body = styled(Box)`
+  height: 800px;
+  padding: 4%;
+  background-color: white;
+`;
 
 const HomeImage = styled(Logo)`
   width: 800px;
@@ -28,7 +33,7 @@ const Wrapper = styled(Box)`
   display: flex;
   justify-content: space-between;
   padding: 13% 5% 5% 5%;
-  margin
+  height: 65vh;
 `;
 
 export const Login: React.FC<Props> = () => {
@@ -112,6 +117,11 @@ export const Login: React.FC<Props> = () => {
               onClickLogin={tryLogin}
             />
           </Wrapper>
+          <Body>
+            <Typography variant="h4" align="center">
+              Tell Meは保護者と保育園をつなげるアプリケーションです
+            </Typography>
+          </Body>
           <CustomizedSnackbar
             open={open}
             onClose={onCloseSnackbar}

@@ -8,7 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import { Box, IconButton } from '@material-ui/core';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth } from '../../../helper/firebaseAuthHelper';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import firebase from 'firebase';
 
 const FlexBox = styled(Box)`
   display: flex;
@@ -41,6 +42,14 @@ const SignUpLink = styled(Link)`
   border-radius: 17px;
 `;
 
+const Logout = styled(Box)`
+  padding: 6px;
+  height: 32px;
+  font-size: 17px;
+  border-radius: 17px;
+  cursor: pointer;
+`;
+
 export type Props = {
   title: string;
   appBarClassName?: string;
@@ -51,6 +60,15 @@ export type Props = {
 export const Header: React.FC<Props> = (props) => {
   const { title, iconButtonClassName, appBarClassName, onClickTitle } = props;
   const [user] = useAuthState(getAuth());
+  const history = useHistory();
+
+  const logout = async () => {
+    await firebase
+      .auth()
+      .signOut()
+      .then(() => history.push('/'))
+      .catch((e) => alert(e));
+  };
 
   return (
     <MyAppBar position="fixed" className={appBarClassName}>
@@ -72,7 +90,9 @@ export const Header: React.FC<Props> = (props) => {
             <Typography variant="h5">{title}</Typography>
           </Box>
           {user ? (
-            <div></div>
+            <Box>
+              <Logout onClick={() => logout()}>ログアウト</Logout>
+            </Box>
           ) : (
             <Box>
               <LoginLink to="/">ログイン</LoginLink>
