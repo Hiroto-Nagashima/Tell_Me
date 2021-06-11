@@ -71,10 +71,14 @@ export const Header: React.FC<Props> = (props) => {
           <Box ml={3}>
             <Typography variant="h5">{title}</Typography>
           </Box>
-          <Box>
-            <LoginLink to="/">ログイン</LoginLink>
-            <SignUpLink to="/signup">新規登録</SignUpLink>
-          </Box>
+          {user ? (
+            <div></div>
+          ) : (
+            <Box>
+              <LoginLink to="/">ログイン</LoginLink>
+              <SignUpLink to="/signup">新規登録</SignUpLink>
+            </Box>
+          )}
         </FlexBox>
       </Toolbar>
     </MyAppBar>
