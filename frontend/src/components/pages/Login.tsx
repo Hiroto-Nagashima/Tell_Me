@@ -7,21 +7,43 @@ import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../providers/UserProvider';
 
-import { Box, Typography } from '@material-ui/core';
+import NotebookImg from '../../images/notebook.jpg';
+import { Box, Card, Typography } from '@material-ui/core';
 import { LoginPaper } from '../organisms/LoginPaper/LoginPaper';
 import { Spinner, CustomizedSnackbar } from '../atoms';
-import { ReactComponent as Logo } from '../../images/undraw_Notebook_re_id0r.svg';
+import { ReactComponent as MainLogo } from '../../images/undraw_Notebook_re_id0r.svg';
+import { ReactComponent as NotebookLogo } from '../../images/undraw_zoom_in_1txs.svg';
 
 type Props = {
   history: H.History;
 };
-const Body = styled(Box)`
+const AboutSection = styled(Box)`
   height: 800px;
   padding: 4%;
   background-color: white;
 `;
+const BackgroundOfNotebook = styled(NotebookLogo)`
+  width: 700px;
+`;
 
-const HomeImage = styled(Logo)`
+const FlexBox = styled(Box)`
+  display: flex;
+`;
+
+const ExplanationOfNotebook = styled(Box)`
+  margin: 170px 0 0 50px;
+`;
+
+const NotebookImage = styled.img`
+  height: 310px;
+  width: 450px;
+`;
+
+const NotebookArea = styled(Box)`
+  position: relative;
+  width: 700px;
+`;
+const HomeImage = styled(MainLogo)`
   width: 800px;
 `;
 
@@ -29,7 +51,16 @@ const MyLoginPaper = styled(LoginPaper)`
   margin: 60px;
 `;
 
-const Wrapper = styled(Box)`
+const MyCard = styled(Card)`
+  height: 310px;
+  width: 450px;
+  background-color: white;
+  position: absolute;
+  right: 125px;
+  bottom: 130px;
+`;
+
+const LoginSection = styled(Box)`
   display: flex;
   justify-content: space-between;
   padding: 13% 5% 5% 5%;
@@ -107,7 +138,7 @@ export const Login: React.FC<Props> = () => {
         <Spinner />
       ) : (
         <>
-          <Wrapper>
+          <LoginSection>
             <HomeImage />
             <MyLoginPaper
               email={email}
@@ -116,12 +147,33 @@ export const Login: React.FC<Props> = () => {
               onChangePassword={onChangePassword}
               onClickLogin={tryLogin}
             />
-          </Wrapper>
-          <Body>
+          </LoginSection>
+          <AboutSection>
             <Typography variant="h4" align="center">
               Tell Meは保護者と保育園をつなげるアプリケーションです
             </Typography>
-          </Body>
+            <FlexBox>
+              <NotebookArea>
+                <BackgroundOfNotebook />
+                <MyCard elevation={6}>
+                  <NotebookImage src={NotebookImg} alt="" />
+                </MyCard>
+              </NotebookArea>
+              <ExplanationOfNotebook>
+                <Typography variant="h5" align="center">
+                  紙ベースの連絡帳とは決別です
+                </Typography>
+                <Box my={5}>
+                  <Typography variant="h5" align="center">
+                    過去の連絡帳が簡単に閲覧できます
+                  </Typography>
+                </Box>
+                <Typography variant="h5" align="center">
+                  気軽に連絡帳を書いて朝の忙しさを減らしましょう
+                </Typography>
+              </ExplanationOfNotebook>
+            </FlexBox>
+          </AboutSection>
           <CustomizedSnackbar
             open={open}
             onClose={onCloseSnackbar}
