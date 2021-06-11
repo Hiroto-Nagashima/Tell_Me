@@ -29,6 +29,21 @@ const BackgroundOfNotebook = styled(NotebookLogo)`
 const FlexBox = styled(Box)`
   display: flex;
 `;
+const Rest0fSubject = styled(Typography)`
+  width: 800px;
+`;
+
+const Subject = styled(Box)`
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  width: 80%;
+`;
+
+const TellMe = styled(Typography)`
+  background: linear-gradient(transparent 75%, #ff9463 70%);
+  width: 200px;
+`;
 
 const ExplanationOfNotebook = styled(Box)`
   margin: 170px 0 0 50px;
@@ -149,9 +164,14 @@ export const Login: React.FC<Props> = () => {
             />
           </LoginSection>
           <AboutSection>
-            <Typography variant="h4" align="center">
-              Tell Meは保護者と保育園をつなげるアプリケーションです
-            </Typography>
+            <Subject>
+              <TellMe variant="h3" align="center">
+                Tell Me
+              </TellMe>
+              <Rest0fSubject variant="h4" align="center">
+                は保護者と保育園をつなげるアプリケーションです
+              </Rest0fSubject>
+            </Subject>
             <FlexBox>
               <NotebookArea>
                 <BackgroundOfNotebook />
