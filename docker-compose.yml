@@ -55,10 +55,12 @@ services:
         ipv4_address: "172.20.0.2"
 
   nginx:
-    image: nginx
     container_name: nginx
     ports:
-      - 81:81
+      - 80:80
+    build:
+      context: ./frontend/container/nginx/
+      dockerfile: Dockerfile
     volumes:
       - ./frontend/build:/var/www
       - ./frontend/container/nginx/:/etc/nginx/conf.d/
