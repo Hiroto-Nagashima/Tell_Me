@@ -1,6 +1,6 @@
 {
   "ipcMode": null,
-  "executionRoleArn": "arn:aws:iam::322809478240:role/ecsTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::322809478240:role/tell-me-frontend-task-role",
   "containerDefinitions": [
     {
       "dnsSearchDomains": null,
@@ -159,9 +159,9 @@
   ],
   "placementConstraints": [],
   "memory": "2048",
-  "taskRoleArn": "arn:aws:iam::322809478240:role/tell-me-frontend-task-role",
+  "taskRoleArn": null,
   "compatibilities": ["EC2", "FARGATE"],
-  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:322809478240:task-definition/tell-me-frontend:14",
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:322809478240:task-definition/tell-me-frontend:16",
   "family": "tell-me-frontend",
   "requiresAttributes": [
     {
@@ -192,12 +192,6 @@
       "targetId": null,
       "targetType": null,
       "value": null,
-      "name": "com.amazonaws.ecs.capability.task-iam-role"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
       "name": "ecs.capability.execution-role-ecr-pull"
     },
     {
@@ -223,7 +217,7 @@
   "requiresCompatibilities": ["FARGATE"],
   "networkMode": "awsvpc",
   "cpu": "512",
-  "revision": 14,
+  "revision": 16,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
