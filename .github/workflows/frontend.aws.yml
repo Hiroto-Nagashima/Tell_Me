@@ -27,7 +27,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build Node.js, tag, and push image to Amazon ECR
-      id: build-image
+      id: build-image of Node.js
       env:
         ECR_REPOSITORY: tell-me-frontend
         IMAGE_TAG: ${{ github.sha }}
@@ -38,7 +38,7 @@ jobs:
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
     - name: Build Nginx, tag, and push image to Amazon ECR
-      id: build-image
+      id: build-image of Nginx
       env:
         ECR_REPOSITORY: tell-me-nginx
         IMAGE_TAG: ${{ github.sha }}
