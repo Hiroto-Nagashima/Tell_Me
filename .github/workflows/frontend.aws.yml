@@ -7,7 +7,7 @@ name: Deploy Frontend to Amazon ECS
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy Frontend
     runs-on: ubuntu-latest
     environment: production
 
@@ -27,7 +27,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build Node.js, tag, and push image to Amazon ECR
-      id: build-image of Node.js
+      id: build-image-of-Node.js
       env:
         ECR_REPOSITORY: tell-me-frontend
         IMAGE_TAG: ${{ github.sha }}
@@ -38,7 +38,7 @@ jobs:
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
     - name: Build Nginx, tag, and push image to Amazon ECR
-      id: build-image of Nginx
+      id: build-image-of-Nginx
       env:
         ECR_REPOSITORY: tell-me-nginx
         IMAGE_TAG: ${{ github.sha }}

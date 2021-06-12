@@ -7,7 +7,7 @@ name: Deploy Backend to Amazon ECS
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy Backend
     runs-on: ubuntu-latest
     environment: production
 
