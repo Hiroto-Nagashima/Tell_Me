@@ -10,8 +10,6 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "lint:conflict": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
-    "precommit": "lint-staged",
-    "prepare": "husky install",
     "chromatic": "npx chromatic --project-token=ada6cf9630ef"
   },
   "dependencies": {
@@ -64,8 +62,6 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^6.0.0",
-    "lint-staged": "^11.0.0",
     "prettier": "^2.2.1",
     "ts-jest": "^27.0.2",
     "yarnlock-dedupe-check": "^2.1.1"
@@ -84,20 +80,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.css": [
-      "git add"
     ]
   }
 }
