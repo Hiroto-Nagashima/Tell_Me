@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./
+        working-directory: ./frontend
     # Job steps
     steps:
       - uses: actions/checkout@v1
@@ -20,5 +20,5 @@ jobs:
       - uses: chromaui/action@v1
         # Options required for Chromatic's GitHub Action
         with:
-          workingDir: ./
+          workingDir: ./frontend
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
