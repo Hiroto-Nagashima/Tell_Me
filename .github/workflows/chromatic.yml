@@ -9,13 +9,16 @@ jobs:
   chromatic-deployment:
     # Operating System
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
     # Job steps
     steps:
       - uses: actions/checkout@v1
-      - name: Install dependencies
-        run: yarn
-        # 👇 Adds Chromatic as a step in the workflow
-      - name: Publish to Chromatic
-        run: docker-compose run frontend yarn chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      - run: yarn
+        #👇 Adds Chromatic as a step in the workflow
+      - uses: chromaui/action@v1
+        # Options required for Chromatic's GitHub Action
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          workingDir: ./frontend
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
