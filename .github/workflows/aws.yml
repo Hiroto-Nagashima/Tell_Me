@@ -62,7 +62,7 @@ jobs:
         # push it to ECR so that it can
         # be deployed to ECS.
         docker-compose build backend
-        docker tag tell-me-backend:latest 322809478240.dkr.ecr.ap-northeast-1.amazonaws.com/tell-me-backend:latest
+        docker tag backend:latest 322809478240.dkr.ecr.ap-northeast-1.amazonaws.com/tell-me-backend:latest
         docker push 322809478240.dkr.ecr.ap-northeast-1.amazonaws.com/tell-me-backend:latest
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
