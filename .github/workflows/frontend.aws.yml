@@ -3,7 +3,7 @@ on:
     branches:
       - develop
 
-name: Deploy Backend to Amazon ECS
+name: Deploy Frontend to Amazon ECS
 
 jobs:
   deploy:
@@ -26,29 +26,40 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Build, tag, and push image to Amazon ECR
+    - name: Build Node.js, tag, and push image to Amazon ECR
       id: build-image
       env:
-        ECR_REPOSITORY: tell-me-backend
+        ECR_REPOSITORY: tell-me-frontend
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker-compose build backend
-        docker tag backend:latest 322809478240.dkr.ecr.ap-northeast-1.amazonaws.com/tell-me-backend:latest
-        docker push 322809478240.dkr.ecr.ap-northeast-1.amazonaws.com/tell-me-backend:latest
+        docker-compose build frontend
+        docker tag tell_me_frontend:latest 322809478240.dkr.ecr.ap-northeast-1.amazonaws.com/tell-me-frontend:latest
+        docker push 322809478240.dkr.ecr.ap-northeast-1.amazonaws.com/tell-me-frontend:latest
+        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+    - name: Build Nginx, tag, and push image to Amazon ECR
+      id: build-image
+      env:
+        ECR_REPOSITORY: tell-me-nginx
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker-compose build nginx
+        docker tag tell_me_nginx:latest 322809478240.dkr.ecr.ap-northeast-1.amazonaws.com/tell-me-nginx:latest
+        docker push 322809478240.dkr.ecr.ap-northeast-1.amazonaws.com/tell-me-nginx:latest
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: backend.task-definition.json
-        container-name: tell-me-container-backend
-        image: 322809478240.dkr.ecr.ap-northeast-1.amazonaws.com/tell-me-backend:latest
+        task-definition: frontend.task-definition.json
+        container-name: tell-me-container-frontend
+        image: 322809478240.dkr.ecr.ap-northeast-1.amazonaws.com/tell-me-frontend:latest
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: tell-me-task2-backend
+        service: tell-me-service-front18
         cluster: tell-me-cluster
         wait-for-service-stability: true

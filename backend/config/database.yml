@@ -9,6 +9,7 @@ development:
   <<: *default
   host: db
   database: app_development
+
 test:
   <<: *default
   host: <%= ENV['DB_HOST'] || 'db' %>
