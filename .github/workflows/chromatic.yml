@@ -16,4 +16,5 @@ jobs:
         run: yarn
         # 👇 Adds Chromatic as a step in the workflow
       - name: Publish to Chromatic
+        uses: ./frontend/
         run: yarn chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
