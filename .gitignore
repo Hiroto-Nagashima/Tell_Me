@@ -92,3 +92,4 @@ yarn-error.log*
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+task-definition.json
