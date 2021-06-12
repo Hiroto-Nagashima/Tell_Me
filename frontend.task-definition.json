@@ -1,0 +1,231 @@
+{
+  "ipcMode": null,
+  "executionRoleArn": "arn:aws:iam::322809478240:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "dnsSearchDomains": null,
+      "environmentFiles": null,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "secretOptions": null,
+        "options": {
+          "awslogs-group": "/ecs/tell-me-frontend",
+          "awslogs-region": "ap-northeast-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "entryPoint": null,
+      "portMappings": [
+        {
+          "hostPort": 3000,
+          "protocol": "tcp",
+          "containerPort": 3000
+        }
+      ],
+      "command": ["yarn", "start"],
+      "linuxParameters": null,
+      "cpu": 0,
+      "environment": [],
+      "resourceRequirements": null,
+      "ulimits": null,
+      "dnsServers": null,
+      "mountPoints": [],
+      "workingDirectory": null,
+      "secrets": [
+        {
+          "valueFrom": "FRONTEND_DANGEROUSLY_DISABLE_HOST_CHECK",
+          "name": "DANGEROUSLY_DISABLE_HOST_CHECK"
+        },
+        {
+          "valueFrom": "FRONTEND_REACT_APP_APIKEY",
+          "name": "REACT_APP_APIKEY"
+        },
+        {
+          "valueFrom": "FRONTEND_REACT_APP_APP_ID",
+          "name": "REACT_APP_APP_ID"
+        },
+        {
+          "valueFrom": "FRONTEND_REACT_APP_AUTHDOMAIN",
+          "name": "REACT_APP_AUTHDOMAIN"
+        },
+        {
+          "valueFrom": "FRONTEND_REACT_APP_DATABASEURL",
+          "name": "REACT_APP_DATABASEURL"
+        },
+        {
+          "valueFrom": "FRONTEND_REACT_APP_MEASUREMENT_ID",
+          "name": "REACT_APP_MEASUREMENT_ID"
+        },
+        {
+          "valueFrom": "FRONTEND_REACT_APP_MESSAGING_SENDER_ID",
+          "name": "REACT_APP_MESSAGING_SENDER_ID"
+        },
+        {
+          "valueFrom": "FRONTEND_REACT_APP_PROJECT_ID",
+          "name": "REACT_APP_PROJECT_ID"
+        },
+        {
+          "valueFrom": "FRONTEND_REACT_APP_STORAGE_BUCKET",
+          "name": "REACT_APP_STORAGE_BUCKET"
+        },
+        {
+          "valueFrom": "FRONTEND_SKIP_PREFLIGHT_CHECK",
+          "name": "SKIP_PREFLIGHT_CHECK"
+        }
+      ],
+      "dockerSecurityOptions": null,
+      "memory": null,
+      "memoryReservation": null,
+      "volumesFrom": [],
+      "stopTimeout": null,
+      "image": "322809478240.dkr.ecr.ap-northeast-1.amazonaws.com/tell-me-frontend:latest",
+      "startTimeout": null,
+      "firelensConfiguration": null,
+      "dependsOn": null,
+      "disableNetworking": null,
+      "interactive": null,
+      "healthCheck": null,
+      "essential": true,
+      "links": null,
+      "hostname": null,
+      "extraHosts": null,
+      "pseudoTerminal": null,
+      "user": null,
+      "readonlyRootFilesystem": null,
+      "dockerLabels": null,
+      "systemControls": null,
+      "privileged": null,
+      "name": "tell-me-container-frontend"
+    },
+    {
+      "dnsSearchDomains": null,
+      "environmentFiles": null,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "secretOptions": null,
+        "options": {
+          "awslogs-group": "/ecs/tell-me-frontend",
+          "awslogs-region": "ap-northeast-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "entryPoint": null,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "protocol": "tcp",
+          "containerPort": 80
+        }
+      ],
+      "command": null,
+      "linuxParameters": null,
+      "cpu": 0,
+      "environment": [
+        {
+          "name": "DANGEROUSLY_DISABLE_HOST_CHECK",
+          "value": " FRONTEND_DANGEROUSLY_DISABLE_HOST_CHECK"
+        }
+      ],
+      "resourceRequirements": null,
+      "ulimits": null,
+      "dnsServers": null,
+      "mountPoints": [],
+      "workingDirectory": null,
+      "secrets": null,
+      "dockerSecurityOptions": null,
+      "memory": null,
+      "memoryReservation": null,
+      "volumesFrom": [],
+      "stopTimeout": null,
+      "image": "322809478240.dkr.ecr.ap-northeast-1.amazonaws.com/tell-me-nginx",
+      "startTimeout": null,
+      "firelensConfiguration": null,
+      "dependsOn": null,
+      "disableNetworking": null,
+      "interactive": null,
+      "healthCheck": null,
+      "essential": true,
+      "links": null,
+      "hostname": null,
+      "extraHosts": null,
+      "pseudoTerminal": null,
+      "user": null,
+      "readonlyRootFilesystem": null,
+      "dockerLabels": null,
+      "systemControls": null,
+      "privileged": null,
+      "name": "tell-me-front-nginx"
+    }
+  ],
+  "placementConstraints": [],
+  "memory": "2048",
+  "taskRoleArn": "arn:aws:iam::322809478240:role/tell-me-frontend-task-role",
+  "compatibilities": ["EC2", "FARGATE"],
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:322809478240:task-definition/tell-me-frontend:14",
+  "family": "tell-me-frontend",
+  "requiresAttributes": [
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "ecs.capability.execution-role-awslogs"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.task-iam-role"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "ecs.capability.execution-role-ecr-pull"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "ecs.capability.secrets.ssm.environment-variables"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "ecs.capability.task-eni"
+    }
+  ],
+  "pidMode": null,
+  "requiresCompatibilities": ["FARGATE"],
+  "networkMode": "awsvpc",
+  "cpu": "512",
+  "revision": 14,
+  "status": "ACTIVE",
+  "inferenceAccelerators": null,
+  "proxyConfiguration": null,
+  "volumes": []
+}
