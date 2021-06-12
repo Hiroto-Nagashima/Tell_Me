@@ -48,7 +48,7 @@ export const LoginPaper: React.FC<Props> = memo((props) => {
     <div className={classes.root}>
       <StyledPaper elevation={3}>
         <Box component="h1" p={2} textAlign="center">
-          Tell Me Everything
+          Tell Me Anything
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField

@@ -7,7 +7,6 @@ import { SingleLineTextField } from '../../atoms/index';
 
 const FlexBox = styled(Box)`
   display: flex;
-  // justify-content: space-around;
 `;
 
 export type Props = {
