@@ -43,7 +43,7 @@ jobs:
       with:
         task-definition: backend.task-definition.json
         container-name: tell-me-container-backend
-        image: ${{ steps.build-image.outputs.image }}
+        image: 322809478240.dkr.ecr.ap-northeast-1.amazonaws.com/tell-me-backend:latest
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
