@@ -1,0 +1,162 @@
+{
+  "ipcMode": null,
+  "executionRoleArn": "arn:aws:iam::322809478240:role/tell-me-backend-task-role",
+  "containerDefinitions": [
+    {
+      "dnsSearchDomains": null,
+      "environmentFiles": null,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "secretOptions": null,
+        "options": {
+          "awslogs-group": "/ecs/tell-me-task-backend",
+          "awslogs-region": "ap-northeast-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "entryPoint": null,
+      "portMappings": [
+        {
+          "hostPort": 3000,
+          "protocol": "tcp",
+          "containerPort": 3000
+        }
+      ],
+      "command": ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"],
+      "linuxParameters": null,
+      "cpu": 0,
+      "environment": [],
+      "resourceRequirements": null,
+      "ulimits": null,
+      "dnsServers": null,
+      "mountPoints": [],
+      "workingDirectory": null,
+      "secrets": [
+        {
+          "valueFrom": "BACKEND_AWS_ACCESS_KEY_ID",
+          "name": "AWS_ACCESS_KEY_ID"
+        },
+        {
+          "valueFrom": "BACKEND_AWS_ASSET_HOST",
+          "name": "AWS_ASSET_HOST"
+        },
+        {
+          "valueFrom": "BACKEND_AWS_SECRET_ACCESS_KEY",
+          "name": "AWS_SECRET_ACCESS_KEY"
+        },
+        {
+          "valueFrom": "BACKEND_DATABASE_URL",
+          "name": "DATABASE_URL"
+        },
+        {
+          "valueFrom": "BACKEND_PROJECT_ID",
+          "name": "PROJECT_ID"
+        },
+        {
+          "valueFrom": "BACKEND_RAILS_ENV",
+          "name": "RAILS_ENV"
+        },
+        {
+          "valueFrom": "BACKEND_RAILS_LOG_TO_STDOUT",
+          "name": "RAILS_LOG_TO_STDOUT"
+        },
+        {
+          "valueFrom": "BACKEND_RAILS_MASTER_KEY",
+          "name": "RAILS_MASTER_KEY"
+        },
+        {
+          "valueFrom": "BACKEND_TZ",
+          "name": "TZ"
+        }
+      ],
+      "dockerSecurityOptions": null,
+      "memory": null,
+      "memoryReservation": null,
+      "volumesFrom": [],
+      "stopTimeout": null,
+      "image": "322809478240.dkr.ecr.ap-northeast-1.amazonaws.com/tell-me-backend:latest",
+      "startTimeout": null,
+      "firelensConfiguration": null,
+      "dependsOn": null,
+      "disableNetworking": null,
+      "interactive": null,
+      "healthCheck": null,
+      "essential": true,
+      "links": null,
+      "hostname": null,
+      "extraHosts": null,
+      "pseudoTerminal": null,
+      "user": null,
+      "readonlyRootFilesystem": null,
+      "dockerLabels": null,
+      "systemControls": null,
+      "privileged": null,
+      "name": "tell-me-container-backend"
+    }
+  ],
+  "placementConstraints": [],
+  "memory": "512",
+  "taskRoleArn": null,
+  "compatibilities": ["EC2", "FARGATE"],
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:322809478240:task-definition/tell-me-task-backend:9",
+  "family": "tell-me-task-backend",
+  "requiresAttributes": [
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "ecs.capability.execution-role-awslogs"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "ecs.capability.execution-role-ecr-pull"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "ecs.capability.secrets.ssm.environment-variables"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "ecs.capability.task-eni"
+    }
+  ],
+  "pidMode": null,
+  "requiresCompatibilities": ["FARGATE"],
+  "networkMode": "awsvpc",
+  "cpu": "256",
+  "revision": 9,
+  "status": "ACTIVE",
+  "inferenceAccelerators": null,
+  "proxyConfiguration": null,
+  "volumes": []
+}
