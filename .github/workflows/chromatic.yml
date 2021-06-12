@@ -1,5 +1,5 @@
 # Workflow name
-name: 'Chromatic'
+name: "Chromatic"
 
 # Event for the workflow
 on: push
@@ -17,3 +17,5 @@ jobs:
         # 👇 Adds Chromatic as a step in the workflow
       - name: Publish to Chromatic
         run: docker-compose run frontend yarn chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
