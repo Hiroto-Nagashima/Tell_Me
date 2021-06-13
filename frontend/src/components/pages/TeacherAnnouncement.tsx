@@ -26,6 +26,8 @@ export const TeacherAnnouncement: React.FC = () => {
 
   const { currentUser } = useContext(CurrentUserContext);
 
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
   const userNameArr = [currentUser.lastName, currentUser.firstName];
   const userName = userNameArr.join('');
 
@@ -36,8 +38,9 @@ export const TeacherAnnouncement: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [postContent, setPostContent] = useState<string | null>('');
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
-  const [severity, setSeverity] =
-    useState<'error' | 'warning' | 'info' | 'success'>('error');
+  const [severity, setSeverity] = useState<
+    'error' | 'warning' | 'info' | 'success'
+  >('error');
 
   const onChangePostContent = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +64,7 @@ export const TeacherAnnouncement: React.FC = () => {
   const fetchDaycare = (daycareId: number | null) => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/api/v1/daycares/${daycareId}`)
+      .get(`${API_ENDPOINT}daycares/${daycareId}`)
       .then((res) => setDaycare(res.data.daycare))
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
@@ -70,7 +73,7 @@ export const TeacherAnnouncement: React.FC = () => {
   const fetchAllUserPosts = (daycareId: number | null) => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/api/v1/daycares/${daycareId}/posts`)
+      .get(`${API_ENDPOINT}daycares/${daycareId}/posts`)
       .then((res) => setPosts(res.data))
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
@@ -79,15 +82,12 @@ export const TeacherAnnouncement: React.FC = () => {
   const tryPost = () => {
     setLoading(true);
     axios
-      .post(
-        `http://localhost:5000/api/v1/daycares/${daycare.id}/users/${teacherId}/posts`,
-        {
-          params: {
-            poster: userName,
-            content: postContent,
-          },
+      .post(`${API_ENDPOINT}daycares/${daycare.id}/users/${teacherId}/posts`, {
+        params: {
+          poster: userName,
+          content: postContent,
         },
-      )
+      })
       .then((res) => {
         if (res.data.status == '422') {
           setSeverity('error');

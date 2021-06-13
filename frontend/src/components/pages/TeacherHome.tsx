@@ -29,6 +29,8 @@ const FlexBox = styled.div`
 export const TeacherHome: React.FC = () => {
   const { currentUser } = useContext(CurrentUserContext);
 
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
   const [image, setImage] = useState<any>(null);
   const [posts, setPosts] = useState<Array<Post>>([]);
   const [error, setError] = useState(false);
@@ -39,8 +41,9 @@ export const TeacherHome: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [selfIntroduction, setSelfIntroduction] = useState<string | null>('');
-  const [severity, setSeverity] =
-    useState<'error' | 'warning' | 'info' | 'success'>('error');
+  const [severity, setSeverity] = useState<
+    'error' | 'warning' | 'info' | 'success'
+  >('error');
 
   const onChangeSelfIntroduction = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -102,7 +105,7 @@ export const TeacherHome: React.FC = () => {
     const submitData = new FormData();
     submitData.append('image', image);
     await axios.post(
-      `http://localhost:5000/api/v1/users/${currentUser.id}/register_image`,
+      `${API_ENDPOINT}users/${currentUser.id}/register_image`,
       submitData,
       {
         headers: {
@@ -115,7 +118,7 @@ export const TeacherHome: React.FC = () => {
   const tryUpdateTeacher = () => {
     setLoading(true);
     axios
-      .put(`http://localhost:5000/api/v1/users/${currentUser.id}`, {
+      .put(`${API_ENDPOINT}users/${currentUser.id}`, {
         params: {
           self_introduction: selfIntroduction,
         },
@@ -140,7 +143,7 @@ export const TeacherHome: React.FC = () => {
     setLoading(true);
     axios
       .get(
-        `http://localhost:5000/api/v1/daycares/${daycareId}/users/${currentUser.id}/posts`,
+        `${API_ENDPOINT}daycares/${daycareId}/users/${currentUser.id}/posts`,
       )
       .then((res) => {
         setPosts(res.data);
@@ -152,7 +155,7 @@ export const TeacherHome: React.FC = () => {
   const fetchDaycare = (daycareId: number | null) => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/api/v1/daycares/${daycareId}`)
+      .get(`${API_ENDPOINT}daycares/${daycareId}`)
       .then((res) => setDaycare(res.data.daycare))
       .catch((e) => setError(e))
       .finally(() => setLoading(false));

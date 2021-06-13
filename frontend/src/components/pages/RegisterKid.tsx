@@ -20,6 +20,8 @@ export const RegisterKid: React.FC<Props> = () => {
 
   const { currentUser } = useContext(CurrentUserContext);
 
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
   const [age, setAge] = useState<number | null>(null);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState('');
@@ -82,7 +84,7 @@ export const RegisterKid: React.FC<Props> = () => {
   const onClickRegister = () => {
     setLoading(true);
     axios
-      .post(`http://localhost:5000/api/v1/kids`, {
+      .post(`${API_ENDPOINT}kids`, {
         params: {
           age: age,
           gender: gender,

@@ -73,6 +73,8 @@ type Props = {
 export const AllKids: React.FC<Props> = () => {
   const classes = useStyles();
 
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
   const [kids, setKids] = useState<Array<KidInfo>>([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -82,7 +84,7 @@ export const AllKids: React.FC<Props> = () => {
   const fetchAllKids = async (daycareId: number) => {
     setLoading(true);
     await axios
-      .get(`http://localhost:5000/api/v1/daycares/${daycareId}/kids`)
+      .get(`${API_ENDPOINT}daycares/${daycareId}/kids`)
       .then((res) => {
         setKids(res.data);
       })

@@ -36,6 +36,8 @@ export const SignUp: React.FC = () => {
 
   const { setCurrentUser } = useContext(CurrentUserContext);
 
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
   const [role, setRole] = useState<string | null>(null);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [email, setEmail] = useState('');
@@ -135,7 +137,7 @@ export const SignUp: React.FC = () => {
               try {
                 await axios
                   .post(
-                    'http://localhost:5000/api/v1/users',
+                    `${API_ENDPOINT}users`,
                     {
                       params: {
                         email: email,

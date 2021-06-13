@@ -18,6 +18,8 @@ export const Announcement: React.FC = () => {
   const { currentKid } = useContext(CurrentKidContext);
   const { id } = useParams<{ id: string }>();
 
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
   const [posts, setPosts] = useState<Array<Post>>([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -26,15 +28,13 @@ export const Announcement: React.FC = () => {
     setLoading(true);
     if (currentKid.daycareId) {
       axios
-        .get(
-          `http://localhost:5000/api/v1/daycares/${currentKid.daycareId}/posts`,
-        )
+        .get(`${API_ENDPOINT}daycares/${currentKid.daycareId}/posts`)
         .then((res) => setPosts(res.data))
         .catch((e) => setError(e))
         .finally(() => setLoading(false));
     } else {
       axios
-        .get(`http://localhost:5000/api/v1/daycares/${id}/posts`)
+        .get(`${API_ENDPOINT}daycares/${id}/posts`)
         .then((res) => setPosts(res.data))
         .catch((e) => setError(e))
         .finally(() => setLoading(false));

@@ -13,6 +13,8 @@ export const Notebook: React.FC = () => {
 
   const { getKid } = useFetchKid();
 
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
   const [memo, setMemo] = useState<string | null>(null);
   const [error, setError] = useState('');
   const [dinner, setDinner] = useState<string | null>(null);
@@ -25,8 +27,9 @@ export const Notebook: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [isNotebookOpen, setIsNotebookOpen] = useState(false);
-  const [severity, setSeverity] =
-    useState<'error' | 'warning' | 'info' | 'success'>('error');
+  const [severity, setSeverity] = useState<
+    'error' | 'warning' | 'info' | 'success'
+  >('error');
   const [bodyTemperature, setBodyTemperature] = useState<number | null>(null);
 
   const newDate = format(selectedDate!, 'yyyy/MM/dd');
@@ -71,7 +74,7 @@ export const Notebook: React.FC = () => {
   const onChangeDate = (date: Date | null) => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/api/v1/kids/${id}/notebooks/fetch_notebook`, {
+      .get(`${API_ENDPOINT}kids/${id}/notebooks/fetch_notebook`, {
         params: {
           date,
         },
@@ -99,19 +102,16 @@ export const Notebook: React.FC = () => {
     setLoading(true);
     if (isUpdate) {
       axios
-        .put(
-          `http://localhost:5000/api/v1/kids/${id}/notebooks/${notebookId}`,
-          {
-            notebook: {
-              date: selectedDate,
-              memo: memo,
-              dinner: dinner,
-              breakfast: breakfast,
-              has_bathed: hasBathed,
-              body_temperature: bodyTemperature,
-            },
+        .put(`${API_ENDPOINT}kids/${id}/notebooks/${notebookId}`, {
+          notebook: {
+            date: selectedDate,
+            memo: memo,
+            dinner: dinner,
+            breakfast: breakfast,
+            has_bathed: hasBathed,
+            body_temperature: bodyTemperature,
           },
-        )
+        })
         .then((res) => {
           if (res.data.status == '422') {
             setSeverity('error');
@@ -131,7 +131,7 @@ export const Notebook: React.FC = () => {
         });
     } else
       axios
-        .post(`http://localhost:5000/api/v1/kids/${id}/notebooks`, {
+        .post(`${API_ENDPOINT}kids/${id}/notebooks`, {
           notebook: {
             memo: memo,
             date: selectedDate,

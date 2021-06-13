@@ -24,6 +24,8 @@ export const ChooseKid: React.FC = () => {
   const history = useHistory();
   const { currentUser } = useContext(CurrentUserContext);
 
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
   const [kids, setKids] = useState<Array<Kid>>();
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -35,7 +37,7 @@ export const ChooseKid: React.FC = () => {
   const fetchKids = () => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/api/v1/users/${currentUser.id}/kids`)
+      .get(`${API_ENDPOINT}users/${currentUser.id}/kids`)
       .then((res) => {
         if (res.data.message === '子供が未登録です') {
           history.push('/kids/register');

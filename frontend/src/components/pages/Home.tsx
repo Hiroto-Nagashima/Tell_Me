@@ -49,6 +49,8 @@ export const Home: React.FC = () => {
   const [parent] = useAuthState(getAuth());
   const { currentUser } = useContext(CurrentUserContext);
 
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
   const [isKidModalOpen, setIsKidModalOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [parentLastName, setParentLastName] = useState<string>('');
@@ -116,15 +118,11 @@ export const Home: React.FC = () => {
     const submitData = new FormData();
     submitData.append('image', image);
     await axios
-      .post(
-        `http://localhost:5000/api/v1/kids/${id}/register_image`,
-        submitData,
-        {
-          headers: {
-            'content-type': 'multipart/form-data',
-          },
+      .post(`${API_ENDPOINT}kids/${id}/register_image`, submitData, {
+        headers: {
+          'content-type': 'multipart/form-data',
         },
-      )
+      })
       .then((res) => {
         setMassage(res.data.message);
         setIsKidModalOpen(false);
@@ -143,7 +141,7 @@ export const Home: React.FC = () => {
   const tryUpdateKid = () => {
     setLoading(true);
     axios
-      .put(`http://localhost:5000/api/v1/kids/${id}`, {
+      .put(`${API_ENDPOINT}kids/${id}`, {
         params: {
           uid: parent!.uid,
           age: age,
@@ -207,7 +205,7 @@ export const Home: React.FC = () => {
     submitData.append('image', image);
     await axios
       .post(
-        `http://localhost:5000/api/v1/users/${currentUser.id}/register_image`,
+        `${API_ENDPOINT}users/${currentUser.id}/register_image`,
         submitData,
         {
           headers: {
@@ -237,7 +235,7 @@ export const Home: React.FC = () => {
       .updateEmail(email)
       .then(() => {
         axios
-          .put(`http://localhost:5000/api/v1/users/${currentUser.id}`, {
+          .put(`${API_ENDPOINT}users/${currentUser.id}`, {
             params: {
               email: email,
               last_name: parentLastName,

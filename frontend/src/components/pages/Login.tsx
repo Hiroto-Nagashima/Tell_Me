@@ -87,13 +87,13 @@ export const Login: React.FC<Props> = () => {
 
   const { setCurrentUser } = useContext(CurrentUserContext);
 
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState('');
-
-  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT!;
 
   const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     return setEmail(e.target.value);
@@ -121,7 +121,7 @@ export const Login: React.FC<Props> = () => {
         const user = getAuth().currentUser;
         try {
           await axios
-            .get(`http://localhost:5000/api/v1/users/fetch_user`, {
+            .get(`${API_ENDPOINT}users/fetch_user`, {
               params: {
                 uid: user!.uid,
               },
