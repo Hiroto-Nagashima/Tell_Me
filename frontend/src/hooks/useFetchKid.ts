@@ -8,6 +8,7 @@ export const useFetchKid = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const { id } = useParams<{ id: string }>();
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
   const [age, setAge] = useState<number | null>(null);
   const [gender, setGender] = useState(0);
@@ -19,7 +20,7 @@ export const useFetchKid = () => {
   const getKid = () => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/api/v1/kids/${id}`)
+      .get(`${API_ENDPOINT}kids/${id}`)
       .then((res) => {
         setCurrentKid(res.data.kid);
         setAge(res.data.kid.age);

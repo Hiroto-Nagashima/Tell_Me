@@ -24,6 +24,8 @@ export const UserProvider: React.FC<Props> = (props) => {
 
   const history = useHistory();
 
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
   const [user, loading] = useAuthState(getAuth());
 
   const [error, setError] = useState(false);
@@ -43,7 +45,7 @@ export const UserProvider: React.FC<Props> = (props) => {
   const fetchUser = async () => {
     if (user) {
       axios
-        .get(`http://localhost:5000/api/v1/users/fetch_user`, {
+        .get(`${API_ENDPOINT}users/fetch_user`, {
           params: {
             uid: user.uid,
           },
