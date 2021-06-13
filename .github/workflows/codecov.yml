@@ -1,6 +1,9 @@
 name: "Codecov"
 
-on: push
+on:
+  push:
+    branches:
+      - develop
 
 jobs:
   upload-reports:
@@ -10,6 +13,7 @@ jobs:
       - uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          files: ./backend/coverage/codecov-result.json.
           name: codecov-umbrella # optional
           directory: backend/coverage
           fail_ci_if_error: true # optional (default = false)
