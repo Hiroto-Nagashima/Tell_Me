@@ -93,6 +93,8 @@ export const Login: React.FC<Props> = () => {
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState('');
 
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT!;
+
   const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     return setEmail(e.target.value);
   }, []);
@@ -162,6 +164,7 @@ export const Login: React.FC<Props> = () => {
               onChangePassword={onChangePassword}
               onClickLogin={tryLogin}
             />
+            <button onClick={() => console.log(API_ENDPOINT)}>push me</button>
           </LoginSection>
           <AboutSection>
             <Subject>

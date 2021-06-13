@@ -71,6 +71,10 @@
         {
           "valueFrom": "FRONTEND_SKIP_PREFLIGHT_CHECK",
           "name": "SKIP_PREFLIGHT_CHECK"
+        },
+        {
+          "valueFrom": "FRONTEND_REACT_APP_API_ENDPOINT",
+          "name": "REACT_APP_API_ENDPOINT"
         }
       ],
       "dockerSecurityOptions": null,
@@ -161,7 +165,7 @@
   "memory": "2048",
   "taskRoleArn": null,
   "compatibilities": ["EC2", "FARGATE"],
-  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:322809478240:task-definition/tell-me-frontend:16",
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:322809478240:task-definition/tell-me-frontend:19",
   "family": "tell-me-frontend",
   "requiresAttributes": [
     {
@@ -217,7 +221,7 @@
   "requiresCompatibilities": ["FARGATE"],
   "networkMode": "awsvpc",
   "cpu": "512",
-  "revision": 16,
+  "revision": 19,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,

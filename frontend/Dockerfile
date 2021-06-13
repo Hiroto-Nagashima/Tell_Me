@@ -8,7 +8,7 @@ RUN yarn install
 
 COPY . .
 
-RUN yarn build
+RUN yarn run build-production
 
 CMD ["yarn", "start"]
 
