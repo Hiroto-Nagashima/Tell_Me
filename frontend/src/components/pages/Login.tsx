@@ -8,78 +8,131 @@ import { useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../providers/UserProvider';
 
 import NotebookImg from '../../images/notebook.jpg';
+import PostImg from '../../images/post.png';
 import { Box, Card, Typography } from '@material-ui/core';
 import { LoginPaper } from '../organisms/LoginPaper/LoginPaper';
 import { Spinner, CustomizedSnackbar } from '../atoms';
-import { ReactComponent as MainLogo } from '../../images/undraw_Notebook_re_id0r.svg';
+import { ReactComponent as MainLogo } from '../../images/undraw_Bibliophile_hwqc.svg';
 import { ReactComponent as NotebookLogo } from '../../images/undraw_zoom_in_1txs.svg';
+import { ReactComponent as MobileUser } from '../../images/undraw_mobile_user_7oqo.svg';
 
 type Props = {
   history: H.History;
 };
-const AboutSection = styled(Box)`
-  height: 800px;
+
+const AboutArea = styled(Box)`
+  height: 550px;
   padding: 4%;
   background-color: white;
 `;
-const BackgroundOfNotebook = styled(NotebookLogo)`
+
+const BackgroundImageOfNotebook = styled(NotebookLogo)`
   width: 700px;
-`;
-
-const FlexBox = styled(Box)`
-  display: flex;
-`;
-const Rest0fSubject = styled(Typography)`
-  width: 800px;
-`;
-
-const Subject = styled(Box)`
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-  width: 80%;
-`;
-
-const TellMe = styled(Typography)`
-  background: linear-gradient(transparent 75%, #ff9463 70%);
-  width: 200px;
 `;
 
 const ExplanationOfNotebook = styled(Box)`
-  margin: 170px 0 0 50px;
+  margin: 170px 50px 0 0;
 `;
 
-const NotebookImage = styled.img`
-  height: 310px;
-  width: 450px;
-`;
-
-const NotebookArea = styled(Box)`
-  position: relative;
-  width: 700px;
-`;
-const HomeImage = styled(MainLogo)`
-  width: 800px;
-`;
-
-const MyLoginPaper = styled(LoginPaper)`
-  margin: 60px;
-`;
-
-const MyCard = styled(Card)`
-  height: 310px;
-  width: 450px;
+const ExplanationOfPost = styled(Box)`
+  width: 60%;
+  height: 150px;
+  margin: 150px 0 0 0;
+  padding-top: 50px;
   background-color: white;
-  position: absolute;
-  right: 125px;
-  bottom: 130px;
+`;
+
+const HomeImage = styled(MainLogo)`
+  width: 700px;
+  height: 500px;
+`;
+
+const LoginArea = styled(Box)`
+  width: 90%
+  height: 670px;
+  padding: 5%;
 `;
 
 const LoginSection = styled(Box)`
   display: flex;
   justify-content: space-between;
-  padding: 13% 5% 5% 5%;
-  height: 65vh;
+`;
+
+const MobileUserImage = styled(MobileUser)`
+  width: 800px;
+  height: 400px;
+`;
+
+const MyLoginPaper = styled(LoginPaper)`
+  margin: 0 0 50px 100px;
+`;
+
+const NotebookArea = styled(Box)`
+  display: flex;
+`;
+
+const NotebookCard = styled(Card)`
+  width: 450px;
+  height: 310px;
+  right: 125px;
+  bottom: 130px;
+  position: absolute;
+  background-color: white;
+`;
+
+const NotebookImage = styled.img`
+  width: 450px;
+  height: 310px;
+`;
+
+const NotebookSection = styled(Box)`
+  width: 700px;
+  position: relative;
+`;
+
+const PostArea = styled(Box)`
+  display: flex;
+`;
+
+const PostCard = styled(Card)`
+  width: 420px;
+  height: 140px;
+  right: 300px;
+  bottom: 350px;
+  position: absolute;
+  background-color: white;
+`;
+
+const PostImage = styled.img`
+  width: 420px;
+  height: 140px;
+`;
+
+const PostSection = styled(Box)`
+  width: 700px;
+  height: 550px;
+  position: relative;
+`;
+
+const Rest0fSubject = styled(Typography)`
+  width: 800px;
+`;
+
+const Slogan = styled(Box)`
+  margin: 20px 0 50px 0;
+  text-align: center;
+`;
+
+const Subject = styled(Box)`
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+`;
+
+const TellMe = styled(Typography)`
+  width: 200px;
+  background: linear-gradient(transparent 75%, #ff9463 70%);
 `;
 
 export const Login: React.FC<Props> = () => {
@@ -155,17 +208,22 @@ export const Login: React.FC<Props> = () => {
         <Spinner />
       ) : (
         <>
-          <LoginSection>
-            <HomeImage />
-            <MyLoginPaper
-              email={email}
-              onChangeEmail={onChangeEmail}
-              password={password}
-              onChangePassword={onChangePassword}
-              onClickLogin={tryLogin}
-            />
-          </LoginSection>
-          <AboutSection>
+          <LoginArea>
+            <Slogan>
+              <Typography variant="h2">Tell Me Anything</Typography>
+            </Slogan>
+            <LoginSection>
+              <HomeImage />
+              <MyLoginPaper
+                email={email}
+                onChangeEmail={onChangeEmail}
+                password={password}
+                onChangePassword={onChangePassword}
+                onClickLogin={tryLogin}
+              />
+            </LoginSection>
+          </LoginArea>
+          <AboutArea>
             <Subject>
               <TellMe variant="h3" align="center">
                 Tell Me
@@ -174,13 +232,7 @@ export const Login: React.FC<Props> = () => {
                 は保護者と保育園をつなげるアプリケーションです
               </Rest0fSubject>
             </Subject>
-            <FlexBox>
-              <NotebookArea>
-                <BackgroundOfNotebook />
-                <MyCard elevation={6}>
-                  <NotebookImage src={NotebookImg} alt="" />
-                </MyCard>
-              </NotebookArea>
+            <NotebookArea>
               <ExplanationOfNotebook>
                 <Typography variant="h5" align="center">
                   紙ベースの連絡帳とは決別です
@@ -194,8 +246,32 @@ export const Login: React.FC<Props> = () => {
                   気軽に連絡帳を書いて朝の忙しさを減らしましょう
                 </Typography>
               </ExplanationOfNotebook>
-            </FlexBox>
-          </AboutSection>
+              <NotebookSection>
+                <BackgroundImageOfNotebook />
+                <NotebookCard elevation={6}>
+                  <NotebookImage src={NotebookImg} alt="" />
+                </NotebookCard>
+              </NotebookSection>
+            </NotebookArea>
+            <PostArea>
+              <PostSection>
+                <MobileUserImage />
+                <PostCard elevation={0}>
+                  <PostImage src={PostImg} alt="" />
+                </PostCard>
+              </PostSection>
+              <ExplanationOfPost>
+                <Typography variant="h5" align="center">
+                  先生たちが子供の様子を教えてくれます
+                </Typography>
+                <Box my={5}>
+                  <Typography variant="h5" align="center">
+                    仕事の合間にチェックしましょう
+                  </Typography>
+                </Box>
+              </ExplanationOfPost>
+            </PostArea>
+          </AboutArea>
           <CustomizedSnackbar
             open={open}
             onClose={onCloseSnackbar}

@@ -1,5 +1,6 @@
 import { Box } from '@material-ui/core';
 import axios from 'axios';
+import format from 'date-fns/format';
 import styled from 'styled-components';
 import React, {
   ChangeEvent,
@@ -138,7 +139,10 @@ export const TeacherAnnouncement: React.FC = () => {
                       poster={post.poster}
                       teacherId={post.user_id}
                       content={post.content}
-                      createdAt={post.created_at}
+                      createdAt={format(
+                        new Date(post.created_at),
+                        'yyyy-MM-dd HH:mm',
+                      )}
                     />
                   </Box>
                 );

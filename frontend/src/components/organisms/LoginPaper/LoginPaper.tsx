@@ -39,7 +39,7 @@ export const LoginPaper: React.FC<Props> = memo((props) => {
     <Wrapper>
       <StyledPaper elevation={3}>
         <Box component="h1" textAlign="center">
-          Tell Me Anything
+          Login
         </Box>
         <Box textAlign="center" m={4}>
           <SingleLineTextField
@@ -65,7 +65,7 @@ export const LoginPaper: React.FC<Props> = memo((props) => {
         <Box textAlign="center" mx={2}>
           <StyledButton
             onClick={onClickLogin}
-            label="Login"
+            label="ログイン"
             fontSize={18}
             width={90}
             borderRadius={20}
@@ -77,7 +77,7 @@ export const LoginPaper: React.FC<Props> = memo((props) => {
         <Box textAlign="center" mx={2}>
           <MyLink to="/signup">
             <StyledButton
-              label="Sign Up"
+              label="新規登録へ"
               fontSize={18}
               width={90}
               borderRadius={20}
