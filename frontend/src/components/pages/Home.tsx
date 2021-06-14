@@ -115,6 +115,7 @@ export const Home: React.FC = () => {
   }, []);
 
   const onClickSubmitKidImage = async () => {
+    setLoading(true);
     const submitData = new FormData();
     submitData.append('image', image);
     await axios
@@ -201,6 +202,7 @@ export const Home: React.FC = () => {
   }, []);
 
   const onClickSubmitParentImage = async () => {
+    setLoading(true);
     const submitData = new FormData();
     submitData.append('image', image);
     await axios
