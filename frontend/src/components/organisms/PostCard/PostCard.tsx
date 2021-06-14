@@ -4,8 +4,9 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { Box } from '@material-ui/core';
+import styled from 'styled-components';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,6 +23,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
+
+const Content = styled(Box)`
+  padding: 0 16px 16px 16px;
+`;
 
 export type Props = {
   poster: string;
@@ -48,9 +53,9 @@ export const PostCard: React.FC<Props> = (props) => {
         title={poster}
         subheader={createdAt}
       />
-      <CardContent>
+      <Content>
         <Typography variant="body1">{content}</Typography>
-      </CardContent>
+      </Content>
     </Card>
   );
 };
