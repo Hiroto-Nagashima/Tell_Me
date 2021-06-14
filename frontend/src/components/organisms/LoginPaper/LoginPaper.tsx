@@ -4,23 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { SingleLineTextField, StyledButton } from '../../atoms/index';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
-      '& > *': {
-        margin: theme.spacing(1),
-        width: theme.spacing(50),
-        height: theme.spacing(62),
-      },
-    },
-  }),
-);
 
 const MyLink = styled(Link)`
   text-decoration: none;
@@ -28,6 +12,15 @@ const MyLink = styled(Link)`
 
 const StyledPaper = styled(Paper)`
   border-radius: 10px;
+  margin: 8px;
+  width: 400px;
+  height: 496px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 export type Props = {
@@ -42,12 +35,10 @@ export const LoginPaper: React.FC<Props> = memo((props) => {
   const { email, password, onChangeEmail, onChangePassword, onClickLogin } =
     props;
 
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
+    <Wrapper>
       <StyledPaper elevation={3}>
-        <Box component="h1" p={2} textAlign="center">
+        <Box component="h1" textAlign="center">
           Tell Me Anything
         </Box>
         <Box textAlign="center" m={4}>
@@ -94,7 +85,7 @@ export const LoginPaper: React.FC<Props> = memo((props) => {
           </MyLink>
         </Box>
       </StyledPaper>
-    </div>
+    </Wrapper>
   );
 });
 

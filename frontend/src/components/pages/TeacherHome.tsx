@@ -1,5 +1,6 @@
 import axios from 'axios';
 import styled from 'styled-components';
+import format from 'date-fns/format';
 import Resizer from 'react-image-file-resizer';
 import React, {
   ChangeEvent,
@@ -142,9 +143,7 @@ export const TeacherHome: React.FC = () => {
   const fetchAllUserPosts = (daycareId: number | null) => {
     setLoading(true);
     axios
-      .get(
-        `${API_ENDPOINT}daycares/${daycareId}/users/${currentUser.id}/posts`,
-      )
+      .get(`${API_ENDPOINT}daycares/${daycareId}/users/${currentUser.id}/posts`)
       .then((res) => {
         setPosts(res.data);
       })
@@ -208,7 +207,10 @@ export const TeacherHome: React.FC = () => {
                       poster={post.poster}
                       teacherId={post.user_id}
                       content={post.content}
-                      createdAt={post.created_at}
+                      createdAt={format(
+                        new Date(post.created_at),
+                        'yyyy-MM-dd HH:mm',
+                      )}
                     />
                   </Box>
                 );

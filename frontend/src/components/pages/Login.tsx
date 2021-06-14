@@ -164,7 +164,6 @@ export const Login: React.FC<Props> = () => {
               onChangePassword={onChangePassword}
               onClickLogin={tryLogin}
             />
-            <button onClick={() => console.log(API_ENDPOINT)}>push me</button>
           </LoginSection>
           <AboutSection>
             <Subject>

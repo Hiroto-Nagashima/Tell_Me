@@ -27,7 +27,7 @@ export type Props = {
   poster: string;
   content: string;
   teacherId: number;
-  createdAt: Date;
+  createdAt: Date | string;
 };
 
 export const PostCard: React.FC<Props> = (props) => {
