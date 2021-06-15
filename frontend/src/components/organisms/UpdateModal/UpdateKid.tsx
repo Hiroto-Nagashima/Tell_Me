@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Box, Grid } from '@material-ui/core';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
-import { SingleLineTextField } from '../../atoms/index';
+import { SelectMenu, SingleLineTextField } from '../../atoms/index';
 
 const FlexBox = styled(Box)`
   display: flex;
