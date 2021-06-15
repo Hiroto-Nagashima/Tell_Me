@@ -103,18 +103,13 @@ export const RegisterKid: React.FC<Props> = () => {
         },
       })
       .then((res) => {
-        if (res.data.status == '422') {
-          setError(res.data.message);
-          setOpen(true);
-        } else {
-          history.push({
-            pathname: `/kids/${res.data.kid.id}`,
-            state: res.data.kid,
-          });
-        }
+        history.push({
+          pathname: `/kids/${res.data.kid.id}`,
+          state: res.data.kid,
+        });
       })
-      .catch((e) => {
-        setError(e);
+      .catch(() => {
+        setError('登録に失敗しました');
         setOpen(true);
       })
       .finally(() => setLoading(false));

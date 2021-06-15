@@ -46,6 +46,7 @@ module Api
         kid = Kid.find(params[:id])
         render json: {
           kid:{
+            id: kid.id,
             age: kid.age,
             gender: kid.gender,
             lastName: kid.last_name,

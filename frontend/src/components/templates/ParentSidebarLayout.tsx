@@ -1,6 +1,6 @@
 import React, { ReactNode, useContext, useState } from 'react';
 import firebase from 'firebase';
-import { useHistory, useParams } from 'react-router';
+import { useHistory } from 'react-router';
 
 import { Box } from '@material-ui/core';
 import List from '@material-ui/core/List';
@@ -72,7 +72,7 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
     window !== undefined ? () => window().document.body : undefined;
 
   const history = useHistory();
-  const { id } = useParams<{ id: string }>();
+  // const { id } = useParams<{ id: string }>();
 
   const theme = useTheme();
   const classes = useStyles();
@@ -96,12 +96,12 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
   };
 
   const onClickHome = () => {
-    history.push(`/kids/${id}`);
+    history.push(`/kids/${currentKid.id}`);
     setTitle('Home');
   };
 
   const onClickNotebook = () => {
-    history.push(`/kids/${id}/notebook`);
+    history.push(`/kids/${currentKid.id}/notebook`);
     setTitle('Notebook');
   };
 

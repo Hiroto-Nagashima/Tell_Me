@@ -3,7 +3,8 @@ require 'carrierwave/storage/file'
 require 'carrierwave/storage/fog'
 
 CarrierWave.configure do |config|
-  config.storage :fog
+  # config.storage :fog
+  config.cache_storage = :fog
   config.fog_provider = 'fog/aws'
   config.fog_directory  = 'tell-me-s3'
   config.asset_host = ENV['AWS_ASSET_HOST']
