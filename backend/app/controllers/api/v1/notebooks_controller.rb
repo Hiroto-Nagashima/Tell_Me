@@ -4,7 +4,7 @@ module Api
       def create
         kid = Kid.find(params[:kid_id])
         notebook = kid.notebooks.build(notebook_params)
-        if notebook.save
+        if notebook.save!
           render json: {
             status: "ok",
             message: "登録が完了しました"
@@ -20,6 +20,7 @@ module Api
       def update
         kid = Kid.find(params[:kid_id])
         notebook = kid.notebooks.find_by(id: params[:id])
+        byebug
         if notebook.update!(notebook_params)
           render json: {
             status: "ok",
