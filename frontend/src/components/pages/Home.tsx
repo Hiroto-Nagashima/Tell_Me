@@ -66,11 +66,14 @@ export const Home: React.FC = () => {
     'error' | 'warning' | 'info' | 'success'
   >('error');
 
-  const onChangeAge = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
+  const onChangeAge = useCallback(
+    (e: React.ChangeEvent<{ value: unknown }>) => {
+      const value = Number(e.target.value);
 
-    return setAge(value);
-  }, []);
+      return setAge(value);
+    },
+    [],
+  );
 
   const onChangeKidFirstName = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
