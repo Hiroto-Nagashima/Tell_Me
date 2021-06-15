@@ -47,7 +47,7 @@ export const Home: React.FC = () => {
 
   const { id } = useParams<{ id: string }>();
   const [parent] = useAuthState(getAuth());
-  const { currentUser } = useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
@@ -157,7 +157,6 @@ export const Home: React.FC = () => {
         },
       })
       .then((res) => {
-        console.log(1);
         setCurrentKid(res.data.kid);
         setMassage(res.data.message);
         setSeverity('success');
@@ -252,6 +251,7 @@ export const Home: React.FC = () => {
           })
           .then((res) => {
             setEmail(res.data.email);
+            setCurrentUser(res.data);
             setParentLastName(res.data.lastName);
             setParentFirstName(res.data.firstName);
             setTelephoneNumber(res.data.telephoneNumber);
@@ -318,7 +318,7 @@ export const Home: React.FC = () => {
     }
   };
 
-  const setCurrentUser = () => {
+  const setUser = () => {
     setEmail(currentUser.email);
     setParentLastName(currentUser.lastName);
     setParentFirstName(currentUser.firstName);
@@ -326,7 +326,7 @@ export const Home: React.FC = () => {
   };
 
   useEffect(() => {
-    currentUser && (getKid(), setCurrentUser());
+    currentUser && (getKid(), setUser());
   }, [currentUser]);
 
   return (

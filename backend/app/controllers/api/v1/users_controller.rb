@@ -12,10 +12,11 @@ module Api
 
       def update
         user = User.find(params[:id])
-        if user.update(user_params)
+        if user.update!(user_params)
           render json: {
             status: "ok",
             message: "更新が完了しました",
+            id: user.id,
             email: user.email,
             firstName: user.first_name,
             lastName: user.last_name,
@@ -51,7 +52,7 @@ module Api
       def register_image
         user = User.find(params[:id])
         user.image = params[:image]
-        if user.save!
+        if user.save
           render json: {
             status: "ok",
             message: "画像を登録しました",
