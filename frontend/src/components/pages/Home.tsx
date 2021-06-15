@@ -157,13 +157,14 @@ export const Home: React.FC = () => {
         },
       })
       .then((res) => {
+        console.log(1);
         setCurrentKid(res.data.kid);
         setMassage(res.data.message);
         setSeverity('success');
         setIsKidModalOpen(false);
       })
       .catch(() => {
-        setMassage('更新失敗しました');
+        setMassage('更新に失敗しました');
         setSeverity('error');
       })
       .finally(() => {
@@ -171,6 +172,7 @@ export const Home: React.FC = () => {
         setIsSnackbarOpen(true);
       });
   };
+
   const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     return setEmail(e.target.value);
   }, []);

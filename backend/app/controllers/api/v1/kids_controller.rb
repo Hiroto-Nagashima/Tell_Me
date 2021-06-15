@@ -21,7 +21,7 @@ module Api
 
       def update
         kid = Kid.find(params[:id])
-        if kid.update(kid_params)
+        if kid.update!(kid_params)
           render json: {
             status: "ok",
             message: "更新が完了しました",
