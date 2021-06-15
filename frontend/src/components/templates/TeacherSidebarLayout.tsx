@@ -10,7 +10,6 @@ import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import HomeIcon from '@material-ui/icons/Home';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -165,7 +164,6 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
       <Header
         title={title}
         appBarClassName={classes.appBar}

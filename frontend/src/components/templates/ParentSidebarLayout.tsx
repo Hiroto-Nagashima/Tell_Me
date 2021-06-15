@@ -9,7 +9,6 @@ import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 import HomeIcon from '@material-ui/icons/Home';
 import ListItem from '@material-ui/core/ListItem';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -162,7 +161,6 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
       <Header
         title={title}
         appBarClassName={classes.appBar}
