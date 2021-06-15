@@ -4,27 +4,31 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
-import { SingleLineTextField } from '../../atoms';
 import { Box } from '@material-ui/core';
+import { SelectMenu } from '../../atoms/SelectMenu/SelectMenu';
 
 export type Props = {
   role: string | null;
   gender: number | null;
+  numbers: Array<number>;
   daycareId: number | null;
   onChangeRole: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeGender: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeDaycareId: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeDaycareId: (e: React.ChangeEvent<{ value: unknown }>) => void;
 };
 
 export const ChooseRole: React.FC<Props> = (props) => {
   const {
     role,
     gender,
+    numbers,
     daycareId,
     onChangeRole,
     onChangeGender,
     onChangeDaycareId,
   } = props;
+
+  // const numbers = [1, 2, 3];
 
   return (
     <>
@@ -65,13 +69,10 @@ export const ChooseRole: React.FC<Props> = (props) => {
         <div></div>
       )}
       {role == '先生' ? (
-        <SingleLineTextField
-          id="Daycare_ID"
-          type="number"
-          textName="Daycare_ID"
-          placeholder="数字"
-          isFullWidth={false}
+        <SelectMenu
+          numbers={numbers}
           value={daycareId}
+          label="保育園のID"
           onChange={onChangeDaycareId}
         />
       ) : (

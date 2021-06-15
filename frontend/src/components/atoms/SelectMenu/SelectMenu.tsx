@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -17,23 +17,28 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-type Props = {
-  numbers: Array<number>;
+export type Props = {
+  label: string;
   value: number | null;
-  onChange: () => void;
+  numbers: Array<number>;
+  onChange: (e: ChangeEvent<{ value: unknown }>) => void;
 };
 
 export const SelectMenu: React.FC<Props> = (props) => {
-  const { value, numbers, onChange } = props;
+  const { label, value, numbers, onChange } = props;
   const classes = useStyles();
 
   return (
     <div>
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+        <InputLabel id="demo-simple-select-label">{label}</InputLabel>
         <Select id="simple-select" value={value} onChange={onChange}>
           {numbers.map((number) => {
-            <MenuItem value={number}>{number}</MenuItem>;
+            return (
+              <MenuItem key={number - 1} value={number}>
+                {number}
+              </MenuItem>
+            );
           })}
         </Select>
       </FormControl>
