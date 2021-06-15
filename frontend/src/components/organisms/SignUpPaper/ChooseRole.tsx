@@ -28,8 +28,6 @@ export const ChooseRole: React.FC<Props> = (props) => {
     onChangeDaycareId,
   } = props;
 
-  // const numbers = [1, 2, 3];
-
   return (
     <>
       <FormControl component="fieldset">
