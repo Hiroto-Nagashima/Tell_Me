@@ -23,7 +23,7 @@ export const ParentRoute: React.FC<Props> = ({
     <Route
       {...rest}
       render={(props) => (
-        <ParentSidebarLayout>
+        <ParentSidebarLayout title={String(Component.displayName)}>
           <Component {...props} />
         </ParentSidebarLayout>
       )}

@@ -62,11 +62,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type Props = {
   children: ReactNode;
+  title: string;
   window?: () => Window;
 };
 
 export const ParentSidebarLayout: React.FC<Props> = (props) => {
-  const { window, children } = props;
+  const { window, children, title } = props;
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -76,9 +77,9 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
   const theme = useTheme();
   const classes = useStyles();
 
-  const [title, setTitle] = useState(() => {
-    return { title: 'Home' };
-  });
+  // const [title, setTitle] = useState(() => {
+  //   return { title: 'Home' };
+  // });
   const [isOpen, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -98,23 +99,23 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
 
   const onClickHome = () => {
     history.push(`/kids/${currentKid.id}`);
-    setTitle(() => {
-      return { title: 'Home' };
-    });
+    // setTitle(() => {
+    //   return { title: 'Home' };
+    // });
   };
 
   const onClickNotebook = () => {
-    setTitle(() => {
-      return { title: 'Notebook' };
-    });
+    // setTitle(() => {
+    //   return { title: 'Notebook' };
+    // });
     history.push(`/kids/${currentKid.id}/notebook`);
   };
 
   const onClickAnnouncement = () => {
     history.push(`/daycares/${currentKid.daycareId}/announcement`);
-    setTitle(() => {
-      return { title: 'Announcement' };
-    });
+    // setTitle(() => {
+    //   return { title: 'Announcement' };
+    // });
   };
 
   const logout = async () => {
@@ -169,7 +170,7 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
   return (
     <div className={classes.root}>
       <Header
-        title={title.title}
+        title={title}
         appBarClassName={classes.appBar}
         iconButtonClassName={classes.menuButton}
         onClickTitle={onToggleDrawer}

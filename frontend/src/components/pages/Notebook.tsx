@@ -201,3 +201,5 @@ export const Notebook: React.FC = () => {
     </>
   );
 };
+
+Notebook.displayName = 'Notebook';

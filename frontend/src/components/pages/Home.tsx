@@ -416,3 +416,5 @@ export const Home: React.FC = () => {
     </>
   );
 };
+
+Home.displayName = 'Home';
