@@ -11,7 +11,14 @@
 
 ## Setup
 ```
+$ git clone git clone https://github.com/Hiroto-Nagashima/Tell_Me.git
+$ cd Tell_Me
 $ docker-compose build
+$ docker-compose run --rm backend bundle i
+$ docker-compose run --rm backend rake db:create
+$ docker-compose run --rm backend rake db:migrate
+$ docker-compose run --rm backend rake db:seed
+$ docker-compose run --rm frontend yarn install
 $ docker-compose up
 ```
 http://localhost:8000 でWebpackサーバ, http://localhost:3000 でAPIサーバーが起動します
@@ -22,7 +29,6 @@ http://localhost:8000 でWebpackサーバ, http://localhost:3000 でAPIサーバ
   - TypeScript
   - styled-components
   - atomic design
-  - jest
 - backend
   - Ruby on Rails
   - RSpec

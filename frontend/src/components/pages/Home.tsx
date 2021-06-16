@@ -168,6 +168,7 @@ export const Home: React.FC = () => {
       })
       .finally(() => {
         setLoading(false);
+        setImage(null);
         setIsSnackbarOpen(true);
       });
   };
@@ -222,6 +223,7 @@ export const Home: React.FC = () => {
       .then((res) => {
         setMassage(res.data.message);
         setSeverity(res.data.severity);
+        setImage(null);
         setIsParentModalOpen(false);
       })
       .catch(() => {

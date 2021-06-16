@@ -20,7 +20,6 @@ module Api
       def update
         kid = Kid.find(params[:kid_id])
         notebook = kid.notebooks.find_by(id: params[:id])
-        byebug
         if notebook.update!(notebook_params)
           render json: {
             status: "ok",
