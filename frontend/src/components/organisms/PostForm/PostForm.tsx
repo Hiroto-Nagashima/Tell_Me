@@ -77,7 +77,7 @@ export const PostForm: React.FC<Props> = (props) => {
           <div className={classes.details}>
             <CardContent className={classes.content}>
               <MultipleLinesTextField
-                label="Announcement"
+                label="連絡の投稿(100字以内)"
                 variant="standard"
                 value={value}
                 onChange={onChangePostContent}

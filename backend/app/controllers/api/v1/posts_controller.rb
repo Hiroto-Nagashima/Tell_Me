@@ -7,7 +7,7 @@ module Api
         post = Post.new(post_params)
         post.daycare_id = daycare.id
         post.user_id = user.id
-        if post.save
+        if post.save!
           render json: {
             status: "ok",
             message: "投稿が完了しました！",
