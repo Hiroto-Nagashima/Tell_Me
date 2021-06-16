@@ -59,7 +59,7 @@ module Api
       end
 
       def kids_of_parent
-        user = User.find_by(params[:id])
+        user = User.find(params[:id])
         if user.kid_users.present?
           kids_box = []
           kid_users = user.kid_users
