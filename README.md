@@ -1,7 +1,7 @@
 [![codecov](https://codecov.io/gh/Hiroto-Nagashima/Tell_Me/branch/develop/graph/badge.svg)](https://codecov.io/gh/Hiroto-Nagashima/Tell_Me)
 # Tell Me
 ## Overview
-https://tell-me-please.com/<br>保育園と保護者を繋ぐ連絡帳アプリです。
+https://tell-me-please.com/<br>保育園と保護者を繋ぐ連絡帳アプリです。<br>**レスポンシブ未対応のため全画面表示で閲覧してください。**
 
 <img width="835" alt="スクリーンショット 2021-06-16 22 53 54" src="https://user-images.githubusercontent.com/74855940/122232007-e0dfba00-cef5-11eb-8d3a-bc04e3facbc7.png">
 
