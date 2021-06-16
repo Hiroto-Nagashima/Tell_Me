@@ -72,12 +72,13 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
     window !== undefined ? () => window().document.body : undefined;
 
   const history = useHistory();
-  // const { id } = useParams<{ id: string }>();
 
   const theme = useTheme();
   const classes = useStyles();
 
-  const [title, setTitle] = useState('Home');
+  const [title, setTitle] = useState(() => {
+    return { title: 'Home' };
+  });
   const [isOpen, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -97,17 +98,23 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
 
   const onClickHome = () => {
     history.push(`/kids/${currentKid.id}`);
-    setTitle('Home');
+    setTitle(() => {
+      return { title: 'Home' };
+    });
   };
 
   const onClickNotebook = () => {
+    setTitle(() => {
+      return { title: 'Notebook' };
+    });
     history.push(`/kids/${currentKid.id}/notebook`);
-    setTitle('Notebook');
   };
 
   const onClickAnnouncement = () => {
     history.push(`/daycares/${currentKid.daycareId}/announcement`);
-    setTitle('Announcement');
+    setTitle(() => {
+      return { title: 'Announcement' };
+    });
   };
 
   const logout = async () => {
@@ -162,7 +169,7 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
   return (
     <div className={classes.root}>
       <Header
-        title={title}
+        title={title.title}
         appBarClassName={classes.appBar}
         iconButtonClassName={classes.menuButton}
         onClickTitle={onToggleDrawer}
