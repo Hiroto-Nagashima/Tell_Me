@@ -8,10 +8,11 @@ module Api
         post.daycare_id = daycare.id
         post.user_id = user.id
         if post.save!
+          posts = Post.all
           render json: {
             status: "ok",
             message: "投稿が完了しました！",
-            post: post
+            posts: posts
           }
         else
           render json: {

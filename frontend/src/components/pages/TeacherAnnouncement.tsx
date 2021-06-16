@@ -90,6 +90,8 @@ export const TeacherAnnouncement: React.FC = () => {
         },
       })
       .then((res) => {
+        setPosts(res.data.posts);
+        setPostContent(null);
         setSeverity('success');
         setMassage(res.data.message);
       })
