@@ -168,3 +168,5 @@ export const AllKids: React.FC<Props> = () => {
     </>
   );
 };
+
+AllKids.displayName = 'All Kids';

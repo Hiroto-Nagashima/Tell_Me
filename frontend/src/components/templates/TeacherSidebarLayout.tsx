@@ -62,11 +62,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type Props = {
   children: ReactNode;
+  title: string;
   window?: () => Window;
 };
 
 export const TeacherSidebarLayout: React.FC<Props> = (props) => {
-  const { window, children } = props;
+  const { window, children, title } = props;
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -76,7 +77,6 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
   const theme = useTheme();
   const history = useHistory();
 
-  const [title, setTitle] = useState('Home');
   const [isOpen, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -98,19 +98,16 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
     history.push(
       `/daycares/${currentUser.daycareId}/teachers/${currentUser.id}`,
     );
-    setTitle('Home');
   };
 
   const onClickAllKids = () => {
     history.push(`/daycares/${currentUser.daycareId}/kids`);
-    setTitle('All Kids');
   };
 
   const onClickAnnouncement = () => {
     history.push(
       `/daycares/${currentUser.daycareId}/teachers/${currentUser.id}/announcement`,
     );
-    setTitle('Announcement');
   };
 
   const logout = async () => {

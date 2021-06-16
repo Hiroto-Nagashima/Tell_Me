@@ -77,9 +77,6 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
   const theme = useTheme();
   const classes = useStyles();
 
-  // const [title, setTitle] = useState(() => {
-  //   return { title: 'Home' };
-  // });
   const [isOpen, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -99,23 +96,14 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
 
   const onClickHome = () => {
     history.push(`/kids/${currentKid.id}`);
-    // setTitle(() => {
-    //   return { title: 'Home' };
-    // });
   };
 
   const onClickNotebook = () => {
-    // setTitle(() => {
-    //   return { title: 'Notebook' };
-    // });
     history.push(`/kids/${currentKid.id}/notebook`);
   };
 
   const onClickAnnouncement = () => {
     history.push(`/daycares/${currentKid.daycareId}/announcement`);
-    // setTitle(() => {
-    //   return { title: 'Announcement' };
-    // });
   };
 
   const logout = async () => {
