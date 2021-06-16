@@ -12,9 +12,9 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: 'flex',
-      width: 560,
+      width: 520,
       borderRadius: 20,
-      height: 240,
+      height: 220,
       padding: 20,
     },
     details: {
@@ -38,6 +38,7 @@ const useStyles = makeStyles(() =>
       display: 'flex',
       alignItems: 'center',
       width: 380,
+      height: 140,
       justifyContent: 'flex-end',
     },
   }),
