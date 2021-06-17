@@ -190,6 +190,7 @@ export const Login: React.FC<Props> = () => {
               }
             })
             .catch(() => {
+              firebase.auth().signOut();
               setError('ユーザーが見つかりません');
               setOpen(true);
             });
