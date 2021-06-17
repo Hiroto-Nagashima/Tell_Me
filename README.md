@@ -63,3 +63,5 @@ $ docker-compose run --rm backend bundle exec rspec
 $ cd frontend
 $ yarn storybook
 ```
+また、Chromaticを使ってStorybookをデプロイしています。以下がURLです。</br>
+https://www.chromatic.com/apps?accountId=6072736e3dd1f500218f416e
