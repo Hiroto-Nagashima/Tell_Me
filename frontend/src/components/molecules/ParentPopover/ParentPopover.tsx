@@ -26,8 +26,9 @@ export const ParentPopover: React.FC<Props> = (props) => {
 
   const classes = useStyles();
 
-  const [anchorEl, setAnchorEl] =
-    React.useState<HTMLButtonElement | null>(null);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null,
+  );
 
   const open = Boolean(anchorEl);
 

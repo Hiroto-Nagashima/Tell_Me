@@ -29,28 +29,36 @@ const App: React.FC = () => {
     <>
       <GlobalStyle />
       <UserProvider>
-        <BrowserRouter>
-          <Switch>
-            <HeaderLayoutRoute exact path="/" component={Login} />
-            <HeaderLayoutRoute exact path="/signup" component={SignUp} />
-            <TeacherRoute
-              exact
-              path="/daycares/:daycareId/teachers/:teacherId"
-              component={TeacherHome}
-            />
-            <TeacherRoute exact path="/daycares/:id/kids" component={AllKids} />
-            <TeacherRoute
-              exact
-              path="/daycares/:daycareId/teachers/:teacherId/announcement"
-              component={TeacherAnnouncement}
-            />
-            <ParentHeaderLayoutRoute exact path="/kids" component={ChooseKid} />
-            <ParentHeaderLayoutRoute
-              exact
-              path="/kids/register"
-              component={RegisterKid}
-            />
-            <KidProvider>
+        <KidProvider>
+          <BrowserRouter>
+            <Switch>
+              <HeaderLayoutRoute exact path="/" component={Login} />
+              <HeaderLayoutRoute exact path="/signup" component={SignUp} />
+              <TeacherRoute
+                exact
+                path="/daycares/:daycareId/teachers/:teacherId"
+                component={TeacherHome}
+              />
+              <TeacherRoute
+                exact
+                path="/daycares/:id/kids"
+                component={AllKids}
+              />
+              <TeacherRoute
+                exact
+                path="/daycares/:daycareId/teachers/:teacherId/announcement"
+                component={TeacherAnnouncement}
+              />
+              <ParentHeaderLayoutRoute
+                exact
+                path="/kids"
+                component={ChooseKid}
+              />
+              <ParentHeaderLayoutRoute
+                exact
+                path="/kids/register"
+                component={RegisterKid}
+              />
               <ParentRoute exact path="/kids/:id" component={Home} />
               <ParentRoute
                 exact
@@ -62,12 +70,10 @@ const App: React.FC = () => {
                 path="/daycares/:id/announcement"
                 component={Announcement}
               />
-            </KidProvider>
-            <Route path="*">
-              <Page404 />
-            </Route>
-          </Switch>
-        </BrowserRouter>
+              <Route component={Page404} />
+            </Switch>
+          </BrowserRouter>
+        </KidProvider>
       </UserProvider>
     </>
   );
