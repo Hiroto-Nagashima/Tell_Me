@@ -30,6 +30,7 @@ const StyledPaper = styled(Paper)`
 export type Props = {
   role: string | null;
   email: string;
+  numbers: Array<number>;
   password: string;
   firstName: string;
   lastName: string;
@@ -41,7 +42,7 @@ export type Props = {
   onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeGender: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeDaycareId: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeDaycareId: (e: React.ChangeEvent<{ value: unknown }>) => void;
   onChangeLastName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeFirstName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeTelephoneNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -51,6 +52,7 @@ export const SignUpPaper: React.FC<Props> = memo((props) => {
     role,
     email,
     gender,
+    numbers,
     lastName,
     firstName,
     password,
@@ -131,6 +133,7 @@ export const SignUpPaper: React.FC<Props> = memo((props) => {
         <Box m={4}>
           <ChooseRole
             role={role}
+            numbers={numbers}
             gender={gender}
             daycareId={daycareId}
             onChangeRole={onChangeRole}

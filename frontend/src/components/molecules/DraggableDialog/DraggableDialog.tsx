@@ -32,16 +32,8 @@ export const DraggableDialog: React.FC<Props> = (props) => {
           <DialogContentText>{content}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <StyledButton
-            variant="outlined"
-            onClick={onClickOK}
-            label={okLabel}
-          />
-          <StyledButton
-            variant="outlined"
-            onClick={onClickClose}
-            label="戻る"
-          />
+          <StyledButton variant="text" onClick={onClickOK} label={okLabel} />
+          <StyledButton variant="text" onClick={onClickClose} label="戻る" />
         </DialogActions>
       </Dialog>
     </div>

@@ -79,3 +79,5 @@ export const Announcement: React.FC = () => {
     </>
   );
 };
+
+Announcement.displayName = 'Announcement';

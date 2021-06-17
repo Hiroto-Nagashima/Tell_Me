@@ -4,7 +4,11 @@ import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import { Box, Grid } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import { SingleLineTextField, StyledButton } from '../../atoms/index';
+import {
+  SelectMenu,
+  SingleLineTextField,
+  StyledButton,
+} from '../../atoms/index';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -50,8 +54,8 @@ export type Props = {
   onChangeFirstName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeLastName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeGender: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeAge: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeDaycareId: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeAge: (e: React.ChangeEvent<{ value: unknown }>) => void;
+  onChangeDaycareId: (e: React.ChangeEvent<{ value: unknown }>) => void;
   onChangeFavoriteFood: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeFavoritePlay: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
@@ -78,6 +82,9 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
   } = props;
   const classes = useStyles();
 
+  const ages = [1, 2, 3, 4, 5];
+  const daycareIds = [1, 2, 3];
+
   return (
     <div className={classes.root}>
       <StyledPaper elevation={3}>
@@ -91,13 +98,10 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
         </Box>
         <Box textAlign="center" mx={4}>
           <Grid container xs={4}>
-            <SingleLineTextField
-              id="ID"
-              type="number"
+            <SelectMenu
+              numbers={daycareIds}
               value={daycareId}
-              textName="ID"
-              isFullWidth={false}
-              placeholder="保育園ID"
+              label="保育園のID"
               onChange={onChangeDaycareId}
             />
           </Grid>
@@ -145,13 +149,10 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
         </Box>
         <Box textAlign="center" mx={5}>
           <Grid container xs={4}>
-            <SingleLineTextField
-              id="ご年齢"
-              type="number"
+            <SelectMenu
+              numbers={ages}
               value={age}
-              textName="ご年齢"
-              isFullWidth={false}
-              placeholder="数字のみ"
+              label="年齢"
               onChange={onChangeAge}
             />
           </Grid>

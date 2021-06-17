@@ -1,6 +1,6 @@
 import React, { ReactNode, useContext, useState } from 'react';
 import firebase from 'firebase';
-import { useHistory, useParams } from 'react-router';
+import { useHistory } from 'react-router';
 
 import { Box } from '@material-ui/core';
 import List from '@material-ui/core/List';
@@ -9,7 +9,6 @@ import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 import HomeIcon from '@material-ui/icons/Home';
 import ListItem from '@material-ui/core/ListItem';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -63,22 +62,21 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type Props = {
   children: ReactNode;
+  title: string;
   window?: () => Window;
 };
 
 export const ParentSidebarLayout: React.FC<Props> = (props) => {
-  const { window, children } = props;
+  const { window, children, title } = props;
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
   const history = useHistory();
-  const { id } = useParams<{ id: string }>();
 
   const theme = useTheme();
   const classes = useStyles();
 
-  const [title, setTitle] = useState('Home');
   const [isOpen, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -97,18 +95,15 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
   };
 
   const onClickHome = () => {
-    history.push(`/kids/${id}`);
-    setTitle('Home');
+    history.push(`/kids/${currentKid.id}`);
   };
 
   const onClickNotebook = () => {
-    history.push(`/kids/${id}/notebook`);
-    setTitle('Notebook');
+    history.push(`/kids/${currentKid.id}/notebook`);
   };
 
   const onClickAnnouncement = () => {
     history.push(`/daycares/${currentKid.daycareId}/announcement`);
-    setTitle('Announcement');
   };
 
   const logout = async () => {
@@ -162,7 +157,6 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
       <Header
         title={title}
         appBarClassName={classes.appBar}

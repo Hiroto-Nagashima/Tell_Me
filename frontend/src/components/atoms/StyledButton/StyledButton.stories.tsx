@@ -1,6 +1,5 @@
 import { Story, Meta } from '@storybook/react';
 import { Props, StyledButton } from './StyledButton';
-import { Grid } from '@material-ui/core';
 
 export default {
   title: 'atoms/StyledButton',

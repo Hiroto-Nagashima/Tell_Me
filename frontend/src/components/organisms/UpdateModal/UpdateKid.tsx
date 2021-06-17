@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Box, Grid } from '@material-ui/core';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
-import { SingleLineTextField } from '../../atoms/index';
+import { SelectMenu, SingleLineTextField } from '../../atoms/index';
 
 const FlexBox = styled(Box)`
   display: flex;
@@ -16,7 +16,7 @@ export type Props = {
   lastName: string | null;
   favoriteFood: string | null;
   favoritePlay: string | null;
-  onChangeAge: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeAge: (e: React.ChangeEvent<{ value: unknown }>) => void;
   onChangeGender: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeFirstName: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeLastName: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -40,6 +40,8 @@ export const UpdateKid: React.FC<Props> = memo((props) => {
     onChangeFavoritePlay,
   } = props;
 
+  const ages = [1, 2, 3, 4, 5];
+
   return (
     <>
       <FlexBox my={2}>
@@ -54,13 +56,10 @@ export const UpdateKid: React.FC<Props> = memo((props) => {
           />
         </Box>
         <Grid container xs={3}>
-          <SingleLineTextField
-            id="体温"
-            type="number"
-            isFullWidth={false}
-            textName="ご年齢"
-            placeholder="数字のみ"
+          <SelectMenu
+            numbers={ages}
             value={age}
+            label="年齢"
             onChange={onChangeAge}
           />
         </Grid>
@@ -89,22 +88,22 @@ export const UpdateKid: React.FC<Props> = memo((props) => {
       </FlexBox>
       <Box textAlign="center" mb={2}>
         <SingleLineTextField
-          id="好きな食べ物"
+          id="好きな遊び"
           isFullWidth={true}
-          textName="好きな食べ物"
-          placeholder="餃子"
-          value={favoriteFood}
-          onChange={onChangeFavoriteFood}
+          textName="好きな遊び"
+          placeholder="おままごと"
+          value={favoritePlay}
+          onChange={onChangeFavoritePlay}
         />
       </Box>
       <Box textAlign="center">
         <SingleLineTextField
           id="好きな食べ物"
           isFullWidth={true}
-          textName="好きな遊び"
-          placeholder="おままごと"
-          value={favoritePlay}
-          onChange={onChangeFavoritePlay}
+          textName="好きな食べ物"
+          placeholder="餃子"
+          value={favoriteFood}
+          onChange={onChangeFavoriteFood}
         />
       </Box>
     </>

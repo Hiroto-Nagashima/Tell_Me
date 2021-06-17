@@ -228,3 +228,5 @@ export const TeacherHome: React.FC = () => {
     </>
   );
 };
+
+TeacherHome.displayName = 'Home';

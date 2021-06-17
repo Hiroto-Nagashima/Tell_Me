@@ -91,7 +91,9 @@ export const Notebook: React.FC = () => {
         setDinner(res.data.dinner);
         setBreakfast(res.data.breakfast);
         setBodyTemperature(res.data.body_temperature);
-        setHasBathed(true);
+        res.data.has_bathed == null
+          ? setHasBathed(true)
+          : setHasBathed(res.data.has_bathed);
         setIsNotebookOpen(true);
       })
       .catch((e) => setError(e))
@@ -142,17 +144,12 @@ export const Notebook: React.FC = () => {
           },
         })
         .then((res) => {
-          if (res.data.status == '422') {
-            setSeverity('error');
-            setMassage(res.data.message);
-          } else {
-            setSeverity('success');
-            setMassage(res.data.message);
-          }
+          setSeverity('success');
+          setMassage(res.data.message);
         })
         .catch(() => {
           setSeverity('error');
-          setMassage('登録に失敗しました');
+          setMassage('入力値に誤りがあります');
         })
         .finally(() => {
           setLoading(false);
@@ -204,3 +201,5 @@ export const Notebook: React.FC = () => {
     </>
   );
 };
+
+Notebook.displayName = 'Notebook';

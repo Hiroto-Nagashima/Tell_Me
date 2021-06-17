@@ -36,6 +36,8 @@ export const SignUp: React.FC = () => {
 
   const { setCurrentUser } = useContext(CurrentUserContext);
 
+  const numbers = [1, 2, 3];
+
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
   const [role, setRole] = useState<string | null>(null);
@@ -76,11 +78,14 @@ export const SignUp: React.FC = () => {
     return setGender(value);
   }, []);
 
-  const onChangeDaycareId = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
+  const onChangeDaycareId = useCallback(
+    (e: React.ChangeEvent<{ value: unknown }>) => {
+      const value = Number(e.target.value);
 
-    return setDaycareId(value);
-  }, []);
+      return setDaycareId(value);
+    },
+    [],
+  );
 
   const onChangeTelephoneNumber = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -199,6 +204,7 @@ export const SignUp: React.FC = () => {
             <MySignUpPaper
               email={email}
               role={role}
+              numbers={numbers}
               daycareId={daycareId}
               password={password}
               firstName={firstName}

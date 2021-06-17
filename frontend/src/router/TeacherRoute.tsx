@@ -23,7 +23,7 @@ export const TeacherRoute: React.FC<Props> = ({
     <Route
       {...rest}
       render={(props) => (
-        <TeacherSidebarLayout>
+        <TeacherSidebarLayout title={String(Component.displayName)}>
           <Component {...props} />
         </TeacherSidebarLayout>
       )}

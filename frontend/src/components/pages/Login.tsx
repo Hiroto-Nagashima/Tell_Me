@@ -189,15 +189,41 @@ export const Login: React.FC<Props> = () => {
                 );
               }
             })
-            .catch((e) => setError(e));
-        } catch (error) {
-          setError(error);
+            .catch(() => {
+              setError('ユーザーが見つかりません');
+              setOpen(true);
+            });
+        } catch {
+          setError('ログインに失敗しました');
+          setOpen(true);
         }
       })
-      .catch((error) => {
-        const errorMessage = error.message;
-        setError(errorMessage);
-        setOpen(true);
+      .catch((e) => {
+        if (
+          e.message ==
+            'There is no user record corresponding to this identifier. The user may have been deleted.' ||
+          e.message == 'The email address is badly formatted.'
+        ) {
+          setError('メールアドレスに誤りがあります');
+          setOpen(true);
+        } else if (
+          e.message ==
+          'Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.'
+        ) {
+          setError(
+            '複数回ログインに失敗したので一時的にログインできません。時間を置いて試してください',
+          );
+          setOpen(true);
+        } else if (
+          e.message ==
+          'The password is invalid or the user does not have a password.'
+        ) {
+          setError('パスワードに誤りがあります');
+          setOpen(true);
+        } else {
+          setError(e.message);
+          setOpen(true);
+        }
       })
       .finally(() => setLoading(false));
   };
@@ -216,10 +242,10 @@ export const Login: React.FC<Props> = () => {
               <HomeImage />
               <MyLoginPaper
                 email={email}
-                onChangeEmail={onChangeEmail}
                 password={password}
-                onChangePassword={onChangePassword}
                 onClickLogin={tryLogin}
+                onChangeEmail={onChangeEmail}
+                onChangePassword={onChangePassword}
               />
             </LoginSection>
           </LoginArea>

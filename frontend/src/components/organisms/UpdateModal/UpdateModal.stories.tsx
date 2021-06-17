@@ -27,11 +27,14 @@ export const UpdateKidModal: Story<Props> = (args) => {
   const [favoriteFood, setFavoriteFood] = useState<string>('');
   const [favoritePlay, setFavoritePlay] = useState<string>('');
 
-  const onChangeAge = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
+  const onChangeAge = useCallback(
+    (e: React.ChangeEvent<{ value: unknown }>) => {
+      const value = Number(e.target.value);
 
-    return setAge(value);
-  }, []);
+      return setAge(value);
+    },
+    [],
+  );
 
   const onChangeKidFirstName = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -157,7 +160,6 @@ export const UpdateParentModal: Story<Props> = (args) => {
     },
     [],
   );
-
 
   return (
     <>

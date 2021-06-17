@@ -10,7 +10,6 @@ import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import HomeIcon from '@material-ui/icons/Home';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -63,11 +62,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type Props = {
   children: ReactNode;
+  title: string;
   window?: () => Window;
 };
 
 export const TeacherSidebarLayout: React.FC<Props> = (props) => {
-  const { window, children } = props;
+  const { window, children, title } = props;
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -77,7 +77,6 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
   const theme = useTheme();
   const history = useHistory();
 
-  const [title, setTitle] = useState('Home');
   const [isOpen, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -99,19 +98,16 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
     history.push(
       `/daycares/${currentUser.daycareId}/teachers/${currentUser.id}`,
     );
-    setTitle('Home');
   };
 
   const onClickAllKids = () => {
     history.push(`/daycares/${currentUser.daycareId}/kids`);
-    setTitle('All Kids');
   };
 
   const onClickAnnouncement = () => {
     history.push(
       `/daycares/${currentUser.daycareId}/teachers/${currentUser.id}/announcement`,
     );
-    setTitle('Announcement');
   };
 
   const logout = async () => {
@@ -165,7 +161,6 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
       <Header
         title={title}
         appBarClassName={classes.appBar}

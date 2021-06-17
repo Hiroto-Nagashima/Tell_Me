@@ -12,9 +12,9 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: 'flex',
-      width: 560,
+      width: 520,
       borderRadius: 20,
-      height: 240,
+      height: 220,
       padding: 20,
     },
     details: {
@@ -38,6 +38,7 @@ const useStyles = makeStyles(() =>
       display: 'flex',
       alignItems: 'center',
       width: 380,
+      height: 140,
       justifyContent: 'flex-end',
     },
   }),
@@ -76,7 +77,7 @@ export const PostForm: React.FC<Props> = (props) => {
           <div className={classes.details}>
             <CardContent className={classes.content}>
               <MultipleLinesTextField
-                label="Announcement"
+                label="連絡の投稿(100字以内)"
                 variant="standard"
                 value={value}
                 onChange={onChangePostContent}

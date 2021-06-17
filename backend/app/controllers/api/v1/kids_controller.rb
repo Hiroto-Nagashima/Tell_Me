@@ -21,7 +21,7 @@ module Api
 
       def update
         kid = Kid.find(params[:id])
-        if kid.update(kid_params)
+        if kid.update!(kid_params)
           render json: {
             status: "ok",
             message: "更新が完了しました",
@@ -46,6 +46,7 @@ module Api
         kid = Kid.find(params[:id])
         render json: {
           kid:{
+            id: kid.id,
             age: kid.age,
             gender: kid.gender,
             lastName: kid.last_name,
@@ -58,7 +59,7 @@ module Api
       end
 
       def kids_of_parent
-        user = User.find_by(params[:id])
+        user = User.find(params[:id])
         if user.kid_users.present?
           kids_box = []
           kid_users = user.kid_users

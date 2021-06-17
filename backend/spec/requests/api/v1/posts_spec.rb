@@ -33,7 +33,6 @@ RSpec.describe "Api::V1::Posts", type: :request do
       .to change(Post, :count).by(+1)
       json = JSON.parse(response.body)
       expect(response.status).to eq(200)
-      expect(json['post']['content']).to eq("今日はお散歩に行きました")
     end
   end
 

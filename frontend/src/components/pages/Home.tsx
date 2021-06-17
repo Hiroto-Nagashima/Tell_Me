@@ -47,7 +47,7 @@ export const Home: React.FC = () => {
 
   const { id } = useParams<{ id: string }>();
   const [parent] = useAuthState(getAuth());
-  const { currentUser } = useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
@@ -66,11 +66,14 @@ export const Home: React.FC = () => {
     'error' | 'warning' | 'info' | 'success'
   >('error');
 
-  const onChangeAge = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
+  const onChangeAge = useCallback(
+    (e: React.ChangeEvent<{ value: unknown }>) => {
+      const value = Number(e.target.value);
 
-    return setAge(value);
-  }, []);
+      return setAge(value);
+    },
+    [],
+  );
 
   const onChangeKidFirstName = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -160,14 +163,16 @@ export const Home: React.FC = () => {
         setIsKidModalOpen(false);
       })
       .catch(() => {
-        setMassage('更新失敗しました');
+        setMassage('更新に失敗しました');
         setSeverity('error');
       })
       .finally(() => {
         setLoading(false);
+        setImage(null);
         setIsSnackbarOpen(true);
       });
   };
+
   const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     return setEmail(e.target.value);
   }, []);
@@ -218,6 +223,7 @@ export const Home: React.FC = () => {
       .then((res) => {
         setMassage(res.data.message);
         setSeverity(res.data.severity);
+        setImage(null);
         setIsParentModalOpen(false);
       })
       .catch(() => {
@@ -247,6 +253,7 @@ export const Home: React.FC = () => {
           })
           .then((res) => {
             setEmail(res.data.email);
+            setCurrentUser(res.data);
             setParentLastName(res.data.lastName);
             setParentFirstName(res.data.firstName);
             setTelephoneNumber(res.data.telephoneNumber);
@@ -313,7 +320,7 @@ export const Home: React.FC = () => {
     }
   };
 
-  const setCurrentUser = () => {
+  const setUser = () => {
     setEmail(currentUser.email);
     setParentLastName(currentUser.lastName);
     setParentFirstName(currentUser.firstName);
@@ -321,7 +328,7 @@ export const Home: React.FC = () => {
   };
 
   useEffect(() => {
-    currentUser && (getKid(), setCurrentUser());
+    currentUser && (getKid(), setUser());
   }, [currentUser]);
 
   return (
@@ -409,3 +416,5 @@ export const Home: React.FC = () => {
     </>
   );
 };
+
+Home.displayName = 'Home';

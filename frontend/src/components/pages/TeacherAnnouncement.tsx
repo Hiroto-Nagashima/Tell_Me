@@ -90,13 +90,10 @@ export const TeacherAnnouncement: React.FC = () => {
         },
       })
       .then((res) => {
-        if (res.data.status == '422') {
-          setSeverity('error');
-          setMassage(res.data.message);
-        } else {
-          setSeverity('success');
-          setMassage(res.data.message);
-        }
+        setPosts(res.data.posts);
+        setPostContent(null);
+        setSeverity('success');
+        setMassage(res.data.message);
       })
       .catch(() => {
         setMassage('投稿に失敗しました');
@@ -160,3 +157,5 @@ export const TeacherAnnouncement: React.FC = () => {
     </>
   );
 };
+
+TeacherAnnouncement.displayName = 'Announcement';

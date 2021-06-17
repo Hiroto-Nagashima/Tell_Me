@@ -41,17 +41,23 @@ export const RegisterKid: React.FC<Props> = () => {
     return setLastName(e.target.value);
   }, []);
 
-  const onChangeAge = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
+  const onChangeAge = useCallback(
+    (e: React.ChangeEvent<{ value: unknown }>) => {
+      const value = Number(e.target.value);
 
-    return setAge(value);
-  }, []);
+      return setAge(value);
+    },
+    [],
+  );
 
-  const onChangeDaycareId = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
+  const onChangeDaycareId = useCallback(
+    (e: React.ChangeEvent<{ value: unknown }>) => {
+      const value = Number(e.target.value);
 
-    return setDaycareId(value);
-  }, []);
+      return setDaycareId(value);
+    },
+    [],
+  );
 
   const onChangeGender = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
@@ -97,18 +103,13 @@ export const RegisterKid: React.FC<Props> = () => {
         },
       })
       .then((res) => {
-        if (res.data.status == '422') {
-          setError(res.data.message);
-          setOpen(true);
-        } else {
-          history.push({
-            pathname: `/kids/${res.data.kid.id}`,
-            state: res.data.kid,
-          });
-        }
+        history.push({
+          pathname: `/kids/${res.data.kid.id}`,
+          state: res.data.kid,
+        });
       })
-      .catch((e) => {
-        setError(e);
+      .catch(() => {
+        setError('登録に失敗しました');
         setOpen(true);
       })
       .finally(() => setLoading(false));
