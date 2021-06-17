@@ -49,6 +49,8 @@ http://localhost:3000 でWebpackサーバ, http://localhost:5000 でAPIサーバ
   - docker-compose
   - Firebase Authentication
   - AWS(ECS, S3, RDS)
+- CI/CD
+  - Github actions  
 
 ## Unit Test
 
