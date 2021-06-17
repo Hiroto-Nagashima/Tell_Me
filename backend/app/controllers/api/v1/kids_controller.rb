@@ -119,13 +119,6 @@ module Api
         end
       end
 
-      def fetch_posts
-        kid = Kid.find(params[:id])
-        daycare = Daycare.find(kid.daycare_id)
-        posts = daycare.posts
-        render json: posts
-      end
-
       private
 
       def kid_params

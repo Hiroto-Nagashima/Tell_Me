@@ -5,7 +5,7 @@ info:
   version: "0.0.0"
   title: Tell Me
 paths:
-  /daycares/:id:
+  /api/v1/daycares/:id:
     get:
       tags:
         - "daycares"
@@ -37,7 +37,7 @@ paths:
           description: "該当する保育園が見つからない"
           schema:
             $ref: "#/definitions/404Error"
-  /daycares/:daycare_id/users/:id/posts:
+  /api/v1/daycares/:daycare_id/users/:id/posts:
     get:
       tags:
         - "posts"
@@ -106,7 +106,7 @@ paths:
           description: "投稿内容に不備"
           schema:
             $ref: "#/definitions/404Error"
-  /daycares/:daycare_id/posts:
+  /api/v1/daycares/:daycare_id/posts:
     get:
       tags:
         - "posts"
@@ -129,7 +129,7 @@ paths:
           description: "該当する投稿が見つからない"
           schema:
             $ref: "#/definitions/404Error"
-  /daycares/:id/kids:
+  /api/v1/daycares/:id/kids:
     get:
       tags:
         - "kids"
@@ -147,14 +147,14 @@ paths:
           description: "成功時のレスポンス"
           schema:
             type: array
-            $ref: "#/definitions/Kid"
+            $ref: "#/definitions/ResponseOfKid"
         404:
           description: "該当する子供が見つからない"
           schema:
             $ref: "#/definitions/404Error"
 
-  /users/:id/kids:
-    post:
+  /api/v1/users/:id/kids:
+    get:
       tags:
         - "kids"
       summary: "ある親の子供を全て取得"
@@ -170,18 +170,292 @@ paths:
         200:
           description: "成功時のレスポンス"
           schema:
-            $ref: "#/definitions/Kid"
+            $ref: "#/definitions/ResponseOfKid"
         404:
           description: "該当する子供が見つからない"
           schema:
             $ref: "#/definitions/404Error"
-  /kids/:id/fetch_posts:
+  /api/v1/kids/:id/register_image:
     post:
       tags:
         - "kids"
-      summary: "ある子供が通っている保育園の投稿を全て取得"
+      summary: "子供のプロフィール画像投稿"
       description: ""
       parameters:
+        - name: id
+          in: path
+          description: 子供のID
+          required: true
+          type: integer
+          format: int64
+        - name: image
+          in: formData
+          description: プロフィール画像
+          required: true
+          type: string
+          format: binary
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
+            title: ""
+            type: object
+            properties:
+              status:
+                type: string
+              message:
+                type: string
+              severity:
+                type: string
+        400:
+          description: "失敗時のレスポンス"
+          schema:
+            title: ""
+            type: object
+            properties:
+              status:
+                type: string
+              message:
+                type: string
+              severity:
+                type: string
+  /api/v1/kids/:id:
+    get:
+      tags:
+        - "kids"
+      summary: "IDに紐づく子供のレコード取得"
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          description: 子供のID
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
+            $ref: "#/definitions/ResponseOfKid"
+        404:
+          description: "該当する子供が見つからない"
+          schema:
+            $ref: "#/definitions/404Error"
+    put:
+      tags:
+        - "kids"
+      summary: "子供の情報の更新"
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          description: 子供のID
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: "body"
+          description: "子供の情報"
+          required: true
+          schema:
+            $ref: "#/definitions/RequestOfKid"
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
+            $ref: "#/definitions/ResponseOfKid"
+        400:
+          description: "失敗時のレスポンス"
+          schema:
+            $ref: "#/definitions/400InputError"
+  /api/v1/kids:
+    post:
+      tags:
+        - "kids"
+      summary: "子供の登録"
+      description: ""
+      parameters:
+        - in: body
+          name: "body"
+          description: "子供の情報"
+          required: true
+          schema:
+            $ref: "#/definitions/RequestOfKid"
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
+            $ref: "#/definitions/ResponseOfKid"
+        422:
+          description: "失敗時のレスポンス"
+          schema:
+            $ref: "#/definitions/BasicResponse"
+  /api/v1/notebooks/fetch_notebook:
+    get:
+      tags:
+        - "notebooks"
+      summary: "パラメーターの日付に紐づいた連絡帳取得"
+      description: ""
+      parameters:
+        - name: date
+          in: query
+          description: 選択された日付
+          required: true
+          type: string
+          format: date
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
+            $ref: "#/definitions/ResponseOfNotebook"
+        404:
+          description: "該当の連絡帳が見つからない"
+          schema:
+            $ref: "#/definitions/404Error"
+  /api/v1/notebooks:
+    post:
+      tags:
+        - "notebooks"
+      summary: "連絡帳作成"
+      description: ""
+      parameters:
+        - in: body
+          name: "body"
+          description: "連絡帳の入力値"
+          required: true
+          schema:
+            $ref: "#/definitions/RequestOfNotebook"
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
+            $ref: "#/definitions/BasicResponse"
+        422:
+          description: "失敗時のレスポンス"
+          schema:
+            $ref: "#/definitions/BasicResponse"
+  /api/v1/notebooks/:id:
+    put:
+      tags:
+        - "notebooks"
+      summary: "連絡帳更新"
+      description: ""
+      parameters:
+        - in: body
+          name: "body"
+          description: "連絡帳の入力値"
+          required: true
+          schema:
+            $ref: "#/definitions/RequestOfNotebook"
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
+            $ref: "#/definitions/BasicResponse"
+        400:
+          description: "失敗時のレスポンス"
+          schema:
+            $ref: "#/definitions/BasicResponse"
+  /api/v1/users/:id/register_image:
+    post:
+      tags:
+        - "users"
+      summary: "ユーザーのプロフィール画像投稿"
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          description: ユーザーのID
+          required: true
+          type: integer
+          format: int64
+        - name: image
+          in: formData
+          description: プロフィール画像
+          required: true
+          type: string
+          format: binary
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
+            title: ""
+            type: object
+            properties:
+              status:
+                type: string
+              message:
+                type: string
+              severity:
+                type: string
+        400:
+          description: "失敗時のレスポンス"
+          schema:
+            title: ""
+            type: object
+            properties:
+              status:
+                type: string
+              message:
+                type: string
+              severity:
+                type: string
+  /api/v1/users/fetch_user:
+    get:
+      tags:
+        - "users"
+      summary: "uidに紐づいたユーザー取得"
+      description: ""
+      parameters:
+        - name: uid
+          in: query
+          description: Firebaseの認証で使うuid
+          required: true
+          type: string
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
+            $ref: "#/definitions/ResponseOfUser"
+        404:
+          description: "該当のユーザーが見つからない"
+          schema:
+            $ref: "#/definitions/404Error"
+  /api/v1/users:
+    post:
+      tags:
+        - "users"
+      summary: "ユーザー登録"
+      description: ""
+      parameters:
+        - in: body
+          name: "body"
+          description: "ユーザーの情報"
+          required: true
+          schema:
+            $ref: "#/definitions/RequestOfUser"
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
+            $ref: "#/definitions/ResponseOfUser"
+        400:
+          description: "失敗時のレスポンス"
+          schema:
+            $ref: "#/definitions/400InputError"
+  /api/v1/users/:id:
+    put:
+      tags:
+        - "users"
+      summary: "ユーザーの情報更新"
+      description: ""
+      parameters:
+        - in: body
+          name: "body"
+          description: "ユーザーの情報"
+          required: true
+          schema:
+            $ref: "#/definitions/RequestOfUser"
         - name: id
           in: path
           description: ユーザーのID
@@ -192,13 +466,13 @@ paths:
         200:
           description: "成功時のレスポンス"
           schema:
-            $ref: "#/definitions/Kid"
-        404:
-          description: "該当する子供が見つからない"
+            $ref: "#/definitions/ResponseOfUser"
+        400:
+          description: "失敗時のレスポンス"
           schema:
-            $ref: "#/definitions/404Error"
+            $ref: "#/definitions/400InputError"
 definitions:
-  Notebook:
+  ResponseOfNotebook:
     type: object
     properties:
       id:
@@ -221,7 +495,28 @@ definitions:
         type: string
       updated_at:
         type: string
-  Kid:
+  RequestOfNotebook:
+    type: object
+    properties:
+      kid_id:
+        type: integer
+      date:
+        type: string
+      body_temperature:
+        type: integer
+      has_bathed:
+        type: boolean
+      breakfast:
+        type: string
+      dinner:
+        type: string
+      memo:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+  ResponseOfKid:
     type: object
     properties:
       id:
@@ -244,7 +539,51 @@ definitions:
         type: string
       updated_at:
         type: string
-  User:
+  RequestOfKid:
+    type: object
+    properties:
+      first_name:
+        type: string
+      last_name:
+        type: string
+      age:
+        type: integer
+      gender:
+        type: integer
+      favorite_food:
+        type: string
+      favorite_play:
+        type: string
+      image:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+  RequestOfUser:
+    type: object
+    properties:
+      first_name:
+        type: string
+      last_name:
+        type: string
+      email:
+        type: string
+      gender:
+        type: integer
+      telephone_number:
+        type: string
+      password:
+        type: string
+      role:
+        type: string
+      image:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+  ResponseOfUser:
     type: object
     properties:
       id:
@@ -311,7 +650,7 @@ definitions:
       message:
         type: "string"
         example: "データが見つかりません"
-  400NoInputError:
+  400InputError:
     type: "object"
     properties:
       status:
@@ -320,4 +659,11 @@ definitions:
         format: "int64"
       message:
         type: "string"
-        example: "未入力箇所があります"
+        example: "未入力箇所に誤りがあります"
+  BasicResponse:
+    type: object
+    properties:
+      status:
+        type: string
+      message:
+        type: string
