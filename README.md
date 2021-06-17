@@ -14,6 +14,7 @@ https://tell-me-please.com/<br>保育園と保護者を繋ぐ連絡帳アプリ�
 - 保育園の先生のページでできることはおよそ以下の通りです
   - 在籍している保育園内の全ての子供の閲覧 
   - 保育園からの連絡の投稿
+- その他詳細はWikiに記載しています  https://github.com/Hiroto-Nagashima/Tell_Me/wiki 
 
 ## Setup
 ```
