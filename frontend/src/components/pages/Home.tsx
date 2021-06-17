@@ -129,6 +129,8 @@ export const Home: React.FC = () => {
       })
       .then((res) => {
         setMassage(res.data.message);
+        setImage(null);
+        setDisabled(true);
         setIsKidModalOpen(false);
         setSeverity(res.data.severity);
       })
@@ -224,6 +226,7 @@ export const Home: React.FC = () => {
         setMassage(res.data.message);
         setSeverity(res.data.severity);
         setImage(null);
+        setDisabled(true);
         setIsParentModalOpen(false);
       })
       .catch(() => {
