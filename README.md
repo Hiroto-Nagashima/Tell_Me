@@ -49,6 +49,8 @@ http://localhost:3000 でWebpackサーバ, http://localhost:5000 でAPIサーバ
   - docker-compose
   - Firebase Authentication
   - AWS(ECS, S3, RDS)
+- CI/CD
+  - Github actions  
 
 ## Unit Test
 
@@ -63,3 +65,5 @@ $ docker-compose run --rm backend bundle exec rspec
 $ cd frontend
 $ yarn storybook
 ```
+また、Chromaticを使ってStorybookをデプロイしています。以下がURLです。</br>
+https://www.chromatic.com/apps?accountId=6072736e3dd1f500218f416e
