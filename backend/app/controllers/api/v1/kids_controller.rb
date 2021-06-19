@@ -106,7 +106,7 @@ module Api
         kid.image = params[:image]
         if kid.save!
           render json: {
-            status: "ok",
+            status: 200,
             message: "画像を登録しました",
             severity: "success"
           }

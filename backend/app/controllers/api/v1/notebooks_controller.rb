@@ -6,7 +6,7 @@ module Api
         notebook = kid.notebooks.build(notebook_params)
         if notebook.save!
           render json: {
-            status: "ok",
+            status: 200,
             message: "登録が完了しました"
           }
         else
@@ -37,7 +37,9 @@ module Api
         kid = Kid.find(params[:kid_id])
         date = params[:date]
         new_date = date.slice(0..9)
-        notebook = kid.notebooks.find_by(date: new_date)
+        notebooks = kid.notebooks.where(date: new_date)
+        notebook = notebooks.last
+        # notebook = kid.notebooks.find_by(date: new_date)
         if notebook.present?
           render json: notebook
         else
