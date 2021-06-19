@@ -10,7 +10,7 @@ module Api
         if post.save!
           posts = Post.all
           render json: {
-            status: "ok",
+            status: 200,
             message: "投稿が完了しました！",
             posts: posts
           }

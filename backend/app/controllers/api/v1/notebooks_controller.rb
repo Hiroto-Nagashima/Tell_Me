@@ -22,7 +22,7 @@ module Api
         notebook = kid.notebooks.find_by(id: params[:id])
         if notebook.update!(notebook_params)
           render json: {
-            status: "ok",
+            status: 200,
             message: "更新が完了しました"
           }
         else
@@ -39,7 +39,6 @@ module Api
         new_date = date.slice(0..9)
         notebooks = kid.notebooks.where(date: new_date)
         notebook = notebooks.last
-        # notebook = kid.notebooks.find_by(date: new_date)
         if notebook.present?
           render json: notebook
         else

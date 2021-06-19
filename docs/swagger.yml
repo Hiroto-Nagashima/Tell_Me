@@ -14,7 +14,7 @@ paths:
       parameters:
         - name: daycare_id
           in: path
-          description: 特定の子供の名前と年齢を取得
+          description: 保育園のID
           required: true
           type: integer
           format: int64
@@ -80,7 +80,7 @@ paths:
           format: int64
         - name: id
           in: path
-          description: 子供のID
+          description: ユーザーのID
           required: true
           type: integer
           format: int64
@@ -105,15 +105,15 @@ paths:
         400:
           description: "投稿内容に不備"
           schema:
-            $ref: "#/definitions/404Error"
-  /api/v1/daycares/:daycare_id/posts:
+            $ref: "#/definitions/400InputError"
+  /api/v1/daycares/:id/posts:
     get:
       tags:
         - "posts"
       summary: "ある保育園の全ての投稿取得"
       description: ""
       parameters:
-        - name: daycare_id
+        - name: id
           in: path
           description: 保育園のID
           required: true
@@ -136,7 +136,7 @@ paths:
       summary: "ある保育園の子供のデータを全て取得"
       description: ""
       parameters:
-        - name: daycare_id
+        - name: id
           in: path
           description: 保育園のID
           required: true
@@ -341,6 +341,12 @@ paths:
       summary: "連絡帳更新"
       description: ""
       parameters:
+        - name: id
+          in: path
+          description: 連絡帳のID
+          required: true
+          type: integer
+          format: int64
         - in: body
           name: "body"
           description: "連絡帳の入力値"
@@ -352,7 +358,7 @@ paths:
           description: "成功時のレスポンス"
           schema:
             $ref: "#/definitions/BasicResponse"
-        400:
+        422:
           description: "失敗時のレスポンス"
           schema:
             $ref: "#/definitions/BasicResponse"
