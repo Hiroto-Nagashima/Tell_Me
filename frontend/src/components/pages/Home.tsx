@@ -58,7 +58,7 @@ export const Home: React.FC = () => {
   const [telephoneNumber, setTelephoneNumber] = useState('');
   const [isParentModalOpen, setIsParentModalOpen] = useState(false);
 
-  const [image, setImage] = useState<any>(null);
+  const [image, setImage] = useState<string | Blob>('');
   const [message, setMassage] = useState('');
   const [disabled, setDisabled] = useState(true);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
@@ -129,7 +129,7 @@ export const Home: React.FC = () => {
       })
       .then((res) => {
         setMassage(res.data.message);
-        setImage(null);
+        setImage('');
         setDisabled(true);
         setIsKidModalOpen(false);
         setSeverity(res.data.severity);
@@ -170,7 +170,7 @@ export const Home: React.FC = () => {
       })
       .finally(() => {
         setLoading(false);
-        setImage(null);
+        setImage('');
         setIsSnackbarOpen(true);
       });
   };
@@ -225,7 +225,7 @@ export const Home: React.FC = () => {
       .then((res) => {
         setMassage(res.data.message);
         setSeverity(res.data.severity);
-        setImage(null);
+        setImage('');
         setDisabled(true);
         setIsParentModalOpen(false);
       })
@@ -295,7 +295,7 @@ export const Home: React.FC = () => {
   );
 
   const resizeFile = (file: File) =>
-    new Promise((resolve) => {
+    new Promise((resolve: (value: string | Blob | File) => void) => {
       Resizer.imageFileResizer(
         file,
         300,
@@ -303,7 +303,7 @@ export const Home: React.FC = () => {
         'JPEG',
         100,
         0,
-        (uri) => {
+        (uri:any) => {
           resolve(uri);
         },
         'base64',
