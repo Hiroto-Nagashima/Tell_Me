@@ -32,7 +32,9 @@ export const TeacherHome: React.FC = () => {
 
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
-  const [image, setImage] = useState<string | Blob>('');
+  const [image, setImage] = useState<string | Blob | ProgressEvent<FileReader>>(
+    '',
+  );
   const [posts, setPosts] = useState<Array<Post>>([]);
   const [error, setError] = useState(false);
   const [disabled, setDisabled] = useState(true);
@@ -74,22 +76,26 @@ export const TeacherHome: React.FC = () => {
   );
 
   const resizeFile = (file: File) =>
-    new Promise((resolve: (value: string | Blob | File) => void) => {
-      Resizer.imageFileResizer(
-        file,
-        300,
-        300,
-        'JPEG',
-        100,
-        0,
-        // eslint-disable-next-line
-        // @ts-ignore
-        (uri: string | Blob | File) => {
-          resolve(uri);
-        },
-        'base64',
-      );
-    });
+    new Promise(
+      (
+        resolve: (
+          value: string | Blob | File | ProgressEvent<FileReader>,
+        ) => void,
+      ) => {
+        Resizer.imageFileResizer(
+          file,
+          300,
+          300,
+          'JPEG',
+          100,
+          0,
+          (uri) => {
+            resolve(uri);
+          },
+          'base64',
+        );
+      },
+    );
 
   const tryResizeFile = async (e: ChangeEvent<HTMLInputElement>) => {
     try {
@@ -106,7 +112,7 @@ export const TeacherHome: React.FC = () => {
 
   const onClickSubmitFile = async () => {
     const submitData = new FormData();
-    submitData.append('image', image);
+    submitData.append('image', image as string | Blob);
     await axios
       .post(
         `${API_ENDPOINT}users/${currentUser.id}/register_image`,
