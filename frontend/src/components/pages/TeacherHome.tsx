@@ -32,7 +32,7 @@ export const TeacherHome: React.FC = () => {
 
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
-  const [image, setImage] = useState<any>(null);
+  const [image, setImage] = useState<string | Blob>('');
   const [posts, setPosts] = useState<Array<Post>>([]);
   const [error, setError] = useState(false);
   const [disabled, setDisabled] = useState(true);
@@ -74,7 +74,7 @@ export const TeacherHome: React.FC = () => {
   );
 
   const resizeFile = (file: File) =>
-    new Promise((resolve) => {
+    new Promise((resolve: (value: string | Blob | File) => void) => {
       Resizer.imageFileResizer(
         file,
         300,
@@ -82,7 +82,9 @@ export const TeacherHome: React.FC = () => {
         'JPEG',
         100,
         0,
-        (uri) => {
+        // eslint-disable-next-line
+        // @ts-ignore
+        (uri: string | Blob | File) => {
           resolve(uri);
         },
         'base64',
@@ -105,15 +107,31 @@ export const TeacherHome: React.FC = () => {
   const onClickSubmitFile = async () => {
     const submitData = new FormData();
     submitData.append('image', image);
-    await axios.post(
-      `${API_ENDPOINT}users/${currentUser.id}/register_image`,
-      submitData,
-      {
-        headers: {
-          'content-type': 'multipart/form-data',
+    await axios
+      .post(
+        `${API_ENDPOINT}users/${currentUser.id}/register_image`,
+        submitData,
+        {
+          headers: {
+            'content-type': 'multipart/form-data',
+          },
         },
-      },
-    );
+      )
+      .then((res) => {
+        setMassage(res.data.message);
+        setImage('');
+        setDisabled(true);
+        setIsModalOpen(false);
+        setSeverity(res.data.severity);
+      })
+      .catch(() => {
+        setMassage('更新失敗しました');
+        setSeverity('error');
+      })
+      .finally(() => {
+        setLoading(false);
+        setIsSnackbarOpen(true);
+      });
   };
 
   const tryUpdateTeacher = () => {
