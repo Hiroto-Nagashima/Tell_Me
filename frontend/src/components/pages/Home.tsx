@@ -303,7 +303,9 @@ export const Home: React.FC = () => {
         'JPEG',
         100,
         0,
-        (uri:any) => {
+        // eslint-disable-next-line
+        // @ts-ignore
+        (uri: string | Blob | File) => {
           resolve(uri);
         },
         'base64',
