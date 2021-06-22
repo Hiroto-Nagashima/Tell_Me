@@ -176,7 +176,7 @@ export const Login: React.FC<Props> = () => {
           await axios
             .get(`${API_ENDPOINT}users/fetch_user`, {
               params: {
-                uid: user!.uid,
+                uid: user ? user.uid : null,
               },
             })
             .then((res) => {

@@ -32,7 +32,10 @@ export const Notebook: React.FC = () => {
   >('error');
   const [bodyTemperature, setBodyTemperature] = useState<number | null>(null);
 
-  const newDate = format(selectedDate!, 'yyyy/MM/dd');
+  const newDate = format(
+    selectedDate ? selectedDate : new Date(),
+    'yyyy/MM/dd',
+  );
 
   const onChangeDinner = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setDinner(e.target.value);
