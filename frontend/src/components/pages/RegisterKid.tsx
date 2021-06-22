@@ -99,7 +99,7 @@ export const RegisterKid: React.FC<Props> = () => {
           daycare_id: daycareId,
           favorite_food: favoriteFood,
           favorite_play: favoritePlay,
-          uid: user!.uid,
+          uid: user ? user.uid : null,
         },
       })
       .then((res) => {
