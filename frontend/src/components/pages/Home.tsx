@@ -151,7 +151,7 @@ export const Home: React.FC = () => {
     axios
       .put(`${API_ENDPOINT}kids/${id}`, {
         params: {
-          uid: parent!.uid,
+          uid: parent ? parent.uid : null,
           age: age,
           gender: gender,
           last_name: kidLastName,
@@ -244,45 +244,47 @@ export const Home: React.FC = () => {
   const tryUpdateParent = () => {
     setLoading(true);
     const user = getAuth().currentUser;
-    user!
-      .updateEmail(email)
-      .then(() => {
-        axios
-          .put(`${API_ENDPOINT}users/${currentUser.id}`, {
-            params: {
-              email: email,
-              last_name: parentLastName,
-              first_name: parentFirstName,
-              telephone_number: telephoneNumber,
-            },
-          })
-          .then((res) => {
-            setEmail(res.data.email);
-            setCurrentUser(res.data);
-            setParentLastName(res.data.lastName);
-            setParentFirstName(res.data.firstName);
-            setTelephoneNumber(res.data.telephoneNumber);
-            setMassage(res.data.message);
-            setSeverity('success');
-            setIsParentModalOpen(false);
+    user
+      ? user
+          .updateEmail(email)
+          .then(() => {
+            axios
+              .put(`${API_ENDPOINT}users/${currentUser.id}`, {
+                params: {
+                  email: email,
+                  last_name: parentLastName,
+                  first_name: parentFirstName,
+                  telephone_number: telephoneNumber,
+                },
+              })
+              .then((res) => {
+                setEmail(res.data.email);
+                setCurrentUser(res.data);
+                setParentLastName(res.data.lastName);
+                setParentFirstName(res.data.firstName);
+                setTelephoneNumber(res.data.telephoneNumber);
+                setMassage(res.data.message);
+                setSeverity('success');
+                setIsParentModalOpen(false);
+              })
+              .catch(() => {
+                setMassage('登録に失敗しました');
+                setSeverity('error');
+              })
+              .finally(() => {
+                setLoading(false);
+                setIsSnackbarOpen(true);
+              });
           })
           .catch(() => {
-            setMassage('登録に失敗しました');
+            setMassage(
+              'メールアドレスの更新に失敗しました。ログアウトしてからもう一度試してください',
+            );
             setSeverity('error');
-          })
-          .finally(() => {
             setLoading(false);
             setIsSnackbarOpen(true);
-          });
-      })
-      .catch(() => {
-        setMassage(
-          'メールアドレスの更新に失敗しました。ログアウトしてからもう一度試してください',
-        );
-        setSeverity('error');
-        setLoading(false);
-        setIsSnackbarOpen(true);
-      });
+          })
+      : null;
   };
   const onCloseSnackbar = useCallback(
     (event?: React.SyntheticEvent, reason?: string) => {
@@ -296,7 +298,7 @@ export const Home: React.FC = () => {
     [],
   );
 
-  const resizeFile = (file: File) =>
+  const resizeFile = (file: File | null) =>
     new Promise(
       (
         resolve: (
@@ -304,7 +306,7 @@ export const Home: React.FC = () => {
         ) => void,
       ) => {
         Resizer.imageFileResizer(
-          file,
+          file as Blob,
           300,
           300,
           'JPEG',
@@ -320,7 +322,7 @@ export const Home: React.FC = () => {
 
   const tryResizeFile = async (event: ChangeEvent<HTMLInputElement>) => {
     try {
-      const file = event.target.files![0];
+      const file = event.target.files ? event.target.files[0] : null;
       const image = await resizeFile(file);
       setImage(image);
       setDisabled(false);

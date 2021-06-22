@@ -75,7 +75,7 @@ export const TeacherHome: React.FC = () => {
     [],
   );
 
-  const resizeFile = (file: File) =>
+  const resizeFile = (file: File | null) =>
     new Promise(
       (
         resolve: (
@@ -83,7 +83,7 @@ export const TeacherHome: React.FC = () => {
         ) => void,
       ) => {
         Resizer.imageFileResizer(
-          file,
+          file as Blob,
           300,
           300,
           'JPEG',
@@ -99,7 +99,7 @@ export const TeacherHome: React.FC = () => {
 
   const tryResizeFile = async (e: ChangeEvent<HTMLInputElement>) => {
     try {
-      const file = e.target.files![0];
+      const file = e.target.files ? e.target.files[0] : null;
       const image = await resizeFile(file);
       setImage(image);
       setDisabled(false);
