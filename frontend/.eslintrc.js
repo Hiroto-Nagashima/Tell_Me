@@ -33,6 +33,12 @@ module.exports = {
         project: ['tsconfig.json'], // Specify it only for TypeScript files
       },
     },
+    {
+      files: ['*.ts'],
+      rules: {
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+      },
+    },
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
