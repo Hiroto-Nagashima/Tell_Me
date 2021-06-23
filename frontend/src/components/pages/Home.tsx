@@ -13,7 +13,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { CurrentUserContext } from '../../providers/UserProvider';
 import { useFetchKid } from '../../hooks/useFetchKid';
 
-import { Box } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { Spinner, CustomizedSnackbar } from '../atoms';
 import {
   KidProfile,
@@ -352,18 +352,20 @@ export const Home: React.FC = () => {
         <h1>{error}</h1>
       ) : (
         <>
-          <Box display="flex" justifyContent="space-around">
-            <KidProfile
-              age={currentKid.age}
-              kidId={id}
-              gender={currentKid.gender}
-              lastName={currentKid.lastName}
-              firstName={currentKid.firstName}
-              favoriteFood={currentKid.favoriteFood}
-              favoritePlay={currentKid.favoritePlay}
-              onClick={onClickKidModal}
-            />
-            <div key={currentUser.id}>
+          <Grid container justify="space-around">
+            <Grid item md={7} xs={12}>
+              <KidProfile
+                age={currentKid.age}
+                kidId={id}
+                gender={currentKid.gender}
+                lastName={currentKid.lastName}
+                firstName={currentKid.firstName}
+                favoriteFood={currentKid.favoriteFood}
+                favoritePlay={currentKid.favoritePlay}
+                onClick={onClickKidModal}
+              />
+            </Grid>
+            <Grid item md={4} xs="auto">
               <ParentProfile
                 id={currentUser.id}
                 email={currentUser.email}
@@ -373,8 +375,8 @@ export const Home: React.FC = () => {
                 telephoneNumber={currentUser.telephoneNumber}
                 onClick={onClickParentModal}
               />
-            </div>
-          </Box>
+            </Grid>
+          </Grid>
           <UpdateModal
             open={isKidModalOpen}
             disabled={disabled}

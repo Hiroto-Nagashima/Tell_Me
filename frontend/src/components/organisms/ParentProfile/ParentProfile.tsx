@@ -41,7 +41,7 @@ const Gender = styled(Box)`
 const MyCard = styled(Card)`
   width: 345px;
   height: 450px;
-  position: 'relative';
+  position: relative;
 `;
 
 const MyCardActions = styled(CardActions)`
@@ -75,12 +75,12 @@ const ProfileImage = styled.img`
   height: 120px;
   object-fit: cover;
   border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  left: 35%;
 `;
 
-const ProfileImageBox = styled(Box)`
-  position: absolute;
-  top: 110px;
-`;
+const ProfileImageBox = styled(Box)``;
 
 const ProfileImageWrapper = styled(Box)`
   display: flex;

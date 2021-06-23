@@ -74,10 +74,11 @@ const KidName = styled(Typography)`
 `;
 
 const MyCard = styled(Card)`
-  width: 580px;
+  width: 100%;
   height: 580px;
   position: relative;
   border-radius: 2px;
+  margin-bottom: 100px;
 `;
 
 const MyCardMedia = styled(CardMedia)`
