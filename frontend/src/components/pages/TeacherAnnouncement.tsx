@@ -1,4 +1,4 @@
-import { Box } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import axios from 'axios';
 import format from 'date-fns/format';
 import styled from 'styled-components';
@@ -17,9 +17,8 @@ import { CurrentUserContext } from '../../providers/UserProvider';
 import { CustomizedSnackbar, Spinner } from '../atoms';
 import { PostCard, PostForm } from '../organisms';
 
-const FlexBox = styled.div`
-  display: flex;
-  justify-content: center;
+const EachPost = styled(Grid)`
+  margin: 3% 0;
 `;
 
 export const TeacherAnnouncement: React.FC = () => {
@@ -118,41 +117,41 @@ export const TeacherAnnouncement: React.FC = () => {
       ) : error ? (
         <div>エラーです</div>
       ) : (
-        <FlexBox>
-          <div>
+        <Grid container justify="center" alignItems="center">
+          <Grid item md={6} xs={11}>
             <PostForm
               src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/user/image/${teacherId}/image.jpeg`}
               value={postContent}
               onClickPost={tryPost}
               onChangePostContent={onChangePostContent}
             />
-            {posts
-              .slice(0)
-              .reverse()
-              .map((post) => {
-                return (
-                  <Box key={post.id} my={2}>
-                    <PostCard
-                      poster={post.poster}
-                      teacherId={post.user_id}
-                      content={post.content}
-                      createdAt={format(
-                        new Date(post.created_at),
-                        'yyyy-MM-dd HH:mm',
-                      )}
-                    />
-                  </Box>
-                );
-              })}
-            <CustomizedSnackbar
-              open={isSnackbarOpen}
-              onClose={onCloseSnackbar}
-              severity={severity}
-            >
-              {message}
-            </CustomizedSnackbar>
-          </div>
-        </FlexBox>
+          </Grid>
+          {posts
+            .slice(0)
+            .reverse()
+            .map((post) => {
+              return (
+                <EachPost item md={7} xs={11} key={post.id}>
+                  <PostCard
+                    poster={post.poster}
+                    teacherId={post.user_id}
+                    content={post.content}
+                    createdAt={format(
+                      new Date(post.created_at),
+                      'yyyy-MM-dd HH:mm',
+                    )}
+                  />
+                </EachPost>
+              );
+            })}
+          <CustomizedSnackbar
+            open={isSnackbarOpen}
+            onClose={onCloseSnackbar}
+            severity={severity}
+          >
+            {message}
+          </CustomizedSnackbar>
+        </Grid>
       )}
     </>
   );

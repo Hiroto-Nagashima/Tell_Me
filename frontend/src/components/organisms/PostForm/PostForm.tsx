@@ -10,23 +10,6 @@ import { MultipleLinesTextField, StyledButton } from '../../atoms';
 
 const useStyles = makeStyles(() =>
   createStyles({
-    root: {
-      display: 'flex',
-      width: 520,
-      borderRadius: 20,
-      height: 220,
-      padding: 20,
-    },
-    details: {
-      display: 'flex',
-      flexDirection: 'column',
-      width: 400,
-    },
-    content: {
-      flex: '1 0 auto',
-      display: 'flex',
-      justifyContent: 'space-between',
-    },
     cover: {
       width: 80,
       height: 80,
@@ -34,19 +17,34 @@ const useStyles = makeStyles(() =>
       borderRadius: 80,
       margin: 20,
     },
-    controls: {
-      display: 'flex',
-      alignItems: 'center',
-      width: 380,
-      height: 140,
-      justifyContent: 'flex-end',
-    },
   }),
 );
 
-const FlexBox = styled.div`
+const Content = styled(CardContent)`
+  flex: 1 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+`;
+
+const Controls = styled.div`
+  display: flex;
+  width: 95%;
+  height: 100px;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+const Details = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+`;
+
+const MyCard = styled(Card)`
+  width: 100%;
+  height: 250px;
+  display: flex;
+  border-radius: 20px;
 `;
 
 export type Props = {
@@ -62,43 +60,39 @@ export const PostForm: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   return (
-    <FlexBox>
-      <div>
-        <Card className={classes.root}>
-          <CardMedia
-            className={classes.cover}
-            image={src}
-            component="img"
-            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) =>
-              (e.currentTarget.src =
-                'https://d2hmx91pr90hgc.cloudfront.net/noimage.jpeg')
-            }
+    <MyCard>
+      <CardMedia
+        className={classes.cover}
+        image={src}
+        component="img"
+        onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) =>
+          (e.currentTarget.src =
+            'https://d2hmx91pr90hgc.cloudfront.net/noimage.jpeg')
+        }
+      />
+      <Details>
+        <Content>
+          <MultipleLinesTextField
+            label="連絡の投稿(100字以内)"
+            variant="standard"
+            value={value}
+            onChange={onChangePostContent}
+            row={5}
           />
-          <div className={classes.details}>
-            <CardContent className={classes.content}>
-              <MultipleLinesTextField
-                label="連絡の投稿(100字以内)"
-                variant="standard"
-                value={value}
-                onChange={onChangePostContent}
-                row={5}
-              />
-            </CardContent>
-            <div className={classes.controls}>
-              <div>
-                <StyledButton
-                  variant="contained"
-                  onClick={onClickPost}
-                  label="登録"
-                  fontSize={17}
-                  width={100}
-                  borderRadius={20}
-                />
-              </div>
-            </div>
+        </Content>
+        <Controls>
+          <div>
+            <StyledButton
+              variant="contained"
+              onClick={onClickPost}
+              label="投稿"
+              fontSize={17}
+              width={100}
+              borderRadius={20}
+            />
           </div>
-        </Card>
-      </div>
-    </FlexBox>
+        </Controls>
+      </Details>
+    </MyCard>
   );
 };

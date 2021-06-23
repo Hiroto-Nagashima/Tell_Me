@@ -11,7 +11,6 @@ import styled from 'styled-components';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      maxWidth: 560,
       borderRadius: 20,
     },
     header: {
