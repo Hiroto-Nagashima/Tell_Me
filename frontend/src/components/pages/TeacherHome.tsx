@@ -106,6 +106,7 @@ export const TeacherHome: React.FC = () => {
   };
 
   const onClickSubmitFile = async () => {
+    setLoading(true);
     const submitData = new FormData();
     submitData.append('image', image as string | Blob);
     await axios
