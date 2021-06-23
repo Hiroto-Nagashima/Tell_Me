@@ -6,7 +6,7 @@ import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router';
 import { CurrentUserContext } from '../../providers/UserProvider';
 
-import { Box } from '@material-ui/core';
+import { Grid, Hidden } from '@material-ui/core';
 import { SignUpPaper } from '../organisms/SignUpPaper/SignUpPaper';
 import { Spinner, CustomizedSnackbar } from '../atoms';
 import { ReactComponent as Logo } from '../../images/undraw_children_4rtb.svg';
@@ -16,14 +16,12 @@ const MySignUpPaper = styled(SignUpPaper)`
 `;
 
 const SignUpImage = styled(Logo)`
-  width: 730px;
+  width: 100%;
   height: 730px;
   padding-bottom: 5%;
 `;
 
-const Wrapper = styled(Box)`
-  display: flex;
-  justify-content: space-between;
+const SignUpArea = styled(Grid)`
   padding: 6% 6% 0 6%;
 `;
 
@@ -199,29 +197,35 @@ export const SignUp: React.FC = () => {
         <Spinner />
       ) : (
         <>
-          <Wrapper>
-            <SignUpImage />
-            <MySignUpPaper
-              email={email}
-              role={role}
-              numbers={numbers}
-              daycareId={daycareId}
-              password={password}
-              firstName={firstName}
-              lastName={lastName}
-              gender={gender}
-              telephoneNumber={telephoneNumber}
-              onClickSignUp={trySignUp}
-              onChangeDaycareId={onChangeDaycareId}
-              onChangeRole={onChangeRole}
-              onChangeEmail={onChangeEmail}
-              onChangePassword={onChangePassword}
-              onChangeFirstName={onChangeFirstName}
-              onChangeLastName={onChangeLastName}
-              onChangeGender={onChangeGender}
-              onChangeTelephoneNumber={onChangeTelephoneNumber}
-            />
-          </Wrapper>
+          <SignUpArea container justify="center" spacing={6}>
+            <Hidden xsDown>
+              <Grid item sm={7}>
+                <SignUpImage />
+              </Grid>
+            </Hidden>
+            <Grid item sm={4} xs="auto">
+              <MySignUpPaper
+                email={email}
+                role={role}
+                numbers={numbers}
+                daycareId={daycareId}
+                password={password}
+                firstName={firstName}
+                lastName={lastName}
+                gender={gender}
+                telephoneNumber={telephoneNumber}
+                onClickSignUp={trySignUp}
+                onChangeDaycareId={onChangeDaycareId}
+                onChangeRole={onChangeRole}
+                onChangeEmail={onChangeEmail}
+                onChangePassword={onChangePassword}
+                onChangeFirstName={onChangeFirstName}
+                onChangeLastName={onChangeLastName}
+                onChangeGender={onChangeGender}
+                onChangeTelephoneNumber={onChangeTelephoneNumber}
+              />
+            </Grid>
+          </SignUpArea>
           <CustomizedSnackbar
             open={isSnackbarOpen}
             onClose={onCloseSnackbar}
