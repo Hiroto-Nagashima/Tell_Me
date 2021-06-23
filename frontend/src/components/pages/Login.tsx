@@ -91,7 +91,7 @@ const PostSection = styled(Grid)`
   position: relative;
 `;
 
-const Rest0fSubject = styled(Typography)`
+const Subject = styled(Typography)`
   background: linear-gradient(transparent 75%, #ff9463 70%);
   );
 `;
@@ -101,10 +101,8 @@ const Slogan = styled(Box)`
   text-align: center;
 `;
 
-const Subject = styled(Grid)`
+const SubjectArea = styled(Grid)`
   margin: 0 auto;
-  display: flex;
-  align-items: center;
   margin-bottom: 75px;
 `;
 
@@ -232,13 +230,13 @@ export const Login: React.FC<Props> = () => {
             </Grid>
           </LoginArea>
           <AboutArea>
-            <Subject container justify="center">
+            <SubjectArea container justify="center" align-items="center">
               <Grid item md={8} xs={12}>
-                <Rest0fSubject variant="h4" align="center" noWrap>
+                <Subject variant="h4" align="center" noWrap>
                   保護者と保育園をつなげます
-                </Rest0fSubject>
+                </Subject>
               </Grid>
-            </Subject>
+            </SubjectArea>
             <NotebookArea container direction="row" justify="center">
               <ExplanationOfNotebook item md={5} xs={12}>
                 <Typography variant="h5" align="center">
