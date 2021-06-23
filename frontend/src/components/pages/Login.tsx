@@ -7,13 +7,13 @@ import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../providers/UserProvider';
 
-import NotebookImg from '../../images/notebook.jpg';
+// import NotebookImg from '../../images/notebook.jpg';
 import PostImg from '../../images/post.png';
-import { Box, Card, Typography } from '@material-ui/core';
+import { Box, Card, Grid, Typography } from '@material-ui/core';
 import { LoginPaper } from '../organisms/LoginPaper/LoginPaper';
 import { Spinner, CustomizedSnackbar } from '../atoms';
 import { ReactComponent as MainLogo } from '../../images/undraw_Bibliophile_hwqc.svg';
-import { ReactComponent as NotebookLogo } from '../../images/undraw_zoom_in_1txs.svg';
+import { ReactComponent as NotebookLogo } from '../../images/undraw_Notebook_re_id0r.svg';
 import { ReactComponent as MobileUser } from '../../images/undraw_mobile_user_7oqo.svg';
 
 type Props = {
@@ -21,118 +21,97 @@ type Props = {
 };
 
 const AboutArea = styled(Box)`
-  height: 550px;
+  height: 800px;
   padding: 4%;
   background-color: white;
 `;
 
 const BackgroundImageOfNotebook = styled(NotebookLogo)`
-  width: 700px;
+  width: 100%;
+  height: 320px;
 `;
 
-const ExplanationOfNotebook = styled(Box)`
-  margin: 170px 50px 0 0;
+const ExplanationOfNotebook = styled(Grid)`
+  margin-bottom: 75px;
 `;
 
-const ExplanationOfPost = styled(Box)`
-  width: 60%;
-  height: 150px;
-  margin: 150px 0 0 0;
-  padding-top: 50px;
-  background-color: white;
+const ExplanationOfPost = styled(Grid)`
+  height: 200px;
+  padding: 50px 0;
 `;
 
 const HomeImage = styled(MainLogo)`
-  width: 700px;
-  height: 500px;
+  width: 100%;
+  height: 65vh;
 `;
 
-const LoginArea = styled(Box)`
+const LoginArea = styled(Grid)`
   width: 90%
   height: 670px;
-  padding: 5%;
+  padding: 4%;
+  margin-top: 50px;
 `;
 
-const LoginSection = styled(Box)`
+const LoginSection = styled(Grid)`
   display: flex;
   justify-content: space-between;
 `;
 
 const MobileUserImage = styled(MobileUser)`
-  width: 800px;
-  height: 400px;
+  width: 100%;
+  height: 450px;
 `;
 
 const MyLoginPaper = styled(LoginPaper)`
   margin: 0 0 50px 100px;
 `;
 
-const NotebookArea = styled(Box)`
-  display: flex;
+const NotebookArea = styled(Grid)`
+  margin-bottom: 120px;
 `;
 
-const NotebookCard = styled(Card)`
-  width: 450px;
-  height: 310px;
-  right: 125px;
-  bottom: 130px;
-  position: absolute;
-  background-color: white;
-`;
-
-const NotebookImage = styled.img`
-  width: 450px;
-  height: 310px;
-`;
-
-const NotebookSection = styled(Box)`
-  width: 700px;
+const NotebookSection = styled(Grid)`
+  width: 100%;
+  height: 200px;
   position: relative;
 `;
 
-const PostArea = styled(Box)`
+const PostArea = styled(Grid)`
   display: flex;
+  height: 60vh;
 `;
 
 const PostCard = styled(Card)`
   width: 420px;
-  height: 140px;
-  right: 300px;
-  bottom: 350px;
   position: absolute;
   background-color: white;
 `;
 
 const PostImage = styled.img`
-  width: 420px;
-  height: 140px;
+  width: 100%;
 `;
 
-const PostSection = styled(Box)`
-  width: 700px;
-  height: 550px;
+const PostSection = styled(Grid)`
+  width: 100%;
+  height: 300px;
   position: relative;
 `;
 
 const Rest0fSubject = styled(Typography)`
-  width: 800px;
+  background: linear-gradient(transparent 75%, #ff9463 70%);
+  );
 `;
 
 const Slogan = styled(Box)`
-  margin: 20px 0 50px 0;
+  margin: 0 0 3% 0;
   text-align: center;
 `;
 
-const Subject = styled(Box)`
-  width: 80%;
+const Subject = styled(Grid)`
   margin: 0 auto;
   display: flex;
   align-items: center;
-`;
-
-const TellMe = styled(Typography)`
-  width: 200px;
-  background: linear-gradient(transparent 75%, #ff9463 70%);
+  margin-bottom: 75px;
 `;
 
 export const Login: React.FC<Props> = () => {
@@ -235,32 +214,39 @@ export const Login: React.FC<Props> = () => {
         <Spinner />
       ) : (
         <>
-          <LoginArea>
-            <Slogan>
-              <Typography variant="h2">Tell Me Anything</Typography>
-            </Slogan>
-            <LoginSection>
-              <HomeImage />
-              <MyLoginPaper
-                email={email}
-                password={password}
-                onClickLogin={tryLogin}
-                onChangeEmail={onChangeEmail}
-                onChangePassword={onChangePassword}
-              />
+          <LoginArea container justify="center">
+            <Grid item xs={12}>
+              <Slogan>
+                <Typography variant="h2" noWrap>
+                  Tell Me Anything
+                </Typography>
+              </Slogan>
+            </Grid>
+            <LoginSection container>
+              <Grid item lg={7} xs={12}>
+                <HomeImage />
+              </Grid>
+              <Grid item lg={4} xs={12}>
+                <MyLoginPaper
+                  email={email}
+                  password={password}
+                  onClickLogin={tryLogin}
+                  onChangeEmail={onChangeEmail}
+                  onChangePassword={onChangePassword}
+                />
+              </Grid>
             </LoginSection>
           </LoginArea>
           <AboutArea>
-            <Subject>
-              <TellMe variant="h3" align="center">
-                Tell Me
-              </TellMe>
-              <Rest0fSubject variant="h4" align="center">
-                は保護者と保育園をつなげるアプリケーションです
-              </Rest0fSubject>
+            <Subject container justify="center">
+              <Grid item lg={8} md={8} xs={12}>
+                <Rest0fSubject variant="h4" align="center" noWrap>
+                  保護者と保育園をつなげます
+                </Rest0fSubject>
+              </Grid>
             </Subject>
-            <NotebookArea>
-              <ExplanationOfNotebook>
+            <NotebookArea container direction="row" justify="center">
+              <ExplanationOfNotebook item lg={5} md={5} xs={12}>
                 <Typography variant="h5" align="center">
                   紙ベースの連絡帳とは決別です
                 </Typography>
@@ -273,21 +259,12 @@ export const Login: React.FC<Props> = () => {
                   気軽に連絡帳を書いて朝の忙しさを減らしましょう
                 </Typography>
               </ExplanationOfNotebook>
-              <NotebookSection>
+              <NotebookSection item lg={6} md={6} sm={10} xs={12}>
                 <BackgroundImageOfNotebook />
-                <NotebookCard elevation={6}>
-                  <NotebookImage src={NotebookImg} alt="" />
-                </NotebookCard>
               </NotebookSection>
             </NotebookArea>
-            <PostArea>
-              <PostSection>
-                <MobileUserImage />
-                <PostCard elevation={0}>
-                  <PostImage src={PostImg} alt="" />
-                </PostCard>
-              </PostSection>
-              <ExplanationOfPost>
+            <PostArea container justify="center" direction="row-reverse">
+              <ExplanationOfPost item lg={5} md={5} xs={12}>
                 <Typography variant="h5" align="center">
                   先生たちが子供の様子を教えてくれます
                 </Typography>
@@ -297,6 +274,18 @@ export const Login: React.FC<Props> = () => {
                   </Typography>
                 </Box>
               </ExplanationOfPost>
+              <PostSection item lg={6} md={6} sm={10} xs={12}>
+                <Grid container justify="center">
+                  <Grid item lg={2} md={2} sm={10} xs={12}>
+                    <PostCard elevation={0}>
+                      <PostImage src={PostImg} alt="" />
+                    </PostCard>
+                  </Grid>
+                  <Grid item lg={10} md={10} sm={10} xs={12}>
+                    <MobileUserImage />
+                  </Grid>
+                </Grid>
+              </PostSection>
             </PostArea>
           </AboutArea>
           <CustomizedSnackbar
