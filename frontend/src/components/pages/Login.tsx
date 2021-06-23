@@ -7,7 +7,6 @@ import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../providers/UserProvider';
 
-// import NotebookImg from '../../images/notebook.jpg';
 import PostImg from '../../images/post.png';
 import { Box, Card, Grid, Typography } from '@material-ui/core';
 import { LoginPaper } from '../organisms/LoginPaper/LoginPaper';
@@ -50,11 +49,6 @@ const LoginArea = styled(Grid)`
   height: 670px;
   padding: 4%;
   margin-top: 50px;
-`;
-
-const LoginSection = styled(Grid)`
-  display: flex;
-  justify-content: space-between;
 `;
 
 const MobileUserImage = styled(MobileUser)`
@@ -103,7 +97,7 @@ const Rest0fSubject = styled(Typography)`
 `;
 
 const Slogan = styled(Box)`
-  margin: 0 0 3% 0;
+  margin-bottom: 3%;
   text-align: center;
 `;
 
@@ -222,7 +216,7 @@ export const Login: React.FC<Props> = () => {
                 </Typography>
               </Slogan>
             </Grid>
-            <LoginSection container>
+            <Grid container justify="space-between">
               <Grid item lg={7} xs={12}>
                 <HomeImage />
               </Grid>
@@ -235,18 +229,18 @@ export const Login: React.FC<Props> = () => {
                   onChangePassword={onChangePassword}
                 />
               </Grid>
-            </LoginSection>
+            </Grid>
           </LoginArea>
           <AboutArea>
             <Subject container justify="center">
-              <Grid item lg={8} md={8} xs={12}>
+              <Grid item md={8} xs={12}>
                 <Rest0fSubject variant="h4" align="center" noWrap>
                   保護者と保育園をつなげます
                 </Rest0fSubject>
               </Grid>
             </Subject>
             <NotebookArea container direction="row" justify="center">
-              <ExplanationOfNotebook item lg={5} md={5} xs={12}>
+              <ExplanationOfNotebook item md={5} xs={12}>
                 <Typography variant="h5" align="center">
                   紙ベースの連絡帳とは決別です
                 </Typography>
@@ -259,12 +253,12 @@ export const Login: React.FC<Props> = () => {
                   気軽に連絡帳を書いて朝の忙しさを減らしましょう
                 </Typography>
               </ExplanationOfNotebook>
-              <NotebookSection item lg={6} md={6} sm={10} xs={12}>
+              <NotebookSection item md={6} sm={10} xs={12}>
                 <BackgroundImageOfNotebook />
               </NotebookSection>
             </NotebookArea>
             <PostArea container justify="center" direction="row-reverse">
-              <ExplanationOfPost item lg={5} md={5} xs={12}>
+              <ExplanationOfPost item md={5} xs={12}>
                 <Typography variant="h5" align="center">
                   先生たちが子供の様子を教えてくれます
                 </Typography>
@@ -274,14 +268,14 @@ export const Login: React.FC<Props> = () => {
                   </Typography>
                 </Box>
               </ExplanationOfPost>
-              <PostSection item lg={6} md={6} sm={10} xs={12}>
+              <PostSection item md={6} sm={10} xs={12}>
                 <Grid container justify="center">
-                  <Grid item lg={2} md={2} sm={10} xs={12}>
+                  <Grid item sm={10} xs={12}>
                     <PostCard elevation={0}>
                       <PostImage src={PostImg} alt="" />
                     </PostCard>
                   </Grid>
-                  <Grid item lg={10} md={10} sm={10} xs={12}>
+                  <Grid item sm={10} xs={12}>
                     <MobileUserImage />
                   </Grid>
                 </Grid>
