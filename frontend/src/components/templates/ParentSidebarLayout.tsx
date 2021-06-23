@@ -23,6 +23,9 @@ import {
 import { Header } from '../organisms';
 import { DraggableDialog } from '../molecules';
 import { CurrentKidContext } from '../../providers/KidProvider';
+import { Kid } from '../../types/frontend/kid';
+import { CurrentUserContext } from '../../providers/UserProvider';
+import { CurrentUser } from '../../types/frontend/currentUser';
 
 const drawerWidth = 240;
 
@@ -80,7 +83,8 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
   const [isOpen, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const { currentKid } = useContext(CurrentKidContext);
+  const { currentKid, setCurrentKid } = useContext(CurrentKidContext);
+  const { setCurrentUser } = useContext(CurrentUserContext);
 
   const onClickLogoutModalOpen = () => {
     setOpen(true);
@@ -110,7 +114,11 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
     await firebase
       .auth()
       .signOut()
-      .then(() => history.push('/'))
+      .then(() => {
+        history.push('/');
+        setCurrentKid({} as Kid);
+        setCurrentUser({} as CurrentUser);
+      })
       .catch((e) => alert(e));
   };
 
