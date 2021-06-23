@@ -23,6 +23,7 @@ import {
   createStyles,
 } from '@material-ui/core/styles';
 import { Header } from '../organisms';
+import { CurrentUser } from '../../types/frontend/currentUser';
 
 const drawerWidth = 240;
 
@@ -80,7 +81,7 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
   const [isOpen, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const { currentUser } = useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   const onClickLogoutModalOpen = () => {
     setOpen(true);
@@ -114,7 +115,10 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
     await firebase
       .auth()
       .signOut()
-      .then(() => history.push('/'))
+      .then(() => {
+        history.push('/');
+        setCurrentUser({} as CurrentUser);
+      })
       .catch((e) => alert(e));
   };
 
