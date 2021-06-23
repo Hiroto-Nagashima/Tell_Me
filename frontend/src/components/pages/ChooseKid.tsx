@@ -66,14 +66,14 @@ export const ChooseKid: React.FC = () => {
               <Direction>お子様を選択してください</Direction>
               {kids?.map((kid) => {
                 return (
-                  <div key={kid.id}>
+                  <Box key={kid.id} my={5}>
                     <KidCard
                       kidName={kid.first_name}
                       age={kid.age}
                       src={`https://d2hmx91pr90hgc.cloudfront.net/uploads/kid/image/${kid.id}/image.jpeg`}
                       onClick={() => onClickButton(kid.id)}
                     />
-                  </div>
+                  </Box>
                 );
               })}
             </Box>
