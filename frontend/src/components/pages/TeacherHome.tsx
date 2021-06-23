@@ -1,5 +1,5 @@
 import axios from 'axios';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import format from 'date-fns/format';
 import Resizer from 'react-image-file-resizer';
 import React, {
@@ -13,7 +13,7 @@ import { Post } from '../../types/api/post';
 import { Daycare } from '../../types/frontend/daycare';
 import { CurrentUserContext } from '../../providers/UserProvider';
 
-import { Box } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import { CustomizedSnackbar, Spinner } from '../atoms';
 import {
   PostCard,
@@ -21,11 +21,6 @@ import {
   UpdateTeacher,
   TeacherProfile,
 } from '../organisms';
-
-const FlexBox = styled.div`
-  display: flex;
-  justify-content: center;
-`;
 
 export const TeacherHome: React.FC = () => {
   const { currentUser } = useContext(CurrentUserContext);
@@ -199,8 +194,8 @@ export const TeacherHome: React.FC = () => {
       ) : error ? (
         <div>エラーです</div>
       ) : (
-        <FlexBox>
-          <div>
+        <Grid container justify="center">
+          <Grid item lg={6} md={8} xs={12}>
             <TeacherProfile
               firstName={currentUser.firstName}
               lastName={currentUser.lastName}
@@ -246,8 +241,8 @@ export const TeacherHome: React.FC = () => {
             >
               {message}
             </CustomizedSnackbar>
-          </div>
-        </FlexBox>
+          </Grid>
+        </Grid>
       )}
     </>
   );

@@ -40,7 +40,7 @@ const LastName = styled(Typography)`
 `;
 
 const MyCard = styled(Card)`
-  width: 560px;
+  width: 100%;
   height: 500px;
   position: relative;
   border-radius: 6px;
