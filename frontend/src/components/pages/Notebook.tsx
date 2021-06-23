@@ -7,6 +7,7 @@ import { DatePicker } from '../molecules';
 import { InputOfNotebook } from '../organisms';
 import { CustomizedSnackbar, Spinner } from '../atoms';
 import { useFetchKid } from '../../hooks/useFetchKid';
+import { Grid } from '@material-ui/core';
 
 export const Notebook: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -175,20 +176,24 @@ export const Notebook: React.FC = () => {
           <div>日付を選択してください</div>
           <DatePicker selectedDate={selectedDate} onChangeDate={onChangeDate} />
           {isNotebookOpen ? (
-            <InputOfNotebook
-              selectedDate={newDate}
-              memo={memo}
-              dinner={dinner}
-              hasBathed={hasBathed}
-              breakfast={breakfast}
-              bodyTemperature={bodyTemperature}
-              onClickRegister={onClickRegister}
-              onChangeMemo={onChangeMemo}
-              onChangeDinner={onChangeDinner}
-              onChangeBreakfast={onChangeBreakfast}
-              onChangeHasBathed={onChangeHasBathed}
-              onChangeBodyTemperature={onChangeBodyTemperature}
-            />
+            <Grid container>
+              <Grid item sm={12} xs="auto">
+                <InputOfNotebook
+                  selectedDate={newDate}
+                  memo={memo}
+                  dinner={dinner}
+                  hasBathed={hasBathed}
+                  breakfast={breakfast}
+                  bodyTemperature={bodyTemperature}
+                  onClickRegister={onClickRegister}
+                  onChangeMemo={onChangeMemo}
+                  onChangeDinner={onChangeDinner}
+                  onChangeBreakfast={onChangeBreakfast}
+                  onChangeHasBathed={onChangeHasBathed}
+                  onChangeBodyTemperature={onChangeBodyTemperature}
+                />
+              </Grid>
+            </Grid>
           ) : (
             <div></div>
           )}
