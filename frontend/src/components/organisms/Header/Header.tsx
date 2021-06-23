@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -9,8 +9,6 @@ import { Box, IconButton } from '@material-ui/core';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth } from '../../../helper/firebaseAuthHelper';
 import { Link } from 'react-router-dom';
-
-import { CurrentKidContext } from '../../../providers/KidProvider';
 
 const FlexBox = styled(Box)`
   display: flex;
@@ -53,12 +51,11 @@ export type Props = {
 export const Header: React.FC<Props> = (props) => {
   const { title, iconButtonClassName, appBarClassName, onClickTitle } = props;
   const [user] = useAuthState(getAuth());
-  const { currentKid } = useContext(CurrentKidContext);
 
   return (
     <MyAppBar position="fixed" className={appBarClassName}>
       <Toolbar>
-        {user && currentKid.id ? (
+        {user ? (
           <IconButton
             color="inherit"
             edge="start"

@@ -17,7 +17,7 @@ import { CurrentUserContext } from '../../providers/UserProvider';
 import { CustomizedSnackbar, Spinner } from '../atoms';
 import { PostCard, PostForm } from '../organisms';
 
-const EachPost = styled(Grid)`
+const PostArea = styled(Grid)`
   margin: 3% 0;
 `;
 
@@ -131,7 +131,7 @@ export const TeacherAnnouncement: React.FC = () => {
             .reverse()
             .map((post) => {
               return (
-                <EachPost item md={7} xs={11} key={post.id}>
+                <PostArea item md={7} xs={11} key={post.id}>
                   <PostCard
                     poster={post.poster}
                     teacherId={post.user_id}
@@ -141,7 +141,7 @@ export const TeacherAnnouncement: React.FC = () => {
                       'yyyy-MM-dd HH:mm',
                     )}
                   />
-                </EachPost>
+                </PostArea>
               );
             })}
           <CustomizedSnackbar

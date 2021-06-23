@@ -167,6 +167,7 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
     <div className={classes.root}>
       <Header
         title={title}
+        onClickTitle={onToggleDrawer}
         appBarClassName={classes.appBar}
         iconButtonClassName={classes.menuButton}
       />
