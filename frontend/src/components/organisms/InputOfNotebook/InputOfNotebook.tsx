@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 
 import Paper from '@material-ui/core/Paper';
 import { Box, Grid } from '@material-ui/core';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
 import {
   SingleLineTextField,
@@ -11,21 +10,15 @@ import {
 } from '../../atoms/index';
 import styled from 'styled-components';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
-      '& > *': {
-        margin: theme.spacing(1),
-        padding: theme.spacing(2),
-        width: theme.spacing(70),
-        height: theme.spacing(122),
-      },
-    },
-  }),
-);
+const Wrapper = styled(Box)`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1%;
+  padding: 2%;
+  width: 100%;
+  height: 500px;
+`;
 
 const StyledPaper = styled(Paper)`
   border-radius: 20px;
@@ -62,10 +55,8 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
     onChangeBodyTemperature,
   } = props;
 
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
+    <Wrapper>
       <StyledPaper elevation={5}>
         <Box component="h1" pt={2} textAlign="center">
           {selectedDate}の連絡帳
@@ -150,7 +141,7 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
           />
         </Box>
       </StyledPaper>
-    </div>
+    </Wrapper>
   );
 });
 InputOfNotebook.displayName = 'InputOfNotebook';
