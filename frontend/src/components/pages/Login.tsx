@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
 import * as H from 'history';
 import axios from 'axios';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import firebase from 'firebase';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router-dom';
@@ -14,6 +14,10 @@ import { Spinner, CustomizedSnackbar } from '../atoms';
 import { ReactComponent as MainLogo } from '../../images/undraw_Bibliophile_hwqc.svg';
 import { ReactComponent as NotebookLogo } from '../../images/undraw_Notebook_re_id0r.svg';
 import { ReactComponent as MobileUser } from '../../images/undraw_mobile_user_7oqo.svg';
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+
+let theme = createMuiTheme();
+theme = responsiveFontSizes(theme);
 
 type Props = {
   history: H.History;
@@ -104,6 +108,11 @@ const Slogan = styled(Box)`
 const SubjectArea = styled(Grid)`
   margin: 0 auto;
   margin-bottom: 75px;
+`;
+
+const Title = styled(Typography)`
+  font-size: clamp(2rem, 8vw - 3rem, 5rem);
+  );
 `;
 
 export const Login: React.FC<Props> = () => {
@@ -205,13 +214,13 @@ export const Login: React.FC<Props> = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <>
+        <ThemeProvider theme={theme}>
           <LoginArea container justify="center">
             <Grid item xs={12}>
               <Slogan>
-                <Typography variant="h2" noWrap>
+                <Title variant="h2" noWrap>
                   Tell Me Anything
-                </Typography>
+                </Title>
               </Slogan>
             </Grid>
             <Grid container justify="space-between">
@@ -287,7 +296,7 @@ export const Login: React.FC<Props> = () => {
           >
             {error}
           </CustomizedSnackbar>
-        </>
+        </ThemeProvider>
       )}
     </>
   );
