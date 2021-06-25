@@ -7,8 +7,7 @@ import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../providers/UserProvider';
 
-import PostImg from '../../images/post.png';
-import { Box, Card, Grid, Typography } from '@material-ui/core';
+import { Box, Grid, Typography } from '@material-ui/core';
 import { LoginPaper } from '../organisms/LoginPaper/LoginPaper';
 import { Spinner, CustomizedSnackbar } from '../atoms';
 import { ReactComponent as MainLogo } from '../../images/undraw_Bibliophile_hwqc.svg';
@@ -79,16 +78,6 @@ const PostArea = styled(Grid)`
   height: 60vh;
 `;
 
-const PostCard = styled(Card)`
-  width: 420px;
-  position: absolute;
-  background-color: white;
-`;
-
-const PostImage = styled.img`
-  width: 100%;
-`;
-
 const PostSection = styled(Grid)`
   width: 100%;
   height: 300px;
@@ -96,6 +85,7 @@ const PostSection = styled(Grid)`
 `;
 
 const Subject = styled(Typography)`
+  font-size: clamp(1.5rem, 8vw - 2rem, 3rem);
   background: linear-gradient(transparent 75%, #ff9463 70%);
   );
 `;
@@ -276,16 +266,7 @@ export const Login: React.FC<Props> = () => {
                 </Box>
               </ExplanationOfPost>
               <PostSection item md={6} sm={10} xs={12}>
-                <Grid container justify="center">
-                  <Grid item sm={10} xs={12}>
-                    <PostCard elevation={0}>
-                      <PostImage src={PostImg} alt="" />
-                    </PostCard>
-                  </Grid>
-                  <Grid item sm={10} xs={12}>
-                    <MobileUserImage />
-                  </Grid>
-                </Grid>
+                <MobileUserImage />
               </PostSection>
             </PostArea>
           </AboutArea>
