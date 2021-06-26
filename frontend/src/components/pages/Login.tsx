@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
 import * as H from 'history';
 import axios from 'axios';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import firebase from 'firebase';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useHistory } from 'react-router-dom';
@@ -13,19 +13,17 @@ import { Spinner, CustomizedSnackbar } from '../atoms';
 import { ReactComponent as MainLogo } from '../../images/undraw_Bibliophile_hwqc.svg';
 import { ReactComponent as NotebookLogo } from '../../images/undraw_Notebook_re_id0r.svg';
 import { ReactComponent as MobileUser } from '../../images/undraw_mobile_user_7oqo.svg';
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
-
-let theme = createMuiTheme();
-theme = responsiveFontSizes(theme);
 
 type Props = {
   history: H.History;
 };
 
 const AboutArea = styled(Box)`
-  height: 800px;
   padding: 4%;
-  background-color: white;
+`;
+
+const Background = styled(Box)`
+  background: white;
 `;
 
 const BackgroundImageOfNotebook = styled(NotebookLogo)`
@@ -52,11 +50,12 @@ const LoginArea = styled(Grid)`
   height: 670px;
   padding: 4%;
   margin-top: 50px;
+  background-color: #f2ebea;
 `;
 
 const MobileUserImage = styled(MobileUser)`
   width: 100%;
-  height: 450px;
+  height: 280px;
 `;
 
 const MyLoginPaper = styled(LoginPaper)`
@@ -73,21 +72,19 @@ const NotebookSection = styled(Grid)`
   position: relative;
 `;
 
-const PostArea = styled(Grid)`
-  display: flex;
-  height: 60vh;
-`;
-
 const PostSection = styled(Grid)`
   width: 100%;
   height: 300px;
   position: relative;
 `;
 
+const Sentence = styled(Typography)`
+  font-size: clamp(0.5rem, 8vw - 1rem, 1.5rem);
+`;
+
 const Subject = styled(Typography)`
   font-size: clamp(1.5rem, 8vw - 2rem, 3rem);
   background: linear-gradient(transparent 75%, #ff9463 70%);
-  );
 `;
 
 const Slogan = styled(Box)`
@@ -101,8 +98,7 @@ const SubjectArea = styled(Grid)`
 `;
 
 const Title = styled(Typography)`
-  font-size: clamp(2rem, 8vw - 3rem, 5rem);
-  );
+  font-size: clamp(2.5rem, 8vw - 3rem, 5rem);
 `;
 
 export const Login: React.FC<Props> = () => {
@@ -204,7 +200,7 @@ export const Login: React.FC<Props> = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <ThemeProvider theme={theme}>
+        <Background>
           <LoginArea container justify="center">
             <Grid item xs={12}>
               <Slogan>
@@ -238,37 +234,37 @@ export const Login: React.FC<Props> = () => {
             </SubjectArea>
             <NotebookArea container direction="row" justify="center">
               <ExplanationOfNotebook item md={5} xs={12}>
-                <Typography variant="h5" align="center">
+                <Sentence variant="h5" align="center">
                   紙ベースの連絡帳とは決別です
-                </Typography>
+                </Sentence>
                 <Box my={5}>
-                  <Typography variant="h5" align="center">
+                  <Sentence variant="h5" align="center">
                     過去の連絡帳が簡単に閲覧できます
-                  </Typography>
+                  </Sentence>
                 </Box>
-                <Typography variant="h5" align="center">
+                <Sentence variant="h5" align="center">
                   気軽に連絡帳を書いて朝の忙しさを減らしましょう
-                </Typography>
+                </Sentence>
               </ExplanationOfNotebook>
               <NotebookSection item md={6} sm={10} xs={12}>
                 <BackgroundImageOfNotebook />
               </NotebookSection>
             </NotebookArea>
-            <PostArea container justify="center" direction="row-reverse">
+            <Grid container justify="center" direction="row-reverse">
               <ExplanationOfPost item md={5} xs={12}>
-                <Typography variant="h5" align="center">
+                <Sentence variant="h5" align="center">
                   先生たちが子供の様子を教えてくれます
-                </Typography>
+                </Sentence>
                 <Box my={5}>
-                  <Typography variant="h5" align="center">
+                  <Sentence variant="h5" align="center">
                     仕事の合間にチェックしましょう
-                  </Typography>
+                  </Sentence>
                 </Box>
               </ExplanationOfPost>
               <PostSection item md={6} sm={10} xs={12}>
                 <MobileUserImage />
               </PostSection>
-            </PostArea>
+            </Grid>
           </AboutArea>
           <CustomizedSnackbar
             open={open}
@@ -277,7 +273,7 @@ export const Login: React.FC<Props> = () => {
           >
             {error}
           </CustomizedSnackbar>
-        </ThemeProvider>
+        </Background>
       )}
     </>
   );
