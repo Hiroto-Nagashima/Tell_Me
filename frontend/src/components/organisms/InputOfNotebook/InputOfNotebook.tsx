@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
 import Paper from '@material-ui/core/Paper';
-import { Box, Grid } from '@material-ui/core';
+import { Box, Grid, Typography } from '@material-ui/core';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
 import {
   SingleLineTextField,
@@ -11,17 +11,22 @@ import {
 import styled from 'styled-components';
 
 const Wrapper = styled(Box)`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   margin: 1%;
   padding: 2%;
   width: 100%;
   height: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const StyledPaper = styled(Paper)`
   border-radius: 20px;
+`;
+
+const Title = styled(Typography)`
+  padding-top: 8%;
+  font-size: clamp(2rem, 8vw - 1.5rem, 2rem);
 `;
 
 export type Props = {
@@ -58,9 +63,9 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
   return (
     <Wrapper>
       <StyledPaper elevation={5}>
-        <Box component="h1" pt={2} textAlign="center">
+        <Title variant="h1" align="center">
           {selectedDate}の連絡帳
-        </Box>
+        </Title>
         <Box component="h3" px={4} my={4}>
           1. 朝に測った体温を記入してください(※必須)
         </Box>

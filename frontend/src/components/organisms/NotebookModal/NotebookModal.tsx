@@ -2,10 +2,11 @@ import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { Box, Button } from '@material-ui/core';
+import { Box, Button, Typography } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { MultipleLinesTextField, SingleLineTextField } from '../../atoms';
 import { RadioButtonGroup } from '../../molecules';
+import styled from 'styled-components';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,6 +24,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
+
+const Title = styled(Typography)`
+  padding: 8% 0;
+  font-size: clamp(2rem, 8vw - 1.5rem, 2rem);
+`;
 
 export type Props = {
   date: Date | string | null;
@@ -65,9 +71,9 @@ export const NotebookModal: React.FC<Props> = (props) => {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <Box component="h2" pt={2} textAlign="center">
+            <Title variant="h2" align="center">
               {date}の連絡帳
-            </Box>
+            </Title>
             <Box mx={4}>
               <SingleLineTextField
                 id="体温"
