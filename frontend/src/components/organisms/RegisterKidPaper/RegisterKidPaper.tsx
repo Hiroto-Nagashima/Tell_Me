@@ -98,7 +98,7 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
           </Grid>
         </Box>
         <Box component="h3" px={2} my={5}>
-          2. お子様のお名前を性別を選択してください
+          2. お子様の性別を選択してください
         </Box>
         <Box m={4}>
           <RadioButtonGroup
