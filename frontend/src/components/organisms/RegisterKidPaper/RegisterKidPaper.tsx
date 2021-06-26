@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Paper from '@material-ui/core/Paper';
 import { Box, Grid } from '@material-ui/core';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+
 import {
   SelectMenu,
   SingleLineTextField,
@@ -11,30 +11,22 @@ import {
 } from '../../atoms/index';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
-      '& > *': {
-        marginTop: theme.spacing(10),
-        marginBottom: theme.spacing(3),
-        padding: theme.spacing(4),
-        width: theme.spacing(60),
-        height: theme.spacing(152),
-      },
-    },
-  }),
-);
-
 const FlexBox = styled.div`
   display: flex;
   justify-content: center;
 `;
 
 const StyledPaper = styled(Paper)`
-  border-radius: 20px;
+  padding: 2% 5%;
+`;
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 600px;
+  margin: 9% 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 export type Props = {
@@ -80,13 +72,12 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
     onChangeFavoritePlay,
     onClickRegister,
   } = props;
-  const classes = useStyles();
 
   const ages = [1, 2, 3, 4, 5];
   const daycareIds = [1, 2, 3];
 
   return (
-    <div className={classes.root}>
+    <Wrapper>
       <StyledPaper elevation={3}>
         <Box component="h2">ようこそ!</Box>
         <Box component="h1" mb={4} textAlign="center">
@@ -194,7 +185,7 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
           />
         </Box>
       </StyledPaper>
-    </div>
+    </Wrapper>
   );
 });
 
