@@ -32,12 +32,18 @@ const BackgroundImageOfNotebook = styled(NotebookLogo)`
 `;
 
 const ExplanationOfNotebook = styled(Grid)`
-  margin-bottom: 75px;
+  margin: 4% 0;
 `;
 
 const ExplanationOfPost = styled(Grid)`
   height: 200px;
+  margin: 4% 0;
   padding: 50px 0;
+`;
+
+const FirstSentence = styled(Typography)`
+  font-size: clamp(0.75rem, 8vw - 1rem, 1.8rem);
+  font-weight: bold;
 `;
 
 const HomeImage = styled(MainLogo)`
@@ -102,6 +108,7 @@ const SubjectArea = styled(Grid)`
 `;
 
 const Title = styled(Typography)`
+  font-weight: bold;
   font-size: clamp(2.5rem, 8vw - 3rem, 5rem);
 `;
 
@@ -238,9 +245,9 @@ export const Login: React.FC<Props> = () => {
             </SubjectArea>
             <NotebookArea container direction="row" justify="center">
               <ExplanationOfNotebook item md={5} xs={12}>
-                <Sentence variant="h5" align="center">
+                <FirstSentence variant="h5" align="center">
                   紙ベースの連絡帳とは決別です
-                </Sentence>
+                </FirstSentence>
                 <Box my={5}>
                   <Sentence variant="h5" align="center">
                     過去の連絡帳が簡単に閲覧できます
@@ -256,9 +263,9 @@ export const Login: React.FC<Props> = () => {
             </NotebookArea>
             <Grid container justify="center" direction="row-reverse">
               <ExplanationOfPost item md={5} xs={12}>
-                <Sentence variant="h5" align="center">
+                <FirstSentence variant="h5" align="center">
                   先生たちが子供の様子を教えてくれます
-                </Sentence>
+                </FirstSentence>
                 <Box my={5}>
                   <Sentence variant="h5" align="center">
                     仕事の合間にチェックしましょう
