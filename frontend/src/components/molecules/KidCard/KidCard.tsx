@@ -7,42 +7,49 @@ import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { StyledButton } from '../../atoms';
+import styled from 'styled-components';
 
 const useStyles = makeStyles(() =>
   createStyles({
-    root: {
-      display: 'flex',
-      width: 450,
-      borderRadius: 20,
-      height: 160,
-      padding: 20,
-    },
-    details: {
-      display: 'flex',
-      flexDirection: 'column',
-      width: 280,
-    },
-    content: {
-      marginTop: 50,
-      flex: '1 0 auto',
-      display: 'flex',
-      justifyContent: 'space-between',
-    },
     cover: {
-      width: 160,
-      height: 160,
+      width: 120,
+      height: 120,
       objectFit: 'cover',
-      borderRadius: 80,
-      marginRight: 5,
-      marginLeft: 5,
-    },
-    controls: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
+      borderRadius: 60,
+      marginRight: 15,
+      marginLeft: 15,
+      marginTop: 15,
     },
   }),
 );
+
+const Content = styled(CardContent)`
+  margin-top: 50px;
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Controls = styled.div`
+  display: flex;
+  width: 95%;
+  height: 100px;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+const Details = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+`;
+
+const MyCard = styled(Card)`
+  width: 100%;
+  height: 200px;
+  display: flex;
+  border-radius: 20px;
+`;
 
 export type Props = {
   kidName: string | null;
@@ -56,7 +63,7 @@ export const KidCard: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <MyCard>
       <CardMedia
         className={classes.cover}
         src={src}
@@ -66,16 +73,16 @@ export const KidCard: React.FC<Props> = (props) => {
             'https://d2hmx91pr90hgc.cloudfront.net/noimage.jpeg')
         }
       />
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
+      <Details>
+        <Content>
           <Typography component="h4" variant="h4">
             {kidName}
           </Typography>
           <Typography variant="h6" color="textSecondary">
             {age}さい
           </Typography>
-        </CardContent>
-        <div className={classes.controls}>
+        </Content>
+        <Controls>
           <CardActions>
             <StyledButton
               variant="contained"
@@ -86,8 +93,8 @@ export const KidCard: React.FC<Props> = (props) => {
               borderRadius={20}
             />
           </CardActions>
-        </div>
-      </div>
-    </Card>
+        </Controls>
+      </Details>
+    </MyCard>
   );
 };

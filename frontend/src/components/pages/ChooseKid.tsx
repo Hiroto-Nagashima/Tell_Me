@@ -5,14 +5,11 @@ import { Kid } from '../../types/api/kid';
 import { useHistory } from 'react-router';
 import { CurrentUserContext } from '../../providers/UserProvider';
 
-import { Box } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import { Spinner } from '../atoms/Spinner/Spinner';
 import { KidCard } from '../molecules/KidCard/KidCard';
 
-const Wrapper = styled(Box)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const Wrapper = styled(Grid)`
   margin-top: 50px;
 `;
 
@@ -61,8 +58,8 @@ export const ChooseKid: React.FC = () => {
         <h1>{error}</h1>
       ) : (
         <>
-          <Wrapper>
-            <Box>
+          <Wrapper container justify="center" alignItems="center">
+            <Grid item md={4} sm={6} xs={10}>
               <Direction>お子様を選択してください</Direction>
               {kids?.map((kid) => {
                 return (
@@ -76,7 +73,7 @@ export const ChooseKid: React.FC = () => {
                   </Box>
                 );
               })}
-            </Box>
+            </Grid>
           </Wrapper>
         </>
       )}
