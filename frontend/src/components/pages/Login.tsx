@@ -46,10 +46,10 @@ const HomeImage = styled(MainLogo)`
 `;
 
 const LoginArea = styled(Grid)`
-  width: 90%
+  width: 100%
   height: 670px;
-  padding: 4%;
-  margin-top: 50px;
+  padding: 3%;
+  margin-top: 70px;
   background-color: #f2ebea;
 `;
 
@@ -58,8 +58,12 @@ const MobileUserImage = styled(MobileUser)`
   height: 280px;
 `;
 
+const MyGrid = styled(Grid)`
+  margin-top: 4%;
+`;
+
 const MyLoginPaper = styled(LoginPaper)`
-  margin: 0 0 50px 100px;
+  margin: 50px 0 50px 0;
 `;
 
 const NotebookArea = styled(Grid)`
@@ -209,11 +213,11 @@ export const Login: React.FC<Props> = () => {
                 </Title>
               </Slogan>
             </Grid>
-            <Grid container justify="space-between">
-              <Grid item lg={7} xs={12}>
+            <Grid container justify="space-around" spacing={6}>
+              <Grid item md={6} sm={10} xs={12}>
                 <HomeImage />
               </Grid>
-              <Grid item lg={4} xs={12}>
+              <MyGrid item md={5} sm={10} xs={12}>
                 <MyLoginPaper
                   email={email}
                   password={password}
@@ -221,7 +225,7 @@ export const Login: React.FC<Props> = () => {
                   onChangeEmail={onChangeEmail}
                   onChangePassword={onChangePassword}
                 />
-              </Grid>
+              </MyGrid>
             </Grid>
           </LoginArea>
           <AboutArea>

@@ -12,9 +12,8 @@ const MyLink = styled(Link)`
 
 const StyledPaper = styled(Paper)`
   border-radius: 10px;
-  margin: 8px;
   width: 400px;
-  height: 496px;
+  height: 470px;
 `;
 
 const Wrapper = styled.div`
