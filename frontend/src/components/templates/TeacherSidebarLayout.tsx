@@ -3,18 +3,9 @@ import firebase from 'firebase';
 import { useHistory } from 'react-router';
 import { CurrentUserContext } from '../../providers/UserProvider';
 
-import { Box } from '@material-ui/core';
-import List from '@material-ui/core/List';
 import Hidden from '@material-ui/core/Hidden';
 import Drawer from '@material-ui/core/Drawer';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import HomeIcon from '@material-ui/icons/Home';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import ChildCareIcon from '@material-ui/icons/ChildCare';
-import AnnouncementIcon from '@material-ui/icons/Announcement';
+
 import { DraggableDialog } from '../molecules';
 import {
   makeStyles,
@@ -24,6 +15,7 @@ import {
 } from '@material-ui/core/styles';
 import { Header } from '../organisms';
 import { CurrentUser } from '../../types/frontend/currentUser';
+import { Drawer as CommonDrawer } from './Drawer';
 
 const drawerWidth = 240;
 
@@ -122,47 +114,6 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
       .catch((e) => alert(e));
   };
 
-  const drawer = (
-    <>
-      <Box textAlign="center">
-        <h2>Tell Me</h2>
-      </Box>
-      <List>
-        <ListItem button onClick={onClickHome}>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText primary="Home" />
-        </ListItem>
-      </List>
-      <List>
-        <ListItem button onClick={onClickAllKids}>
-          <ListItemIcon>
-            <ChildCareIcon />
-          </ListItemIcon>
-          <ListItemText primary="All Kids" />
-        </ListItem>
-      </List>
-      <List>
-        <ListItem button onClick={onClickAnnouncement}>
-          <ListItemIcon>
-            <AnnouncementIcon />
-          </ListItemIcon>
-          <ListItemText primary="Announcement" />
-        </ListItem>
-      </List>
-      <Divider />
-      <List>
-        <ListItem button onClick={onClickLogoutModalOpen}>
-          <ListItemIcon>
-            <ExitToAppIcon />
-          </ListItemIcon>
-          <ListItemText primary="Logout" />
-        </ListItem>
-      </List>
-    </>
-  );
-
   return (
     <div className={classes.root}>
       <Header
@@ -186,7 +137,15 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
               keepMounted: true,
             }}
           >
-            {drawer}
+            <CommonDrawer
+              firstListItemText="Home"
+              secondListItemText="All Kids"
+              thirdListItemText="Announcement"
+              onClickFirstItem={onClickHome}
+              onClickSecondItem={onClickAllKids}
+              onClickThirdItem={onClickAnnouncement}
+              onClickLogoutButton={onClickLogoutModalOpen}
+            />
           </Drawer>
         </Hidden>
         <Hidden xsDown implementation="css">
@@ -197,7 +156,15 @@ export const TeacherSidebarLayout: React.FC<Props> = (props) => {
             variant="permanent"
             open
           >
-            {drawer}
+            <CommonDrawer
+              firstListItemText="Home"
+              secondListItemText="All Kids"
+              thirdListItemText="Announcement"
+              onClickFirstItem={onClickHome}
+              onClickSecondItem={onClickAllKids}
+              onClickThirdItem={onClickAnnouncement}
+              onClickLogoutButton={onClickLogoutModalOpen}
+            />
           </Drawer>
         </Hidden>
       </nav>
