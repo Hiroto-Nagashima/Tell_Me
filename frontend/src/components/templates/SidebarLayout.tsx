@@ -228,11 +228,7 @@ export const SidebarLayout: React.FC<Props> = (props) => {
         okLabel="ログアウト"
         content="本当にログアウトしますか？"
         onClickClose={onClickLogoutModalClose}
-        onClickOK={
-          currentUser.role == '保護者'
-            ? () => ParentLogout
-            : () => TeacherLogout
-        }
+        onClickOK={currentUser.role == '保護者' ? ParentLogout : TeacherLogout}
       />
     </div>
   );
