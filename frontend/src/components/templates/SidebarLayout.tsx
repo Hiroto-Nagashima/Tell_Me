@@ -6,7 +6,6 @@ import { CurrentUser } from '../../types/frontend/currentUser';
 import { CurrentKidContext } from '../../providers/KidProvider';
 import { CurrentUserContext } from '../../providers/UserProvider';
 
-import { DraggableDialog } from '../molecules';
 import {
   makeStyles,
   useTheme,
@@ -17,6 +16,7 @@ import Hidden from '@material-ui/core/Hidden';
 import Drawer from '@material-ui/core/Drawer';
 import { Drawer as CommonDrawer } from './Drawer';
 import { Header } from '../organisms';
+import { DraggableDialog } from '../molecules';
 
 const drawerWidth = 240;
 
@@ -117,17 +117,6 @@ export const SidebarLayout: React.FC<Props> = (props) => {
     );
   };
 
-  const TeacherLogout = async () => {
-    await firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        history.push('/');
-        setCurrentUser({} as CurrentUser);
-      })
-      .catch((e) => alert(e));
-  };
-
   const ParentLogout = async () => {
     await firebase
       .auth()
@@ -135,6 +124,17 @@ export const SidebarLayout: React.FC<Props> = (props) => {
       .then(() => {
         history.push('/');
         setCurrentKid({} as Kid);
+        setCurrentUser({} as CurrentUser);
+      })
+      .catch((e) => alert(e));
+  };
+
+  const TeacherLogout = async () => {
+    await firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        history.push('/');
         setCurrentUser({} as CurrentUser);
       })
       .catch((e) => alert(e));
