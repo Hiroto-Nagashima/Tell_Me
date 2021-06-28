@@ -1,19 +1,13 @@
 import React, { ReactNode, useContext, useState } from 'react';
 import firebase from 'firebase';
 import { useHistory } from 'react-router';
+import { Kid } from '../../types/frontend/kid';
+import { CurrentUser } from '../../types/frontend/currentUser';
+import { CurrentKidContext } from '../../providers/KidProvider';
+import { CurrentUserContext } from '../../providers/UserProvider';
 
-import { Box } from '@material-ui/core';
-import List from '@material-ui/core/List';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
-import Divider from '@material-ui/core/Divider';
-import HomeIcon from '@material-ui/icons/Home';
-import ListItem from '@material-ui/core/ListItem';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import AnnouncementIcon from '@material-ui/icons/Announcement';
 import {
   makeStyles,
   useTheme,
@@ -22,10 +16,7 @@ import {
 } from '@material-ui/core/styles';
 import { Header } from '../organisms';
 import { DraggableDialog } from '../molecules';
-import { CurrentKidContext } from '../../providers/KidProvider';
-import { Kid } from '../../types/frontend/kid';
-import { CurrentUserContext } from '../../providers/UserProvider';
-import { CurrentUser } from '../../types/frontend/currentUser';
+import { Drawer as CommonDrawer } from './Drawer';
 
 const drawerWidth = 240;
 
@@ -75,10 +66,9 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  const history = useHistory();
-
   const theme = useTheme();
   const classes = useStyles();
+  const history = useHistory();
 
   const [isOpen, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -122,47 +112,6 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
       .catch((e) => alert(e));
   };
 
-  const drawer = (
-    <>
-      <Box textAlign="center">
-        <h2>Tell Me</h2>
-      </Box>
-      <List>
-        <ListItem button onClick={onClickHome}>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText primary="Home" />
-        </ListItem>
-      </List>
-      <List>
-        <ListItem button onClick={onClickNotebook}>
-          <ListItemIcon>
-            <MenuBookIcon />
-          </ListItemIcon>
-          <ListItemText primary="Notebook" />
-        </ListItem>
-      </List>
-      <List>
-        <ListItem button onClick={onClickAnnouncement}>
-          <ListItemIcon>
-            <AnnouncementIcon />
-          </ListItemIcon>
-          <ListItemText primary="Announcement" />
-        </ListItem>
-      </List>
-      <Divider />
-      <List>
-        <ListItem button onClick={onClickLogoutModalOpen}>
-          <ListItemIcon>
-            <ExitToAppIcon />
-          </ListItemIcon>
-          <ListItemText primary="Logout" />
-        </ListItem>
-      </List>
-    </>
-  );
-
   return (
     <div className={classes.root}>
       <Header
@@ -186,7 +135,15 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
               keepMounted: true,
             }}
           >
-            {drawer}
+            <CommonDrawer
+              firstListItemText="Home"
+              secondListItemText="Notebook"
+              thirdListItemText="Announcement"
+              onClickFirstItem={onClickHome}
+              onClickSecondItem={onClickNotebook}
+              onClickThirdItem={onClickAnnouncement}
+              onClickLogoutButton={onClickLogoutModalOpen}
+            />
           </Drawer>
         </Hidden>
         <Hidden xsDown implementation="css">
@@ -197,7 +154,15 @@ export const ParentSidebarLayout: React.FC<Props> = (props) => {
             variant="permanent"
             open
           >
-            {drawer}
+            <CommonDrawer
+              firstListItemText="Home"
+              secondListItemText="Notebook"
+              thirdListItemText="Announcement"
+              onClickFirstItem={onClickHome}
+              onClickSecondItem={onClickNotebook}
+              onClickThirdItem={onClickAnnouncement}
+              onClickLogoutButton={onClickLogoutModalOpen}
+            />
           </Drawer>
         </Hidden>
       </nav>

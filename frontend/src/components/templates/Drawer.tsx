@@ -15,13 +15,13 @@ type Props = {
   onClickFirstItem: () => void;
   onClickSecondItem: () => void;
   onClickThirdItem: () => void;
-  onClickLogoutButton: () => Promise<void>;
+  onClickLogoutButton: () => void;
   firstListItemText: string;
   secondListItemText: string;
   thirdListItemText: string;
 };
 
-export const ParentSidebarLayout: React.FC<Props> = (props) => {
+export const Drawer: React.FC<Props> = (props) => {
   const {
     onClickFirstItem,
     firstListItemText,
