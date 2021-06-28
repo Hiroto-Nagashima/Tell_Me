@@ -69,7 +69,7 @@ const MyGrid = styled(Grid)`
 `;
 
 const MyLoginPaper = styled(LoginPaper)`
-  margin: 50px 0 50px 0;
+  margin: 50px 0;
 `;
 
 const NotebookArea = styled(Grid)`
