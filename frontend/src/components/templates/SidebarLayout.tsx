@@ -117,24 +117,13 @@ export const SidebarLayout: React.FC<Props> = (props) => {
     );
   };
 
-  const ParentLogout = async () => {
+  const Logout = async () => {
     await firebase
       .auth()
       .signOut()
       .then(() => {
         history.push('/');
         setCurrentKid({} as Kid);
-        setCurrentUser({} as CurrentUser);
-      })
-      .catch((e) => alert(e));
-  };
-
-  const TeacherLogout = async () => {
-    await firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        history.push('/');
         setCurrentUser({} as CurrentUser);
       })
       .catch((e) => alert(e));
@@ -227,7 +216,7 @@ export const SidebarLayout: React.FC<Props> = (props) => {
         okLabel="ログアウト"
         content="本当にログアウトしますか？"
         onClickClose={onClickLogoutModalClose}
-        onClickOK={currentUser.role == '保護者' ? ParentLogout : TeacherLogout}
+        onClickOK={Logout}
       />
     </div>
   );
