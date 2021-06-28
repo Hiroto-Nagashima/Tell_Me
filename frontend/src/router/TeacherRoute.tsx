@@ -5,7 +5,8 @@ import { Route, RouteComponentProps } from 'react-router-dom';
 
 import { Login } from '../components/pages/Login';
 import { HeaderLayout } from '../components/templates/HeaderLayout';
-import { TeacherSidebarLayout } from '../components/templates/TeacherSidebarLayout';
+import { SidebarLayout } from '../components/templates/SidebarLayout';
+// import { TeacherSidebarLayout } from '../components/templates/TeacherSidebarLayout';
 
 type Props = {
   component: ComponentType<RouteComponentProps>;
@@ -23,9 +24,9 @@ export const TeacherRoute: React.FC<Props> = ({
     <Route
       {...rest}
       render={(props) => (
-        <TeacherSidebarLayout title={String(Component.displayName)}>
+        <SidebarLayout title={String(Component.displayName)}>
           <Component {...props} />
-        </TeacherSidebarLayout>
+        </SidebarLayout>
       )}
     />
   ) : (

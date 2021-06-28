@@ -1,10 +1,10 @@
 import React, { ReactNode, useContext, useState } from 'react';
 import firebase from 'firebase';
 import { useHistory } from 'react-router';
+import { Kid } from '../../types/frontend/kid';
+import { CurrentUser } from '../../types/frontend/currentUser';
+import { CurrentKidContext } from '../../providers/KidProvider';
 import { CurrentUserContext } from '../../providers/UserProvider';
-
-import Hidden from '@material-ui/core/Hidden';
-import Drawer from '@material-ui/core/Drawer';
 
 import { DraggableDialog } from '../molecules';
 import {
@@ -13,11 +13,10 @@ import {
   Theme,
   createStyles,
 } from '@material-ui/core/styles';
-import { Header } from '../organisms';
-import { Kid } from '../../types/frontend/kid';
-import { CurrentUser } from '../../types/frontend/currentUser';
+import Hidden from '@material-ui/core/Hidden';
+import Drawer from '@material-ui/core/Drawer';
 import { Drawer as CommonDrawer } from './Drawer';
-import { CurrentKidContext } from '../../providers/KidProvider';
+import { Header } from '../organisms';
 
 const drawerWidth = 240;
 

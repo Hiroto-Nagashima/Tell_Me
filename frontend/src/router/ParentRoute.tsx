@@ -5,7 +5,6 @@ import { Route, RouteComponentProps } from 'react-router-dom';
 
 import { Login } from '../components/pages/Login';
 import { HeaderLayout } from '../components/templates/HeaderLayout';
-// import { ParentSidebarLayout } from '../components/templates/ParentSidebarLayout';
 import { SidebarLayout } from '../components/templates/SidebarLayout';
 
 type Props = {
