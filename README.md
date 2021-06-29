@@ -1,7 +1,7 @@
 [![codecov](https://codecov.io/gh/Hiroto-Nagashima/Tell_Me/branch/develop/graph/badge.svg)](https://codecov.io/gh/Hiroto-Nagashima/Tell_Me)
 # Tell Me
 ## Overview
-https://tell-me-please.com/<br>保育園と保護者を繋ぐ連絡帳アプリです。<br>**レスポンシブ未対応のため全画面表示で閲覧してください。**
+https://tell-me-please.com/<br>保育園と保護者を繋ぐ連絡帳アプリです。
 
 <img width="835" alt="スクリーンショット 2021-06-16 22 53 54" src="https://user-images.githubusercontent.com/74855940/122232007-e0dfba00-cef5-11eb-8d3a-bc04e3facbc7.png">
 
@@ -12,9 +12,9 @@ https://tell-me-please.com/<br>保育園と保護者を繋ぐ連絡帳アプリ�
   - 連絡帳の登録、更新
   - 保育園の先生からの連絡の閲覧
 - 保育園の先生のページでできることはおよそ以下の通りです
-  - 在籍している保育園内の全ての子供の閲覧 
+  - 在籍している保育園内の全ての子供の閲覧
   - 保育園からの連絡の投稿
-- その他詳細はWikiに記載しています  https://github.com/Hiroto-Nagashima/Tell_Me/wiki 
+- その他詳細はWikiに記載しています  https://github.com/Hiroto-Nagashima/Tell_Me/wiki
 
 ## Setup
 ```
