@@ -8,13 +8,23 @@ import { CurrentUserContext } from '../../providers/UserProvider';
 import { Box, Grid } from '@material-ui/core';
 import { Spinner } from '../atoms/Spinner/Spinner';
 import { KidCard } from '../molecules/KidCard/KidCard';
-
-const Wrapper = styled(Grid)`
-  margin-top: 50px;
-`;
+import { Link } from 'react-router-dom';
+import { StyledButton } from '../atoms';
 
 const Direction = styled.h2`
   margin: 50px 0;
+`;
+
+const MyLink = styled(Link)`
+  text-decoration: none;
+`;
+
+const KidCardArea = styled(Grid)`
+  margin-top: 50px;
+`;
+
+const ButtonArea = styled(Grid)`
+  margin-top: 50px;
 `;
 
 export const ChooseKid: React.FC = () => {
@@ -58,7 +68,7 @@ export const ChooseKid: React.FC = () => {
         <h1>{error}</h1>
       ) : (
         <>
-          <Wrapper container justify="center" alignItems="center">
+          <KidCardArea container justify="center" alignItems="center">
             <Grid item md={4} sm={6} xs={10}>
               <Direction>お子様を選択してください</Direction>
               {kids?.map((kid) => {
@@ -74,7 +84,19 @@ export const ChooseKid: React.FC = () => {
                 );
               })}
             </Grid>
-          </Wrapper>
+          </KidCardArea>
+          <ButtonArea container justify="flex-end">
+            <Grid item md={3} sm={6} xs={10}>
+              <MyLink to="/kids/register">
+                <StyledButton
+                  label="新しい子供を登録"
+                  fontSize={18}
+                  width={70}
+                  borderRadius={20}
+                />
+              </MyLink>
+            </Grid>
+          </ButtonArea>
         </>
       )}
     </>
