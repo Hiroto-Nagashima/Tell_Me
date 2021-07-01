@@ -228,6 +228,7 @@ export const Notebook: React.FC = () => {
       .then((res) => {
         setSeverity('success');
         setMassage(res.data.message);
+        setNotebookTemplates(res.data.notebook_templates);
       })
       .catch(() => {
         setSeverity('error');

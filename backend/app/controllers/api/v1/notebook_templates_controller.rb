@@ -5,9 +5,11 @@ module Api
         kid = Kid.find(params[:kid_id])
         notebook_templates = kid.notebook_templates.build(notebook_templates_params)
         if notebook_templates.save!
+          new_notebook_templates = NotebookTemplate.where(kid_id: params[:kid_id]).last(3)
           render json: {
             status: 200,
-            message: "登録が完了しました"
+            message: "登録が完了しました",
+            notebook_templates: new_notebook_templates
           }
         else
           render json: {

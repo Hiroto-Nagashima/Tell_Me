@@ -53,6 +53,9 @@ export const NotebookTemplate: React.FC<Props> = memo((props) => {
         <Title variant="h1" align="center">
           テンプレートの作成
         </Title>
+        <Box component="p" mr={5} textAlign="right">
+          ※最大3個
+        </Box>
         <Box component="h3" px={4} my={4}>
           1. 入浴の有無
         </Box>
@@ -79,7 +82,7 @@ export const NotebookTemplate: React.FC<Props> = memo((props) => {
           />
         </Box>
         <Box component="h3" px={4} my={4}>
-          4. 朝食
+          3. 朝食
         </Box>
         <Box textAlign="center" mx={4}>
           <MultipleLinesTextField
