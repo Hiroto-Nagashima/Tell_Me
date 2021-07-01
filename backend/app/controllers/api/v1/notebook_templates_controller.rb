@@ -19,7 +19,13 @@ module Api
 
       def show
         kid = Kid.find(params[:kid_id])
-        notebook_templates = NotebookTemplates.where(kid_id: kid.id, id: params[:id])
+        notebook_template = NotebookTemplate.where(kid_id: kid.id, id: params[:id])
+        render json: notebook_template
+      end
+
+      def index
+        kid = Kid.find(params[:kid_id])
+        notebook_template = NotebookTemplate.where(kid_id: kid.id, id: params[:id]).last(3)
         render json: notebook_templates
       end
 

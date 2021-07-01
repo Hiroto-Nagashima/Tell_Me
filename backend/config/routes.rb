@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       resources :kids, only: [:show, :create, :update] do
         get '/notebooks/fetch_notebook', to: 'notebooks#fetch_notebook'
         resources :notebooks, only: [:create, :update]
-        resources :notebook_templates, only: [:show, :create]
+        resources :notebook_templates, only: [:show, :index, :create]
       end
 
       post '/users/:id/register_image', to: 'users#register_image'
