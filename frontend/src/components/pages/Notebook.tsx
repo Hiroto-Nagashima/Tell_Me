@@ -199,6 +199,7 @@ export const Notebook: React.FC = () => {
           setIsSnackbarOpen(true);
         });
   };
+
   const onClickTemplateButton = (templateId: number) => {
     setLoading(true);
     axios
@@ -240,7 +241,6 @@ export const Notebook: React.FC = () => {
 
   const FetchNotebookTemplates = () => {
     setLoading(true);
-    setIsNotebookOpen(false);
     axios
       .get(`${API_ENDPOINT}kids/${id}/notebook_templates`)
       .then((res) => {
@@ -249,7 +249,6 @@ export const Notebook: React.FC = () => {
       .catch(() => setError('エラー'))
       .finally(() => {
         setLoading(false);
-        setIsNotebookOpen(true);
       });
   };
 
