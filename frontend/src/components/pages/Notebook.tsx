@@ -199,6 +199,20 @@ export const Notebook: React.FC = () => {
           setIsSnackbarOpen(true);
         });
   };
+  const onClickTemplateButton = (templateId: number) => {
+    setLoading(true);
+    axios
+      .get(`${API_ENDPOINT}kids/${id}/notebook_templates/${templateId}`)
+      .then((res) => {
+        setDinner(res.data[0].dinner);
+        setBreakfast(res.data[0].breakfast);
+        setHasBathed(res.data[0].has_bathed);
+      })
+      .catch(() => setError('エラー'))
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const onClickRegisterTemplate = () => {
     setLoading(true);
@@ -226,6 +240,7 @@ export const Notebook: React.FC = () => {
 
   const FetchNotebookTemplates = () => {
     setLoading(true);
+    setIsNotebookOpen(false);
     axios
       .get(`${API_ENDPOINT}kids/${id}/notebook_templates`)
       .then((res) => {
@@ -234,6 +249,7 @@ export const Notebook: React.FC = () => {
       .catch(() => setError('エラー'))
       .finally(() => {
         setLoading(false);
+        setIsNotebookOpen(true);
       });
   };
 
@@ -260,16 +276,18 @@ export const Notebook: React.FC = () => {
           >
             <Box component="span" display={displayOfButton}>
               {notebookTemplates
-                ? notebookTemplates.map((notebookTemplate) => {
+                ? notebookTemplates.map((notebookTemplate, index) => {
                     return (
                       <TemplateButton item xs={12} key={notebookTemplate.id}>
                         <StyledButton
-                          label={`Template${
-                            notebookTemplates.indexOf(notebookTemplate) + 1
-                          }`}
+                          variant="contained"
+                          label={`Template${index + 1}`}
                           fontSize={18}
                           width={100}
                           borderRadius={20}
+                          onClick={() =>
+                            onClickTemplateButton(notebookTemplate.id)
+                          }
                         />
                       </TemplateButton>
                     );
