@@ -1,0 +1,2 @@
+class NotebookTemplate < ApplicationRecord
+end
