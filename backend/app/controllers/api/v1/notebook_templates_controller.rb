@@ -26,7 +26,7 @@ module Api
       private
 
       def notebook_templates_params
-        params.require(:notebook_templates).permit(:has_bathed, :breakfast, :dinner)
+        params.require(:notebook_template).permit(:has_bathed, :breakfast, :dinner)
       end
     end
   end

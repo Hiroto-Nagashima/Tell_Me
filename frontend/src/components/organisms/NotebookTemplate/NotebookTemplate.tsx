@@ -18,6 +18,7 @@ const Wrapper = styled(Box)`
 
 const StyledPaper = styled(Paper)`
   border-radius: 20px;
+  width: 100%;
 `;
 
 const Title = styled(Typography)`

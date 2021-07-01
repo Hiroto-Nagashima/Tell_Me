@@ -2,6 +2,7 @@ class Kid < ApplicationRecord
   belongs_to :daycare
   has_many :kid_users
   has_many :notebooks
+  has_many :notebook_templates
   has_many :users, through: :kid_users
 
   validates :age, numericality: true

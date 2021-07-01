@@ -8,6 +8,7 @@ import { InputOfNotebook } from '../organisms';
 import { CustomizedSnackbar, Spinner } from '../atoms';
 import { useFetchKid } from '../../hooks/useFetchKid';
 import { Grid } from '@material-ui/core';
+import { NotebookTemplate } from '../organisms/NotebookTemplate/NotebookTemplate';
 
 export const Notebook: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -19,11 +20,16 @@ export const Notebook: React.FC = () => {
   const [memo, setMemo] = useState<string | null>(null);
   const [error, setError] = useState('');
   const [dinner, setDinner] = useState<string | null>(null);
+  const [dinnerTemplate, setDinnerTemplate] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [message, setMassage] = useState('');
   const [isUpdate, setIsUpdate] = useState(false);
   const [breakfast, setBreakfast] = useState<string | null>(null);
+  const [breakfastTemplate, setBreakfastTemplate] = useState<string | null>(
+    null,
+  );
   const [hasBathed, setHasBathed] = useState<boolean>(true);
+  const [hasBathedTemplate, setHasBathedTemplate] = useState<boolean>(true);
   const [notebookId, setNotebookID] = useState<number | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
@@ -61,6 +67,24 @@ export const Notebook: React.FC = () => {
 
   const onChangeHasBathed = () => {
     setHasBathed(!hasBathed);
+  };
+
+  const onChangeDinnerTemplate = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setDinnerTemplate(e.target.value);
+    },
+    [],
+  );
+
+  const onChangeBreakfastTemplate = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setBreakfastTemplate(e.target.value);
+    },
+    [],
+  );
+
+  const onChangeHasBathedTemplate = () => {
+    setHasBathedTemplate(!hasBathedTemplate);
   };
 
   const onCloseSnackbar = useCallback(
@@ -104,7 +128,7 @@ export const Notebook: React.FC = () => {
       .finally(() => setLoading(false));
   };
 
-  const onClickRegister = () => {
+  const onClickRegisterNotebook = () => {
     setLoading(true);
     if (isUpdate) {
       axios
@@ -161,6 +185,30 @@ export const Notebook: React.FC = () => {
         });
   };
 
+  const onClickRegisterTemplate = () => {
+    setLoading(true);
+    axios
+      .post(`${API_ENDPOINT}kids/${id}/notebook_templates`, {
+        notebook_template: {
+          dinner: dinnerTemplate,
+          breakfast: breakfastTemplate,
+          has_bathed: hasBathedTemplate,
+        },
+      })
+      .then((res) => {
+        setSeverity('success');
+        setMassage(res.data.message);
+      })
+      .catch(() => {
+        setSeverity('error');
+        setMassage('入力値に誤りがあります');
+      })
+      .finally(() => {
+        setLoading(false);
+        setIsSnackbarOpen(true);
+      });
+  };
+
   useEffect(() => {
     getKid();
   }, []);
@@ -175,8 +223,19 @@ export const Notebook: React.FC = () => {
         <>
           <div>日付を選択してください</div>
           <DatePicker selectedDate={selectedDate} onChangeDate={onChangeDate} />
-          {isNotebookOpen ? (
-            <Grid container>
+          <Grid container justify="center">
+            <Grid item md={6} sm={10} xs={12}>
+              <NotebookTemplate
+                dinner={dinnerTemplate}
+                hasBathed={hasBathedTemplate}
+                breakfast={breakfastTemplate}
+                onClickRegister={onClickRegisterTemplate}
+                onChangeDinner={onChangeDinnerTemplate}
+                onChangeBreakfast={onChangeBreakfastTemplate}
+                onChangeHasBathed={onChangeHasBathedTemplate}
+              />
+            </Grid>
+            {isNotebookOpen ? (
               <Grid item sm={12} xs="auto">
                 <InputOfNotebook
                   selectedDate={newDate}
@@ -185,7 +244,7 @@ export const Notebook: React.FC = () => {
                   hasBathed={hasBathed}
                   breakfast={breakfast}
                   bodyTemperature={bodyTemperature}
-                  onClickRegister={onClickRegister}
+                  onClickRegister={onClickRegisterNotebook}
                   onChangeMemo={onChangeMemo}
                   onChangeDinner={onChangeDinner}
                   onChangeBreakfast={onChangeBreakfast}
@@ -193,10 +252,10 @@ export const Notebook: React.FC = () => {
                   onChangeBodyTemperature={onChangeBodyTemperature}
                 />
               </Grid>
-            </Grid>
-          ) : (
-            <div></div>
-          )}
+            ) : (
+              <div></div>
+            )}
+          </Grid>
           <CustomizedSnackbar
             open={isSnackbarOpen}
             severity={severity}
