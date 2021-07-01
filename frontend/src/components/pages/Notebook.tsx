@@ -7,7 +7,7 @@ import { DatePicker } from '../molecules';
 import { InputOfNotebook } from '../organisms';
 import { CustomizedSnackbar, Spinner } from '../atoms';
 import { useFetchKid } from '../../hooks/useFetchKid';
-import { Grid } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import { NotebookTemplate } from '../organisms/NotebookTemplate/NotebookTemplate';
 
 export const Notebook: React.FC = () => {
@@ -34,6 +34,7 @@ export const Notebook: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [isNotebookOpen, setIsNotebookOpen] = useState(false);
+  const [display, setDisplay] = React.useState('');
   const [severity, setSeverity] = useState<
     'error' | 'warning' | 'info' | 'success'
   >('error');
@@ -125,7 +126,10 @@ export const Notebook: React.FC = () => {
         setIsNotebookOpen(true);
       })
       .catch((e) => setError(e))
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+        setDisplay('none');
+      });
   };
 
   const onClickRegisterNotebook = () => {
@@ -225,15 +229,17 @@ export const Notebook: React.FC = () => {
           <DatePicker selectedDate={selectedDate} onChangeDate={onChangeDate} />
           <Grid container justify="center">
             <Grid item md={6} sm={10} xs={12}>
-              <NotebookTemplate
-                dinner={dinnerTemplate}
-                hasBathed={hasBathedTemplate}
-                breakfast={breakfastTemplate}
-                onClickRegister={onClickRegisterTemplate}
-                onChangeDinner={onChangeDinnerTemplate}
-                onChangeBreakfast={onChangeBreakfastTemplate}
-                onChangeHasBathed={onChangeHasBathedTemplate}
-              />
+              <Box component="span" display={display}>
+                <NotebookTemplate
+                  dinner={dinnerTemplate}
+                  hasBathed={hasBathedTemplate}
+                  breakfast={breakfastTemplate}
+                  onClickRegister={onClickRegisterTemplate}
+                  onChangeDinner={onChangeDinnerTemplate}
+                  onChangeBreakfast={onChangeBreakfastTemplate}
+                  onChangeHasBathed={onChangeHasBathedTemplate}
+                />
+              </Box>
             </Grid>
             {isNotebookOpen ? (
               <Grid item sm={12} xs="auto">
