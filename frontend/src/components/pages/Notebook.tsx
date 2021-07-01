@@ -5,10 +5,16 @@ import { useParams } from 'react-router-dom';
 
 import { DatePicker } from '../molecules';
 import { InputOfNotebook } from '../organisms';
-import { CustomizedSnackbar, Spinner } from '../atoms';
+import { CustomizedSnackbar, Spinner, StyledButton } from '../atoms';
 import { useFetchKid } from '../../hooks/useFetchKid';
 import { Box, Grid } from '@material-ui/core';
 import { NotebookTemplate } from '../organisms/NotebookTemplate/NotebookTemplate';
+import { NotebookTemplate as TypeOfNotebookTemplate } from '../../types/frontend/notebookTemplates';
+import styled from 'styled-components';
+
+const TemplateButton = styled(Grid)`
+  margin: 5% 0;
+`;
 
 export const Notebook: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -34,7 +40,11 @@ export const Notebook: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [isNotebookOpen, setIsNotebookOpen] = useState(false);
-  const [display, setDisplay] = React.useState('');
+  const [displayOfTemplate, setDisplayOfTemplate] = React.useState('');
+  const [displayOfButton, setDisplayOfButton] = React.useState('none');
+  const [notebookTemplates, setNotebookTemplates] =
+    useState<Array<TypeOfNotebookTemplate> | null>(null);
+
   const [severity, setSeverity] = useState<
     'error' | 'warning' | 'info' | 'success'
   >('error');
@@ -128,7 +138,8 @@ export const Notebook: React.FC = () => {
       .catch((e) => setError(e))
       .finally(() => {
         setLoading(false);
-        setDisplay('none');
+        setDisplayOfTemplate('none');
+        setDisplayOfButton('');
       });
   };
 
@@ -213,8 +224,22 @@ export const Notebook: React.FC = () => {
       });
   };
 
+  const FetchNotebookTemplates = () => {
+    setLoading(true);
+    axios
+      .get(`${API_ENDPOINT}kids/${id}/notebook_templates`)
+      .then((res) => {
+        setNotebookTemplates(res.data);
+      })
+      .catch(() => setError('エラー'))
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
     getKid();
+    FetchNotebookTemplates();
   }, []);
 
   return (
@@ -227,9 +252,34 @@ export const Notebook: React.FC = () => {
         <>
           <div>日付を選択してください</div>
           <DatePicker selectedDate={selectedDate} onChangeDate={onChangeDate} />
+          <Grid
+            container
+            direction="row"
+            justify="flex-end"
+            alignItems="center"
+          >
+            <Box component="span" display={displayOfButton}>
+              {notebookTemplates
+                ? notebookTemplates.map((notebookTemplate) => {
+                    return (
+                      <TemplateButton item xs={12} key={notebookTemplate.id}>
+                        <StyledButton
+                          label={`Template${
+                            notebookTemplates.indexOf(notebookTemplate) + 1
+                          }`}
+                          fontSize={18}
+                          width={100}
+                          borderRadius={20}
+                        />
+                      </TemplateButton>
+                    );
+                  })
+                : null}
+            </Box>
+          </Grid>
           <Grid container justify="center">
             <Grid item md={6} sm={10} xs={12}>
-              <Box component="span" display={display}>
+              <Box component="span" display={displayOfTemplate}>
                 <NotebookTemplate
                   dinner={dinnerTemplate}
                   hasBathed={hasBathedTemplate}

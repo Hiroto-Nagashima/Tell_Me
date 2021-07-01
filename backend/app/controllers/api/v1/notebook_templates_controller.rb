@@ -24,9 +24,8 @@ module Api
       end
 
       def index
-        kid = Kid.find(params[:kid_id])
-        notebook_template = NotebookTemplate.where(kid_id: kid.id, id: params[:id]).last(3)
-        render json: notebook_templates
+        notebook_templates = NotebookTemplate.where(kid_id: params[:kid_id]).last(3)
+        render json:  notebook_templates
       end
 
       private
