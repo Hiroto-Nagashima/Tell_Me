@@ -20,10 +20,10 @@ export type Props = {
 };
 
 const MyCircularProgress = styled(CircularProgress)`
-  margin: 0;
-  position: absolute;
   top: 50%;
   left: 50%;
+  margin: 0;
+  position: absolute;
   margin-right: -50%;
 `;
 

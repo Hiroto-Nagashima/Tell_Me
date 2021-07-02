@@ -7,10 +7,10 @@ export type Props = {
   label: string;
   width?: number;
   height?: number;
+  variant?: 'text' | 'outlined' | 'contained';
   disabled?: boolean;
   fontSize?: number;
   borderRadius?: number;
-  variant?: 'text' | 'outlined' | 'contained';
   onClick?: (e: unknown) => void;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit?: () => void;
@@ -18,25 +18,25 @@ export type Props = {
 
 export const StyledButton: React.FC<Props> = (props) => {
   const {
-    variant,
+    url,
+    label,
     width,
     height,
+    variant,
+    disabled,
     fontSize,
     borderRadius,
-    label,
-    disabled,
-    url,
     onClick,
     onSubmit,
   } = props;
 
   const SButton = styled(Button)`
-    font-size: ${fontSize}px;
-    border-radius: ${borderRadius}px;
-    width: ${width}%;
-    background: #ff9463;
     color: white;
+    width: ${width}%;
     height: ${height}px;
+    font-size: ${fontSize}px;
+    background: #ff9463;
+    border-radius: ${borderRadius}px;
     &:hover {
       background: #f25e5d;
     }
@@ -44,11 +44,11 @@ export const StyledButton: React.FC<Props> = (props) => {
 
   return (
     <SButton
-      variant={variant}
       href={url}
+      variant={variant}
+      disabled={disabled}
       onClick={onClick}
       onSubmit={onSubmit}
-      disabled={disabled}
     >
       {label}
     </SButton>

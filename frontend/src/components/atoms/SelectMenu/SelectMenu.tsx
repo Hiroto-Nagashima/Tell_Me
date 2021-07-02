@@ -31,8 +31,8 @@ export const SelectMenu: React.FC<Props> = (props) => {
   return (
     <div>
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">{label}</InputLabel>
-        <Select id="simple-select" value={value} onChange={onChange}>
+        <InputLabel>{label}</InputLabel>
+        <Select value={value} onChange={onChange}>
           {numbers.map((number) => {
             return (
               <MenuItem key={number - 1} value={number}>

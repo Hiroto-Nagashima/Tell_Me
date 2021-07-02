@@ -14,12 +14,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export type Props = {
   open: boolean;
-  onClose: () => void;
-  severity: 'error' | 'warning' | 'info' | 'success';
   children: string;
+  severity: 'error' | 'warning' | 'info' | 'success';
+  onClose: () => void;
 };
 export const CustomizedSnackbar: React.FC<Props> = memo((props) => {
-  const { open, onClose, severity, children } = props;
+  const { open, children, severity, onClose } = props;
   const classes = useStyles();
 
   return (
