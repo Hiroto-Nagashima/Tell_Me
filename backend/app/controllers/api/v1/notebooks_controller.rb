@@ -6,14 +6,13 @@ module Api
         notebook = kid.notebooks.build(notebook_params)
         if notebook.save!
           render json: {
-            status: 200,
             message: "登録が完了しました"
-          }
+          }, status: 200
         else
           render json: {
             status: "422",
             message: notebook.errors.full_messages
-          }
+          },status: 422
         end
       end
 
@@ -22,14 +21,12 @@ module Api
         notebook = kid.notebooks.find_by(id: params[:id])
         if notebook.update!(notebook_params)
           render json: {
-            status: 200,
             message: "更新が完了しました"
-          }
+          }, status: 200
         else
           render json: {
-            status: 400,
             message: "更新に失敗しました"
-          }
+          }, status: 400
         end
       end
 
@@ -40,10 +37,10 @@ module Api
         notebooks = kid.notebooks.where(date: new_date)
         notebook = notebooks.last
         if notebook.present?
-          render json: notebook
+          render json: notebook, status: 200
         else
           @notebook= kid.notebooks.build
-          render json: @notebook
+          render json: @notebook, status: 200
         end
       end
 
