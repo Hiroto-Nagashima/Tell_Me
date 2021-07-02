@@ -9,7 +9,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  padding: 2%;
+  padding: 15px;
 `;
 
 export type Props = {
