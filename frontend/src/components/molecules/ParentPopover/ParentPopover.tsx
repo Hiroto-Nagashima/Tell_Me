@@ -6,15 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import PhoneIcon from '@material-ui/icons/Phone';
 import Button from '@material-ui/core/Button';
 import MailIcon from '@material-ui/icons/Mail';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import styled from 'styled-components';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    typography: {
-      padding: theme.spacing(2),
-    },
-  }),
-);
+const Wrapper = styled.div`
+  padding: 2%;
+`;
 
 export type Props = {
   email: string | null;
@@ -24,8 +20,6 @@ export type Props = {
 
 export const ParentPopover: React.FC<Props> = (props) => {
   const { email, telephoneNumber, buttonLabel } = props;
-
-  const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null,
@@ -62,7 +56,7 @@ export const ParentPopover: React.FC<Props> = (props) => {
           horizontal: 'left',
         }}
       >
-        <div className={classes.typography}>
+        <Wrapper>
           <Box mt={1} display="flex">
             <Box mr={4} mb={2}>
               <PhoneIcon />
@@ -89,7 +83,7 @@ export const ParentPopover: React.FC<Props> = (props) => {
               {email}
             </Typography>
           </Box>
-        </div>
+        </Wrapper>
       </Popover>
     </div>
   );
