@@ -3,7 +3,7 @@
 ## Overview
 https://tell-me-please.com/<br>保育園と保護者を繋ぐ連絡帳アプリです。
 
-<img width="835" alt="スクリーンショット 2021-06-16 22 53 54" src="https://user-images.githubusercontent.com/74855940/122232007-e0dfba00-cef5-11eb-8d3a-bc04e3facbc7.png">
+<img width="951" alt="スクリーンショット 2021-07-02 13 46 53" src="https://user-images.githubusercontent.com/74855940/124222180-38a83300-db3c-11eb-823c-e4b3d1a90f5b.png">
 
 ## Description
 - このアプリのユーザーは保護者と保育園の先生です。
@@ -51,7 +51,7 @@ http://localhost:3000 でWebpackサーバ, http://localhost:5000 でAPIサーバ
   - Firebase Authentication
   - AWS(ECS, S3, RDS)
 - CI/CD
-  - Github actions  
+  - Github actions
 
 ## Unit Test
 
