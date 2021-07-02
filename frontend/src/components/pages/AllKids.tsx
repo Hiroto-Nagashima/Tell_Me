@@ -20,10 +20,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-
 import { Spinner } from '../atoms';
-import { ParentPopover } from '../molecules/ParentPopover/ParentPopover';
-import { NotebookModal } from '../organisms/NotebookModal/NotebookModal';
+import { ParentPopover, NotebookModal } from '../organisms';
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({

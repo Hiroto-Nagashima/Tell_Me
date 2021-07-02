@@ -9,7 +9,9 @@ import { UpdateModal } from './UpdateModal/UpdateModal';
 import { UpdateTeacher } from './UpdateModal/UpdateTeacher';
 import { UpdateParent } from './UpdateModal/UpdateParent';
 import { SignUpPaper } from './SignUpPaper/SignUpPaper';
+import { NotebookModal } from './NotebookModal/NotebookModal';
 import { ParentProfile } from './ParentProfile/ParentProfile';
+import { ParentPopover } from '../organisms/ParentPopover/ParentPopover';
 import { TeacherProfile } from './TeacherProfile/TeacherProfile';
 import { InputOfNotebook } from './InputOfNotebook/InputOfNotebook';
 import { RegisterKidPaper } from './RegisterKidPaper/RegisterKidPaper';
@@ -26,7 +28,9 @@ export {
   UpdateModal,
   UpdateParent,
   UpdateTeacher,
+  ParentPopover,
   ParentProfile,
+  NotebookModal,
   TeacherProfile,
   InputOfNotebook,
   RegisterKidPaper,
