@@ -1,5 +1,11 @@
 import React, { ChangeEvent } from 'react';
+import styled from 'styled-components';
+
 import TextField from '@material-ui/core/TextField';
+
+const MyTextField = styled(TextField)`
+  width: 100%;
+`;
 
 export type Props = {
   row: number;
@@ -15,11 +21,9 @@ export const MultipleLinesTextField: React.FC<Props> = (props) => {
   const { row, label, value, variant, disabled, onChange } = props;
 
   return (
-    <TextField
-      id="outlined-multiline-static"
+    <MyTextField
       rows={row}
       label={label}
-      style={{ width: '100%' }}
       value={value}
       variant={variant}
       disabled={disabled}

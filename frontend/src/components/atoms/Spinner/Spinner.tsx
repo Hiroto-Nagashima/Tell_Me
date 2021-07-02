@@ -15,10 +15,6 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-export type Props = {
-  color?: 'inherit' | 'primary' | 'secondary';
-};
-
 const MyCircularProgress = styled(CircularProgress)`
   top: 50%;
   left: 50%;
@@ -26,6 +22,10 @@ const MyCircularProgress = styled(CircularProgress)`
   position: absolute;
   margin-right: -50%;
 `;
+
+export type Props = {
+  color?: 'inherit' | 'primary' | 'secondary';
+};
 
 export const Spinner: React.FC<Props> = (props) => {
   const { color } = props;

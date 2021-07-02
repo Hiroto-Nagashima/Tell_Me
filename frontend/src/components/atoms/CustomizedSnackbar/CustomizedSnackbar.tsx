@@ -1,16 +1,13 @@
 import React, { memo } from 'react';
-import Snackbar from '@material-ui/core/Snackbar';
-import { Alert } from './Alert';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import styled from 'styled-components';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    width: '100%',
-    '& > * + *': {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
+import { Alert } from './Alert';
+import Snackbar from '@material-ui/core/Snackbar';
+
+const Wrapper = styled.div`
+  width: 100%;
+  margin-top: 2%;
+`;
 
 export type Props = {
   open: boolean;
@@ -20,16 +17,15 @@ export type Props = {
 };
 export const CustomizedSnackbar: React.FC<Props> = memo((props) => {
   const { open, children, severity, onClose } = props;
-  const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <Wrapper>
       <Snackbar open={open} autoHideDuration={6000} onClose={onClose}>
-        <Alert onClose={onClose} severity={severity}>
+        <Alert severity={severity} onClose={onClose}>
           {children}
         </Alert>
       </Snackbar>
-    </div>
+    </Wrapper>
   );
 });
 
