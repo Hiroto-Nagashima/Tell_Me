@@ -7,27 +7,25 @@ module Api
         if notebook_templates.save!
           new_notebook_templates = NotebookTemplate.where(kid_id: params[:kid_id]).last(3)
           render json: {
-            status: 200,
             message: "登録が完了しました",
             notebook_templates: new_notebook_templates
-          }
+          }, status: 200
         else
           render json: {
-            status: "422",
             message: notebook_templates.errors.full_messages
-          }
+          }, status: 422
         end
       end
 
       def show
         kid = Kid.find(params[:kid_id])
         notebook_template = NotebookTemplate.where(kid_id: kid.id, id: params[:id])
-        render json: notebook_template
+        render json: notebook_template, status: 200
       end
 
       def index
         notebook_templates = NotebookTemplate.where(kid_id: params[:kid_id]).last(3)
-        render json:  notebook_templates
+        render json:  notebook_templates, status: 200
       end
 
       private

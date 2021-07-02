@@ -13,9 +13,8 @@ module Api
           }
         else
           render json: {
-            status: "422",
             message: kid.errors.full_messages
-          }
+          }, status: 422
         end
       end
 
@@ -23,7 +22,6 @@ module Api
         kid = Kid.find(params[:id])
         if kid.update!(kid_params)
           render json: {
-            status: "ok",
             message: "更新が完了しました",
             kid:{
             age: kid.age,
@@ -34,11 +32,9 @@ module Api
             favoritePlay: kid.favorite_play,
             favoriteFood: kid.favorite_food,
             }
-          }
+          }, status: 200
         else
-          render json: {
-            status: 400,
-          }
+          render status: 400
         end
       end
 
@@ -106,16 +102,14 @@ module Api
         kid.image = params[:image]
         if kid.save!
           render json: {
-            status: 200,
             message: "画像を登録しました",
             severity: "success"
-          }
+          }, status: 200
         else
           render json: {
-            status: 400,
             message: "画像を登録に失敗しました",
             severity: "error"
-          }
+          }, status: 400
         end
       end
 

@@ -14,7 +14,6 @@ module Api
         user = User.find(params[:id])
         if user.update!(user_params)
           render json: {
-            status: 200,
             message: "更新が完了しました",
             id: user.id,
             email: user.email,
@@ -22,11 +21,9 @@ module Api
             lastName: user.last_name,
             selfIntroduction: user.self_introduction,
             telephoneNumber: user.telephone_number
-          }
+          }, status: 200
         else
-          render json: {
-            status: 400,
-          }
+          render status: 400
         end
       end
 
@@ -54,16 +51,14 @@ module Api
         user.image = params[:image]
         if user.save
           render json: {
-            status: 200,
             message: "画像を登録しました",
             severity: "success"
-          }
+          }, status: 200
         else
           render json: {
-            status: 400,
             message: "画像を登録に失敗しました",
             severity: "error"
-          }
+          }, status: 400
         end
       end
 
