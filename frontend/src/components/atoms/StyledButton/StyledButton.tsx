@@ -30,7 +30,7 @@ export const StyledButton: React.FC<Props> = (props) => {
     onSubmit,
   } = props;
 
-  const SButton = styled(Button)`
+  const MyButton = styled(Button)`
     color: white;
     width: ${width}%;
     height: ${height}px;
@@ -43,7 +43,7 @@ export const StyledButton: React.FC<Props> = (props) => {
   `;
 
   return (
-    <SButton
+    <MyButton
       href={url}
       variant={variant}
       disabled={disabled}
@@ -51,6 +51,6 @@ export const StyledButton: React.FC<Props> = (props) => {
       onSubmit={onSubmit}
     >
       {label}
-    </SButton>
+    </MyButton>
   );
 };

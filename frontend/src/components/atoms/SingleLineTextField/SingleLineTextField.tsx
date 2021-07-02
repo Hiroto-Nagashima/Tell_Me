@@ -16,7 +16,7 @@ export type Props = {
   inputProps?: InputBaseComponentProps;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
-const SFormControl = styled(FormControl)`
+const MyFormControl = styled(FormControl)`
   display: grid;
 `;
 export const SingleLineTextField: VFC<Props> = (props) => {
@@ -33,7 +33,7 @@ export const SingleLineTextField: VFC<Props> = (props) => {
   } = props;
 
   return (
-    <SFormControl variant="outlined" fullWidth={isFullWidth}>
+    <MyFormControl variant="outlined" fullWidth={isFullWidth}>
       <InputLabel htmlFor="component-outlined">{textName}</InputLabel>
       <OutlinedInput
         id={id}
@@ -47,6 +47,6 @@ export const SingleLineTextField: VFC<Props> = (props) => {
         placeholder={placeholder}
         onChange={onChange}
       />
-    </SFormControl>
+    </MyFormControl>
   );
 };
