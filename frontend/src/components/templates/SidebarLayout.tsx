@@ -15,8 +15,7 @@ import {
 import Hidden from '@material-ui/core/Hidden';
 import Drawer from '@material-ui/core/Drawer';
 import { Drawer as CommonDrawer } from './Drawer';
-import { Header } from '../organisms';
-import { DraggableDialog } from '../molecules';
+import { Header, DraggableDialog } from '../organisms';
 
 const drawerWidth = 240;
 

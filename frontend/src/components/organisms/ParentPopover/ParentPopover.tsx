@@ -1,12 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import { Box } from '@material-ui/core';
-import Popover from '@material-ui/core/Popover';
-import Typography from '@material-ui/core/Typography';
-import PhoneIcon from '@material-ui/icons/Phone';
 import Button from '@material-ui/core/Button';
+import Popover from '@material-ui/core/Popover';
 import MailIcon from '@material-ui/icons/Mail';
-import styled from 'styled-components';
+import PhoneIcon from '@material-ui/icons/Phone';
+import Typography from '@material-ui/core/Typography';
 
 const Wrapper = styled.div`
   padding: 15px;

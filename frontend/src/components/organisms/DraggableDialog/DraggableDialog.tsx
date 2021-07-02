@@ -28,8 +28,8 @@ export const DraggableDialog: React.FC<Props> = (props) => {
     <div>
       <Dialog
         open={isOpen}
-        onClose={onClickClose}
         PaperComponent={DraggablePaper}
+        onClose={onClickClose}
       >
         <MyDialogTitle id="draggable-dialog-title">{title}</MyDialogTitle>
         <DialogContent>

@@ -13,6 +13,7 @@ import { NotebookModal } from './NotebookModal/NotebookModal';
 import { ParentProfile } from './ParentProfile/ParentProfile';
 import { ParentPopover } from '../organisms/ParentPopover/ParentPopover';
 import { TeacherProfile } from './TeacherProfile/TeacherProfile';
+import { DraggableDialog } from '../organisms/DraggableDialog/DraggableDialog';
 import { InputOfNotebook } from './InputOfNotebook/InputOfNotebook';
 import { RegisterKidPaper } from './RegisterKidPaper/RegisterKidPaper';
 
@@ -32,6 +33,7 @@ export {
   ParentProfile,
   NotebookModal,
   TeacherProfile,
+  DraggableDialog,
   InputOfNotebook,
   RegisterKidPaper,
 };
