@@ -2,14 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { Kid } from '../../types/api/kid';
+import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { CurrentUserContext } from '../../providers/UserProvider';
 
 import { Box, Grid } from '@material-ui/core';
-import { Spinner } from '../atoms/Spinner/Spinner';
-import { KidCard } from '../molecules/KidCard/KidCard';
-import { Link } from 'react-router-dom';
-import { StyledButton } from '../atoms';
+import { Spinner, StyledButton } from '../atoms';
+import { KidCard } from '../organisms/KidCard/KidCard';
 
 const Direction = styled.h2`
   margin: 50px 0;

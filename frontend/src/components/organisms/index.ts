@@ -1,4 +1,5 @@
 import { Header } from './Header/Header';
+import { KidCard } from '../organisms/KidCard/KidCard';
 import { PostCard } from './PostCard/PostCard';
 import { PostForm } from './PostForm/PostForm';
 import { KidProfile } from './KidProfile/KidProfile';
@@ -15,6 +16,7 @@ import { RegisterKidPaper } from './RegisterKidPaper/RegisterKidPaper';
 
 export {
   Header,
+  KidCard,
   PostCard,
   PostForm,
   KidProfile,
