@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Box } from '@material-ui/core';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
@@ -67,10 +68,10 @@ export const ParentPopover: React.FC<Props> = (props) => {
               <PhoneIcon />
             </Box>
             <Typography
-              variant="h6"
-              color="textSecondary"
-              component="h6"
               align="center"
+              color="textSecondary"
+              variant="h6"
+              component="h6"
             >
               {telephoneNumber}
             </Typography>
@@ -80,10 +81,10 @@ export const ParentPopover: React.FC<Props> = (props) => {
               <MailIcon />
             </Box>
             <Typography
-              variant="h6"
-              color="textSecondary"
-              component="h6"
               align="center"
+              color="textSecondary"
+              variant="h6"
+              component="h6"
             >
               {email}
             </Typography>

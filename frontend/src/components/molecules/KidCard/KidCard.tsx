@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -7,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { StyledButton } from '../../atoms';
-import styled from 'styled-components';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -15,32 +15,32 @@ const useStyles = makeStyles(() =>
       width: 120,
       height: 120,
       objectFit: 'cover',
-      borderRadius: 60,
-      marginRight: 15,
-      marginLeft: 15,
       marginTop: 15,
+      marginLeft: 15,
+      marginRight: 15,
+      borderRadius: 60,
     },
   }),
 );
 
 const Content = styled(CardContent)`
-  margin-top: 50px;
   flex: 1 0 auto;
   display: flex;
+  margin-top: 50px;
   justify-content: space-between;
 `;
 
 const Controls = styled.div`
-  display: flex;
   width: 95%;
   height: 100px;
+  display: flex;
   align-items: center;
   justify-content: flex-end;
 `;
 
 const Details = styled.div`
-  display: flex;
   width: 100%;
+  display: flex;
   flex-direction: column;
 `;
 
@@ -52,14 +52,14 @@ const MyCard = styled(Card)`
 `;
 
 export type Props = {
-  kidName: string | null;
   age: number | null;
   src: string;
+  kidName: string | null;
   onClick?: () => void;
 };
 
 export const KidCard: React.FC<Props> = (props) => {
-  const { kidName, age, src, onClick } = props;
+  const { age, src, kidName, onClick } = props;
   const classes = useStyles();
 
   return (
