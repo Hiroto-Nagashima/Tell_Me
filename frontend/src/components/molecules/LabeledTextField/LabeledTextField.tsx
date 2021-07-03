@@ -6,7 +6,7 @@ import { TextField } from '../../atoms/index';
 export type Props = {
   row: number;
   type?: string;
-  value: string;
+  value: string | number | null;
   disabled?: boolean;
   component: ElementType;
   mainLabel: string;

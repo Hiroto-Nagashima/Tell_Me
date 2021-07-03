@@ -5,6 +5,7 @@ import { Box, Grid, Typography } from '@material-ui/core';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
 import { TextField, StyledButton } from '../../atoms/index';
 import styled from 'styled-components';
+import { LabeledTextField } from '../../molecules/LabeledTextField/LabeledTextField';
 
 const Wrapper = styled(Box)`
   margin: 1%;
@@ -95,42 +96,30 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
             secondLabel="無"
           />
         </Box>
-        <Box component="h3" px={4} my={4}>
-          3. 昨日の夕飯を入力してください(※必須)
-        </Box>
-        <Box textAlign="center" mx={4}>
-          <TextField
-            label="夕飯"
-            row={2}
-            value={dinner}
-            variant="outlined"
-            onChange={onChangeDinner}
-          />
-        </Box>
-        <Box component="h3" px={4} my={4}>
-          4. 今朝の朝食を入力してください (※必須)
-        </Box>
-        <Box textAlign="center" mx={4}>
-          <TextField
-            label="朝食"
-            row={2}
-            value={breakfast}
-            variant="outlined"
-            onChange={onChangeBreakfast}
-          />
-        </Box>
-        <Box component="h3" px={4} my={4}>
-          5. 連絡事項を入力してください
-        </Box>
-        <Box textAlign="center" mx={4}>
-          <TextField
-            label="連絡事項"
-            row={2}
-            value={memo}
-            variant="outlined"
-            onChange={onChangeMemo}
-          />
-        </Box>
+        <LabeledTextField
+          row={2}
+          value={dinner}
+          component="h3"
+          mainLabel="3. 昨日の夕飯を入力してください(※必須)"
+          inputLabel="夕飯"
+          onChange={onChangeDinner}
+        />
+        <LabeledTextField
+          row={2}
+          value={breakfast}
+          component="h3"
+          mainLabel="4. 今朝の朝食を入力してください (※必須)"
+          inputLabel="朝食"
+          onChange={onChangeBreakfast}
+        />
+        <LabeledTextField
+          row={2}
+          value={memo}
+          component="h3"
+          mainLabel="5. 連絡事項を入力してください"
+          inputLabel="連絡事項"
+          onChange={onChangeMemo}
+        />
         <Box textAlign="center" m={4}>
           <StyledButton
             onClick={onClickRegister}
