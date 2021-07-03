@@ -13,6 +13,7 @@ export type Props = {
   multiline?: boolean;
   inputLabel: string;
   inputProps?: InputBaseComponentProps;
+  isFullWidth?: boolean;
   placeholder?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
@@ -28,6 +29,7 @@ export const LabeledTextField: React.FC<Props> = memo((props) => {
     multiline,
     inputLabel,
     inputProps,
+    isFullWidth,
     placeholder,
     onChange,
   } = props;
@@ -47,6 +49,7 @@ export const LabeledTextField: React.FC<Props> = memo((props) => {
           disabled={disabled}
           multiline={multiline}
           inputProps={inputProps}
+          isFullWidth={isFullWidth}
           placeholder={placeholder}
           onChange={onChange}
         />

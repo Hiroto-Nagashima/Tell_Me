@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import { Box, Grid } from '@material-ui/core';
 import { SelectMenu, StyledButton, TextField } from '../../atoms/index';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
+import { LabeledTextField } from '../../molecules/LabeledTextField/LabeledTextField';
 
 const FlexBox = styled.div`
   display: flex;
@@ -79,7 +80,7 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
           {parentLastName}
           {parentFirstName}さん
         </Box>
-        <Box component="h3" px={2} my={5}>
+        <Box component="h3" px={4} my={4}>
           1. 保育園のIDを入力してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -92,7 +93,7 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
             />
           </Grid>
         </Box>
-        <Box component="h3" px={2} my={5}>
+        <Box component="h3" px={4} my={4}>
           2. お子様の性別を選択してください
         </Box>
         <Box m={4}>
@@ -105,7 +106,7 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
             onChange={onChangeGender}
           />
         </Box>
-        <Box component="h3" px={2} my={5}>
+        <Box component="h3" px={4} my={4}>
           3. お子様のお名前を入力してください
         </Box>
         <FlexBox>
@@ -132,10 +133,10 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
             />
           </Box>
         </FlexBox>
-        <Box component="h3" px={2} my={5}>
+        <Box component="h3" px={4} my={4}>
           4. お子様のご年齢を入力してください
         </Box>
-        <Box textAlign="center" mx={5}>
+        <Box textAlign="center" mx={4}>
           <Grid container xs={4}>
             <SelectMenu
               numbers={ages}
@@ -145,34 +146,26 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
             />
           </Grid>
         </Box>
-        <Box component="h3" px={2} my={5}>
-          5. お子様の好きな食べ物を入力してください
-        </Box>
-        <Box textAlign="center" mx={4}>
-          <TextField
-            row={1}
-            label="好きな食べ物(20字以内)"
-            value={favoriteFood}
-            variant="outlined"
-            placeholder="餃子"
-            isFullWidth={true}
-            onChange={onChangeFavoriteFood}
-          />
-        </Box>
-        <Box component="h3" px={2} my={5}>
-          6. お子様の好きな遊びを入力してください
-        </Box>
-        <Box textAlign="center" mx={4}>
-          <TextField
-            row={1}
-            label="好きな遊び(20字以内)"
-            value={favoritePlay}
-            variant="outlined"
-            placeholder="おままごと"
-            isFullWidth={true}
-            onChange={onChangeFavoritePlay}
-          />
-        </Box>
+        <LabeledTextField
+          row={1}
+          value={favoriteFood}
+          component="h3"
+          mainLabel="5. お子様の好きな食べ物を入力してください"
+          inputLabel="好きな食べ物(20字以内)"
+          placeholder="餃子"
+          isFullWidth={true}
+          onChange={onChangeFavoriteFood}
+        />
+        <LabeledTextField
+          row={1}
+          value={favoritePlay}
+          component="h3"
+          mainLabel="6. お子様の好きな遊びを入力してください"
+          inputLabel="好きな遊び(20字以内)"
+          placeholder="おままごと"
+          isFullWidth={true}
+          onChange={onChangeFavoritePlay}
+        />
         <Box textAlign="center" m={5}>
           <StyledButton
             width={80}
