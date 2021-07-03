@@ -3,9 +3,13 @@ import axios from 'axios';
 import format from 'date-fns/format';
 import { useParams } from 'react-router-dom';
 
-import { DatePicker } from '../molecules';
 import { InputOfNotebook } from '../organisms';
-import { CustomizedSnackbar, Spinner, StyledButton } from '../atoms';
+import {
+  CustomizedSnackbar,
+  Spinner,
+  DatePicker,
+  StyledButton,
+} from '../atoms';
 import { useFetchKid } from '../../hooks/useFetchKid';
 import { Box, Grid } from '@material-ui/core';
 import { NotebookTemplate } from '../organisms/NotebookTemplate/NotebookTemplate';
@@ -48,7 +52,7 @@ export const Notebook: React.FC = () => {
   const [severity, setSeverity] = useState<
     'error' | 'warning' | 'info' | 'success'
   >('error');
-  const [bodyTemperature, setBodyTemperature] = useState<number | null>(null);
+  const [bodyTemperature, setBodyTemperature] = useState<string | null>(null);
 
   const newDate = format(
     selectedDate ? selectedDate : new Date(),
@@ -69,9 +73,7 @@ export const Notebook: React.FC = () => {
 
   const onChangeBodyTemperature = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      const value = Number(e.target.value);
-
-      return setBodyTemperature(value);
+      setBodyTemperature(e.target.value);
     },
     [],
   );

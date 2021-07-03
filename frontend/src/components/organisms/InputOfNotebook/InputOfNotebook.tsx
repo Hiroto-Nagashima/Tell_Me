@@ -31,7 +31,7 @@ export type Props = {
   hasBathed: boolean | null;
   breakfast: string | null;
   selectedDate: Date | string | null;
-  bodyTemperature: number | null;
+  bodyTemperature: string | null;
   onClickRegister: () => void;
   onChangeMemo: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeDinner: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -69,13 +69,12 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
           <Grid container xs={3}>
             <TextField
               row={1}
-              type="number"
+              // type="number"
               label="体温"
               value={bodyTemperature}
               variant="outlined"
               placeholder="36.5"
               inputProps={{
-                min: '36.0',
                 step: '0.1',
               }}
               onChange={onChangeBodyTemperature}
@@ -97,6 +96,7 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
           value={dinner}
           component="h3"
           mainLabel="3. 昨日の夕飯を入力してください(※必須)"
+          multiline={true}
           inputLabel="夕飯"
           onChange={onChangeDinner}
         />
@@ -105,6 +105,7 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
           value={breakfast}
           component="h3"
           mainLabel="4. 今朝の朝食を入力してください (※必須)"
+          multiline={true}
           inputLabel="朝食"
           onChange={onChangeBreakfast}
         />
@@ -113,6 +114,7 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
           value={memo}
           component="h3"
           mainLabel="5. 連絡事項を入力してください"
+          multiline={true}
           inputLabel="連絡事項"
           onChange={onChangeMemo}
         />

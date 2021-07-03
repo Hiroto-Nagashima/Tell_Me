@@ -71,6 +71,7 @@ export const NotebookTemplate: React.FC<Props> = memo((props) => {
           value={dinner}
           component="h3"
           mainLabel="2. 夕飯"
+          multiline={true}
           inputLabel="夕飯"
           onChange={onChangeDinner}
         />
@@ -79,17 +80,18 @@ export const NotebookTemplate: React.FC<Props> = memo((props) => {
           value={breakfast}
           component="h3"
           mainLabel="3. 朝食"
+          multiline={true}
           inputLabel="朝食"
           onChange={onChangeBreakfast}
         />
         <Box textAlign="center" m={4}>
           <StyledButton
-            onClick={onClickRegister}
-            variant="contained"
             label="登録"
-            fontSize={20}
             width={90}
+            variant="contained"
+            fontSize={20}
             borderRadius={20}
+            onClick={onClickRegister}
           />
         </Box>
       </StyledPaper>

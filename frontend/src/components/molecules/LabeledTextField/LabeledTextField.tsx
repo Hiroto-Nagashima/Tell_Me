@@ -15,7 +15,7 @@ export type Props = {
   inputProps?: InputBaseComponentProps;
   isFullWidth?: boolean;
   placeholder?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const LabeledTextField: React.FC<Props> = memo((props) => {

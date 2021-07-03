@@ -23,14 +23,16 @@ const Template: Story<Props> = (args) => {
   const [memo, setMemo] = useState<string | null>(args.memo);
   const [hasBathed, setHasBathed] = useState<boolean | null>(args.hasBathed);
   const [dinner, setDinner] = useState<string | null>(args.dinner);
-  const [breakfast, setBreakfast] = useState<string | null>(args.breakfast)
-  const [bodyTemperature, setBodyTemperature] = useState<number | null>(args.bodyTemperature);
+  const [breakfast, setBreakfast] = useState<string | null>(args.breakfast);
+  const [bodyTemperature, setBodyTemperature] = useState<string | null>(
+    args.bodyTemperature,
+  );
   return (
     <InputOfNotebook
       {...args}
       onChangeBodyTemperature={(e) => {
         args.onChangeBodyTemperature(e);
-        setBodyTemperature(Number(e.target.value));
+        setBodyTemperature(e.target.value);
       }}
       onChangeMemo={(e) => {
         args.onChangeMemo(e);
@@ -59,6 +61,6 @@ const Template: Story<Props> = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  selectedDate: "2021/06/15",
-  hasBathed: true
+  selectedDate: '2021/06/15',
+  hasBathed: true,
 };
