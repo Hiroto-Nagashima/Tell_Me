@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 import Paper from '@material-ui/core/Paper';
 import { Box, Typography } from '@material-ui/core';
-import { RadioButtonGroup } from '../../atoms/RadioButtonGroup/RadioButtonGroup';
 import { StyledButton } from '../../atoms/index';
 import { LabeledTextField } from '../../molecules/LabeledTextField/LabeledTextField';
+import { LabeledRadioButtonGroup } from '../../molecules/LabeledRadioButtonGroup/LabeledRadioButtonGroup';
 
 const Wrapper = styled(Box)`
   margin: 1%;
@@ -57,19 +57,16 @@ export const NotebookTemplate: React.FC<Props> = memo((props) => {
         <Box component="p" mr={5} textAlign="right">
           ※最大3個
         </Box>
-        <Box component="h3" px={4} my={4}>
-          1. 入浴の有無
-        </Box>
-        <Box mx={4}>
-          <RadioButtonGroup
-            value={hasBathed}
-            firstValue={true}
-            secondValue={false}
-            onChange={onChangeHasBathed}
-            firstLabel="有"
-            secondLabel="無"
-          />
-        </Box>
+        <LabeledRadioButtonGroup
+          value={hasBathed}
+          component="h3"
+          mainLabel="1. 入浴の有無"
+          firstLabel="有"
+          secondLabel="無"
+          firstValue={true}
+          secondValue={false}
+          onChange={onChangeHasBathed}
+        />
         <LabeledTextField
           row={2}
           value={dinner}

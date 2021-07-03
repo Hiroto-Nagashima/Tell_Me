@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import { Box, Grid } from '@material-ui/core';
 import { SelectMenu, StyledButton, TextField } from '../../atoms/index';
-import { RadioButtonGroup } from '../../atoms/RadioButtonGroup/RadioButtonGroup';
 import { LabeledTextField } from '../../molecules/LabeledTextField/LabeledTextField';
+import { LabeledRadioButtonGroup } from '../../molecules/LabeledRadioButtonGroup/LabeledRadioButtonGroup';
 
 const FlexBox = styled.div`
   display: flex;
@@ -93,19 +93,16 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
             />
           </Grid>
         </Box>
-        <Box component="h3" px={4} my={4}>
-          2. お子様の性別を選択してください
-        </Box>
-        <Box m={4}>
-          <RadioButtonGroup
-            value={gender}
-            firstValue={0}
-            secondValue={1}
-            firstLabel="女の子"
-            secondLabel="男の子"
-            onChange={onChangeGender}
-          />
-        </Box>
+        <LabeledRadioButtonGroup
+          value={gender}
+          component="h3"
+          mainLabel="2. お子様の性別を選択してください"
+          firstValue={0}
+          secondValue={1}
+          firstLabel="女の子"
+          secondLabel="男の子"
+          onChange={onChangeGender}
+        />
         <Box component="h3" px={4} my={4}>
           3. お子様のお名前を入力してください
         </Box>
