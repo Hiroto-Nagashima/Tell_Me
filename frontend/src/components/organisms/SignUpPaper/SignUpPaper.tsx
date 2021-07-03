@@ -5,9 +5,9 @@ import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import {
-  MultipleLinesTextField,
-  SingleLineTextField,
+  TextField,
   StyledButton,
+  SingleLineTextField,
 } from '../../atoms/index';
 import { ChooseRole } from './ChooseRole';
 
@@ -83,7 +83,7 @@ export const SignUpPaper: React.FC<Props> = memo((props) => {
         </Box>
         <FlexBox>
           <Box textAlign="center" ml={4} mr={1}>
-            <MultipleLinesTextField
+            <TextField
               label="朝"
               row={1}
               variant="outlined"

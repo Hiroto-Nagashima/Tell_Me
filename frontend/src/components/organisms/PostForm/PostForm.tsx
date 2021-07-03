@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { MultipleLinesTextField, StyledButton } from '../../atoms';
+import { TextField, StyledButton } from '../../atoms';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -72,7 +72,7 @@ export const PostForm: React.FC<Props> = (props) => {
       />
       <Details>
         <Content>
-          <MultipleLinesTextField
+          <TextField
             label="連絡の投稿(100字以内)"
             variant="standard"
             value={value}

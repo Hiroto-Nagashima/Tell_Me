@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import Paper from '@material-ui/core/Paper';
 import { Box, Typography } from '@material-ui/core';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
-import { MultipleLinesTextField, StyledButton } from '../../atoms/index';
+import { TextField, StyledButton } from '../../atoms/index';
 import styled from 'styled-components';
 
 const Wrapper = styled(Box)`
@@ -73,7 +73,7 @@ export const NotebookTemplate: React.FC<Props> = memo((props) => {
           2. 夕飯
         </Box>
         <Box textAlign="center" mx={4}>
-          <MultipleLinesTextField
+          <TextField
             label="朝食"
             variant="outlined"
             row={6}
@@ -85,7 +85,7 @@ export const NotebookTemplate: React.FC<Props> = memo((props) => {
           3. 朝食
         </Box>
         <Box textAlign="center" mx={4}>
-          <MultipleLinesTextField
+          <TextField
             label="朝食"
             row={2}
             value={breakfast}

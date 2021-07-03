@@ -1,7 +1,7 @@
 import React, { ElementType, memo } from 'react';
 
 import { Box } from '@material-ui/core';
-import { MultipleLinesTextField } from '../../atoms/index';
+import { TextField } from '../../atoms/index';
 
 export type Props = {
   row: number;
@@ -21,7 +21,7 @@ export const LabeledMultipleLineTextField: React.FC<Props> = memo((props) => {
         {mainLabel}
       </Box>
       <Box textAlign="center" mx={4}>
-        <MultipleLinesTextField
+        <TextField
           row={row}
           label={inputLabel}
           value={value}

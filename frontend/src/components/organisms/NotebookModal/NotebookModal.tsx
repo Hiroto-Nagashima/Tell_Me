@@ -4,7 +4,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { Box, Button, Typography } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { MultipleLinesTextField, SingleLineTextField } from '../../atoms';
+import { TextField, SingleLineTextField } from '../../atoms';
 import { RadioButtonGroup } from '../../molecules';
 import styled from 'styled-components';
 
@@ -97,7 +97,7 @@ export const NotebookModal: React.FC<Props> = (props) => {
               />
             </Box>
             <Box textAlign="center" mx={4} my={2}>
-              <MultipleLinesTextField
+              <TextField
                 label="夕食"
                 row={2}
                 value={dinner}
@@ -106,7 +106,7 @@ export const NotebookModal: React.FC<Props> = (props) => {
               />
             </Box>
             <Box textAlign="center" mx={4} my={2}>
-              <MultipleLinesTextField
+              <TextField
                 label="朝食"
                 row={2}
                 value={breakfast}
@@ -115,7 +115,7 @@ export const NotebookModal: React.FC<Props> = (props) => {
               />
             </Box>
             <Box textAlign="center" mx={4} my={2}>
-              <MultipleLinesTextField
+              <TextField
                 label="連絡事項"
                 row={4}
                 value={memo}

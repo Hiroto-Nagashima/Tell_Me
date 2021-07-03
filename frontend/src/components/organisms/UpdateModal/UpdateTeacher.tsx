@@ -1,7 +1,7 @@
 import React, { ChangeEvent, memo } from 'react';
 
 import { Box } from '@material-ui/core';
-import { MultipleLinesTextField } from '../../atoms/index';
+import { TextField } from '../../atoms';
 
 export type Props = {
   selfIntroduction: string | null;
@@ -14,7 +14,7 @@ export const UpdateTeacher: React.FC<Props> = memo((props) => {
   return (
     <>
       <Box textAlign="center" m={4}>
-        <MultipleLinesTextField
+        <TextField
           label="自己紹介"
           variant="standard"
           row={5}

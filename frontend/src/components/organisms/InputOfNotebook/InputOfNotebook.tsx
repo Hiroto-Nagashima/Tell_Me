@@ -4,9 +4,9 @@ import Paper from '@material-ui/core/Paper';
 import { Box, Grid, Typography } from '@material-ui/core';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
 import {
-  SingleLineTextField,
-  MultipleLinesTextField,
+  TextField,
   StyledButton,
+  SingleLineTextField,
 } from '../../atoms/index';
 import styled from 'styled-components';
 
@@ -103,7 +103,7 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
           3. 昨日の夕飯を入力してください(※必須)
         </Box>
         <Box textAlign="center" mx={4}>
-          <MultipleLinesTextField
+          <TextField
             label="夕飯"
             row={2}
             value={dinner}
@@ -115,7 +115,7 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
           4. 今朝の朝食を入力してください (※必須)
         </Box>
         <Box textAlign="center" mx={4}>
-          <MultipleLinesTextField
+          <TextField
             label="朝食"
             row={2}
             value={breakfast}
@@ -127,7 +127,7 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
           5. 連絡事項を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
-          <MultipleLinesTextField
+          <TextField
             label="連絡事項"
             row={2}
             value={memo}
