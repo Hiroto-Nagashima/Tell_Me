@@ -1,12 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { Box, Button, Typography } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { TextField } from '../../atoms';
-import { RadioButtonGroup } from '../../molecules';
-import styled from 'styled-components';
+import { RadioButtonGroup, TextField } from '../../atoms';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

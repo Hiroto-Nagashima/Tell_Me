@@ -10,11 +10,12 @@ const FlexBox = styled.div`
 `;
 
 export type Props = {
-  leftValue: string | null;
-  rightValue: string | null;
+  mainLabel?: string;
   leftLabel: string;
-  rightLabel: string;
+  leftValue: string | null;
   leftPlaceholder: string;
+  rightValue: string | null;
+  rightLabel: string;
   rightPlaceholder: string;
   onChangeLeftValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeRightValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -22,6 +23,7 @@ export type Props = {
 
 export const AlignedTextFields: React.FC<Props> = memo((props) => {
   const {
+    mainLabel,
     leftValue,
     rightValue,
     leftLabel,
@@ -33,30 +35,35 @@ export const AlignedTextFields: React.FC<Props> = memo((props) => {
   } = props;
 
   return (
-    <FlexBox>
-      <Box textAlign="center" ml={4} mr={1}>
-        <TextField
-          row={1}
-          label={leftLabel}
-          value={leftValue}
-          variant="outlined"
-          isFullWidth={false}
-          placeholder={leftPlaceholder}
-          onChange={onChangeLeftValue}
-        />
+    <>
+      <Box component="h3" px={4} my={4}>
+        {mainLabel}
       </Box>
-      <Box textAlign="center" mr={4} ml={1}>
-        <TextField
-          row={1}
-          label={rightLabel}
-          value={rightValue}
-          variant="outlined"
-          isFullWidth={false}
-          placeholder={rightPlaceholder}
-          onChange={onChangeRightValue}
-        />
-      </Box>
-    </FlexBox>
+      <FlexBox>
+        <Box textAlign="center" ml={4} mr={1}>
+          <TextField
+            row={1}
+            label={leftLabel}
+            value={leftValue}
+            variant="outlined"
+            isFullWidth={false}
+            placeholder={leftPlaceholder}
+            onChange={onChangeLeftValue}
+          />
+        </Box>
+        <Box textAlign="center" mr={4} ml={1}>
+          <TextField
+            row={1}
+            label={rightLabel}
+            value={rightValue}
+            variant="outlined"
+            isFullWidth={false}
+            placeholder={rightPlaceholder}
+            onChange={onChangeRightValue}
+          />
+        </Box>
+      </FlexBox>
+    </>
   );
 });
 

@@ -1,13 +1,8 @@
 import React, { ChangeEvent, memo } from 'react';
-import styled from 'styled-components';
 
 import { Box } from '@material-ui/core';
 import { TextField } from '../../atoms/index';
-
-const FlexBox = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+import { AlignedTextFields } from '../../molecules/AlignedTextFields/AlignedTextFields';
 
 export type Props = {
   email: string;
@@ -34,28 +29,16 @@ export const UpdateParent: React.FC<Props> = memo((props) => {
 
   return (
     <div>
-      <FlexBox>
-        <Box textAlign="center" mr={1} mb={2}>
-          <TextField
-            row={1}
-            label="姓"
-            value={lastName}
-            variant="outlined"
-            placeholder="山田"
-            onChange={onChangeLastName}
-          />
-        </Box>
-        <Box textAlign="center" ml={1}>
-          <TextField
-            row={1}
-            label="名"
-            value={firstName}
-            variant="outlined"
-            placeholder="太郎"
-            onChange={onChangeFirstName}
-          />
-        </Box>
-      </FlexBox>
+      <AlignedTextFields
+        leftLabel="姓"
+        leftValue={lastName}
+        leftPlaceholder="山田"
+        rightLabel="名"
+        rightValue={firstName}
+        rightPlaceholder="太郎"
+        onChangeLeftValue={onChangeLastName}
+        onChangeRightValue={onChangeFirstName}
+      />
       <Box textAlign="center" m={4}>
         <TextField
           row={1}

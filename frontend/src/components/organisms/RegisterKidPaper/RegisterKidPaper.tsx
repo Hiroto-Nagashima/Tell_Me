@@ -3,15 +3,11 @@ import styled from 'styled-components';
 
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
-import { StyledButton, TextField } from '../../atoms/index';
+import { StyledButton } from '../../atoms/index';
 import { LabeledTextField } from '../../molecules/LabeledTextField/LabeledTextField';
 import { LabeledRadioButtonGroup } from '../../molecules/LabeledRadioButtonGroup/LabeledRadioButtonGroup';
 import { LabeledSelectMenu } from '../../molecules/LabeledSelectMenu/LabeledSelectMenu';
-
-const FlexBox = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+import { AlignedTextFields } from '../../molecules/AlignedTextFields/AlignedTextFields';
 
 const StyledPaper = styled(Paper)`
   padding: 2% 5%;
@@ -98,33 +94,17 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
           secondLabel="男の子"
           onChange={onChangeGender}
         />
-        <Box component="h3" px={4} my={4}>
-          3. お子様のお名前を入力してください
-        </Box>
-        <FlexBox>
-          <Box textAlign="center" ml={4} mr={1}>
-            <TextField
-              row={1}
-              label="姓"
-              value={lastName}
-              variant="outlined"
-              isFullWidth={false}
-              placeholder="山田"
-              onChange={onChangeLastName}
-            />
-          </Box>
-          <Box textAlign="center" mr={4} ml={1}>
-            <TextField
-              row={1}
-              label="名"
-              value={firstName}
-              variant="outlined"
-              isFullWidth={false}
-              placeholder="太郎"
-              onChange={onChangeFirstName}
-            />
-          </Box>
-        </FlexBox>
+        <AlignedTextFields
+          mainLabel="3. お子様のお名前を入力してください"
+          leftLabel="姓"
+          leftValue={lastName}
+          leftPlaceholder="山田"
+          rightLabel="名"
+          rightValue={firstName}
+          rightPlaceholder="太郎"
+          onChangeLeftValue={onChangeLastName}
+          onChangeRightValue={onChangeFirstName}
+        />
         <LabeledSelectMenu
           value={age}
           numbers={ages}

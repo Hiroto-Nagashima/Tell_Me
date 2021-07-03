@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Box, Grid } from '@material-ui/core';
 import { RadioButtonGroup } from '../../atoms/RadioButtonGroup/RadioButtonGroup';
 import { SelectMenu, TextField } from '../../atoms/index';
+import { AlignedTextFields } from '../../molecules/AlignedTextFields/AlignedTextFields';
 
 const FlexBox = styled(Box)`
   display: flex;
@@ -44,7 +45,7 @@ export const UpdateKid: React.FC<Props> = memo((props) => {
 
   return (
     <>
-      <FlexBox my={2}>
+      <FlexBox my={2} ml={4}>
         <Box mr={3}>
           <RadioButtonGroup
             value={gender}
@@ -64,28 +65,18 @@ export const UpdateKid: React.FC<Props> = memo((props) => {
           />
         </Grid>
       </FlexBox>
-      <FlexBox>
-        <Box textAlign="center" mr={1} mb={2}>
-          <TextField
-            row={1}
-            label="姓"
-            value={lastName}
-            variant="outlined"
-            placeholder="山田"
-            onChange={onChangeLastName}
-          />
-        </Box>
-        <Box textAlign="center" ml={1}>
-          <TextField
-            row={1}
-            label="名"
-            value={firstName}
-            variant="outlined"
-            placeholder="太郎"
-            onChange={onChangeFirstName}
-          />
-        </Box>
-      </FlexBox>
+      <Box mb={2}>
+        <AlignedTextFields
+          leftLabel="姓"
+          leftValue={lastName}
+          leftPlaceholder="山田"
+          rightLabel="名"
+          rightValue={firstName}
+          rightPlaceholder="太郎"
+          onChangeLeftValue={onChangeLastName}
+          onChangeRightValue={onChangeFirstName}
+        />
+      </Box>
       <Box textAlign="center" mb={2}>
         <TextField
           row={1}
@@ -97,7 +88,7 @@ export const UpdateKid: React.FC<Props> = memo((props) => {
           onChange={onChangeFavoritePlay}
         />
       </Box>
-      <Box textAlign="center">
+      <Box textAlign="center" mt={2}>
         <TextField
           row={1}
           label="好きな食べ物"
@@ -111,4 +102,5 @@ export const UpdateKid: React.FC<Props> = memo((props) => {
     </>
   );
 });
+
 UpdateKid.displayName = 'UpdateKid';
