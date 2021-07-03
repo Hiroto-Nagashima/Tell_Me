@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
+import styled from 'styled-components';
 
 import Paper from '@material-ui/core/Paper';
 import { Box, Typography } from '@material-ui/core';
-import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
+import { RadioButtonGroup } from '../../atoms/RadioButtonGroup/RadioButtonGroup';
 import { StyledButton } from '../../atoms/index';
-import styled from 'styled-components';
 import { LabeledTextField } from '../../molecules/LabeledTextField/LabeledTextField';
 
 const Wrapper = styled(Box)`
@@ -100,4 +100,5 @@ export const NotebookTemplate: React.FC<Props> = memo((props) => {
     </Wrapper>
   );
 });
+
 NotebookTemplate.displayName = 'NotebookTemplate';

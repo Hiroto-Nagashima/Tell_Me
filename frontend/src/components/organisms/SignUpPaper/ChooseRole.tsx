@@ -4,7 +4,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { Box } from '@material-ui/core';
-import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
+import { RadioButtonGroup } from '../../atoms/RadioButtonGroup/RadioButtonGroup';
 import { SelectMenu } from '../../atoms/SelectMenu/SelectMenu';
 
 export type Props = {

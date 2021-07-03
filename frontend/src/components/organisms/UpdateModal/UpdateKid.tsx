@@ -2,7 +2,7 @@ import React, { ChangeEvent, memo } from 'react';
 import styled from 'styled-components';
 
 import { Box, Grid } from '@material-ui/core';
-import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
+import { RadioButtonGroup } from '../../atoms/RadioButtonGroup/RadioButtonGroup';
 import { SelectMenu, TextField } from '../../atoms/index';
 
 const FlexBox = styled(Box)`
