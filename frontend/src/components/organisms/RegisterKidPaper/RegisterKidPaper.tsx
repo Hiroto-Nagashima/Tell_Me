@@ -2,10 +2,11 @@ import React, { memo } from 'react';
 import styled from 'styled-components';
 
 import Paper from '@material-ui/core/Paper';
-import { Box, Grid } from '@material-ui/core';
-import { SelectMenu, StyledButton, TextField } from '../../atoms/index';
+import { Box } from '@material-ui/core';
+import { StyledButton, TextField } from '../../atoms/index';
 import { LabeledTextField } from '../../molecules/LabeledTextField/LabeledTextField';
 import { LabeledRadioButtonGroup } from '../../molecules/LabeledRadioButtonGroup/LabeledRadioButtonGroup';
+import { LabeledSelectMenu } from '../../molecules/LabeledSelectMenu/LabeledSelectMenu';
 
 const FlexBox = styled.div`
   display: flex;
@@ -80,7 +81,7 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
           {parentLastName}
           {parentFirstName}さん
         </Box>
-        <Box component="h3" px={4} my={4}>
+        {/* <Box component="h3" px={4} my={4}>
           1. 保育園のIDを入力してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -92,7 +93,14 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
               onChange={onChangeDaycareId}
             />
           </Grid>
-        </Box>
+        </Box> */}
+        <LabeledSelectMenu
+          value={daycareId}
+          numbers={daycareIds}
+          mainLabel="1. 保育園のIDを入力してください"
+          menuLabel="保育園のID"
+          onChange={onChangeDaycareId}
+        />
         <LabeledRadioButtonGroup
           value={gender}
           component="h3"
@@ -130,7 +138,7 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
             />
           </Box>
         </FlexBox>
-        <Box component="h3" px={4} my={4}>
+        {/* <Box component="h3" px={4} my={4}>
           4. お子様のご年齢を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
@@ -142,7 +150,14 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
               onChange={onChangeAge}
             />
           </Grid>
-        </Box>
+        </Box> */}
+        <LabeledSelectMenu
+          value={age}
+          numbers={ages}
+          mainLabel="4. お子様のご年齢を入力してください"
+          menuLabel="年齢"
+          onChange={onChangeAge}
+        />
         <LabeledTextField
           row={1}
           value={favoriteFood}
