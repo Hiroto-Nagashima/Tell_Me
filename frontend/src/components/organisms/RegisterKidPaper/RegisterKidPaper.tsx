@@ -3,13 +3,13 @@ import styled from 'styled-components';
 
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
-import { StyledButton } from '../../atoms/index';
+import { StyledButton } from '../../atoms';
 import {
   AlignedTextFields,
   LabeledTextField,
   LabeledSelectMenu,
   LabeledRadioButtonGroup,
-} from '../../molecules/index';
+} from '../../molecules';
 
 const StyledPaper = styled(Paper)`
   padding: 2% 5%;
