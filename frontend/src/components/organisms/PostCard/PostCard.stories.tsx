@@ -4,6 +4,12 @@ import { PostCard, Props } from './PostCard';
 export default {
   title: 'organisms/PostCard',
   component: PostCard,
+    decorators: [
+    (Story) => (
+      <div style={{ margin: '4em', width: '40%' }}>
+        <Story />
+      </div>
+    ),]
 } as Meta;
 
 const Template: Story<Props> = (args) => <PostCard {...args} />;

@@ -2,7 +2,7 @@ import { Story, Meta } from '@storybook/react';
 import { Props, DraggableDialog } from './DraggableDialog';
 
 export default {
-  title: 'Molecules/DraggableDialog',
+  title: 'Organisms/DraggableDialog',
   component: DraggableDialog,
   argTypes: {
     onClickOK: { action: 'clicked' },

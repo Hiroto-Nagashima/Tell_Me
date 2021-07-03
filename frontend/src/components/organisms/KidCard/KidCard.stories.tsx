@@ -2,12 +2,12 @@ import { Story, Meta } from '@storybook/react';
 import { Props, KidCard } from './KidCard';
 
 export default {
-  title: 'Molecules/KidCard',
+  title: 'Organisms/KidCard',
   component: KidCard,
   argTypes: { onClick: { action: 'clicked' } },
   decorators: [
     (Story) => (
-      <div style={{ margin: '3em' }}>
+      <div style={{ margin: '4em', width: '40%' }}>
         <Story />
       </div>
     ),

@@ -4,6 +4,12 @@ import { PostForm, Props } from './PostForm';
 export default {
   title: 'organisms/PostForm',
   component: PostForm,
+    decorators: [
+    (Story) => (
+      <div style={{ margin: '4em', width: '50%' }}>
+        <Story />
+      </div>
+    ),]
 } as Meta;
 
 const Template: Story<Props> = (args) => <PostForm {...args} />;

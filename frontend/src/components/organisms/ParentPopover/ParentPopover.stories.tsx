@@ -2,7 +2,7 @@ import { Story, Meta } from '@storybook/react';
 import { ParentPopover, Props } from './ParentPopover';
 
 export default {
-  title: 'Molecules/ParentPopover',
+  title: 'Organisms/ParentPopover',
   component: ParentPopover,
   decorators: [
     (Story) => (
