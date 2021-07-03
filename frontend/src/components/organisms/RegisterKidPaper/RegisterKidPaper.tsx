@@ -81,19 +81,6 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
           {parentLastName}
           {parentFirstName}さん
         </Box>
-        {/* <Box component="h3" px={4} my={4}>
-          1. 保育園のIDを入力してください
-        </Box>
-        <Box textAlign="center" mx={4}>
-          <Grid container xs={4}>
-            <SelectMenu
-              numbers={daycareIds}
-              value={daycareId}
-              label="保育園のID"
-              onChange={onChangeDaycareId}
-            />
-          </Grid>
-        </Box> */}
         <LabeledSelectMenu
           value={daycareId}
           numbers={daycareIds}
@@ -138,19 +125,6 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
             />
           </Box>
         </FlexBox>
-        {/* <Box component="h3" px={4} my={4}>
-          4. お子様のご年齢を入力してください
-        </Box>
-        <Box textAlign="center" mx={4}>
-          <Grid container xs={4}>
-            <SelectMenu
-              numbers={ages}
-              value={age}
-              label="年齢"
-              onChange={onChangeAge}
-            />
-          </Grid>
-        </Box> */}
         <LabeledSelectMenu
           value={age}
           numbers={ages}
