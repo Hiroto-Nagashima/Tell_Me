@@ -3,8 +3,9 @@ import React, { memo } from 'react';
 import Paper from '@material-ui/core/Paper';
 import { Box, Typography } from '@material-ui/core';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
-import { TextField, StyledButton } from '../../atoms/index';
+import { StyledButton } from '../../atoms/index';
 import styled from 'styled-components';
+import { LabeledTextField } from '../../molecules/LabeledTextField/LabeledTextField';
 
 const Wrapper = styled(Box)`
   margin: 1%;
@@ -69,30 +70,22 @@ export const NotebookTemplate: React.FC<Props> = memo((props) => {
             secondLabel="無"
           />
         </Box>
-        <Box component="h3" px={4} my={4}>
-          2. 夕飯
-        </Box>
-        <Box textAlign="center" mx={4}>
-          <TextField
-            label="朝食"
-            variant="outlined"
-            row={6}
-            value={dinner}
-            onChange={onChangeDinner}
-          />
-        </Box>
-        <Box component="h3" px={4} my={4}>
-          3. 朝食
-        </Box>
-        <Box textAlign="center" mx={4}>
-          <TextField
-            label="朝食"
-            row={2}
-            value={breakfast}
-            variant="outlined"
-            onChange={onChangeBreakfast}
-          />
-        </Box>
+        <LabeledTextField
+          row={2}
+          value={dinner}
+          component="h3"
+          mainLabel="2. 夕飯"
+          inputLabel="夕飯"
+          onChange={onChangeDinner}
+        />
+        <LabeledTextField
+          row={2}
+          value={breakfast}
+          component="h3"
+          mainLabel="3. 朝食"
+          inputLabel="朝食"
+          onChange={onChangeBreakfast}
+        />
         <Box textAlign="center" m={4}>
           <StyledButton
             onClick={onClickRegister}
