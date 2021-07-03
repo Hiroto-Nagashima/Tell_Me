@@ -7,7 +7,6 @@ import { DraggablePaper } from '../organisms/DraggableDialog/DraggablePaper';
 import { CustomizedSnackbar } from './CustomizedSnackbar/CustomizedSnackbar';
 import { RadioButtonGroup } from '../atoms/RadioButtonGroup/RadioButtonGroup';
 
-
 export {
   Spinner,
   TextField,

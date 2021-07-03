@@ -5,6 +5,13 @@ import { Grid } from '@material-ui/core';
 export default {
   title: 'atoms/TextField',
   component: TextField,
+  decorators: [
+    (Story) => (
+      <div style={{ margin: '3em', width: '30%' }}>
+        <Story />
+      </div>
+    ),
+  ],
 } as Meta;
 
 const Template: Story<Props> = (args) => <TextField {...args} />;

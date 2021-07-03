@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { RadioButtonGroup, Props } from './RadioButtonGroup';
 
 export default {
-  title: 'Molecules/RadioButtonGroup',
+  title: 'atoms/RadioButtonGroup',
   component: RadioButtonGroup,
   argTypes: {
     onChange: { action: 'clicked' },

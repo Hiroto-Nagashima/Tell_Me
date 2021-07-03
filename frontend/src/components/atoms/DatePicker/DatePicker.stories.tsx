@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { DatePicker, Props } from './DatePicker';
 
 export default {
-  title: 'molecules/DatePickers',
+  title: 'atoms/DatePickers',
   component: DatePicker,
   argTypes: { onChangeDate: { action: 'clicked' } },
   decorators: [
