@@ -258,11 +258,12 @@ export const Home: React.FC = () => {
                 },
               })
               .then((res) => {
-                setEmail(res.data.email);
-                setCurrentUser(res.data);
-                setParentLastName(res.data.lastName);
-                setParentFirstName(res.data.firstName);
-                setTelephoneNumber(res.data.telephoneNumber);
+                console.log(res.data);
+                setEmail(res.data.user.email);
+                setCurrentUser(res.data.user);
+                setParentLastName(res.data.user.lastName);
+                setParentFirstName(res.data.user.firstName);
+                setTelephoneNumber(res.data.user.telephoneNumber);
                 setMassage(res.data.message);
                 setSeverity('success');
                 setIsParentModalOpen(false);

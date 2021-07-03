@@ -15,12 +15,17 @@ module Api
         if user.update!(user_params)
           render json: {
             message: "更新が完了しました",
+            user: {
             id: user.id,
+            role: user.role,
             email: user.email,
+            image: user.image,
+            gender: user.gender,
             firstName: user.first_name,
             lastName: user.last_name,
             selfIntroduction: user.self_introduction,
             telephoneNumber: user.telephone_number
+          }
           }, status: 200
         else
           render status: 400
