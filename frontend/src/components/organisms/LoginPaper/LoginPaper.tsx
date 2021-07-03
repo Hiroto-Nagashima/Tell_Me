@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
-import { TextField, StyledButton } from '../../atoms/index';
+import { TextField, StyledButton } from '../../atoms';
 
 const MyLink = styled(Link)`
   text-decoration: none;

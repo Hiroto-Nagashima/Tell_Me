@@ -5,7 +5,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import { Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { StyledButton } from '../../atoms/index';
+import { StyledButton } from '../../atoms';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

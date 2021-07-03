@@ -4,10 +4,12 @@ import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
 import { StyledButton } from '../../atoms/index';
-import { LabeledTextField } from '../../molecules/LabeledTextField/LabeledTextField';
-import { LabeledRadioButtonGroup } from '../../molecules/LabeledRadioButtonGroup/LabeledRadioButtonGroup';
-import { LabeledSelectMenu } from '../../molecules/LabeledSelectMenu/LabeledSelectMenu';
-import { AlignedTextFields } from '../../molecules/AlignedTextFields/AlignedTextFields';
+import {
+  AlignedTextFields,
+  LabeledTextField,
+  LabeledSelectMenu,
+  LabeledRadioButtonGroup,
+} from '../../molecules/index';
 
 const StyledPaper = styled(Paper)`
   padding: 2% 5%;

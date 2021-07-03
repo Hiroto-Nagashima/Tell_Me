@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import { TextField, StyledButton } from '../../atoms/index';
+import { TextField, StyledButton } from '../../atoms';
 import { ChooseRole } from './ChooseRole';
 
 const useStyles = makeStyles((theme: Theme) =>

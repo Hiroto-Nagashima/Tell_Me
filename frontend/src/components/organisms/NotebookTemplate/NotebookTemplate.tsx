@@ -3,9 +3,8 @@ import styled from 'styled-components';
 
 import Paper from '@material-ui/core/Paper';
 import { Box, Typography } from '@material-ui/core';
-import { StyledButton } from '../../atoms/index';
-import { LabeledTextField } from '../../molecules/LabeledTextField/LabeledTextField';
-import { LabeledRadioButtonGroup } from '../../molecules/LabeledRadioButtonGroup/LabeledRadioButtonGroup';
+import { StyledButton } from '../../atoms/';
+import { LabeledTextField, LabeledRadioButtonGroup } from '../../molecules';
 
 const Wrapper = styled(Box)`
   margin: 1%;

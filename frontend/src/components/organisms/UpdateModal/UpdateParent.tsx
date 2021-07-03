@@ -1,7 +1,7 @@
 import React, { ChangeEvent, memo } from 'react';
 
 import { Box } from '@material-ui/core';
-import { TextField } from '../../atoms/index';
+import { TextField } from '../../atoms';
 import { AlignedTextFields } from '../../molecules/AlignedTextFields/AlignedTextFields';
 
 export type Props = {
