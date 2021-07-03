@@ -3,11 +3,7 @@ import React, { memo } from 'react';
 import Paper from '@material-ui/core/Paper';
 import { Box, Grid, Typography } from '@material-ui/core';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
-import {
-  TextField,
-  StyledButton,
-  SingleLineTextField,
-} from '../../atoms/index';
+import { TextField, StyledButton } from '../../atoms/index';
 import styled from 'styled-components';
 
 const Wrapper = styled(Box)`
@@ -71,17 +67,17 @@ export const InputOfNotebook: React.FC<Props> = memo((props) => {
         </Box>
         <Box px={4}>
           <Grid container xs={3}>
-            <SingleLineTextField
-              id="体温"
+            <TextField
+              row={1}
               type="number"
-              textName="体温"
-              isFullWidth={false}
+              label="体温"
+              value={bodyTemperature}
+              variant="outlined"
+              placeholder="36.5"
               inputProps={{
                 min: '36.0',
                 step: '0.1',
               }}
-              placeholder="36.5"
-              value={bodyTemperature}
               onChange={onChangeBodyTemperature}
             />
           </Grid>
