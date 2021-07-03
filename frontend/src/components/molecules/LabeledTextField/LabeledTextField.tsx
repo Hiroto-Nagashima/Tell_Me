@@ -1,19 +1,36 @@
 import React, { ElementType, memo } from 'react';
 
-import { Box } from '@material-ui/core';
+import { Box, InputBaseComponentProps } from '@material-ui/core';
 import { TextField } from '../../atoms/index';
 
 export type Props = {
   row: number;
+  type?: string;
   value: string;
+  disabled?: boolean;
   component: ElementType;
   mainLabel: string;
+  multiline?: boolean;
   inputLabel: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  inputProps?: InputBaseComponentProps;
+  placeholder?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const LabeledTextField: React.FC<Props> = memo((props) => {
-  const { row, value, component, mainLabel, inputLabel, onChange } = props;
+  const {
+    row,
+    type,
+    value,
+    disabled,
+    component,
+    mainLabel,
+    multiline,
+    inputLabel,
+    inputProps,
+    placeholder,
+    onChange,
+  } = props;
 
   return (
     <>
@@ -23,9 +40,14 @@ export const LabeledTextField: React.FC<Props> = memo((props) => {
       <Box textAlign="center" mx={4}>
         <TextField
           row={row}
+          type={type}
           label={inputLabel}
           value={value}
           variant="outlined"
+          disabled={disabled}
+          multiline={multiline}
+          inputProps={inputProps}
+          placeholder={placeholder}
           onChange={onChange}
         />
       </Box>
