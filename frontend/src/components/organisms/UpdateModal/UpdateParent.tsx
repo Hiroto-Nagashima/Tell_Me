@@ -2,7 +2,7 @@ import React, { ChangeEvent, memo } from 'react';
 import styled from 'styled-components';
 
 import { Box } from '@material-ui/core';
-import { SingleLineTextField } from '../../atoms/index';
+import { TextField } from '../../atoms/index';
 
 const FlexBox = styled.div`
   display: flex;
@@ -36,43 +36,45 @@ export const UpdateParent: React.FC<Props> = memo((props) => {
     <div>
       <FlexBox>
         <Box textAlign="center" mr={1} mb={2}>
-          <SingleLineTextField
-            id="姓"
-            isFullWidth={false}
-            textName="姓"
-            placeholder="山田"
+          <TextField
+            row={1}
+            label="姓"
             value={lastName}
+            variant="outlined"
+            placeholder="山田"
             onChange={onChangeLastName}
           />
         </Box>
         <Box textAlign="center" ml={1}>
-          <SingleLineTextField
-            id="名"
-            isFullWidth={false}
-            textName="名"
-            placeholder="太郎"
+          <TextField
+            row={1}
+            label="名"
             value={firstName}
+            variant="outlined"
+            placeholder="太郎"
             onChange={onChangeFirstName}
           />
         </Box>
       </FlexBox>
       <Box textAlign="center" m={4}>
-        <SingleLineTextField
-          id="電話番号"
-          isFullWidth={true}
-          textName="電話番号"
-          placeholder="090xxxxxxxx"
+        <TextField
+          row={1}
+          label="電話番号"
           value={telephoneNumber}
+          variant="outlined"
+          placeholder="090xxxxxxxx"
+          isFullWidth={true}
           onChange={onChangeTelephoneNumber}
         />
       </Box>
       <Box textAlign="center" m={4}>
-        <SingleLineTextField
-          id="メールアドレス"
-          isFullWidth={true}
-          textName="メールアドレス"
-          placeholder="xxxx@gmail.com"
+        <TextField
+          row={1}
+          label="メールアドレス"
           value={email}
+          variant="outlined"
+          placeholder="xxxx@gmail.com"
+          isFullWidth={true}
           onChange={onChangeEmail}
         />
       </Box>

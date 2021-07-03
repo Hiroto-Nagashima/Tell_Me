@@ -3,12 +3,7 @@ import styled from 'styled-components';
 
 import Paper from '@material-ui/core/Paper';
 import { Box, Grid } from '@material-ui/core';
-
-import {
-  SelectMenu,
-  SingleLineTextField,
-  StyledButton,
-} from '../../atoms/index';
+import { SelectMenu, StyledButton, TextField } from '../../atoms/index';
 import { RadioButtonGroup } from '../../molecules/RadioButtonGroup/RadioButtonGroup';
 
 const FlexBox = styled.div`
@@ -115,22 +110,24 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
         </Box>
         <FlexBox>
           <Box textAlign="center" ml={4} mr={1}>
-            <SingleLineTextField
-              id="姓"
+            <TextField
+              row={1}
+              label="姓"
               value={lastName}
-              textName="姓"
-              placeholder="山田"
+              variant="outlined"
               isFullWidth={false}
+              placeholder="山田"
               onChange={onChangeLastName}
             />
           </Box>
           <Box textAlign="center" mr={4} ml={1}>
-            <SingleLineTextField
-              id="名"
+            <TextField
+              row={1}
+              label="名"
               value={firstName}
-              textName="名"
-              placeholder="空欄は入れないでください"
+              variant="outlined"
               isFullWidth={false}
+              placeholder="太郎"
               onChange={onChangeFirstName}
             />
           </Box>
@@ -152,10 +149,11 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
           5. お子様の好きな食べ物を入力してください
         </Box>
         <Box textAlign="center" mx={4}>
-          <SingleLineTextField
-            id="好きな食べ物"
+          <TextField
+            row={1}
+            label="好きな食べ物(20字以内)"
             value={favoriteFood}
-            textName="好きな食べ物(20字以内)"
+            variant="outlined"
             placeholder="餃子"
             isFullWidth={true}
             onChange={onChangeFavoriteFood}
@@ -165,10 +163,11 @@ export const RegisterKidPaper: React.FC<Props> = memo((props) => {
           6. お子様の好きな遊びを入力してください
         </Box>
         <Box textAlign="center" mx={4}>
-          <SingleLineTextField
-            id="好きな食べ物"
+          <TextField
+            row={1}
+            label="好きな遊び(20字以内)"
             value={favoritePlay}
-            textName="好きな遊び(20字以内)"
+            variant="outlined"
             placeholder="おままごと"
             isFullWidth={true}
             onChange={onChangeFavoritePlay}

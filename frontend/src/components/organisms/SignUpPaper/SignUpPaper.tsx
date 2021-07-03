@@ -4,11 +4,7 @@ import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import {
-  TextField,
-  StyledButton,
-  SingleLineTextField,
-} from '../../atoms/index';
+import { TextField, StyledButton } from '../../atoms/index';
 import { ChooseRole } from './ChooseRole';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -84,53 +80,57 @@ export const SignUpPaper: React.FC<Props> = memo((props) => {
         <FlexBox>
           <Box textAlign="center" ml={4} mr={1}>
             <TextField
-              label="朝"
               row={1}
-              variant="outlined"
+              label="姓"
               value={lastName}
+              variant="outlined"
+              placeholder="親御様の姓"
               onChange={onChangeLastName}
             />
           </Box>
           <Box textAlign="center" mr={4} ml={1}>
-            <SingleLineTextField
-              id="名"
-              textName="名"
-              isFullWidth={false}
-              placeholder="親御様の名"
+            <TextField
+              row={1}
+              label="名"
               value={firstName}
+              variant="outlined"
+              placeholder="親御様の名"
               onChange={onChangeFirstName}
             />
           </Box>
         </FlexBox>
         <Box textAlign="center" m={4}>
-          <SingleLineTextField
-            id="電話番号"
-            textName="電話番号"
+          <TextField
+            row={1}
+            label="電話番号"
+            value={telephoneNumber}
+            variant="outlined"
             isFullWidth={true}
             placeholder="ハイフンなし"
-            value={telephoneNumber}
             onChange={onChangeTelephoneNumber}
           />
         </Box>
         <Box textAlign="center" m={4}>
-          <SingleLineTextField
-            id="email"
-            textName="メールアドレス"
+          <TextField
+            row={1}
+            label="メールアドレス"
+            value={email}
+            variant="outlined"
             isFullWidth={true}
             placeholder="xxxxxxx@xxx.ne.jp"
-            value={email}
             onChange={onChangeEmail}
           />
         </Box>
         <Box textAlign="center" m={4}>
-          <SingleLineTextField
-            id="password"
-            textName="パスワード"
+          <TextField
+            row={1}
+            type="password"
+            label="パスワード"
+            value={password}
+            variant="outlined"
             isFullWidth={true}
             placeholder="6文字以上"
-            value={password}
             onChange={onChangePassword}
-            type="password"
           />
         </Box>
         <Box m={4}>

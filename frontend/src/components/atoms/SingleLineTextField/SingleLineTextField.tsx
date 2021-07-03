@@ -15,15 +15,15 @@ const MyOutlinedInput = styled(OutlinedInput)`
 `;
 
 export type Props = {
-  id: string;
+  id?: string;
   row?: number;
   type?: string;
   value?: number | string | null;
   disabled?: boolean;
   textName: string;
   inputProps?: InputBaseComponentProps;
-  isFullWidth: boolean;
-  placeholder: string;
+  isFullWidth?: boolean;
+  placeholder?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 

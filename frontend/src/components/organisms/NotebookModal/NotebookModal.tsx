@@ -4,7 +4,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { Box, Button, Typography } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { TextField, SingleLineTextField } from '../../atoms';
+import { TextField } from '../../atoms';
 import { RadioButtonGroup } from '../../molecules';
 import styled from 'styled-components';
 
@@ -75,14 +75,13 @@ export const NotebookModal: React.FC<Props> = (props) => {
               {date}の連絡帳
             </Title>
             <Box mx={4}>
-              <SingleLineTextField
-                id="体温"
-                disabled
-                textName="体温"
+              <TextField
+                row={1}
                 type="number"
-                isFullWidth={false}
-                placeholder="36.5"
+                label="体温"
                 value={bodyTemperature}
+                variant="outlined"
+                disabled
               />
             </Box>
             <Box mx={4} my={2}>

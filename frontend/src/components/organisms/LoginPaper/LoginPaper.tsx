@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
-import { SingleLineTextField, StyledButton } from '../../atoms/index';
+import { TextField, StyledButton } from '../../atoms/index';
 
 const MyLink = styled(Link)`
   text-decoration: none;
@@ -41,25 +41,21 @@ export const LoginPaper: React.FC<Props> = memo((props) => {
           Login
         </Box>
         <Box textAlign="center" m={4}>
-          <SingleLineTextField
-            id="email"
+          <TextField
             row={1}
-            isFullWidth={true}
-            textName="email"
-            placeholder="xxxxxxx@xxx.ne.jp"
+            label="メールアドレス"
             value={email}
+            variant="outlined"
             onChange={onChangeEmail}
           />
         </Box>
         <Box textAlign="center" m={4}>
-          <SingleLineTextField
-            id="password"
+          <TextField
             row={1}
-            isFullWidth={true}
-            textName="password"
             type="password"
-            placeholder="6文字以上"
+            label="パスワード"
             value={password}
+            variant="outlined"
             onChange={onChangePassword}
           />
         </Box>
