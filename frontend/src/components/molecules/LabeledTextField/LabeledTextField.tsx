@@ -12,7 +12,7 @@ export type Props = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const LabeledMultipleLineTextField: React.FC<Props> = memo((props) => {
+export const LabeledTextField: React.FC<Props> = memo((props) => {
   const { row, value, component, mainLabel, inputLabel, onChange } = props;
 
   return (
@@ -32,4 +32,4 @@ export const LabeledMultipleLineTextField: React.FC<Props> = memo((props) => {
     </>
   );
 });
-LabeledMultipleLineTextField.displayName = 'LabeledMultipleLineTextField';
+LabeledTextField.displayName = 'LabeledTextField';
