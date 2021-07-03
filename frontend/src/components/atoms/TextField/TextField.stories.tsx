@@ -1,13 +1,13 @@
 import { Story, Meta } from '@storybook/react';
-import { Props, MultipleLinesTextField } from './MultipleLinesTextField';
+import { Props, TextField } from './TextField';
 import { Grid } from '@material-ui/core';
 
 export default {
-  title: 'atoms/MultipleLinesTextField',
-  component: MultipleLinesTextField,
+  title: 'atoms/TextField',
+  component: TextField,
 } as Meta;
 
-const Template: Story<Props> = (args) => <MultipleLinesTextField {...args} />;
+const Template: Story<Props> = (args) => <TextField {...args} />;
 
 export const Memo = Template.bind({});
 Memo.args = {

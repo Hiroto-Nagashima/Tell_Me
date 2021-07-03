@@ -1,9 +1,9 @@
 import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
 
-import TextField from '@material-ui/core/TextField';
+import MaterialUITextField from '@material-ui/core/TextField';
 
-const MyTextField = styled(TextField)`
+const MyTextField = styled(MaterialUITextField)`
   width: 100%;
 `;
 
@@ -16,8 +16,7 @@ export type Props = {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-// 列の指定ができるTextarea
-export const MultipleLinesTextField: React.FC<Props> = (props) => {
+export const TextField: React.FC<Props> = (props) => {
   const { row, label, value, variant, disabled, onChange } = props;
 
   return (

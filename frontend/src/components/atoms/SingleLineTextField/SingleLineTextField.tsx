@@ -16,6 +16,7 @@ const MyOutlinedInput = styled(OutlinedInput)`
 
 export type Props = {
   id: string;
+  row?: number;
   type?: string;
   value?: number | string | null;
   disabled?: boolean;
@@ -29,6 +30,7 @@ export type Props = {
 export const SingleLineTextField: VFC<Props> = (props) => {
   const {
     id,
+    row,
     type,
     value,
     disabled,
@@ -44,6 +46,7 @@ export const SingleLineTextField: VFC<Props> = (props) => {
       <InputLabel htmlFor="component-outlined">{textName}</InputLabel>
       <MyOutlinedInput
         id={id}
+        rows={row}
         type={type}
         label={textName}
         value={value}

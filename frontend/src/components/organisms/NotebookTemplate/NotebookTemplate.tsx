@@ -74,10 +74,10 @@ export const NotebookTemplate: React.FC<Props> = memo((props) => {
         </Box>
         <Box textAlign="center" mx={4}>
           <MultipleLinesTextField
-            label="夕飯"
-            row={2}
-            value={dinner}
+            label="朝食"
             variant="outlined"
+            row={6}
+            value={dinner}
             onChange={onChangeDinner}
           />
         </Box>

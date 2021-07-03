@@ -4,7 +4,11 @@ import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import { Box } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import { SingleLineTextField, StyledButton } from '../../atoms/index';
+import {
+  MultipleLinesTextField,
+  SingleLineTextField,
+  StyledButton,
+} from '../../atoms/index';
 import { ChooseRole } from './ChooseRole';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -79,11 +83,10 @@ export const SignUpPaper: React.FC<Props> = memo((props) => {
         </Box>
         <FlexBox>
           <Box textAlign="center" ml={4} mr={1}>
-            <SingleLineTextField
-              id="姓"
-              textName="姓"
-              isFullWidth={false}
-              placeholder="親御様の姓"
+            <MultipleLinesTextField
+              label="朝"
+              row={1}
+              variant="outlined"
               value={lastName}
               onChange={onChangeLastName}
             />

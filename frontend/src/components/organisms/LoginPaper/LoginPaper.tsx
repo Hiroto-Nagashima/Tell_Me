@@ -43,6 +43,7 @@ export const LoginPaper: React.FC<Props> = memo((props) => {
         <Box textAlign="center" m={4}>
           <SingleLineTextField
             id="email"
+            row={1}
             isFullWidth={true}
             textName="email"
             placeholder="xxxxxxx@xxx.ne.jp"
@@ -53,6 +54,7 @@ export const LoginPaper: React.FC<Props> = memo((props) => {
         <Box textAlign="center" m={4}>
           <SingleLineTextField
             id="password"
+            row={1}
             isFullWidth={true}
             textName="password"
             type="password"
