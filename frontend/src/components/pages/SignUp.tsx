@@ -143,13 +143,13 @@ export const SignUp: React.FC = () => {
                     `${API_ENDPOINT}users`,
                     {
                       params: {
-                        email: email,
                         role: role,
-                        daycare_id: daycareId,
-                        password: password,
+                        email: email,
                         gender: gender,
-                        first_name: firstName,
+                        password: password,
                         last_name: lastName,
+                        daycare_id: daycareId,
+                        first_name: firstName,
                         telephone_number: telephoneNumber,
                       },
                     },
@@ -205,31 +205,31 @@ export const SignUp: React.FC = () => {
             </Hidden>
             <Grid item sm={4} xs="auto">
               <MySignUpPaper
-                email={email}
                 role={role}
-                numbers={numbers}
-                daycareId={daycareId}
-                password={password}
-                firstName={firstName}
-                lastName={lastName}
+                email={email}
                 gender={gender}
+                numbers={numbers}
+                password={password}
+                lastName={lastName}
+                firstName={firstName}
+                daycareId={daycareId}
                 telephoneNumber={telephoneNumber}
-                onClickSignUp={trySignUp}
-                onChangeDaycareId={onChangeDaycareId}
                 onChangeRole={onChangeRole}
                 onChangeEmail={onChangeEmail}
-                onChangePassword={onChangePassword}
-                onChangeFirstName={onChangeFirstName}
-                onChangeLastName={onChangeLastName}
+                onClickSignUp={trySignUp}
                 onChangeGender={onChangeGender}
+                onChangePassword={onChangePassword}
+                onChangeLastName={onChangeLastName}
+                onChangeFirstName={onChangeFirstName}
+                onChangeDaycareId={onChangeDaycareId}
                 onChangeTelephoneNumber={onChangeTelephoneNumber}
               />
             </Grid>
           </SignUpArea>
           <CustomizedSnackbar
             open={isSnackbarOpen}
-            onClose={onCloseSnackbar}
             severity="error"
+            onClose={onCloseSnackbar}
           >
             {error}
           </CustomizedSnackbar>

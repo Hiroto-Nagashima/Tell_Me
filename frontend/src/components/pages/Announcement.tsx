@@ -3,12 +3,12 @@ import axios from 'axios';
 import format from 'date-fns/format';
 import styled from 'styled-components';
 import { Post } from '../../types/api/post';
+import { useParams } from 'react-router-dom';
+import { CurrentKidContext } from '../../providers/KidProvider';
 
 import { Box } from '@material-ui/core';
 import { Spinner } from '../atoms';
 import { PostCard } from '../organisms';
-import { CurrentKidContext } from '../../providers/KidProvider';
-import { useParams } from 'react-router-dom';
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,8 +21,8 @@ export const Announcement: React.FC = () => {
 
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
-  const [posts, setPosts] = useState<Array<Post>>([]);
   const [error, setError] = useState(false);
+  const [posts, setPosts] = useState<Array<Post>>([]);
   const [loading, setLoading] = useState(false);
 
   const fetchPosts = () => {
@@ -63,8 +63,8 @@ export const Announcement: React.FC = () => {
                   <Box key={post.id} my={2}>
                     <PostCard
                       poster={post.poster}
-                      teacherId={post.user_id}
                       content={post.content}
+                      teacherId={post.user_id}
                       createdAt={format(
                         new Date(post.created_at),
                         'yyyy-MM-dd HH:mm',

@@ -10,20 +10,20 @@ import { Box, Grid } from '@material-ui/core';
 import { Spinner, StyledButton } from '../atoms';
 import { KidCard } from '../organisms/KidCard/KidCard';
 
-const Direction = styled.h2`
-  margin: 50px 0;
+const ButtonArea = styled(Grid)`
+  margin-top: 50px;
 `;
 
-const MyLink = styled(Link)`
-  text-decoration: none;
+const Direction = styled.h2`
+  margin: 50px 0;
 `;
 
 const KidCardArea = styled(Grid)`
   margin-top: 50px;
 `;
 
-const ButtonArea = styled(Grid)`
-  margin-top: 50px;
+const MyLink = styled(Link)`
+  text-decoration: none;
 `;
 
 export const ChooseKid: React.FC = () => {

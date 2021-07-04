@@ -2,11 +2,11 @@ import axios from 'axios';
 import format from 'date-fns/format';
 import Resizer from 'react-image-file-resizer';
 import React, {
+  useState,
+  useEffect,
+  useContext,
   ChangeEvent,
   useCallback,
-  useContext,
-  useEffect,
-  useState,
 } from 'react';
 import { Post } from '../../types/api/post';
 import { Daycare } from '../../types/frontend/daycare';
@@ -26,18 +26,18 @@ export const TeacherHome: React.FC = () => {
 
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
-  const [image, setImage] = useState<string | Blob | ProgressEvent<FileReader>>(
-    '',
-  );
-  const [posts, setPosts] = useState<Array<Post>>([]);
   const [error, setError] = useState(false);
-  const [disabled, setDisabled] = useState(true);
+  const [posts, setPosts] = useState<Array<Post>>([]);
+  const [daycare, setDaycare] = useState<Daycare>({} as Daycare);
   const [loading, setLoading] = useState(false);
   const [message, setMassage] = useState('');
-  const [daycare, setDaycare] = useState<Daycare>({} as Daycare);
+  const [disabled, setDisabled] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [selfIntroduction, setSelfIntroduction] = useState<string | null>('');
+  const [image, setImage] = useState<string | Blob | ProgressEvent<FileReader>>(
+    '',
+  );
   const [severity, setSeverity] = useState<
     'error' | 'warning' | 'info' | 'success'
   >('error');
@@ -119,11 +119,11 @@ export const TeacherHome: React.FC = () => {
         },
       )
       .then((res) => {
-        setMassage(res.data.message);
         setImage('');
+        setMassage(res.data.message);
         setDisabled(true);
-        setIsModalOpen(false);
         setSeverity(res.data.severity);
+        setIsModalOpen(false);
       })
       .catch(() => {
         setMassage('更新失敗しました');
@@ -146,8 +146,8 @@ export const TeacherHome: React.FC = () => {
       .then((res) => {
         setSelfIntroduction(res.data.user.selfIntroduction);
         setMassage(res.data.message);
-        setIsModalOpen(false);
         setSeverity('success');
+        setIsModalOpen(false);
       })
       .catch(() => {
         setMassage('登録に失敗しました');
@@ -197,10 +197,10 @@ export const TeacherHome: React.FC = () => {
         <Grid container justify="center">
           <Grid item lg={6} md={8} xs={12}>
             <TeacherProfile
-              firstName={currentUser.firstName}
               lastName={currentUser.lastName}
-              selfIntroduction={selfIntroduction}
+              firstName={currentUser.firstName}
               daycareName={daycare.name}
+              selfIntroduction={selfIntroduction}
               onClick={onOpenModal}
             />
             <UpdateModal
@@ -223,9 +223,9 @@ export const TeacherHome: React.FC = () => {
                 return (
                   <Box key={post.id} my={2}>
                     <PostCard
+                      content={post.content}
                       poster={post.poster}
                       teacherId={post.user_id}
-                      content={post.content}
                       createdAt={format(
                         new Date(post.created_at),
                         'yyyy-MM-dd HH:mm',
@@ -236,8 +236,8 @@ export const TeacherHome: React.FC = () => {
               })}
             <CustomizedSnackbar
               open={isSnackbarOpen}
-              onClose={onCloseSnackbar}
               severity={severity}
+              onClose={onCloseSnackbar}
             >
               {message}
             </CustomizedSnackbar>

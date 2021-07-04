@@ -1,72 +1,71 @@
 import React, {
+  useState,
+  useEffect,
+  useContext,
   ChangeEvent,
   useCallback,
-  useContext,
-  useEffect,
-  useState,
 } from 'react';
 import axios from 'axios';
 import Resizer from 'react-image-file-resizer';
 import { getAuth } from '../../helper/firebaseAuthHelper';
 import { useParams } from 'react-router-dom';
+import { useFetchKid } from '../../hooks/useFetchKid';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { CurrentUserContext } from '../../providers/UserProvider';
-import { useFetchKid } from '../../hooks/useFetchKid';
 
 import { Grid } from '@material-ui/core';
 import { Spinner, CustomizedSnackbar } from '../atoms';
 import {
-  KidProfile,
-  ParentProfile,
-  UpdateModal,
   UpdateKid,
+  KidProfile,
+  UpdateModal,
   UpdateParent,
+  ParentProfile,
 } from '../organisms';
 
 export const Home: React.FC = () => {
   const {
+    age,
     error,
+    gender,
     loading,
     currentKid,
-    age,
-    gender,
     kidLastName,
     kidFirstName,
     favoriteFood,
     favoritePlay,
-    getKid,
-    setCurrentKid,
     setAge,
-    setLoading,
+    getKid,
     setGender,
+    setLoading,
+    setCurrentKid,
     setKidLastName,
     setKidFirstName,
     setFavoriteFood,
     setFavoritePlay,
   } = useFetchKid();
 
+  const [email, setEmail] = useState('');
+  const [message, setMassage] = useState('');
+  const [disabled, setDisabled] = useState(true);
+  const [isKidModalOpen, setIsKidModalOpen] = useState(false);
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const [parentLastName, setParentLastName] = useState<string>('');
+  const [parentFirstName, setParentFirstName] = useState<string>('');
+  const [telephoneNumber, setTelephoneNumber] = useState('');
+  const [isParentModalOpen, setIsParentModalOpen] = useState(false);
+  const [severity, setSeverity] = useState<
+    'error' | 'warning' | 'info' | 'success'
+  >('error');
+  const [image, setImage] = useState<string | Blob | ProgressEvent<FileReader>>(
+    '',
+  );
+
   const { id } = useParams<{ id: string }>();
   const [parent] = useAuthState(getAuth());
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
-
-  const [isKidModalOpen, setIsKidModalOpen] = useState(false);
-  const [email, setEmail] = useState('');
-  const [parentLastName, setParentLastName] = useState<string>('');
-  const [parentFirstName, setParentFirstName] = useState<string>('');
-  const [telephoneNumber, setTelephoneNumber] = useState('');
-  const [isParentModalOpen, setIsParentModalOpen] = useState(false);
-
-  const [image, setImage] = useState<string | Blob | ProgressEvent<FileReader>>(
-    '',
-  );
-  const [message, setMassage] = useState('');
-  const [disabled, setDisabled] = useState(true);
-  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
-  const [severity, setSeverity] = useState<
-    'error' | 'warning' | 'info' | 'success'
-  >('error');
 
   const onChangeAge = useCallback(
     (e: React.ChangeEvent<{ value: unknown }>) => {

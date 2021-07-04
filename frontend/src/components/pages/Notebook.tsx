@@ -5,10 +5,10 @@ import { useParams } from 'react-router-dom';
 
 import { InputOfNotebook } from '../organisms';
 import {
-  CustomizedSnackbar,
   Spinner,
   DatePicker,
   StyledButton,
+  CustomizedSnackbar,
 } from '../atoms';
 import { useFetchKid } from '../../hooks/useFetchKid';
 import { Box, Grid } from '@material-ui/core';
@@ -30,29 +30,28 @@ export const Notebook: React.FC = () => {
   const [memo, setMemo] = useState<string | null>(null);
   const [error, setError] = useState('');
   const [dinner, setDinner] = useState<string | null>(null);
-  const [dinnerTemplate, setDinnerTemplate] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [message, setMassage] = useState('');
   const [isUpdate, setIsUpdate] = useState(false);
   const [breakfast, setBreakfast] = useState<string | null>(null);
+  const [hasBathed, setHasBathed] = useState<boolean>(true);
+  const [notebookId, setNotebookID] = useState<number | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [isNotebookOpen, setIsNotebookOpen] = useState(false);
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const [dinnerTemplate, setDinnerTemplate] = useState<string | null>(null);
+  const [bodyTemperature, setBodyTemperature] = useState<string | null>(null);
+  const [displayOfButton, setDisplayOfButton] = React.useState('none');
+  const [hasBathedTemplate, setHasBathedTemplate] = useState<boolean>(true);
+  const [displayOfTemplate, setDisplayOfTemplate] = React.useState('');
   const [breakfastTemplate, setBreakfastTemplate] = useState<string | null>(
     null,
   );
-  const [hasBathed, setHasBathed] = useState<boolean>(true);
-  const [hasBathedTemplate, setHasBathedTemplate] = useState<boolean>(true);
-  const [notebookId, setNotebookID] = useState<number | null>(null);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
-  const [isNotebookOpen, setIsNotebookOpen] = useState(false);
-  const [displayOfTemplate, setDisplayOfTemplate] = React.useState('');
-  const [displayOfButton, setDisplayOfButton] = React.useState('none');
   const [notebookTemplates, setNotebookTemplates] =
     useState<Array<TypeOfNotebookTemplate> | null>(null);
-
   const [severity, setSeverity] = useState<
     'error' | 'warning' | 'info' | 'success'
   >('error');
-  const [bodyTemperature, setBodyTemperature] = useState<string | null>(null);
 
   const newDate = format(
     selectedDate ? selectedDate : new Date(),
@@ -140,8 +139,8 @@ export const Notebook: React.FC = () => {
       .catch((e) => setError(e))
       .finally(() => {
         setLoading(false);
-        setDisplayOfTemplate('none');
         setDisplayOfButton('');
+        setDisplayOfTemplate('none');
       });
   };
 
@@ -161,16 +160,16 @@ export const Notebook: React.FC = () => {
         })
         .then((res) => {
           if (res.data.status == '422') {
+            setMassage(res.data.message);
             setSeverity('error');
-            setMassage(res.data.message);
           } else {
-            setSeverity('success');
             setMassage(res.data.message);
+            setSeverity('success');
           }
         })
         .catch(() => {
-          setSeverity('error');
           setMassage('登録に失敗しました');
+          setSeverity('error');
         })
         .finally(() => {
           setLoading(false);
@@ -189,12 +188,12 @@ export const Notebook: React.FC = () => {
           },
         })
         .then((res) => {
-          setSeverity('success');
           setMassage(res.data.message);
+          setSeverity('success');
         })
         .catch(() => {
-          setSeverity('error');
           setMassage('入力値に誤りがあります');
+          setSeverity('error');
         })
         .finally(() => {
           setLoading(false);
@@ -233,8 +232,8 @@ export const Notebook: React.FC = () => {
         setNotebookTemplates(res.data.notebook_templates);
       })
       .catch(() => {
-        setSeverity('error');
         setMassage('入力値に誤りがあります');
+        setSeverity('error');
       })
       .finally(() => {
         setLoading(false);
@@ -282,10 +281,10 @@ export const Notebook: React.FC = () => {
                     return (
                       <TemplateButton item xs={12} key={notebookTemplate.id}>
                         <StyledButton
-                          variant="contained"
                           label={`Template${index + 1}`}
-                          fontSize={18}
                           width={100}
+                          variant="contained"
+                          fontSize={18}
                           borderRadius={20}
                           onClick={() =>
                             onClickTemplateButton(notebookTemplate.id)
@@ -314,15 +313,15 @@ export const Notebook: React.FC = () => {
             {isNotebookOpen ? (
               <Grid item sm={12} xs="auto">
                 <InputOfNotebook
-                  selectedDate={newDate}
                   memo={memo}
                   dinner={dinner}
-                  hasBathed={hasBathed}
                   breakfast={breakfast}
+                  hasBathed={hasBathed}
+                  selectedDate={newDate}
                   bodyTemperature={bodyTemperature}
-                  onClickRegister={onClickRegisterNotebook}
                   onChangeMemo={onChangeMemo}
                   onChangeDinner={onChangeDinner}
+                  onClickRegister={onClickRegisterNotebook}
                   onChangeBreakfast={onChangeBreakfast}
                   onChangeHasBathed={onChangeHasBathed}
                   onChangeBodyTemperature={onChangeBodyTemperature}

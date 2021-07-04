@@ -90,9 +90,9 @@ export const TeacherAnnouncement: React.FC = () => {
       })
       .then((res) => {
         setPosts(res.data.posts);
-        setPostContent(null);
-        setSeverity('success');
         setMassage(res.data.message);
+        setSeverity('success');
+        setPostContent(null);
       })
       .catch(() => {
         setMassage('投稿に失敗しました');
@@ -133,9 +133,9 @@ export const TeacherAnnouncement: React.FC = () => {
               return (
                 <PostArea item md={7} xs={11} key={post.id}>
                   <PostCard
+                    content={post.content}
                     poster={post.poster}
                     teacherId={post.user_id}
-                    content={post.content}
                     createdAt={format(
                       new Date(post.created_at),
                       'yyyy-MM-dd HH:mm',
@@ -146,8 +146,8 @@ export const TeacherAnnouncement: React.FC = () => {
             })}
           <CustomizedSnackbar
             open={isSnackbarOpen}
-            onClose={onCloseSnackbar}
             severity={severity}
+            onClose={onCloseSnackbar}
           >
             {message}
           </CustomizedSnackbar>
