@@ -145,7 +145,7 @@ export const TeacherHome: React.FC = () => {
         },
       })
       .then((res) => {
-        setSelfIntroduction(res.data.selfIntroduction);
+        setSelfIntroduction(res.data.user.selfIntroduction);
         setMassage(res.data.message);
         setIsModalOpen(false);
         setSeverity('success');

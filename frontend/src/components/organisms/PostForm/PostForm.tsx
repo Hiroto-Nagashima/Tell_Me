@@ -73,11 +73,12 @@ export const PostForm: React.FC<Props> = (props) => {
       <Details>
         <Content>
           <TextField
+            row={6}
             label="連絡の投稿(100字以内)"
             variant="standard"
             value={value}
+            multiline={true}
             onChange={onChangePostContent}
-            row={5}
           />
         </Content>
         <Controls>

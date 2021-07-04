@@ -258,7 +258,6 @@ export const Home: React.FC = () => {
                 },
               })
               .then((res) => {
-                console.log(res.data);
                 setEmail(res.data.user.email);
                 setCurrentUser(res.data.user);
                 setParentLastName(res.data.user.lastName);
