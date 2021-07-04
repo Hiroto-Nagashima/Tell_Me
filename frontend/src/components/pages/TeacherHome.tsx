@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import styled from 'styled-components';
 import format from 'date-fns/format';
 import Resizer from 'react-image-file-resizer';
 import React, {
