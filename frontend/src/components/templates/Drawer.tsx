@@ -12,23 +12,23 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 
 type Props = {
+  firstListItemText: string;
+  secondListItemText: string;
+  thirdListItemText: string;
   onClickFirstItem: () => void;
   onClickSecondItem: () => void;
   onClickThirdItem: () => void;
   onClickLogoutButton: () => void;
-  firstListItemText: string;
-  secondListItemText: string;
-  thirdListItemText: string;
 };
 
 export const Drawer: React.FC<Props> = (props) => {
   const {
-    onClickFirstItem,
     firstListItemText,
-    onClickSecondItem,
     secondListItemText,
-    onClickThirdItem,
     thirdListItemText,
+    onClickFirstItem,
+    onClickSecondItem,
+    onClickThirdItem,
     onClickLogoutButton,
   } = props;
 

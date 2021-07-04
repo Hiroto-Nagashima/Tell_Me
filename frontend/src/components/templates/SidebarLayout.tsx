@@ -132,24 +132,24 @@ export const SidebarLayout: React.FC<Props> = (props) => {
     <div className={classes.root}>
       <Header
         title={title}
-        onClickTitle={onToggleDrawer}
         appBarClassName={classes.appBar}
         iconButtonClassName={classes.menuButton}
+        onClickTitle={onToggleDrawer}
       />
       <nav className={classes.drawer}>
         <Hidden smUp implementation="css">
           <Drawer
-            container={container}
-            variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={mobileOpen}
-            onClose={onToggleDrawer}
+            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+            variant="temporary"
+            container={container}
             classes={{
               paper: classes.drawerPaper,
             }}
             ModalProps={{
               keepMounted: true,
             }}
+            onClose={onToggleDrawer}
           >
             {currentUser.role == '保護者' ? (
               <CommonDrawer
@@ -214,8 +214,8 @@ export const SidebarLayout: React.FC<Props> = (props) => {
         isOpen={isOpen}
         okLabel="ログアウト"
         content="本当にログアウトしますか？"
-        onClickClose={onClickLogoutModalClose}
         onClickOK={Logout}
+        onClickClose={onClickLogoutModalClose}
       />
     </div>
   );
