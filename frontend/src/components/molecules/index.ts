@@ -5,7 +5,7 @@ import { LabeledRadioButtonGroup } from './LabeledRadioButtonGroup/LabeledRadioB
 
 export {
   LabeledTextField,
+  AlignedTextFields,
   LabeledSelectMenu,
   LabeledRadioButtonGroup,
-  AlignedTextFields,
 };
