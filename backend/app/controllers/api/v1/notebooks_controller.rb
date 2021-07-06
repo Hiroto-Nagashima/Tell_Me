@@ -33,6 +33,7 @@ module Api
       def fetch_notebook
         kid = Kid.find(params[:kid_id])
         date = params[:date]
+        # 年月日を切り出す
         new_date = date.slice(0..9)
         notebooks = kid.notebooks.where(date: new_date)
         notebook = notebooks.last

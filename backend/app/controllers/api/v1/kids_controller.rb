@@ -70,6 +70,7 @@ module Api
         end
       end
 
+      # ある保育園の全ての子供とその両親、連絡帳を取得
       def kids_in_daycare
         daycare = Daycare.find(params[:id])
         kids = Kid.where(daycare_id: daycare.id)

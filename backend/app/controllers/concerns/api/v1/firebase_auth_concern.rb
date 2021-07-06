@@ -39,8 +39,9 @@ module Api
             Most likely the ID token is expired, so get a fresh token from your client app and try again.
           ERROR
         end
-
+        # 証明書作成
         certificate = OpenSSL::X509::Certificate.new(public_key)
+        # 証明書を使ってトークンをデコード
         decoded_token = decode_jwt(token, true, { algorithm: ALGORITHM, verify_iat: true }, certificate.public_key)
 
         { uid: decoded_token[:payload]['sub'], decoded_token: decoded_token }
@@ -58,6 +59,7 @@ module Api
         { payload: decoded_token[0], header: decoded_token[1] }
       end
 
+      # 公開鍵を取得
       def fetch_public_keys
         uri = URI.parse(CLIENT_CERT_URL)
         https = Net::HTTP.new(uri.host, uri.port)
@@ -72,6 +74,7 @@ module Api
         raise msg
       end
 
+      # トークンの中身がFirebaseの認証トークンとして正しいフォーマットになっているかをチェック
       def validate(json)
         errors = []
         project_id = CONFIG['project_info']['project_id']
