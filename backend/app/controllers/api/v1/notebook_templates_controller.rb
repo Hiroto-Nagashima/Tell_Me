@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class NotebookTemplatesController < ApplicationController
@@ -7,7 +9,7 @@ module Api
         if notebook_templates.save!
           new_notebook_templates = NotebookTemplate.where(kid_id: params[:kid_id]).last(3)
           render json: {
-            message: "登録が完了しました",
+            message: '登録が完了しました',
             notebook_templates: new_notebook_templates
           }, status: 200
         else
@@ -25,7 +27,7 @@ module Api
 
       def index
         notebook_templates = NotebookTemplate.where(kid_id: params[:kid_id]).last(3)
-        render json:  notebook_templates, status: 200
+        render json: notebook_templates, status: 200
       end
 
       private

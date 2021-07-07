@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'jwt'
 require 'yaml'
 require 'net/http'
@@ -10,9 +12,9 @@ module Api
 
       CONFIG = YAML.load_file(Rails.root.join('config/firebase_config.yml'))
 
-      ALGORITHM       = 'RS256'.freeze
-      ISSUER_BASE_URL = 'https://securetoken.google.com/'.freeze
-      CLIENT_CERT_URL = 'https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com'.freeze
+      ALGORITHM       = 'RS256'
+      ISSUER_BASE_URL = 'https://securetoken.google.com/'
+      CLIENT_CERT_URL = 'https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com'
 
       def authenticate_token_by_firebase
         authenticate_with_http_token do |token, _|
@@ -39,6 +41,7 @@ module Api
             Most likely the ID token is expired, so get a fresh token from your client app and try again.
           ERROR
         end
+
         # 証明書作成
         certificate = OpenSSL::X509::Certificate.new(public_key)
         # 証明書を使ってトークンをデコード

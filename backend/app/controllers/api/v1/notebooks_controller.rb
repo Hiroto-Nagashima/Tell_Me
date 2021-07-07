@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class NotebooksController < ApplicationController
@@ -6,13 +8,13 @@ module Api
         notebook = kid.notebooks.build(notebook_params)
         if notebook.save!
           render json: {
-            message: "登録が完了しました"
+            message: '登録が完了しました'
           }, status: 200
         else
           render json: {
-            status: "422",
+            status: '422',
             message: notebook.errors.full_messages
-          },status: 422
+          }, status: 422
         end
       end
 
@@ -21,11 +23,11 @@ module Api
         notebook = kid.notebooks.find_by(id: params[:id])
         if notebook.update!(notebook_params)
           render json: {
-            message: "更新が完了しました"
+            message: '更新が完了しました'
           }, status: 200
         else
           render json: {
-            message: "更新に失敗しました"
+            message: '更新に失敗しました'
           }, status: 400
         end
       end
@@ -40,7 +42,7 @@ module Api
         if notebook.present?
           render json: notebook, status: 200
         else
-          @notebook= kid.notebooks.build
+          @notebook = kid.notebooks.build
           render json: @notebook, status: 200
         end
       end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :parent, class: User do
     association :daycare
@@ -20,6 +22,6 @@ FactoryBot.define do
     telephone_number             { '09012341234' }
     sequence(:last_name)         { |i| "last_name#{i}" }
     sequence(:first_name)        { |i| "frist_name#{i}" }
-    sequence(:self_introduction) { |i| "self_introduction#{i}"  }
+    sequence(:self_introduction) { |i| "self_introduction#{i}" }
   end
 end

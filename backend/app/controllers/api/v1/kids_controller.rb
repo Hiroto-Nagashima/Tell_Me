@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class KidsController < ApplicationController
@@ -22,15 +24,15 @@ module Api
         kid = Kid.find(params[:id])
         if kid.update!(kid_params)
           render json: {
-            message: "更新が完了しました",
-            kid:{
-            age: kid.age,
-            gender: kid.gender,
-            lastName: kid.last_name,
-            firstName: kid.first_name,
-            daycareId: kid.daycare_id,
-            favoritePlay: kid.favorite_play,
-            favoriteFood: kid.favorite_food,
+            message: '更新が完了しました',
+            kid: {
+              age: kid.age,
+              gender: kid.gender,
+              lastName: kid.last_name,
+              firstName: kid.first_name,
+              daycareId: kid.daycare_id,
+              favoritePlay: kid.favorite_play,
+              favoriteFood: kid.favorite_food
             }
           }, status: 200
         else
@@ -41,7 +43,7 @@ module Api
       def show
         kid = Kid.find(params[:id])
         render json: {
-          kid:{
+          kid: {
             id: kid.id,
             age: kid.age,
             gender: kid.gender,
@@ -49,7 +51,7 @@ module Api
             firstName: kid.first_name,
             daycareId: kid.daycare_id,
             favoritePlay: kid.favorite_play,
-            favoriteFood: kid.favorite_food,
+            favoriteFood: kid.favorite_food
           }
         }, status: 200
       end
@@ -65,7 +67,7 @@ module Api
           render json: kids_box, status: 200
         else
           render json: {
-            message: "子供が未登録です"
+            message: '子供が未登録です'
           }
         end
       end
@@ -76,23 +78,23 @@ module Api
         kids = Kid.where(daycare_id: daycare.id)
         arr = []
         kids.each do |kid|
-          hash= {"notebook" => nil, "mother" => nil, "father" => nil, "kid" => nil}
+          hash = { 'notebook' => nil, 'mother' => nil, 'father' => nil, 'kid' => nil }
           mother = nil
           father = nil
           notebook = kid.notebooks.last
           parents = kid.kid_users.where(kid_id: kid.id)
           parents.each do |parent|
             user = User.find(parent.user_id)
-            if user.gender == 0
+            if user.gender.zero?
               mother = user
             else
               father = user
             end
           end
-          hash["notebook"] = notebook
-          hash["mother"] = mother
-          hash["father"] = father
-          hash["kid"] = kid
+          hash['notebook'] = notebook
+          hash['mother'] = mother
+          hash['father'] = father
+          hash['kid'] = kid
           arr << hash
         end
         render json: arr, status: 200
@@ -103,13 +105,13 @@ module Api
         kid.image = params[:image]
         if kid.save!
           render json: {
-            message: "画像を登録しました",
-            severity: "success"
+            message: '画像を登録しました',
+            severity: 'success'
           }, status: 200
         else
           render json: {
-            message: "画像を登録に失敗しました",
-            severity: "error"
+            message: '画像を登録に失敗しました',
+            severity: 'error'
           }, status: 400
         end
       end
@@ -117,7 +119,8 @@ module Api
       private
 
       def kid_params
-        params.require(:params).permit(:age, :first_name, :daycare_id, :last_name, :gender, :favorite_food, :favorite_play)
+        params.require(:params).permit(:age, :first_name, :daycare_id, :last_name, :gender, :favorite_food,
+                                       :favorite_play)
       end
     end
   end

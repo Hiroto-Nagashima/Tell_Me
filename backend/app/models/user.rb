@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   enum role: { 保護者: 0, 先生: 1 }
 
@@ -12,8 +14,8 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   validates :first_name, :last_name, :telephone_number, :uid, :email, :password, presence: true
 
-  validates :password,length: { minimum: 6 }
-  validates :self_introduction,length: { maximum: 80 }
+  validates :password, length: { minimum: 6 }
+  validates :self_introduction, length: { maximum: 80 }
 
   mount_base64_uploader :image, ImageUploader
 end

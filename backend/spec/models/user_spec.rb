@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -45,17 +47,16 @@ RSpec.describe User, type: :model do
         user.valid?
         expect(user.errors.messages[:password]).to include("can't be blank")
       end
-
     end
   end
 
   describe '#uniqueness' do
-    it "登録済みのemailアドレスでは登録に失敗するか" do
+    it '登録済みのemailアドレスでは登録に失敗するか' do
       email = Faker::Internet.email
       user = create(:user, email: email)
       user2 = build(:user, email: email)
       user2.valid?
-      expect(user2.errors[:email]).to include("has already been taken")
+      expect(user2.errors[:email]).to include('has already been taken')
     end
   end
 
@@ -64,13 +65,13 @@ RSpec.describe User, type: :model do
       password = Faker::Internet.password(min_length: 5, max_length: 5)
       user = build_stubbed(:user, password: password)
       user.valid?
-      expect(user.errors.messages[:password]).to include("is too short (minimum is 6 characters)")
+      expect(user.errors.messages[:password]).to include('is too short (minimum is 6 characters)')
     end
 
     it '自己紹介が21字以上だとエラーになるか' do
-      user = build_stubbed(:parent, self_introduction: Faker::Base.regexify("[あ]{81}"))
+      user = build_stubbed(:parent, self_introduction: Faker::Base.regexify('[あ]{81}'))
       user.valid?
-      expect(user.errors.messages[:self_introduction]).to include("is too long (maximum is 80 characters)")
+      expect(user.errors.messages[:self_introduction]).to include('is too long (maximum is 80 characters)')
     end
   end
 end

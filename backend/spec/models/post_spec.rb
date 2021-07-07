@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
@@ -21,15 +23,14 @@ RSpec.describe Post, type: :model do
         post.valid?
         expect(post.errors.messages[:poster]).to include("can't be blank")
       end
-
     end
   end
 
   describe '#length' do
     it '好きな食べ物が21字以上だとエラーになるか' do
-      post = build_stubbed(:post, content: Faker::Base.regexify("[あ]{101}"))
+      post = build_stubbed(:post, content: Faker::Base.regexify('[あ]{101}'))
       post.valid?
-      expect(post.errors.messages[:content]).to include("is too long (maximum is 100 characters)")
+      expect(post.errors.messages[:content]).to include('is too long (maximum is 100 characters)')
     end
   end
 end

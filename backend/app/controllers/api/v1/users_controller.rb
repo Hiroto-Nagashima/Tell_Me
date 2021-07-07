@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class UsersController < ApplicationController
@@ -14,18 +16,18 @@ module Api
         user = User.find(params[:id])
         if user.update!(user_params)
           render json: {
-            message: "更新が完了しました",
+            message: '更新が完了しました',
             user: {
-            id: user.id,
-            role: user.role,
-            email: user.email,
-            image: user.image,
-            gender: user.gender,
-            firstName: user.first_name,
-            lastName: user.last_name,
-            selfIntroduction: user.self_introduction,
-            telephoneNumber: user.telephone_number
-          }
+              id: user.id,
+              role: user.role,
+              email: user.email,
+              image: user.image,
+              gender: user.gender,
+              firstName: user.first_name,
+              lastName: user.last_name,
+              selfIntroduction: user.self_introduction,
+              telephoneNumber: user.telephone_number
+            }
           }, status: 200
         else
           render status: 400
@@ -35,7 +37,7 @@ module Api
       def fetch_user
         user = User.find_by(uid: params[:uid])
         render json: {
-          user:{
+          user: {
             id: user.id,
             role: user.role,
             email: user.email,
@@ -56,20 +58,22 @@ module Api
         user.image = params[:image]
         if user.save
           render json: {
-            message: "画像を登録しました",
-            severity: "success"
+            message: '画像を登録しました',
+            severity: 'success'
           }, status: 200
         else
           render json: {
-            message: "画像を登録に失敗しました",
-            severity: "error"
+            message: '画像を登録に失敗しました',
+            severity: 'error'
           }, status: 400
         end
       end
 
       private
+
       def user_params
-        params.require(:params).permit(:email, :password, :role, :first_name, :last_name, :gender, :daycare_id, :telephone_number, :self_introduction)
+        params.require(:params).permit(:email, :password, :role, :first_name, :last_name, :gender, :daycare_id,
+                                       :telephone_number, :self_introduction)
       end
 
       def set_auth

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateNotebookTemplates < ActiveRecord::Migration[6.1]
   def change
     create_table :notebook_templates do |t|

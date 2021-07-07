@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 RSpec.describe Notebook, type: :model do
-
   describe '#presence' do
     context 'success' do
       it '必要項目を全て記入していれば成功' do
@@ -17,7 +18,7 @@ RSpec.describe Notebook, type: :model do
       end
 
       it '朝食が空欄の場合保存に失敗するか' do
-        notebook= build_stubbed(:notebook, breakfast: nil)
+        notebook = build_stubbed(:notebook, breakfast: nil)
         notebook.valid?
         expect(notebook.errors.messages[:breakfast]).to include("can't be blank")
       end
@@ -33,7 +34,6 @@ RSpec.describe Notebook, type: :model do
         notebook.valid?
         expect(notebook.errors.messages[:date]).to include("can't be blank")
       end
-
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Kid < ApplicationRecord
   belongs_to :daycare
   has_many :kid_users

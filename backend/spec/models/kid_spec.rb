@@ -1,7 +1,8 @@
-require 'spec_helper.rb'
+# frozen_string_literal: true
+
+require 'spec_helper'
 
 RSpec.describe Kid, type: :model do
-
   describe '#presence' do
     context 'success' do
       it '必要項目を全て記入していれば成功' do
@@ -52,21 +53,20 @@ RSpec.describe Kid, type: :model do
         kid.valid?
         expect(kid.errors.messages[:favorite_play]).to include("can't be blank")
       end
-
     end
   end
 
   describe '#length' do
     it '好きな遊びが21字以上だとエラーになるか' do
-      kid = build_stubbed(:kid, favorite_play: Faker::Base.regexify("[あ]{21}"))
+      kid = build_stubbed(:kid, favorite_play: Faker::Base.regexify('[あ]{21}'))
       kid.valid?
-      expect(kid.errors.messages[:favorite_play]).to include("is too long (maximum is 20 characters)")
+      expect(kid.errors.messages[:favorite_play]).to include('is too long (maximum is 20 characters)')
     end
 
     it '好きな食べ物が21字以上だとエラーになるか' do
-      kid = build_stubbed(:kid, favorite_food: Faker::Base.regexify("[あ]{21}"))
+      kid = build_stubbed(:kid, favorite_food: Faker::Base.regexify('[あ]{21}'))
       kid.valid?
-      expect(kid.errors.messages[:favorite_food]).to include("is too long (maximum is 20 characters)")
+      expect(kid.errors.messages[:favorite_food]).to include('is too long (maximum is 20 characters)')
     end
   end
 end

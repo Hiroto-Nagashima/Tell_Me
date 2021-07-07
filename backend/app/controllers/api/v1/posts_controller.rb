@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class PostsController < ApplicationController
@@ -10,7 +12,7 @@ module Api
         if post.save!
           posts = Post.all
           render json: {
-            message: "投稿が完了しました！",
+            message: '投稿が完了しました！',
             posts: posts
           }, status: 200
         else
