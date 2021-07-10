@@ -45,7 +45,8 @@ module Api
         # 証明書作成
         certificate = OpenSSL::X509::Certificate.new(public_key)
         # 証明書を使ってトークンをデコード
-        decoded_token = decode_jwt(token, true, { algorithm: ALGORITHM, verify_iat: true }, certificate.public_key)
+        decoded_token = decode_jwt(token, true, { algorithm: ALGORITHM, verify_iat: true },
+                                   certificate.public_key)
 
         { uid: decoded_token[:payload]['sub'], decoded_token: decoded_token }
       end
@@ -90,9 +91,15 @@ module Api
           errors << "Firebase ID token has incorrect algorithm. Expected '#{ALGORITHM}' but got '#{header['alg']}'"
         end
 
-        errors << 'Firebase ID token has no "sub" (subject) claim.' unless payload['sub'].is_a?(String)
-        errors << 'Firebase ID token has an empty string "sub" (subject) claim.' if payload['sub'].empty?
-        errors << 'Firebase ID token has "sub" (subject) claim longer than 128 characters.' if payload['sub'].size > 128
+        unless payload['sub'].is_a?(String)
+          errors << 'Firebase ID token has no "sub" (subject) claim.'
+        end
+        if payload['sub'].empty?
+          errors << 'Firebase ID token has an empty string "sub" (subject) claim.'
+        end
+        if payload['sub'].size > 128
+          errors << 'Firebase ID token has "sub" (subject) claim longer than 128 characters.'
+        end
 
         errors
       end

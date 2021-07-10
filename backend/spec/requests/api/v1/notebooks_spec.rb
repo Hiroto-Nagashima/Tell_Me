@@ -28,7 +28,8 @@ RSpec.describe 'Api::V1::Notebooks', type: :request do
     it 'ある子供の連絡帳を更新' do
       kid = create(:kid)
       target_notebook = create(:notebook, kid_id: kid.id, memo: '普通です', date: '2021-4-26')
-      put "/api/v1/kids/#{kid.id}/notebooks/#{target_notebook.id}", params: { notebook: { memo: '元気です' } }
+      put "/api/v1/kids/#{kid.id}/notebooks/#{target_notebook.id}",
+          params: { notebook: { memo: '元気です' } }
       json = JSON.parse(response.body)
       expect(response.status).to eq(200)
       expect(target_notebook.reload.memo).to eq('元気です')
