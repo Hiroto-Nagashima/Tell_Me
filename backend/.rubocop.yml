@@ -4,6 +4,7 @@ Style/Documentation:
   Enabled: false
 
 Metrics/BlockLength:
+  Max: 80
   Exclude:
     - "spec/**/*"
 
@@ -11,4 +12,14 @@ Style/AsciiComments:
   Enabled: false
 
 Metrics/LineLength:
-  Max: 100
+  Max: 140
+
+Lint/UselessAssignment:
+  Exclude:
+    - "spec/**/*"
+
+AllCops:
+  DisabledByDefault: true
+  Exclude:
+    - "gems/**/*"
+  NewCops: enable
