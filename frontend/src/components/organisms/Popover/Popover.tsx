@@ -13,13 +13,13 @@ const Wrapper = styled.div`
 `;
 
 export type Props = {
-  email: string | null;
+  topText: string | null;
+  bottomText: string | null;
   buttonLabel: string | null;
-  telephoneNumber: string | null;
 };
 
-export const ParentPopover: React.FC<Props> = (props) => {
-  const { email, telephoneNumber, buttonLabel } = props;
+export const MyPopover: React.FC<Props> = (props) => {
+  const { topText, bottomText, buttonLabel } = props;
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null,
@@ -67,7 +67,7 @@ export const ParentPopover: React.FC<Props> = (props) => {
               variant="h6"
               component="h6"
             >
-              {telephoneNumber}
+              {topText}
             </Typography>
           </Box>
           <Box mt={1} display="flex">
@@ -80,7 +80,7 @@ export const ParentPopover: React.FC<Props> = (props) => {
               variant="h6"
               component="h6"
             >
-              {email}
+              {bottomText}
             </Typography>
           </Box>
         </Wrapper>

@@ -21,7 +21,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import { Spinner } from '../atoms';
-import { ParentPopover, NotebookModal } from '../organisms';
+import { MyPopover, NotebookModal } from '../organisms';
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -124,10 +124,10 @@ export const AllKids: React.FC<Props> = () => {
                       {kid.mother == null ? (
                         '-'
                       ) : (
-                        <ParentPopover
-                          email={kid.mother.email}
+                        <MyPopover
+                          topText={kid.mother.telephone_number}
+                          bottomText={kid.mother.email}
                           buttonLabel={`${kid.mother.last_name}${kid.mother.first_name}`}
-                          telephoneNumber={kid.mother.telephone_number}
                         />
                       )}
                     </StyledTableCell>
@@ -135,10 +135,10 @@ export const AllKids: React.FC<Props> = () => {
                       {kid.father == null ? (
                         '-'
                       ) : (
-                        <ParentPopover
-                          email={kid.father.email}
+                        <MyPopover
+                          topText={kid.father.telephone_number}
+                          bottomText={kid.father.email}
                           buttonLabel={`${kid.father.last_name}${kid.father.first_name}`}
-                          telephoneNumber={kid.father.telephone_number}
                         />
                       )}
                     </StyledTableCell>

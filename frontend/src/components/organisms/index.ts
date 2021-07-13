@@ -11,7 +11,7 @@ import { UpdateParent } from './UpdateModal/UpdateParent';
 import { SignUpPaper } from './SignUpPaper/SignUpPaper';
 import { NotebookModal } from './NotebookModal/NotebookModal';
 import { ParentProfile } from './ParentProfile/ParentProfile';
-import { ParentPopover } from '../organisms/ParentPopover/ParentPopover';
+import { MyPopover } from './Popover/Popover';
 import { TeacherProfile } from './TeacherProfile/TeacherProfile';
 import { DraggableDialog } from '../organisms/DraggableDialog/DraggableDialog';
 import { InputOfNotebook } from './InputOfNotebook/InputOfNotebook';
@@ -22,6 +22,7 @@ export {
   KidCard,
   PostCard,
   PostForm,
+  MyPopover,
   KidProfile,
   LoginPaper,
   SignUpPaper,
@@ -29,7 +30,6 @@ export {
   UpdateModal,
   UpdateParent,
   UpdateTeacher,
-  ParentPopover,
   ParentProfile,
   NotebookModal,
   TeacherProfile,

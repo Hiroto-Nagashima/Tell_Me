@@ -1,9 +1,9 @@
 import { Story, Meta } from '@storybook/react';
-import { ParentPopover, Props } from './ParentPopover';
+import { MyPopover, Props } from './Popover';
 
 export default {
-  title: 'Organisms/ParentPopover',
-  component: ParentPopover,
+  title: 'Organisms/MyPopover',
+  component: MyPopover,
   decorators: [
     (Story) => (
       <div style={{ margin: '3em' }}>
@@ -13,11 +13,11 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<Props> = (args) => <ParentPopover {...args} />;
+const Template: Story<Props> = (args) => <MyPopover {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
+  topText: '08012341234',
   buttonLabel: '山田太郎',
-  email: 'hogehoge@gmail.com',
-  telephoneNumber: '08012341234',
+  bottomText: 'hogehoge@gmail.com',
 };
