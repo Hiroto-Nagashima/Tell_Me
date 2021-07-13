@@ -84,7 +84,6 @@ export const SignUpPaper: React.FC<Props> = memo((props) => {
               label="姓"
               value={lastName}
               variant="outlined"
-              placeholder="親御様の姓"
               onChange={onChangeLastName}
             />
           </Box>
@@ -94,7 +93,6 @@ export const SignUpPaper: React.FC<Props> = memo((props) => {
               label="名"
               value={firstName}
               variant="outlined"
-              placeholder="親御様の名"
               onChange={onChangeFirstName}
             />
           </Box>
