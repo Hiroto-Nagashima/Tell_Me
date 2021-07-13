@@ -248,7 +248,7 @@ export const Notebook: React.FC = () => {
       .then((res) => {
         setNotebookTemplates(res.data);
       })
-      .catch(() => setError('エラー'))
+      .catch(() => setError('現在エラー対応中です'))
       .finally(() => {
         setLoading(false);
       });

@@ -7,6 +7,8 @@ import Popover from '@material-ui/core/Popover';
 import MailIcon from '@material-ui/icons/Mail';
 import PhoneIcon from '@material-ui/icons/Phone';
 import Typography from '@material-ui/core/Typography';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { getAuth } from '../../../helper/firebaseAuthHelper';
 
 const Wrapper = styled.div`
   padding: 15px;
@@ -20,6 +22,8 @@ export type Props = {
 
 export const MyPopover: React.FC<Props> = (props) => {
   const { topText, bottomText, buttonLabel } = props;
+
+  const [user] = useAuthState(getAuth());
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null,
@@ -58,9 +62,14 @@ export const MyPopover: React.FC<Props> = (props) => {
       >
         <Wrapper>
           <Box mt={1} display="flex">
-            <Box mr={4} mb={2}>
-              <PhoneIcon />
-            </Box>
+            {user ? (
+              <Box mr={4} mb={2}>
+                <PhoneIcon />
+              </Box>
+            ) : (
+              <Box mr={2}>Email</Box>
+            )}
+
             <Typography
               align="center"
               color="textSecondary"
@@ -71,9 +80,14 @@ export const MyPopover: React.FC<Props> = (props) => {
             </Typography>
           </Box>
           <Box mt={1} display="flex">
-            <Box mr={4}>
-              <MailIcon />
-            </Box>
+            {user ? (
+              <Box mr={4}>
+                <MailIcon />
+              </Box>
+            ) : (
+              <Box mr={2}>Password</Box>
+            )}
+
             <Typography
               align="center"
               color="textSecondary"
