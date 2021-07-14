@@ -3,6 +3,10 @@
 ## Overview
 https://tell-me-please.com/<br>保育園と保護者を繋ぐ連絡帳アプリです。
 
+
+**<更新　7/13>ゲストログインのためのアカウントを作成しました。ヘッダー内の「親ゲストでログイン」「先生ゲストでログイン」と書いてある箇所を押すとEmailとPasswordが見れます。それをコピペしてログインしてください。**
+
+
 <img width="951" alt="スクリーンショット 2021-07-02 13 46 53" src="https://user-images.githubusercontent.com/74855940/124222180-38a83300-db3c-11eb-823c-e4b3d1a90f5b.png">
 ※Frontend Serviceでは、ReactによってビルドされたファイルをNginxでホストしています
 
