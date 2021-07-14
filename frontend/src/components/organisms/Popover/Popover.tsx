@@ -61,7 +61,7 @@ export const MyPopover: React.FC<Props> = (props) => {
         }}
       >
         <Wrapper>
-          <Box mt={1} display="flex">
+          <Box mt={1} display="flex" alignItems="center">
             {user ? (
               <Box mr={4} mb={2}>
                 <PhoneIcon />
@@ -79,7 +79,7 @@ export const MyPopover: React.FC<Props> = (props) => {
               {topText}
             </Typography>
           </Box>
-          <Box mt={1} display="flex">
+          <Box mt={1} display="flex" alignItems="center">
             {user ? (
               <Box mr={4}>
                 <MailIcon />
