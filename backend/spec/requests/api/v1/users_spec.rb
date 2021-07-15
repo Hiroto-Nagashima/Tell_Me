@@ -23,11 +23,6 @@ RSpec.describe 'Api::V1::Users', type: :request do
     end
   end
 
-  # describe "POST /users" do
-  #   it 'ユーザーを新規登録' do
-  #   end
-  # end
-
   describe 'PUT /users/:id' do
     it 'ユーザーの情報を更新' do
       user = create(:user)
@@ -38,7 +33,7 @@ RSpec.describe 'Api::V1::Users', type: :request do
         telephone_number: user.telephone_number
       } }
       json = JSON.parse(response.body)
-      expect(json['lastName']).to eq('山本')
+      expect(json["user"]['lastName']).to eq('山本')
       expect(response).to have_http_status(200)
     end
   end
