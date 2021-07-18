@@ -75,16 +75,16 @@ module Api
       # ある保育園の全ての子供とその両親、連絡帳を取得
       def kids_in_daycare
         daycare = Daycare.find(params[:id])
-        kids = Kid.where(daycare_id: daycare.id)
+        kids = Kid.where(daycare_id: daycare.id).includes(:notebooks, kid_users: :user)
         arr = []
         kids.each do |kid|
           hash = { 'notebook' => nil, 'mother' => nil, 'father' => nil, 'kid' => nil }
           mother = nil
           father = nil
           notebook = kid.notebooks.last
-          parents = kid.kid_users.where(kid_id: kid.id)
+          parents = kid.kid_users
           parents.each do |parent|
-            user = User.find(parent.user_id)
+            user = parent.user
             if user.gender.zero?
               mother = user
             else
