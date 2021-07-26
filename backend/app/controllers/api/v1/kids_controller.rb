@@ -3,6 +3,9 @@
 module Api
   module V1
     class KidsController < ApplicationController
+
+      before_action :set_kid ,only: [:update, :show, :register_image]
+
       def create
         kid = Kid.new(kid_params)
         if kid.save!
@@ -21,18 +24,17 @@ module Api
       end
 
       def update
-        kid = Kid.find(params[:id])
-        if kid.update!(kid_params)
+        if @kid.update!(kid_params)
           render json: {
             message: '更新が完了しました',
             kid: {
-              age: kid.age,
-              gender: kid.gender,
-              lastName: kid.last_name,
-              firstName: kid.first_name,
-              daycareId: kid.daycare_id,
-              favoritePlay: kid.favorite_play,
-              favoriteFood: kid.favorite_food
+              age: @kid.age,
+              gender: @kid.gender,
+              lastName: @kid.last_name,
+              firstName: @kid.first_name,
+              daycareId: @kid.daycare_id,
+              favoritePlay: @kid.favorite_play,
+              favoriteFood: @kid.favorite_food
             }
           }, status: 200
         else
@@ -41,17 +43,16 @@ module Api
       end
 
       def show
-        kid = Kid.find(params[:id])
         render json: {
           kid: {
-            id: kid.id,
-            age: kid.age,
-            gender: kid.gender,
-            lastName: kid.last_name,
-            firstName: kid.first_name,
-            daycareId: kid.daycare_id,
-            favoritePlay: kid.favorite_play,
-            favoriteFood: kid.favorite_food
+            id: @kid.id,
+            age: @kid.age,
+            gender: @kid.gender,
+            lastName: @kid.last_name,
+            firstName: @kid.first_name,
+            daycareId: @kid.daycare_id,
+            favoritePlay: @kid.favorite_play,
+            favoriteFood: @kid.favorite_food
           }
         }, status: 200
       end
@@ -101,9 +102,8 @@ module Api
       end
 
       def register_image
-        kid = Kid.find(params[:id])
-        kid.image = params[:image]
-        if kid.save!
+        @kid.image = params[:image]
+        if @kid.save!
           render json: {
             message: '画像を登録しました',
             severity: 'success'
@@ -121,6 +121,10 @@ module Api
       def kid_params
         params.require(:params).permit(:age, :first_name, :daycare_id, :last_name, :gender, :favorite_food,
                                        :favorite_play)
+      end
+
+      def set_kid
+        @kid = Kid.find(params[:id])
       end
     end
   end
