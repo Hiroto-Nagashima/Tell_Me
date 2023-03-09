@@ -33,8 +33,6 @@ $ docker-compose run --rm frontend yarn install
 $ docker-compose up
 
 ```
-http://localhost:3000 でwebサーバ, http://localhost:5000 でAPIサーバーが起動します。
-**現在、Firebaseに必要なAPI Keyなどが記載されたenvファイルを共有できないため、ローカルで立ち上げられません。対応検討中です**
 
 ## Usage
 - 保護者の機能を試したい場合はユーザー登録で「私は保護者です」を選択して子供の作成ページに進んでください。
